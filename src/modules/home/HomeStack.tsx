@@ -1,24 +1,26 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { WalletParamList } from "./WalletParamList";
+import { HomeParamList } from "./HomeParamList";
 
 import DepositScreen from "./screens/DepositScreen";
+import HomeScreen from "./screens/HomeScreen";
 import WalletScreen from "./screens/WalletScreen";
 import WithdrawScreen from "./screens/WithdrawScreen";
 
-interface WalletStackProps {}
+interface HomeStackProps {}
 
-const Stack = createStackNavigator<WalletParamList>();
+const Stack = createStackNavigator<HomeParamList>();
 
-export const WalletStack: React.FC<WalletStackProps> = ({}) => {
+export const HomeStack: React.FC<HomeStackProps> = ({}) => {
   return (
     <Stack.Navigator
       screenOptions={{
         header: () => null
       }}
-      initialRouteName="Wallet"
+      initialRouteName="Home"
     >
+      <Stack.Screen options={{ headerTitle: "Home" }} name="Home" component={HomeScreen} />
       <Stack.Screen options={{ headerTitle: "Wallet" }} name="Wallet" component={WalletScreen} />
       <Stack.Screen options={{ headerTitle: "Deposit" }} name="Deposit" component={DepositScreen} />
       <Stack.Screen options={{ headerTitle: "Withdraw" }} name="Withdraw" component={WithdrawScreen} />
