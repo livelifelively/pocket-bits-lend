@@ -8,6 +8,7 @@ const CreateVaultScreen = ({navigation} : VaultNavProps<"CreateVault">) => {
   return (
     <DefaultLayout>
       <Text style={styles.text}>Create Vault</Text>
+      <Button title="Lock in Vault" onPress={() => {navigation.navigate("VaultCreated")}} />
       <Button title="Back" onPress={() => {navigation.goBack()}} />
     </DefaultLayout>
   );

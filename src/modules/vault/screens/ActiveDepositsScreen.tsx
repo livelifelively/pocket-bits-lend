@@ -8,7 +8,6 @@ const ActiveDepositsScreen = ({navigation} : VaultNavProps<"ActiveDeposits">) =>
   return (
     <DefaultLayout>
       <Text style={styles.text}>Active Deposits</Text>
-      <Button title="Lock in Vault" onPress={() => {navigation.navigate("VaultCreated")}} />
       <Button title="Back" onPress={() => {navigation.goBack()}} />
     </DefaultLayout>
   );
