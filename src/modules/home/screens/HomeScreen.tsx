@@ -1,8 +1,21 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Button } from "react-native";
 
-const HomeScreen = () => {
-  return <Text style={styles.text}>HomeScreen</Text>;
+import { DefaultLayout } from "../../../layouts/Default";
+import { HomeNavProps } from "../HomeParamList";
+
+const HomeScreen = ({navigation}: HomeNavProps<"Home">) => {
+  return (
+    <DefaultLayout>
+      <Text style={styles.text}>HomeScreen</Text>
+      <Button
+        title="Wallet"
+        onPress={() => {
+          navigation.navigate("Wallet");
+        }}
+      />
+    </DefaultLayout>
+  )
 };
 
 const styles = StyleSheet.create({

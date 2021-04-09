@@ -1,8 +1,27 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Button } from "react-native";
 
-const DepositScreen = () => {
-  return <Text style={styles.text}>Deposit</Text>;
+import { DefaultLayout } from "../../../layouts/Default";
+import { HomeNavProps } from "../HomeParamList";
+
+const DepositScreen = ({navigation}: HomeNavProps<"Deposit">) => {
+  return (
+    <DefaultLayout>
+      <Text style={styles.text}>Receive BTC</Text>
+      <Button
+        title="Send"
+        onPress={() => {
+          navigation.goBack();
+        }}
+      />
+      <Button
+        title="Back"
+        onPress={() => {
+          navigation.goBack();
+        }}
+      />
+    </DefaultLayout>
+  )
 };
 
 const styles = StyleSheet.create({

@@ -1,8 +1,21 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Button } from "react-native";
 
-const WithdrawScreen = () => {
-  return <Text style={styles.text}>Withdraw</Text>;
+import { DefaultLayout } from "../../../layouts/Default";
+import { HomeNavProps } from "../HomeParamList";
+
+const WithdrawScreen = ({navigation}: HomeNavProps<"Withdraw">) => {
+  return (
+    <DefaultLayout>
+      <Text style={styles.text}>Send BTC</Text>
+      <Button
+        title="Back"
+        onPress={() => {
+          navigation.goBack();
+        }}
+      />
+    </DefaultLayout>
+  )
 };
 
 const styles = StyleSheet.create({
