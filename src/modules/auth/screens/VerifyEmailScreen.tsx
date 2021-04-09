@@ -1,8 +1,22 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Button } from "react-native";
 
-const VerifyEmailScreen = () => {
-  return <Text style={styles.text}>VerifyEmail</Text>;
+import { DefaultLayout } from "../../../layouts/Default";
+import { AuthNavProps } from "../AuthParamList";
+
+const VerifyEmailScreen = ({ navigation, route }: AuthNavProps<"VerifyEmail">) => {
+  return (
+    <DefaultLayout>
+      <Text style={styles.text}>VerifyEmail</Text>
+      <Button
+        title="Confirm"
+        onPress={() => {
+          // Set passcode: true, SignUp: true, User and go home
+          navigation.navigate("SetPasscode")
+        }}
+      />
+    </DefaultLayout>
+  )
 };
 
 const styles = StyleSheet.create({

@@ -1,13 +1,14 @@
 import React, {useContext} from "react";
-import { Text, StyleSheet, View, Button } from "react-native";
+import { Text, StyleSheet, Button } from "react-native";
 
 import { AuthContext } from "../AuthProvider";
 import { AuthNavProps } from "../AuthParamList";
+import { DefaultLayout } from "../../../layouts/Default";
 
 function LoginPasscodeScreen({ navigation }: AuthNavProps<"LoginPasscode">) {
   const { login } = useContext(AuthContext);
   return (
-    <View>
+    <DefaultLayout>
       <Text>Login with Pass code screen</Text>
       <Button
         title="log me in"
@@ -21,7 +22,7 @@ function LoginPasscodeScreen({ navigation }: AuthNavProps<"LoginPasscode">) {
           navigation.navigate("SignUp");
         }}
       />
-    </View>
+    </DefaultLayout>
   );
 }
 
