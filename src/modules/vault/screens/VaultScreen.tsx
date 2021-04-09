@@ -12,7 +12,6 @@ const VaultScreen = ({navigation}: VaultNavProps<"Vault">) => {
       <Button title="Active Deposits" onPress={() => {navigation.navigate("ActiveDeposits")}} />
       <Button title="History" onPress={() => { navigation.navigate("VaultHistory")}} />
       <Button title="1 Month Vault" onPress={() => {navigation.navigate("CreateVault")}} />
-      <Button title="" onPress={() => {}} />
     </DefaultLayout>
   );
 };
