@@ -1,8 +1,17 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Button } from "react-native";
 
-const ActiveDepositsScreen = () => {
-  return <Text style={styles.text}>ActiveDeposits</Text>;
+import { DefaultLayout } from "../../../layouts/Default";
+import { VaultNavProps } from "../VaultParamList";
+
+const ActiveDepositsScreen = ({navigation} : VaultNavProps<"ActiveDeposits">) => {
+  return (
+    <DefaultLayout>
+      <Text style={styles.text}>Active Deposits</Text>
+      <Button title="Lock in Vault" onPress={() => {navigation.navigate("VaultCreated")}} />
+      <Button title="Back" onPress={() => {navigation.goBack()}} />
+    </DefaultLayout>
+  );
 };
 
 const styles = StyleSheet.create({
