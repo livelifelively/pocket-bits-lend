@@ -1,8 +1,16 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Button } from "react-native";
 
-const ProfileSettingsScreen = () => {
-  return <Text style={styles.text}>ProfileSettings</Text>;
+import { DefaultLayout } from "../../../layouts/Default";
+import { SettingsNavProps } from "../SettingsParamList";
+
+const ProfileSettingsScreen = ({navigation}: SettingsNavProps<"ProfileSettings">) => {
+  return (
+    <DefaultLayout>
+      <Text style={styles.text}>Profile Settings</Text>
+      <Button title="Back" onPress={() => {navigation.goBack()}} />
+    </DefaultLayout>
+  )
 };
 
 const styles = StyleSheet.create({

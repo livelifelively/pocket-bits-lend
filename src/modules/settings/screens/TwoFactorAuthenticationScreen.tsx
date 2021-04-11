@@ -1,8 +1,16 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Button } from "react-native";
 
-const TwoFactorAuthenticationScreen = () => {
-  return <Text style={styles.text}>TwoFactorAuthentication</Text>;
+import { DefaultLayout } from "../../../layouts/Default";
+import { SettingsNavProps } from "../SettingsParamList";
+
+const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<"TwoFactorAuthentication">) => {
+  return (
+    <DefaultLayout>
+      <Text style={styles.text}>TwoFactorAuthentication</Text>
+      <Button title="Back" onPress={() => {navigation.goBack()}} />
+    </DefaultLayout>
+  )
 };
 
 const styles = StyleSheet.create({

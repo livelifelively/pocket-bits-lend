@@ -1,8 +1,18 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Button } from "react-native";
 
-const SecuritySettingsScreen = () => {
-  return <Text style={styles.text}>SecuritySettings</Text>;
+import { DefaultLayout } from "../../../layouts/Default";
+import { SettingsNavProps } from "../SettingsParamList";
+
+const SecuritySettingsScreen = ({navigation}: SettingsNavProps<"SecuritySettings">) => {
+  return (
+    <DefaultLayout>
+      <Text style={styles.text}>Security Settings</Text>
+      <Button title="2 Factor Authentication" onPress={() => {navigation.navigate("TwoFactorAuthentication")}} />
+      <Button title="Change Passcode" onPress={() => {navigation.navigate("ChangePasscode")}} />
+      <Button title="Back" onPress={() => {navigation.goBack()}} />
+    </DefaultLayout>
+  )
 };
 
 const styles = StyleSheet.create({
