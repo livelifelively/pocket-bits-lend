@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { HomeParamList } from "./HomeParamList";
 
 import DepositScreen from "./screens/DepositScreen";
-import HomeScreen from "./screens/HomeScreen";
+// import HomeScreen from "../HomeScreen";
 import WalletScreen from "./screens/WalletScreen";
 import WithdrawScreen from "./screens/WithdrawScreen";
 
@@ -18,9 +18,9 @@ export const HomeStack: React.FC<HomeStackProps> = ({}) => {
       screenOptions={{
         header: () => null
       }}
-      initialRouteName="Home"
+      initialRouteName="Wallet"
     >
-      <Stack.Screen options={{ headerTitle: "Home" }} name="Home" component={HomeScreen} />
+      {/* <Stack.Screen options={{ headerTitle: "Home" }} name="Home" component={HomeScreen} /> */}
       <Stack.Screen options={{ headerTitle: "Wallet" }} name="Wallet" component={WalletScreen} />
       <Stack.Screen options={{ headerTitle: "Deposit" }} name="Deposit" component={DepositScreen} />
       <Stack.Screen options={{ headerTitle: "Withdraw" }} name="Withdraw" component={WithdrawScreen} />

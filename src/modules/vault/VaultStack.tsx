@@ -1,31 +1,65 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { VaultParamList } from "./VaultParamList";
+import { 
+  VaultHistoryParamList,
+  VaultCreationParamList,
+  VaultActiveDepositsParamList,
+  // VaultCreationNavProps,
+  // VaultActiveDepositsNavProps,
+  // VaultHistoryNavProps
+} from "./VaultParamList";
 
-import VaultScreen from "./screens/VaultScreen";
 import ActiveDepositsScreen from "./screens/ActiveDepositsScreen";
 import CreateVaultScreen from "./screens/CreateVaultScreen";
 import VaultCreatedScreen from "./screens/VaultCreatedScreen";
 import VaultHistoryScreen from "./screens/VaultHistoryScreen";
 
-interface VaultStackProps {}
+interface VaultHistoryStackProps {}
+interface VaultCreationStackProps {}
+interface VaultActiveDepositsStackProps {}
 
-const Stack = createStackNavigator<VaultParamList>();
+const VaultHistory = createStackNavigator<VaultHistoryParamList>();
+const VaultActiveDeposits = createStackNavigator<VaultActiveDepositsParamList>();
+const VaultCreation = createStackNavigator<VaultCreationParamList>();
 
-export const VaultStack: React.FC<VaultStackProps> = ({}) => {
+export const VaultCreationStack: React.FC<VaultCreationStackProps> = ({}) => {
   return (
-    <Stack.Navigator
+    <VaultCreation.Navigator
       screenOptions={{
         header: () => null
       }}
-      initialRouteName="Vault"
+      initialRouteName="CreateVault"
     >
-      <Stack.Screen options={{ headerTitle: "Sign In" }} name="Vault" component={VaultScreen} />
-      <Stack.Screen options={{ headerTitle: "Sign In" }} name="ActiveDeposits" component={ActiveDepositsScreen} />
-      <Stack.Screen options={{ headerTitle: "Sign Up" }} name="CreateVault" component={CreateVaultScreen} />
-      <Stack.Screen options={{ headerTitle: "Set Passcode" }} name="VaultCreated" component={VaultCreatedScreen} />
-      <Stack.Screen options={{ headerTitle: "Verify Email" }} name="VaultHistory" component={VaultHistoryScreen} />
-    </Stack.Navigator>
+      <VaultCreation.Screen name="CreateVault" component={CreateVaultScreen} />
+      <VaultCreation.Screen name="VaultCreated" component={VaultCreatedScreen} />
+    </VaultCreation.Navigator>
+  );
+};
+
+
+export const VaultHistoryStack: React.FC<VaultHistoryStackProps> = ({}) => {
+  return (
+    <VaultHistory.Navigator
+      screenOptions={{
+        header: () => null
+      }}
+      initialRouteName="VaultHistory"
+    >
+      <VaultHistory.Screen name="VaultHistory" component={VaultHistoryScreen} />
+    </VaultHistory.Navigator>
+  );
+};
+
+export const VaultActiveDepositsStack: React.FC<VaultActiveDepositsStackProps> = ({}) => {
+  return (
+    <VaultActiveDeposits.Navigator
+      screenOptions={{
+        header: () => null
+      }}
+      initialRouteName="ActiveDeposits"
+    >
+      <VaultActiveDeposits.Screen name="ActiveDeposits" component={ActiveDepositsScreen} />
+    </VaultActiveDeposits.Navigator>
   );
 };

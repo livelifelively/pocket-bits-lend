@@ -2,9 +2,9 @@ import React from "react";
 import { Text, StyleSheet, Button } from "react-native";
 
 import { DefaultLayout } from "../../../layouts/Default";
-import { VaultNavProps } from "../VaultParamList";
+import { VaultCreationNavProps } from "../VaultParamList";
 
-const CreateVaultScreen = ({navigation} : VaultNavProps<"CreateVault">) => {
+const CreateVaultScreen = ({navigation} : VaultCreationNavProps<"CreateVault">) => {
   return (
     <DefaultLayout>
       <Text style={styles.text}>Create Vault</Text>

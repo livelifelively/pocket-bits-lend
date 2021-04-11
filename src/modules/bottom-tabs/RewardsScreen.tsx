@@ -1,10 +1,10 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
 
-import { DefaultLayout } from "../../../layouts/Default";
-import { RewardsNavProps } from "../RewardsParamList";
+import { DefaultLayout } from "../../layouts/Default";
+import { RewardsNavProps } from "./TabsParamList";
 
-const RewardScreen = ({navigation}: RewardsNavProps<"Rewards">) => {
+const RewardScreen = ({navigation}: RewardsNavProps<"VaultCreationStack">) => {
   return (
     <DefaultLayout>
       <Text style={styles.text}>Reward Screen</Text>

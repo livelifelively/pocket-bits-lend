@@ -4,7 +4,7 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 
 import { AuthContext } from "../modules/auth/AuthProvider";
 import { AuthStack } from "../modules/auth/AuthStack";
-import { AppTabs } from "./AppTabs";
+import { AppStack } from "./AppStack";
 import AsyncStorage from '@react-native-community/async-storage';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
@@ -36,7 +36,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
   return (
     <NavigationContainer
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      {user ? <AppTabs /> : <AuthStack />}
+      {user ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
   );
 }

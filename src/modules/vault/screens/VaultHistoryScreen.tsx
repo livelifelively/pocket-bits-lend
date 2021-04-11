@@ -3,9 +3,9 @@ import React from "react";
 import { Text, StyleSheet, Button } from "react-native";
 
 import { DefaultLayout } from "../../../layouts/Default";
-import { VaultNavProps } from "../VaultParamList";
+import { VaultHistoryNavProps } from "../VaultParamList";
 
-const VaultHistoryScreen = ({navigation} : VaultNavProps<"VaultHistory">) => {
+const VaultHistoryScreen = ({navigation} : VaultHistoryNavProps<"VaultHistory">) => {
   return (
     <DefaultLayout>
       <Text style={styles.text}>Vault History</Text>

@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import { RewardsParamList } from "./RewardsParamList";
 
-import RewardsScreen from "./screens/RewardsScreen";
+import RewardsScreen from "../RewardsScreen";
 
 interface RewardsStackProps {}
 
