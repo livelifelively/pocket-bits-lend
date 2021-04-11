@@ -12,6 +12,7 @@ export type AppStackParamList = {
   VaultCreationStack: undefined;
   VaultHistoryStack: undefined;
   WalletStack: undefined;
+  SettingsStack: undefined;
 };
 
 

@@ -11,6 +11,7 @@ import RewardsScreen from "../modules/bottom-tabs/RewardsScreen";
 
 import { VaultActiveDepositsStack, VaultCreationStack, VaultHistoryStack } from "../modules/vault/VaultStack";
 import { WalletStack } from "../modules/wallet/WalletStack";
+import { SettingsStack } from "../modules/settings/SettingsStack";
 
 interface AppTabsProps {}
 interface AppStackProps {}
@@ -50,7 +51,11 @@ const AppTabs: React.FC<AppTabsProps> = ({}) => {
 
 export const AppStack: React.FC<AppStackProps> = ({}) => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        header: () => null
+      }}
+    >
       <Stack.Screen name="Landing" component={AppTabs} />
       {/* VAULT STACKS */}
       <Stack.Screen name="VaultHistoryStack" component={VaultHistoryStack} />
@@ -58,6 +63,7 @@ export const AppStack: React.FC<AppStackProps> = ({}) => {
       <Stack.Screen name="VaultActiveDepositsStack" component={VaultActiveDepositsStack} />
       {/* WALLET STACK */}
       <Stack.Screen name="WalletStack" component={WalletStack} />
+      <Stack.Screen name="SettingsStack" component={SettingsStack} />
     </Stack.Navigator>
   );
 };

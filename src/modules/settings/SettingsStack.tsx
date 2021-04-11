@@ -21,11 +21,11 @@ export const SettingsStack: React.FC<SettingsStackProps> = ({}) => {
       }}
       initialRouteName="Settings"
     >
-      <Stack.Screen options={{ headerTitle: "Sign In" }} name="Settings" component={SettingsScreen} />
-      <Stack.Screen options={{ headerTitle: "Sign In" }} name="ProfileSettings" component={ProfileSettingsScreen} />
-      <Stack.Screen options={{ headerTitle: "Sign Up" }} name="SecuritySettings" component={SecuritySettingsScreen} />
-      <Stack.Screen options={{ headerTitle: "Set Passcode" }} name="TwoFactorAuthentication" component={TwoFactorAuthenticationScreen} />
-      <Stack.Screen options={{ headerTitle: "Verify Email" }} name="ChangePasscode" component={ChangePasscodeScreen} />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
+      <Stack.Screen name="ProfileSettings" component={ProfileSettingsScreen} />
+      <Stack.Screen name="SecuritySettings" component={SecuritySettingsScreen} />
+      <Stack.Screen name="TwoFactorAuthentication" component={TwoFactorAuthenticationScreen} />
+      <Stack.Screen name="ChangePasscode" component={ChangePasscodeScreen} />
     </Stack.Navigator>
   );
 };

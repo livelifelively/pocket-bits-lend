@@ -15,6 +15,7 @@ export type VaultNavProps<T extends keyof VaultParamList> = {
 
 export type HomeParamList = {
   WalletStack: undefined;
+  SettingsStack: undefined
 };
 
 export type HomeNavProps<T extends keyof HomeParamList> = {
@@ -22,7 +23,11 @@ export type HomeNavProps<T extends keyof HomeParamList> = {
   route: RouteProp<HomeParamList, T>
 }
 
-export type RewardsNavProps<T extends keyof VaultParamList> = {
-  navigation: StackNavigationProp<VaultParamList, T>;
-  route: RouteProp<VaultParamList, T>;
+export type RewardsParamList = {
+  InviteFriends: undefined
+}
+
+export type RewardsNavProps<T extends keyof RewardsParamList> = {
+  navigation: StackNavigationProp<RewardsParamList, T>;
+  route: RouteProp<RewardsParamList, T>;
 }

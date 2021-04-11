@@ -14,6 +14,12 @@ const HomeScreen = ({navigation}: HomeNavProps<"WalletStack">) => {
           navigation.navigate("WalletStack");
         }}
       />
+      <Button
+        title="Settings"
+        onPress={() => {
+          navigation.navigate("SettingsStack");
+        }}
+      />
     </DefaultLayout>
   )
 };
