@@ -2,9 +2,9 @@ import React from "react";
 import { Text, StyleSheet, Button } from "react-native";
 
 import { DefaultLayout } from "../../../layouts/Default";
-import { HomeNavProps } from "../HomeParamList";
+import { WalletNavProps } from "../WalletParamList";
 
-const WithdrawScreen = ({navigation}: HomeNavProps<"Withdraw">) => {
+const WithdrawScreen = ({navigation}: WalletNavProps<"Withdraw">) => {
   return (
     <DefaultLayout>
       <Text style={styles.text}>Send BTC</Text>

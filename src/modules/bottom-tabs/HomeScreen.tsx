@@ -4,16 +4,16 @@ import { Text, StyleSheet, Button } from "react-native";
 import { DefaultLayout } from "../../layouts/Default";
 import { HomeNavProps } from "./TabsParamList";
 
-const HomeScreen = ({navigation}: HomeNavProps<"VaultCreationStack">) => {
+const HomeScreen = ({navigation}: HomeNavProps<"WalletStack">) => {
   return (
     <DefaultLayout>
       <Text style={styles.text}>HomeScreen</Text>
-      {/* <Button
+      <Button
         title="Wallet"
         onPress={() => {
-          navigation.navigate("Wallet");
+          navigation.navigate("WalletStack");
         }}
-      /> */}
+      />
     </DefaultLayout>
   )
 };

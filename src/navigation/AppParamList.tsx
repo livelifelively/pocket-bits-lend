@@ -11,6 +11,7 @@ export type AppStackParamList = {
   VaultActiveDepositsStack: undefined;
   VaultCreationStack: undefined;
   VaultHistoryStack: undefined;
+  WalletStack: undefined;
 };
 
 

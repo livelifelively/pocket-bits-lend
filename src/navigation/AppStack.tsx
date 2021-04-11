@@ -10,6 +10,7 @@ import VaultScreen from "../modules/bottom-tabs/VaultScreen";
 import RewardsScreen from "../modules/bottom-tabs/RewardsScreen";
 
 import { VaultActiveDepositsStack, VaultCreationStack, VaultHistoryStack } from "../modules/vault/VaultStack";
+import { WalletStack } from "../modules/wallet/WalletStack";
 
 interface AppTabsProps {}
 interface AppStackProps {}
@@ -55,6 +56,8 @@ export const AppStack: React.FC<AppStackProps> = ({}) => {
       <Stack.Screen name="VaultHistoryStack" component={VaultHistoryStack} />
       <Stack.Screen name="VaultCreationStack" component={VaultCreationStack} />
       <Stack.Screen name="VaultActiveDepositsStack" component={VaultActiveDepositsStack} />
+      {/* WALLET STACK */}
+      <Stack.Screen name="WalletStack" component={WalletStack} />
     </Stack.Navigator>
   );
 };

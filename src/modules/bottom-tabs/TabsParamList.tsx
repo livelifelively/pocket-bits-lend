@@ -8,26 +8,21 @@ export type VaultParamList = {
   VaultActiveDepositsStack: undefined;
 };
 
-// export type VaultHistoryParamList = {
-//   VaultHistory: undefined;
-// };
-
-// export type VaultActiveDepositsParamList = {
-//   ActiveDeposits: undefined;
-// };
-
 export type VaultNavProps<T extends keyof VaultParamList> = {
   navigation: StackNavigationProp<VaultParamList, T>;
   route: RouteProp<VaultParamList, T>;
 };
 
+export type HomeParamList = {
+  WalletStack: undefined;
+};
+
+export type HomeNavProps<T extends keyof HomeParamList> = {
+  navigation: StackNavigationProp<HomeParamList, T>
+  route: RouteProp<HomeParamList, T>
+}
 
 export type RewardsNavProps<T extends keyof VaultParamList> = {
   navigation: StackNavigationProp<VaultParamList, T>;
   route: RouteProp<VaultParamList, T>;
-}
-
-export type HomeNavProps<T extends keyof VaultParamList> = {
-  navigation: StackNavigationProp<VaultParamList, T>
-  route: RouteProp<VaultParamList, T>
 }

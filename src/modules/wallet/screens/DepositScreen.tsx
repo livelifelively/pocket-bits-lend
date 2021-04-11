@@ -2,15 +2,16 @@ import React from "react";
 import { Text, StyleSheet, Button } from "react-native";
 
 import { DefaultLayout } from "../../../layouts/Default";
-import { HomeNavProps } from "../HomeParamList";
+import { WalletNavProps } from "../WalletParamList";
 
-const DepositScreen = ({navigation}: HomeNavProps<"Deposit">) => {
+const DepositScreen = ({navigation}: WalletNavProps<"Deposit">) => {
   return (
     <DefaultLayout>
       <Text style={styles.text}>Receive BTC</Text>
       <Button
         title="Send"
         onPress={() => {
+          // send bitcoin, on success go back.
           navigation.goBack();
         }}
       />

@@ -2,9 +2,9 @@ import React from "react";
 import { Text, StyleSheet, Button } from "react-native";
 
 import { DefaultLayout } from "../../../layouts/Default";
-import { HomeNavProps } from "../HomeParamList";
+import { WalletNavProps } from "../WalletParamList";
 
-const WalletScreen = ({navigation}: HomeNavProps<"Wallet">) => {
+const WalletScreen = ({navigation}: WalletNavProps<"Wallet">) => {
   return (
     <DefaultLayout>
       <Text style={styles.text}>Wallet</Text>
