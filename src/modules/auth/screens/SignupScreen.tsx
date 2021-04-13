@@ -1,34 +1,28 @@
 import React from "react";
-import { Text, StyleSheet, Button } from "react-native";
+import { Title } from "react-native-paper";
 
 import { AuthNavProps } from "../AuthParamList";
 import { DefaultLayout } from "../../../layouts/Default";
+import { AppButton } from "../../../components/design/AppButton";
 
 function SignupScreen({ navigation, route }: AuthNavProps<"SignUp">) {
   return (
     <DefaultLayout>
-      <Text style={styles.text}>route name: {route.name}</Text>
-      <Button
+      <Title>route name: {route.name}</Title>
+      <AppButton
         title="Sign In"
         onPress={() => {
           navigation.navigate("LoginEmail");
-          // navigation.goBack()
         }}
       />
-      <Button
+      <AppButton
         title="Sign Up"
         onPress={() => {
           navigation.navigate("VerifyEmail");
-          // navigation.goBack()
         }}
       />
     </DefaultLayout>
   );
 }
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 30
-  }
-});
 
 export default SignupScreen;

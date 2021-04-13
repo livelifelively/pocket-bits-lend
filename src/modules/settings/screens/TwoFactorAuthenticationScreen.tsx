@@ -3,12 +3,13 @@ import { Text, StyleSheet, Button } from "react-native";
 
 import { DefaultLayout } from "../../../layouts/Default";
 import { SettingsNavProps } from "../SettingsParamList";
+import { AppButton } from "../../../components/design/AppButton";
 
 const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<"TwoFactorAuthentication">) => {
   return (
     <DefaultLayout>
       <Text style={styles.text}>TwoFactorAuthentication</Text>
-      <Button title="Back" onPress={() => {navigation.goBack()}} />
+      <AppButton title="Back" onPress={() => {navigation.goBack()}} />
     </DefaultLayout>
   )
 };

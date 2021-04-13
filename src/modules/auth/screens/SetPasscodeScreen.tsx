@@ -4,6 +4,7 @@ import { Text, StyleSheet, Button } from "react-native";
 import { DefaultLayout } from "../../../layouts/Default";
 import { AuthNavProps } from "../AuthParamList";
 import { AuthContext } from "../AuthProvider";
+import { AppButton } from "../../../components/design/AppButton";
 
 const SetPasscodeScreen = ({navigation, route}: AuthNavProps<"SetPasscode">) => {
   const {login} = useContext(AuthContext)
@@ -11,14 +12,14 @@ const SetPasscodeScreen = ({navigation, route}: AuthNavProps<"SetPasscode">) => 
   return (
     <DefaultLayout>
       <Text style={styles.text}>SetPasscode</Text>
-      <Button
+      <AppButton
         title="Confirm"
         onPress={() => {
           // Set passcode: true, SignUp: true, User and go home
           login()
         }}
       />
-      <Button
+      <AppButton
         title="Skip"
         onPress={() => {
           // Set passcode: false, SignUp: true, User and go home

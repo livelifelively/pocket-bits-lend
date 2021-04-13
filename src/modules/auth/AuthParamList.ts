@@ -7,6 +7,7 @@ export type AuthParamList = {
   SignUp: undefined;
   SetPasscode: undefined;
   VerifyEmail: undefined;
+  HomeGuest: undefined;
 };
 
 export type AuthNavProps<T extends keyof AuthParamList> = {

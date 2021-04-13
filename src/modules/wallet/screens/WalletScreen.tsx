@@ -3,24 +3,25 @@ import { Text, StyleSheet, Button } from "react-native";
 
 import { DefaultLayout } from "../../../layouts/Default";
 import { WalletNavProps } from "../WalletParamList";
+import { AppButton } from "../../../components/design/AppButton";
 
 const WalletScreen = ({navigation}: WalletNavProps<"Wallet">) => {
   return (
     <DefaultLayout>
       <Text style={styles.text}>Wallet</Text>
-      <Button
+      <AppButton
         title="Receive"
         onPress={() => {
           navigation.navigate("Deposit");
         }}
       />
-      <Button
+      <AppButton
         title="Send"
         onPress={() => {
           navigation.navigate("Withdraw");
         }}
       />
-      <Button
+      <AppButton
         title="Back"
         onPress={() => {
           navigation.goBack();

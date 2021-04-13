@@ -3,12 +3,13 @@ import { Text, StyleSheet, Button } from "react-native";
 
 import { DefaultLayout } from "../../../layouts/Default";
 import { VaultActiveDepositsNavProps } from "../VaultParamList";
+import { AppButton } from "../../../components/design/AppButton";
 
 const ActiveDepositsScreen = ({navigation} : VaultActiveDepositsNavProps<"ActiveDeposits">) => {
   return (
     <DefaultLayout>
       <Text style={styles.text}>Active Deposits</Text>
-      <Button title="Back" onPress={() => {navigation.goBack()}} />
+      <AppButton title="Back" onPress={() => {navigation.goBack()}} />
     </DefaultLayout>
   );
 };

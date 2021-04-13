@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import { AuthParamList } from "./AuthParamList";
 
+import HomeGuestScreen from "./screens/HomeGuestScreen";
 import LoginEmailScreen from "./screens/LoginEmailScreen";
 import LoginPasscodeScreen from "./screens/LoginPasscodeScreen";
 import SignupScreen from "./screens/SignupScreen";
@@ -19,13 +20,14 @@ export const AuthStack: React.FC<AuthStackProps> = ({}) => {
       screenOptions={{
         header: () => null
       }}
-      initialRouteName="LoginEmail"
+      initialRouteName="HomeGuest"
     >
-      <Stack.Screen options={{ headerTitle: "Sign In" }} name="LoginEmail" component={LoginEmailScreen} />
-      <Stack.Screen options={{ headerTitle: "Sign In" }} name="LoginPasscode" component={LoginPasscodeScreen} />
-      <Stack.Screen options={{ headerTitle: "Sign Up" }} name="SignUp" component={SignupScreen} />
-      <Stack.Screen options={{ headerTitle: "Set Passcode" }} name="SetPasscode" component={SetPasscodeScreen} />
-      <Stack.Screen options={{ headerTitle: "Verify Email" }} name="VerifyEmail" component={VerifyEmailScreen} />
+      <Stack.Screen name="HomeGuest" component={HomeGuestScreen} />
+      <Stack.Screen name="LoginEmail" component={LoginEmailScreen} />
+      <Stack.Screen name="LoginPasscode" component={LoginPasscodeScreen} />
+      <Stack.Screen name="SignUp" component={SignupScreen} />
+      <Stack.Screen name="SetPasscode" component={SetPasscodeScreen} />
+      <Stack.Screen name="VerifyEmail" component={VerifyEmailScreen} />
     </Stack.Navigator>
   );
 };

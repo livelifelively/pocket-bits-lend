@@ -3,12 +3,13 @@ import { Text, StyleSheet, Button } from "react-native";
 
 import { DefaultLayout } from "../../../layouts/Default";
 import { AuthNavProps } from "../AuthParamList";
+import { AppButton } from "../../../components/design/AppButton";
 
 const VerifyEmailScreen = ({ navigation, route }: AuthNavProps<"VerifyEmail">) => {
   return (
     <DefaultLayout>
       <Text style={styles.text}>VerifyEmail</Text>
-      <Button
+      <AppButton
         title="Confirm"
         onPress={() => {
           // Set passcode: true, SignUp: true, User and go home

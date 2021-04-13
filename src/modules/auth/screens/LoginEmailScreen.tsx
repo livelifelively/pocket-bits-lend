@@ -1,28 +1,33 @@
 import React, {useContext} from "react";
-import { Text, StyleSheet, Button } from "react-native";
+import { StyleSheet, Button } from "react-native";
+import { Text } from "react-native-paper";
 
 import { AuthContext } from "../AuthProvider";
 import { AuthNavProps } from "../AuthParamList";
 import { DefaultLayout } from "../../../layouts/Default";
+import { AppButton } from "../../../components/design/AppButton";
+import { AppText } from "../../../components/design/AppText";
 
 function LoginEmailScreen({ navigation }: AuthNavProps<"LoginEmail">) {
   const { login } = useContext(AuthContext);
   return (
     <DefaultLayout>
-      <Text>Login with email screen</Text>
-      <Button
+      <AppText>
+        <Text style={styles.text}>Login with email screen</Text>
+      </AppText>
+      <AppButton
         title="Sign In"
         onPress={() => {
           login();
         }}
       />
-      <Button
+      <AppButton
         title="Sign Up"
         onPress={() => {
           navigation.navigate("SignUp");
         }}
       />
-      <Button
+      <AppButton
         title="Forgot Password?"
         onPress={() => {
           // login();

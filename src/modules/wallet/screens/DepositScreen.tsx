@@ -3,19 +3,20 @@ import { Text, StyleSheet, Button } from "react-native";
 
 import { DefaultLayout } from "../../../layouts/Default";
 import { WalletNavProps } from "../WalletParamList";
+import { AppButton } from "../../../components/design/AppButton";
 
 const DepositScreen = ({navigation}: WalletNavProps<"Deposit">) => {
   return (
     <DefaultLayout>
       <Text style={styles.text}>Receive BTC</Text>
-      <Button
+      <AppButton
         title="Send"
         onPress={() => {
           // send bitcoin, on success go back.
           navigation.goBack();
         }}
       />
-      <Button
+      <AppButton
         title="Back"
         onPress={() => {
           navigation.goBack();

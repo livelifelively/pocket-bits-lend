@@ -1,35 +1,12 @@
-// import { StatusBar } from 'expo-status-bar';
-// import React from 'react';
-// import { StyleSheet, Text, View } from 'react-native';
-
-// import Navigation from './src/navigation';
-
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Open up App.tsx to start working on your app!</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
-
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider as PaperProvider } from 'react-native-paper';
 
 import useCachedResources from './src/hooks/useCachedResources';
 import useColorScheme from './src/hooks/useColorScheme';
 import Navigation from './src/navigation';
 import { AuthProvider } from "./src/modules/auth/AuthProvider";
+import Theme from "./src/theme";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -41,9 +18,11 @@ export default function App() {
     return (
       <SafeAreaProvider>
         {/* <Navigation colorScheme={colorScheme} /> */}
-        <AuthProvider>
-          <Navigation colorScheme={colorScheme} />
-        </AuthProvider>
+        <PaperProvider theme={Theme}>
+          <AuthProvider>
+            <Navigation colorScheme={colorScheme} />
+          </AuthProvider>
+        </PaperProvider>
         {/* <StatusBar style="dark" /> */}
       </SafeAreaProvider>
     );

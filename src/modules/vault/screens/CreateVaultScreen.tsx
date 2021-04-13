@@ -3,13 +3,14 @@ import { Text, StyleSheet, Button } from "react-native";
 
 import { DefaultLayout } from "../../../layouts/Default";
 import { VaultCreationNavProps } from "../VaultParamList";
+import { AppButton } from "../../../components/design/AppButton";
 
 const CreateVaultScreen = ({navigation} : VaultCreationNavProps<"CreateVault">) => {
   return (
     <DefaultLayout>
       <Text style={styles.text}>Create Vault</Text>
-      <Button title="Lock in Vault" onPress={() => {navigation.navigate("VaultCreated")}} />
-      <Button title="Back" onPress={() => {navigation.goBack()}} />
+      <AppButton title="Lock in Vault" onPress={() => {navigation.navigate("VaultCreated")}} />
+      <AppButton title="Back" onPress={() => {navigation.goBack()}} />
     </DefaultLayout>
   );
 };

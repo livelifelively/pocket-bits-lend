@@ -4,12 +4,13 @@ import { Text, StyleSheet, Button } from "react-native";
 
 import { DefaultLayout } from "../../../layouts/Default";
 import { VaultHistoryNavProps } from "../VaultParamList";
+import { AppButton } from "../../../components/design/AppButton";
 
 const VaultHistoryScreen = ({navigation} : VaultHistoryNavProps<"VaultHistory">) => {
   return (
     <DefaultLayout>
       <Text style={styles.text}>Vault History</Text>
-      <Button title="Back" onPress={() => {navigation.goBack()}} />
+      <AppButton title="Back" onPress={() => {navigation.goBack()}} />
     </DefaultLayout>
   );
 };
