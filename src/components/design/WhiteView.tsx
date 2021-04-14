@@ -1,21 +1,23 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
-interface ComponetViewProps {}
+interface WhiteViewProps {
+  style?: {}
+}
 
-export const ComponetView: React.FC<ComponetViewProps> = ({children}) => {
+export const WhiteView: React.FC<WhiteViewProps> = ({children, style}) => {
   return (
-    <View style={styles.componentView}>
+    <View style={{...styles.whiteView, ...style}}>
       {children}
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  componentView: {
+  whiteView: {
     backgroundColor: '#ffffff',
     padding: 15,
     borderRadius: 15,
-    // elevation: 0.5
+    width: '100%'
   }
 })

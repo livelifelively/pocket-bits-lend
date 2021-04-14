@@ -1,28 +1,34 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
+import { Title } from "react-native-paper";
+import { AppButton } from "./AppButton";
 
-const Topbar = () => {
+interface TopBarProps {
+  onPress: () => void,
+  title: string
+}
+
+const Topbar: React.FC<TopBarProps> = ({onPress, title}) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.navbar}>
-        
-      </View>
+    <View style={styles.navBar}>
+      <AppButton
+        title="<"
+        onPress={onPress}
+      />
+      <Title>{title}</Title>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
+  navBar: {
+    flexDirection: "row",
+    width: '100%',
+    marginBottom: 25
   },
-  navbar: {
-    height: 55,
-    backgroundColor: 'white',
-    paddingHorizontal: 15,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  }
+  navBarTitle: {
+    fontSize: 18
+  },
 })
 
 export default Topbar;

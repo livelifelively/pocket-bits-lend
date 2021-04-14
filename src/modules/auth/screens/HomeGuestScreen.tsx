@@ -1,37 +1,38 @@
 import React from "react";
-import { Text, StyleSheet, Button } from "react-native";
+import { Text, StyleSheet, View } from "react-native";
 
 import { AuthNavProps } from "../AuthParamList";
 import { DefaultLayout } from "../../../layouts/Default";
 import { AppText } from "../../../components/design/AppText";
 import { AppButton } from "../../../components/design/AppButton";
-import { ComponetView } from "../../../components/design/ComponentView";
+import { VaultIntro } from "../../../components/business/VaultIntro";
+import { Wallets } from "../../../components/business/Wallets";
+
 
 function HomeGuestScreen({ navigation }: AuthNavProps<"HomeGuest">) {
   return (
     <DefaultLayout>
-      <AppButton
-        title="Sign In"
-        onPress={() => {
-          navigation.navigate("LoginEmail");
-        }}
-        size="large"
-        style={styles.authButtons}
-      />
-      <AppButton
-        title="Sign Up"
-        onPress={() => {
-          navigation.navigate("SignUp");
-        }}
-        mode="outlined"
-        size="large"
-        style={styles.authButtons}
-      />
-      <ComponetView>
-        <AppText>
-          <Text>Guest HOME</Text>
-        </AppText>
-      </ComponetView>
+      <View style={{...styles.authButtonsWrapper, ...styles.components}}>
+        <AppButton
+          title="Sign In"
+          onPress={() => {
+            navigation.navigate("LoginEmail");
+          }}
+          size="large"
+          style={styles.authButtons}
+        />
+        <AppButton
+          title="Sign Up"
+          onPress={() => {
+            navigation.navigate("SignUp");
+          }}
+          mode="outlined"
+          size="large"
+          style={styles.authButtons}
+        />
+      </View>
+      <VaultIntro style={{...styles.components}} />
+      <Wallets onPress={() => {}} />
     </DefaultLayout>
   );
 }
@@ -42,6 +43,12 @@ const styles = StyleSheet.create({
   },
   authButtons: {
     width: '100%'
+  },
+  authButtonsWrapper: {
+    width: '100%'
+  },
+  components: {
+    marginBottom: 15
   }
 });
 

@@ -14,7 +14,8 @@ export type VaultNavProps<T extends keyof VaultParamList> = {
 };
 
 export type HomeParamList = {
-  WalletStack: undefined;
+  Home: undefined;
+  WalletStack: {};
   SettingsStack: undefined
 };
 
