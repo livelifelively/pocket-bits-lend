@@ -77,8 +77,8 @@ export const Wallets: React.FC<WalletsProps> = ({children, style, onPress}) => {
       {
         wallets && wallets.map((val) => {
           return (
-            <TouchableOpacity onPress={() => onWalletPress(val)}>
-              <WhiteView style={styles.WalletRowWrapper} key={val.id}>
+            <TouchableOpacity onPress={() => onWalletPress(val)} key={val.id}>
+              <WhiteView style={styles.WalletRowWrapper}>
                 <View>
                   <Text style={styles.cryptoName}>{val.cryptoCurrencyShortName}</Text>
                 </View>

@@ -1,22 +1,28 @@
 import React from "react";
-import { Text, StyleSheet, Button } from "react-native";
+import { StyleSheet} from "react-native";
 
 import { DefaultLayout } from "../../../layouts/Default";
 import { VaultActiveDepositsNavProps } from "../VaultParamList";
-import { AppButton } from "../../../components/design/AppButton";
+import { VaultActiveDeposits } from "../../../components/business/VaultActiveDeposits";
+import Topbar from "../../../components/design/Topbar";
 
 const ActiveDepositsScreen = ({navigation} : VaultActiveDepositsNavProps<"ActiveDeposits">) => {
   return (
     <DefaultLayout>
-      <Text style={styles.text}>Active Deposits</Text>
-      <AppButton title="Back" onPress={() => {navigation.goBack()}} />
+      <Topbar
+        onPress={() => {
+          navigation.goBack();
+        }}
+        title="Active Deposits"
+      />
+      <VaultActiveDeposits showTitle={false} expandableListUnit={true} />
     </DefaultLayout>
-  );
+  )
 };
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 30
+  component: {
+    marginBottom: 30
   }
 });
 

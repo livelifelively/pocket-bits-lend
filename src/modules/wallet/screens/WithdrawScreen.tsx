@@ -1,27 +1,26 @@
 import React from "react";
-import { Text, StyleSheet, Button } from "react-native";
+import { StyleSheet} from "react-native";
 
 import { DefaultLayout } from "../../../layouts/Default";
 import { WalletNavProps } from "../WalletParamList";
-import { AppButton } from "../../../components/design/AppButton";
+import Topbar from "../../../components/design/Topbar";
 
 const WithdrawScreen = ({navigation}: WalletNavProps<"Withdraw">) => {
   return (
     <DefaultLayout>
-      <Text style={styles.text}>Send BTC</Text>
-      <AppButton
-        title="Back"
+      <Topbar
         onPress={() => {
           navigation.goBack();
         }}
+        title="Send BTC"
       />
     </DefaultLayout>
   )
 };
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 30
+  component: {
+    marginBottom: 15
   }
 });
 
