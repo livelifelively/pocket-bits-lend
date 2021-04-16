@@ -9,7 +9,7 @@ const WithdrawScreen = ({navigation}: WalletNavProps<"Withdraw">) => {
   return (
     <DefaultLayout>
       <Topbar
-        onPress={() => {
+        onBackButtonPress={() => {
           navigation.goBack();
         }}
         title="Send BTC"

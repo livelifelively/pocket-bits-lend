@@ -10,7 +10,7 @@ const ActiveDepositsScreen = ({navigation} : VaultActiveDepositsNavProps<"Active
   return (
     <DefaultLayout>
       <Topbar
-        onPress={() => {
+        onBackButtonPress={() => {
           navigation.goBack();
         }}
         title="Active Deposits"

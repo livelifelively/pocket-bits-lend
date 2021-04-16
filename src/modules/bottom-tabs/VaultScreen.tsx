@@ -13,9 +13,7 @@ const VaultScreen = ({navigation}: VaultNavProps<"VaultCreationStack">) => {
   return (
     <DefaultLayout>
       <Topbar
-        onPress={() => {
-          navigation.goBack();
-        }}
+        showBackButton={false}
         title="Vault"
       />
       <ValueCreated />

@@ -108,7 +108,7 @@ const VaultActiveDepositsListUnitBasic = ({showDetails, depositDetails}: {showDe
   )
 }
 
-export const VaultActiveDepositsListUnit: React.FC<VaultActiveDepositsListUnitProps> = ({style, expanded=true, depositDetails}) => {
+export const VaultActiveDepositsListUnit: React.FC<VaultActiveDepositsListUnitProps> = ({style, expanded=false, depositDetails}) => {
   const [expansion, setExpansion] = useState(() => expanded)
   
   const showDetails = () => {

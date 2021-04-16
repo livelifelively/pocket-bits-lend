@@ -12,7 +12,7 @@ const DepositScreen = ({navigation}: WalletNavProps<"Deposit">) => {
   return (
     <DefaultLayout>
       <Topbar
-        onPress={() => {
+        onBackButtonPress={() => {
           navigation.goBack();
         }}
         title="Receive BTC"

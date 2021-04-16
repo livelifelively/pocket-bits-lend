@@ -13,7 +13,7 @@ const WalletScreen = ({navigation}: WalletNavProps<"Wallet">) => {
   return (
     <DefaultLayout>
       <Topbar
-        onPress={() => {
+        onBackButtonPress={() => {
           navigation.goBack();
         }}
         title="Wallet"

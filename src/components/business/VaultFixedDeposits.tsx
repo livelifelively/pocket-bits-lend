@@ -54,7 +54,9 @@ export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({children,
           vaults && vaults.map((val) => {
             return (
               <WhiteView style={styles.vaultFixedDeposit} key={val.id}>
-                <TouchableOpacity onPress={onPress}>
+                <TouchableOpacity onPress={() => {
+                  onPress()
+                }}>
                   <Text style={styles.vaultFixedDepositInterestRate}>{val.interestRatePercent}%</Text>
                   <Text style={styles.subtext}>Interest Rate</Text>
                   <YellowView style={styles.vaultFixedDepositDuration}>
