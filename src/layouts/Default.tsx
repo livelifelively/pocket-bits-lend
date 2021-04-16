@@ -1,11 +1,13 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 
-interface DefaultLayoutProps {}
+interface DefaultLayoutProps {
+  style?: {}
+}
 
-export const DefaultLayout: React.FC<DefaultLayoutProps> = ({children}) => {
+export const DefaultLayout: React.FC<DefaultLayoutProps> = ({children, style={}}) => {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={{...styles.container, ...style}}>
       <View style={styles.wrapper}>
         {children}
       </View>

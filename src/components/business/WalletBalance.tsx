@@ -21,7 +21,7 @@ export const WalletBalance: React.FC<WalletBalanceProps> = ({children, style, on
       <View style={styles.walletVaultStatus}>
         <View>
           <Text>
-            <Text style={styles.walletBalanceGraphValue}>
+            <Text style={styles.walletBalanceValue}>
               {`0.215 `}
               <Text style={styles.walletBalanceSubtext}>BTC</Text>
             </Text>
@@ -34,7 +34,7 @@ export const WalletBalance: React.FC<WalletBalanceProps> = ({children, style, on
         </View>
         <View>
           <Text>
-            <Text style={styles.walletBalanceGraphValue}>
+            <Text style={styles.walletBalanceValue}>
               {`0.215 `}
               <Text style={styles.walletBalanceSubtext}>BTC</Text>
             </Text>
@@ -50,6 +50,9 @@ export const WalletBalance: React.FC<WalletBalanceProps> = ({children, style, on
         <AppButton
           title="Add funds to vault"
           onPress={onPress}
+          color="white"
+          size='small'
+          style={{shadowOpacity: 0.3, shadowRadius: 5, shadowColor: '#a3a3a3', shadowOffset: { height: 0, width: 0 }}}
         />
       </View>
     </WhiteView>
@@ -69,12 +72,19 @@ const styles = StyleSheet.create({
   },
   walletBalanceGraphValue: {
     fontFamily: 'Poppins-Bold',
-    fontSize: 18
+    fontSize: 18,
+    textAlign: 'center'
   },
   walletBalanceGraphCurrencyValue: {
     color: '#44CBB3',
     fontSize: 14,
-    fontFamily: 'Poppins-Regular'
+    fontFamily: 'Poppins-Regular',
+    textAlign: 'center'
+  },
+  walletBalanceValue: {
+    fontFamily: 'Poppins-Bold',
+    fontSize: 18,
+    textAlign: 'center'
   },
   walletVaultStatus: {
     flexDirection: 'row',
@@ -83,6 +93,7 @@ const styles = StyleSheet.create({
     marginBottom: 15
   },
   walletBalanceSubtext: {
-    fontSize: 12
+    fontSize: 10,
+    color: '#5A5A5A'
   }
 })

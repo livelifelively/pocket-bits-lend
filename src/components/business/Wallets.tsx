@@ -58,7 +58,7 @@ const wallets = [
     holdingSubtext: '0.000',
     holdingValueInCurrency: '50,021',
     changeInPercent: {
-      changeDirection: '+',
+      changeDirection: '-',
       changeValue: '2.56'
     }
   }
@@ -76,6 +76,8 @@ export const Wallets: React.FC<WalletsProps> = ({children, style, onPress}) => {
       </View>
       {
         wallets && wallets.map((val) => {
+          const changeDirectionColor = val.changeInPercent.changeDirection === '+' ? '#44CBB3' : '#EA6D6D';
+
           return (
             <TouchableOpacity onPress={() => onWalletPress(val)} key={val.id}>
               <WhiteView style={styles.WalletRowWrapper}>
@@ -85,15 +87,13 @@ export const Wallets: React.FC<WalletsProps> = ({children, style, onPress}) => {
                 <View>
                   <Text style={styles.cryptoHolding}>{val.holding}</Text>
                   <Text style={styles.cryptoHoldingSubtext}>
-                    <Text>{val.currency.symbol}</Text>
-                    <Text>{val.holdingSubtext}</Text>
+                    {`${val.currency.symbol} ${val.holdingSubtext}`}
                   </Text>
                 </View>
                 <View>
                   <Text style={styles.cryptoHoldingValue}>{`${val.currency.symbol}${val.holdingValueInCurrency}`}</Text>
-                  <Text style={styles.cryptoHoldingValueSubtext}>
-                    <Text>{val.changeInPercent.changeDirection}</Text>
-                    <Text>{`${val.changeInPercent.changeValue}%`}</Text>
+                  <Text style={{...styles.cryptoHoldingValueSubtext, color: changeDirectionColor}}>
+                    {`${val.changeInPercent.changeDirection}${val.changeInPercent.changeValue}%`}
                   </Text>
                 </View>
               </WhiteView>
@@ -127,8 +127,8 @@ const styles = StyleSheet.create({
   },
   cryptoHoldingSubtext: {
     fontSize: 10,
-    textAlign: 'center',
-    width: '100%'
+    width: '100%',
+    textAlign: 'center'
   },
   cryptoHoldingValue: {
     fontWeight: '400',
@@ -136,5 +136,6 @@ const styles = StyleSheet.create({
   },
   cryptoHoldingValueSubtext: {
     fontSize: 10,
+    textAlign: 'center'
   }
 })

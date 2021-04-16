@@ -9,26 +9,27 @@ interface AppButtonProps {
   title: string,
   mode?: 'text' | 'outlined' | 'contained',
   style?: {},
-  size?: 'normal' | 'large'
+  size?: 'normal' | 'large' | 'small',
+  color?: string
 }
 
 
-export const AppButton: React.FC<AppButtonProps> = ({onPress, title, mode='contained', style={}, size='normal'}) => {
+export const AppButton: React.FC<AppButtonProps> = ({onPress, title, mode='contained', style={}, size='normal', color=Theme.colors.primary}) => {
   let {buttonStyle, textStyle} = extendStylesByParams(
-    {size, mode}, 
+    {size, mode, color}, 
     {...styles.appButtonContainer, ...style},
     {...styles.appButtonText}
   )
 
   return (
-    <Button style={buttonStyle} onPress={onPress} mode={mode}>
+    <Button style={buttonStyle} color={color} onPress={() => {console.log(Theme.colors); onPress()}} mode={mode}>
       <Text style={textStyle}>{title}</Text>
     </Button>
   )
 }
 
-const extendStylesByParams = ({mode='', size=''}, baseButtonStyle={}, baseTextStyle={}) => {
-  const buttonModeStyle = extendStylesByMode(mode)
+const extendStylesByParams = ({mode='', size='', color=''}, baseButtonStyle={}, baseTextStyle={}) => {
+  const buttonModeStyle = extendStylesByMode({mode, color})
   const {buttonSizeStyle, textSizeStyle} = extendStylesBySize(size)
   return {
     buttonStyle: {...baseButtonStyle, ...buttonModeStyle, ...buttonSizeStyle},
@@ -36,17 +37,17 @@ const extendStylesByParams = ({mode='', size=''}, baseButtonStyle={}, baseTextSt
   }
 }
 
-const extendStylesByMode = (mode='') => {
+const extendStylesByMode = ({mode='', color=''}) => {
   let buttonStyle = {}
 
   switch (mode) {
     case 'outlined':
       buttonStyle = {
         ...buttonStyle,
-        borderColor: Theme.colors.primary,
+        borderColor: color,
       }
       break;
-  
+
     default:
       break;
   }
@@ -65,7 +66,12 @@ const extendStylesBySize = (size='') => {
         lineHeight: 38,
       }
       break;
-  
+    case 'small':
+      textStyle = {
+        fontSize: 12,
+        lineHeight: 16,
+      }
+      break;
     default:
       break;
   }

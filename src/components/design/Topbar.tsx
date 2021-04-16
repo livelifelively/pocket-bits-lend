@@ -14,10 +14,12 @@ interface TopBarProps {
 const Topbar: React.FC<TopBarProps> = ({onBackButtonPress=() => {}, title, showBackButton=true, onSettingsButtonPress=() => {}, showSettingsButton=false}) => {
   return (
     <View style={styles.navBar}>
-      <View>
+      <View style={styles.pageTitleAndBack}>
         {
           showBackButton && <AppButton
             title="<"
+            color="white"
+            style={{marginRight: 15, shadowOpacity: 0.3, shadowRadius: 5, shadowColor: '#a3a3a3', shadowOffset: { height: 0, width: 0 }}}
             onPress={onBackButtonPress}
           />
         }
@@ -45,6 +47,10 @@ const styles = StyleSheet.create({
   navBarTitle: {
     fontSize: 18
   },
+  pageTitleAndBack: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  }
 })
 
 export default Topbar;

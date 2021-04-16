@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
   },
   vaultInfoText: {
     lineHeight: 16,
-    fontSize: 12,
-    fontWeight: '600'
+    fontSize: 13,
+    fontFamily: 'Poppins-Medium',
+    color: '#625E59'
   }
 })

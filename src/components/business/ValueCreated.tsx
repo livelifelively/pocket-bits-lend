@@ -30,8 +30,8 @@ const data = {
 export const ValueCreated: React.FC<ValueCreatedProps> = ({children, style}) => {
   return (
     <YellowView style={styles.valueCreatedWrapper}>
-      <View>
-        <Text>i</Text>
+      <View style={{marginBottom: 20}}>
+        <Text style={{textAlign: 'right'}}>i</Text>
       </View>
       <View style={styles.valueCreatedDetails}>
         <View>
@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
   },
   valueCreatedDetailsTitle: {
     fontFamily: 'Poppins-Bold',
-    fontSize: 24
+    fontSize: 24,
+    textAlign: 'center'
   },
   valueCreatedDetailsSubtext: {
     fontSize: 12
