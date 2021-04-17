@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   },
   createVaultInfo: {flexDirection: 'row', width: '100%', justifyContent: 'space-between', marginBottom: 30},
   vaultInputAmount: {flexDirection: 'row', width: '100%', backgroundColor: '#f7f7f7', justifyContent: 'space-between', borderRadius: 15, marginBottom: 15},
-  vaultInputAmountTextInput: {padding: 15, backgroundColor: '#f7f7f7', fontSize: 14, borderRadius: 15},
+  vaultInputAmountTextInput: {padding: 15, backgroundColor: '#f7f7f7', fontSize: 14, borderRadius: 15, width: '70%'},
   vaultInputAmountText: {padding: 10, borderLeftWidth: 1, borderLeftColor: '#e5e5e5'},
   dropdownMenuWrapper: {
     borderWidth: 1,

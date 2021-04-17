@@ -64,8 +64,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   walletActionsButtons: {
-    marginBottom: 10,
-    marginHorizontal: 13, shadowOpacity: 0.3, shadowRadius: 5, shadowColor: '#a3a3a3', shadowOffset: { height: 0, width: 0 }
+    marginBottom: 10, marginHorizontal: 13, shadowOpacity: 0.3, shadowRadius: 5, shadowColor: '#a3a3a3', shadowOffset: { height: 0, width: 0 }
   },
   walletActionsSubtext: {
     color: '#625E59',
