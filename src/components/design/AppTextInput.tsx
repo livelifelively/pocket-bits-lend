@@ -10,11 +10,12 @@ interface AppTextInputProps {
   keyboardType?: 'default' | 'numeric' | 'email-address' | 'ascii-capable' | 'numbers-and-punctuation' | 'url' | 'number-pad' | 'phone-pad' | 'name-phone-pad' | 'decimal-pad' | 'twitter' | 'web-search' | 'visible-password',
   value: string,
   autoCorrect?: boolean,
-  maxLength?: number
+  maxLength?: number,
+  placeholderTextColor?: string
 }
 
 
-export const AppTextInput: React.FC<AppTextInputProps> = ({onChangeText, placeholder, style={}, size='normal', value='', autoCorrect=false, maxLength, keyboardType='default'}) => {
+export const AppTextInput: React.FC<AppTextInputProps> = ({onChangeText, placeholder, style={}, size='normal', value='', autoCorrect=false, maxLength, keyboardType='default', placeholderTextColor='#625E59'}) => {
   return (
     <TextInput
       autoCorrect={autoCorrect}
@@ -24,6 +25,7 @@ export const AppTextInput: React.FC<AppTextInputProps> = ({onChangeText, placeho
       placeholder={placeholder}
       keyboardType={keyboardType}
       maxLength={maxLength}
+      placeholderTextColor={placeholderTextColor}
     />
   )
 }

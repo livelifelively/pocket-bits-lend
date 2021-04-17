@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f7f7f7',
     flex: 1,
+    paddingHorizontal: 30,
+    paddingTop: 65,
   },
   wrapper: {
     alignItems: 'center',
-    paddingHorizontal: 30,
-    paddingTop: 65,
   }
 });

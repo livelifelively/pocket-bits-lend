@@ -21,6 +21,12 @@ export const AppButton: React.FC<AppButtonProps> = ({onPress, title, mode='conta
     {...styles.appButtonText}
   )
 
+  console.log('===============================')
+  console.log(title)
+  console.log(buttonStyle)
+  console.log(textStyle)
+  console.log('+++++++++++++++++++++++++++++++')
+
   return (
     <Button style={buttonStyle} color={color} onPress={() => {console.log(Theme.colors); onPress()}} mode={mode}>
       <Text style={textStyle}>{title}</Text>
@@ -29,30 +35,44 @@ export const AppButton: React.FC<AppButtonProps> = ({onPress, title, mode='conta
 }
 
 const extendStylesByParams = ({mode='', size='', color=''}, baseButtonStyle={}, baseTextStyle={}) => {
-  const buttonModeStyle = extendStylesByMode({mode, color})
+  const {buttonModeStyle, textModeStyle} = extendStylesByMode({mode, color})
   const {buttonSizeStyle, textSizeStyle} = extendStylesBySize(size)
   return {
     buttonStyle: {...baseButtonStyle, ...buttonModeStyle, ...buttonSizeStyle},
-    textStyle: {...baseTextStyle, ...textSizeStyle}
+    textStyle: {...baseTextStyle, ...textModeStyle, ...textSizeStyle}
   }
 }
 
 const extendStylesByMode = ({mode='', color=''}) => {
-  let buttonStyle = {}
+  let buttonModeStyle = {}
+  let textModeStyle = {}
 
   switch (mode) {
     case 'outlined':
-      buttonStyle = {
-        ...buttonStyle,
+      buttonModeStyle = {
+        ...buttonModeStyle,
         borderColor: color,
       }
+      break;
+
+    case 'text':
+      textModeStyle = {
+        ...textModeStyle,
+        color: color,
+        padding: 0
+      }
+      buttonModeStyle = {
+        ...buttonModeStyle,
+        padding: 0
+      }
+
       break;
 
     default:
       break;
   }
 
-  return buttonStyle
+  return {buttonModeStyle, textModeStyle}
 }
 
 const extendStylesBySize = (size='') => {
@@ -69,6 +89,12 @@ const extendStylesBySize = (size='') => {
     case 'small':
       textStyle = {
         fontSize: 12,
+        lineHeight: 16,
+      }
+      break;
+    case 'normal':
+      textStyle = {
+        fontSize: 14,
         lineHeight: 16,
       }
       break;
