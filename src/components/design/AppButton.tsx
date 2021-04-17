@@ -21,14 +21,8 @@ export const AppButton: React.FC<AppButtonProps> = ({onPress, title, mode='conta
     {...styles.appButtonText}
   )
 
-  console.log('===============================')
-  console.log(title)
-  console.log(buttonStyle)
-  console.log(textStyle)
-  console.log('+++++++++++++++++++++++++++++++')
-
   return (
-    <Button style={buttonStyle} color={color} onPress={() => {console.log(Theme.colors); onPress()}} mode={mode}>
+    <Button style={buttonStyle} color={color} onPress={() => {onPress()}} mode={mode}>
       <Text style={textStyle}>{title}</Text>
     </Button>
   )

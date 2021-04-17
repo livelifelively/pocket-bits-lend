@@ -11,7 +11,7 @@ import { AppButton } from "../../components/design/AppButton";
 
 const RewardScreen = ({navigation}: RewardsNavProps<"InviteFriends">) => {
   return (
-    <DefaultLayout style={{backgroundColor: '#ffffff'}}>
+    <DefaultLayout backgroundColor='#ffffff'>
       <Topbar
         showBackButton={false}
         title="Reward Screen"

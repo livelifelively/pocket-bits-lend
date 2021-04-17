@@ -57,8 +57,6 @@ const fontConfig = {
   }
 };
 
-console.log(DefaultTheme.colors)
-
 const Theme = {
   ...DefaultTheme,
   colors: {

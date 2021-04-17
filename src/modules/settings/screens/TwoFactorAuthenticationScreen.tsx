@@ -14,7 +14,7 @@ const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<"TwoFactor
   const onVerificationCodeChange = () => {}
 
   return (
-    <DefaultLayout style={{backgroundColor: '#ffffff'}}>
+    <DefaultLayout backgroundColor='#ffffff'>
       <Topbar
         onBackButtonPress={() => {
           navigation.goBack();

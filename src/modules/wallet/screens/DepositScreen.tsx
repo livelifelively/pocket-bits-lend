@@ -9,7 +9,7 @@ import Topbar from "../../../components/design/Topbar";
 
 const DepositScreen = ({navigation}: WalletNavProps<"Deposit">) => {
   return (
-    <DefaultLayout style={{backgroundColor: '#ffffff'}}>
+    <DefaultLayout backgroundColor='#ffffff'>
       <Topbar
         onBackButtonPress={() => {
           navigation.goBack();

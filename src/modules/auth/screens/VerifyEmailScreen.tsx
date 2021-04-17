@@ -15,7 +15,7 @@ const VerifyEmailScreen = ({ navigation, route }: AuthNavProps<"VerifyEmail">) =
   }
 
   return (
-    <DefaultLayout style={{backgroundColor: '#FCFCFC', paddingHorizontal: 45}}>
+    <DefaultLayout backgroundColor='#FCFCFC' paddingHorizontal={45}>
       <View style={{height: 65, width: '100%', backgroundColor: '#EBEBEB', marginTop: 100, marginBottom: 120, alignItems: 'center', flexDirection: 'column', justifyContent: 'center'}}>
         <Text style={{textAlign: 'center', fontSize: 24}}>logo</Text>
       </View>
