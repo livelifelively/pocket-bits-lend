@@ -1,7 +1,8 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import { Title } from "react-native-paper";
-import { AppButton } from "./AppButton";
+import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { Title, Text } from "react-native-paper";
+import { BackIcon } from "../../icons";
+import {WhiteTouchableOpacity} from "./WhiteTouchableOpacity";
 
 interface TopBarProps {
   onBackButtonPress?: () => void,
@@ -16,19 +17,47 @@ const Topbar: React.FC<TopBarProps> = ({onBackButtonPress=() => {}, title, showB
     <View style={styles.navBar}>
       <View style={styles.pageTitleAndBack}>
         {
-          showBackButton && <AppButton
-            title="<"
-            color="white"
-            style={{marginRight: 15, shadowOpacity: 0.3, shadowRadius: 5, shadowColor: '#a3a3a3', shadowOffset: { height: 0, width: 0 }}}
+          showBackButton && <TouchableOpacity
+            activeOpacity={0.7}
             onPress={onBackButtonPress}
-          />
+            style={{
+              shadowColor: '#a3a3a3', // IOS
+              shadowOffset: { height: 0, width: 1 }, // IOS
+              shadowOpacity: 0.3,
+              shadowRadius: 5, //IOS
+              backgroundColor: '#fff',
+              elevation: 2, // Android
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flexDirection: 'row',
+              paddingVertical: 15,
+              paddingHorizontal: 15,
+              borderRadius: 6,
+              marginRight: 20
+            }}
+          >
+            <View style={{width: 7, height: 10}}>
+              <BackIcon />
+            </View>
+          </TouchableOpacity>
         }
         <Title>{title}</Title>
       </View>
       <View>
         {
           showSettingsButton && <View>
-            <AppButton title="settings" onPress={onSettingsButtonPress} />
+            <WhiteTouchableOpacity
+              onPress={onSettingsButtonPress}
+              style={{
+                width: 48, height: 48, borderRadius: 48
+              }}
+            >
+              <View>
+                <Image
+                  source={require('../../../assets/images/avatar-male.png')}
+                />
+              </View>
+            </WhiteTouchableOpacity>
           </View>
         }
       </View>

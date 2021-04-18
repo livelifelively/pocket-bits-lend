@@ -1,7 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { Text } from "react-native-paper";
 
 import {WhiteView} from "../design/WhiteView";
+import { VaultBuildingIcon } from "../../icons";
 
 interface VaultIntroProps {
   style?: {}
@@ -10,7 +12,10 @@ interface VaultIntroProps {
 export const VaultIntro: React.FC<VaultIntroProps> = ({children, style}) => {
   return (
     <WhiteView style={{...styles.vaultIntroWrapper, ...style}}>
-      <View style={styles.vaultInfoIcon}></View>
+      <View style={styles.vaultInfoIcon}>
+        <View style={{marginBottom: 25}}><VaultBuildingIcon /></View>
+        <View style={{marginLeft: 10}}><Text>Vault</Text></View>
+      </View>
       <View style={styles.vaultInfoTextWrapper}>
         <Text style={styles.vaultInfoText}>
           Use Coinsip Vault to earn additional interest
@@ -27,11 +32,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   vaultInfoTextWrapper: {
-    width: '40%',
+    width: '50%',
   },
   vaultInfoIcon: {
-    width: '35%',
-    textAlign: 'center',
+    // width: '35%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 20,
+    paddingLeft: 20
   },
   vaultInfoText: {
     lineHeight: 16,

@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
+import { InfoIcon } from "../../icons";
 
 import {YellowView} from "../design/YellowView";
 
@@ -30,8 +31,8 @@ const data = {
 export const ValueCreated: React.FC<ValueCreatedProps> = ({children, style}) => {
   return (
     <YellowView style={styles.valueCreatedWrapper}>
-      <View style={{marginBottom: 20}}>
-        <Text style={{textAlign: 'right'}}>i</Text>
+      <View style={{marginBottom: 20, flexDirection: 'row-reverse', alignItems: 'center', width: '100%', backgroundColor: 'red'}}>
+        <InfoIcon style={{height: 13, width: 13}} />
       </View>
       <View style={styles.valueCreatedDetails}>
         <View>

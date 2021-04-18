@@ -10,6 +10,7 @@ import Topbar from "../../../components/design/Topbar";
 import { WhiteView } from "../../../components/design/WhiteView";
 import { AppTextInput } from "../../../components/design/AppTextInput";
 import { Menu } from "react-native-paper";
+import { WhiteTouchableOpacity } from "../../../components/design/WhiteTouchableOpacity";
 // import { TouchableOpacity } from "react-native-gesture-handler";
 
 type VaultDepositOption = {
@@ -90,7 +91,7 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<"CreateVault">) 
   }
 
   return (
-    <DefaultLayout>
+    <DefaultLayout style={{paddingHorizontal: 30}}>
       <Topbar
         onBackButtonPress={() => {
           navigation.goBack();
@@ -105,28 +106,37 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<"CreateVault">) 
             <Text>Interest Rate</Text>
           </View>
         </View>
-        <View style={styles.vaultInputAmount}>
+        
+        <View style={[styles.inputAmount]}>          
           <AppTextInput
             autoCorrect={false}
             value={`${amount}`}
-            style={styles.vaultInputAmountTextInput}
+            style={styles.inputAmountTextInput}
             onChangeText={onCryptoAmountChange}
             placeholder={`Enter Amount in ${activeVaultOption.crypto.shortName}`}
             keyboardType="number-pad"
             maxLength={15}
           />
-          <View style={styles.vaultInputAmountText}>
+          <View style={[styles.inputAmountText]}>
             <Text>{availableFundsInCrypto} {activeVaultOption.crypto.shortName}</Text>
-            <Text style={styles.subtext}>Available</Text>
+            <Text style={[styles.subtext, {textAlign: 'center'}]}>Available</Text>
           </View>
         </View>
-        <View style={styles.percentButtonsRow}>
-          <TouchableOpacity style={styles.percentButton}><Text>25%</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.percentButton}><Text>50%</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.percentButton}><Text>75%</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.percentButton}><Text>100%</Text></TouchableOpacity>
+        <View style={{flexDirection: 'row',justifyContent: 'flex-end', marginBottom: 20, alignItems: 'center'}}>
+          <WhiteTouchableOpacity style={styles.percentButtons}>
+            <Text style={styles.percentButtonsText}>25%</Text>
+          </WhiteTouchableOpacity>
+          <WhiteTouchableOpacity style={styles.percentButtons}>
+            <Text style={styles.percentButtonsText}>50%</Text>
+          </WhiteTouchableOpacity>
+          <WhiteTouchableOpacity style={styles.percentButtons}>
+            <Text style={styles.percentButtonsText}>75%</Text>
+          </WhiteTouchableOpacity>
+          <WhiteTouchableOpacity style={styles.percentButtons}>
+            <Text style={styles.percentButtonsText}>100%</Text>
+          </WhiteTouchableOpacity>
         </View>
-        
+
         <View
           style={styles.dropdownMenuWrapper}
         >
@@ -161,9 +171,22 @@ const styles = StyleSheet.create({
     padding: 30
   },
   createVaultInfo: {flexDirection: 'row', width: '100%', justifyContent: 'space-between', marginBottom: 30},
-  vaultInputAmount: {flexDirection: 'row', width: '100%', backgroundColor: '#f7f7f7', justifyContent: 'space-between', borderRadius: 15, marginBottom: 15},
-  vaultInputAmountTextInput: {padding: 15, backgroundColor: '#f7f7f7', fontSize: 14, borderRadius: 15, width: '70%'},
-  vaultInputAmountText: {padding: 10, borderLeftWidth: 1, borderLeftColor: '#e5e5e5'},
+
+
+  percentButtons: {
+    paddingVertical: 7,
+    paddingHorizontal: 10,
+    marginLeft: 10,
+    borderRadius: 2
+  },
+  percentButtonsText: {
+    fontSize: 12
+  },
+  inputAmount: {flexDirection: 'row', alignItems: 'center', width: '100%', backgroundColor: '#f7f7f7', justifyContent: 'center', borderRadius: 15, marginBottom: 15,},
+  inputAmountTextInput: {padding: 20, backgroundColor: '#f7f7f7', fontSize: 14, borderRadius: 15, width: 200,},
+  inputAmountText: {paddingVertical: 10, borderLeftWidth: 1, borderLeftColor: '#e5e5e5', alignItems: 'center', justifyContent: 'center', width: 80},
+  
+  
   dropdownMenuWrapper: {
     borderWidth: 1,
     borderColor: '#f5f5f5',

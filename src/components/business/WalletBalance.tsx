@@ -1,9 +1,10 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
-import { AppButton } from "../design/AppButton";
 
 import {WhiteView} from "../design/WhiteView";
+import { YellowPlusIcon } from "../../icons";
+import { WhiteTouchableOpacity } from "../design/WhiteTouchableOpacity";
 
 interface WalletBalanceProps {
   style?: {},
@@ -15,7 +16,7 @@ export const WalletBalance: React.FC<WalletBalanceProps> = ({children, style, on
     <WhiteView style={{...styles.walletBalanceWrapper, ...style}}>
       <View style={styles.walletBalanceGraph}>
         <Text style={styles.walletBalanceGraphValue}>0.433</Text>
-        <Text style={styles.walletBalanceSubtext}>Total Balance</Text>
+        <Text style={[styles.walletBalanceSubtext, {textAlign: "center"}]}>Total Balance</Text>
         <Text style={styles.walletBalanceGraphCurrencyValue}>$18,324</Text>
       </View>
       <View style={styles.walletVaultStatus}>
@@ -26,7 +27,10 @@ export const WalletBalance: React.FC<WalletBalanceProps> = ({children, style, on
               <Text style={styles.walletBalanceSubtext}>BTC</Text>
             </Text>
           </Text>
-          <Text style={styles.walletBalanceSubtext}>Balance</Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{height: 8, width: 8, backgroundColor: '#FF7E42', borderRadius: 8, marginRight: 5}}></View>
+            <Text style={styles.walletBalanceSubtext}>Balance</Text>
+          </View>
           <Text style={styles.walletBalanceSubtext}>
             {`Interest `}
             <Text style={{...styles.walletBalanceSubtext, fontFamily: 'Poppins-Bold'}}>12%</Text>
@@ -39,7 +43,10 @@ export const WalletBalance: React.FC<WalletBalanceProps> = ({children, style, on
               <Text style={styles.walletBalanceSubtext}>BTC</Text>
             </Text>
           </Text>
-          <Text style={styles.walletBalanceSubtext}>Locked in vault</Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{height: 8, width: 8, backgroundColor: '#363EFF', borderRadius: 8, marginRight: 5}}></View>
+            <Text style={styles.walletBalanceSubtext}>Locked in vault</Text>
+          </View>
           <Text style={styles.walletBalanceSubtext}>
             {`Interest `}
             <Text style={{...styles.walletBalanceSubtext, fontFamily: 'Poppins-Bold'}}>12%</Text>
@@ -47,13 +54,19 @@ export const WalletBalance: React.FC<WalletBalanceProps> = ({children, style, on
         </View>
       </View>
       <View>
-        <AppButton
-          title="Add funds to vault"
+        <WhiteTouchableOpacity
           onPress={onPress}
-          color="white"
-          size='small'
-          style={{shadowOpacity: 0.3, shadowRadius: 5, shadowColor: '#a3a3a3', shadowOffset: { height: 0, width: 0 }}}
-        />
+          style={{
+            paddingVertical: 7,
+            paddingHorizontal: 12,
+            borderRadius: 6,
+          }}
+        >
+          <View style={{width: 25, height: 25}}>
+            <YellowPlusIcon />
+          </View>
+          <Text style={{fontSize: 12}}>Add funds to vault</Text>
+        </WhiteTouchableOpacity>
       </View>
     </WhiteView>
   )
@@ -68,7 +81,11 @@ const styles = StyleSheet.create({
   walletBalanceGraph: {
     height: 135,
     justifyContent: 'center',
-    alignContent: 'center'
+    alignContent: 'center',
+    width: 135,
+    borderRadius: 135,
+    borderWidth: 20,
+    borderColor: '#363EFF'
   },
   walletBalanceGraphValue: {
     fontFamily: 'Poppins-Bold',
@@ -90,7 +107,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '100%',
-    marginBottom: 15
+    marginBottom: 18
   },
   walletBalanceSubtext: {
     fontSize: 10,

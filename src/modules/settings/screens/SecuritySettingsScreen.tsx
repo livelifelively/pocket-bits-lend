@@ -6,6 +6,8 @@ import { SettingsNavProps } from "../SettingsParamList";
 import { AppButton } from "../../../components/design/AppButton";
 import Topbar from "../../../components/design/Topbar";
 import { WhiteView } from "../../../components/design/WhiteView";
+import LockIcon from "../../../icons/Lock";
+import MobilePasscodeIcon from "../../../icons/MobilePasscodeIcon";
 
 const SecuritySettingsScreen = ({navigation}: SettingsNavProps<"SecuritySettings">) => {
   return (
@@ -18,7 +20,9 @@ const SecuritySettingsScreen = ({navigation}: SettingsNavProps<"SecuritySettings
       />
       <TouchableOpacity style={styles.settingsAction} onPress={() => {navigation.navigate("TwoFactorAuthentication")}}>
         <WhiteView style={styles.settingsActionWrapper}>
-          <View></View>
+          <View style={styles.settingsActionIcon}>
+            <LockIcon />
+          </View>
           <View>
             <Text style={styles.settingsActionTitle}>2 Factor Authentication</Text>
           </View>
@@ -26,7 +30,9 @@ const SecuritySettingsScreen = ({navigation}: SettingsNavProps<"SecuritySettings
       </TouchableOpacity>
       <TouchableOpacity style={styles.settingsAction} onPress={() => {navigation.navigate("ChangePasscode")}}>
         <WhiteView style={styles.settingsActionWrapper}>
-          <View></View>
+        <View style={styles.settingsActionIcon}>
+            <MobilePasscodeIcon />
+          </View>
           <View>
             <Text style={styles.settingsActionTitle}>Change Passcode</Text>
           </View>
@@ -46,7 +52,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Medium'
   },
   settingsActionWrapper: {
-    padding: 20
+    padding: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  settingsActionIcon: {
+    width: 25,
+    height: 25,
+    marginRight: 20,
   }
 });
 

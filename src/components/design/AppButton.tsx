@@ -10,11 +10,12 @@ interface AppButtonProps {
   mode?: 'text' | 'outlined' | 'contained',
   style?: {},
   size?: 'normal' | 'large' | 'small',
-  color?: string
+  color?: string,
+  icon?: React.ReactNode
 }
 
 
-export const AppButton: React.FC<AppButtonProps> = ({onPress, title, mode='contained', style={}, size='normal', color=Theme.colors.primary}) => {
+export const AppButton: React.FC<AppButtonProps> = ({onPress, title, mode='contained', style={}, size='normal', color=Theme.colors.primary, icon}) => {
   let {buttonStyle, textStyle} = extendStylesByParams(
     {size, mode, color}, 
     {...styles.appButtonContainer, ...style},
@@ -23,6 +24,7 @@ export const AppButton: React.FC<AppButtonProps> = ({onPress, title, mode='conta
 
   return (
     <Button style={buttonStyle} color={color} onPress={() => {onPress()}} mode={mode}>
+      {/* {icon ? {icon} : ''} */}
       <Text style={textStyle}>{title}</Text>
     </Button>
   )

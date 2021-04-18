@@ -1,11 +1,13 @@
 import React from "react";
-import { Text, StyleSheet, View } from "react-native";
-import { Title } from "react-native-paper";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { Text, Title } from "react-native-paper";
 
 import { DefaultLayout } from "../../../layouts/Default";
 import { WalletNavProps } from "../WalletParamList";
 import { AppButton } from "../../../components/design/AppButton";
 import Topbar from "../../../components/design/Topbar";
+import { YellowCopyIcon, YellowShareIcon } from "../../../icons";
+import { WhiteTouchableOpacity } from "../../../components/design/WhiteTouchableOpacity";
 
 const DepositScreen = ({navigation}: WalletNavProps<"Deposit">) => {
   return (
@@ -19,21 +21,41 @@ const DepositScreen = ({navigation}: WalletNavProps<"Deposit">) => {
       <View style={styles.depositQRCode}></View>
       <Title style={styles.component}>Scan the QR Code</Title>
       <Title style={styles.component}>OR</Title>
-      <View style={{marginBottom: 25, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#FAFAFA', width: '100%', alignItems: 'center', paddingHorizontal: 15, borderRadius: 15}}>
+      <View style={{
+        marginBottom: 25, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#FAFAFA', width: '100%', 
+        alignItems: 'center', paddingHorizontal: 15, borderRadius: 15, paddingVertical: 20
+      }}>
         <View>
           <Text style={{color: '#625E59', fontSize: 12}}>3F8QCEXUrRQcjoyp2J8ng71xre3vd33dcer</Text>
         </View>
-        <AppButton title="C" onPress={() => {}} />
+        <TouchableOpacity onPress={() => {}} style={{marginRight: 10}}>
+          <YellowCopyIcon />
+        </TouchableOpacity>
       </View>
-      <AppButton
+      <WhiteTouchableOpacity
+        onPress={() => {
+          navigation.navigate("Withdraw");
+        }}
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          paddingHorizontal: 15,
+          paddingVertical: 8,
+          borderRadius: 8,
+          width: 130
+        }}
+      >
+        <View style={{width: 19, height: 19, marginRight: 20}}><YellowShareIcon /></View>
+        <View><Text>Share</Text></View>
+      </WhiteTouchableOpacity>
+      {/* <AppButton
         title="Share"
         color="white"
         size="small"
         style={{marginBottom: 10, marginHorizontal: 13, shadowOpacity: 0.3, shadowRadius: 5, shadowColor: '#a3a3a3', shadowOffset: { height: 0, width: 0 }, elevation: 1}}
-        onPress={() => {
-          navigation.navigate("Withdraw");
-        }}
-      />
+        
+      /> */}
     </DefaultLayout>
   )
 };

@@ -12,6 +12,7 @@ import RewardsScreen from "../modules/bottom-tabs/RewardsScreen";
 import { VaultActiveDepositsStack, VaultCreationStack, VaultHistoryStack } from "../modules/vault/VaultStack";
 import { WalletStack } from "../modules/wallet/WalletStack";
 import { SettingsStack } from "../modules/settings/SettingsStack";
+import { HomeIcon, RewardIcon, VaultIcon } from "../icons";
 
 interface AppTabsProps {}
 interface AppStackProps {}
@@ -26,11 +27,11 @@ const AppTabs: React.FC<AppTabsProps> = ({}) => {
         tabBarIcon: ({ focused, color, size }) => {
           switch (route.name) {
             case "Home":
-              return <AntDesign name={"home"} size={size} color={color} />;
+              return <HomeIcon />;
             case "Rewards":
-              return <EvilIcons name={"search"} size={size} color={color} />;
+              return <RewardIcon />;
             case "Vault":
-              return <EvilIcons name={"search"} size={size} color={color} />;
+              return <VaultIcon />;
 
             default:
               break;
@@ -39,7 +40,8 @@ const AppTabs: React.FC<AppTabsProps> = ({}) => {
       })}
       tabBarOptions={{
         activeTintColor: "tomato",
-        inactiveTintColor: "gray"
+        inactiveTintColor: "gray",
+        showLabel: false,
       }}
     >
       <Tabs.Screen name="Home" component={HomeScreen} />

@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Title, Text } from "react-native-paper";
 
+import { TetherIcon, EtheriumIcon, BitcoinIcon } from "../../icons";
 import {WhiteView} from "../design/WhiteView";
 
 interface WalletsProps {
@@ -64,6 +65,22 @@ const wallets = [
   }
 ]
 
+const cryotpyIcon = (shortName: string) => {
+  switch (shortName) {
+    case 'USDT':
+      return <TetherIcon />
+
+    case 'BTC':
+      return <BitcoinIcon />
+
+    case 'ETH':
+      return <EtheriumIcon />
+  
+    default:
+      break;
+  }
+}
+
 export const Wallets: React.FC<WalletsProps> = ({children, style, onPress}) => {
   const onWalletPress = (walletDetails={}) => {
     onPress(walletDetails)
@@ -79,9 +96,12 @@ export const Wallets: React.FC<WalletsProps> = ({children, style, onPress}) => {
           const changeDirectionColor = val.changeInPercent.changeDirection === '+' ? '#44CBB3' : '#EA6D6D';
 
           return (
-            <TouchableOpacity onPress={() => onWalletPress(val)} key={val.id}>
+            <TouchableOpacity activeOpacity={0.7} onPress={() => onWalletPress(val)} key={val.id}>
               <WhiteView style={styles.WalletRowWrapper}>
-                <View>
+                <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: 75}}>
+                  <View style={{marginRight: 15}}>
+                    {cryotpyIcon(val.cryptoCurrencyShortName)}
+                  </View>
                   <Text style={styles.cryptoName}>{val.cryptoCurrencyShortName}</Text>
                 </View>
                 <View>
@@ -112,7 +132,8 @@ const styles = StyleSheet.create({
   WalletRowWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 10
+    marginBottom: 10,
+    paddingHorizontal: 30
   },
   walletCryptoDetails: {
     
