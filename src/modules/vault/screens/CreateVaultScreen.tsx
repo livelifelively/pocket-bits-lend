@@ -11,6 +11,7 @@ import { WhiteView } from "../../../components/design/WhiteView";
 import { AppTextInput } from "../../../components/design/AppTextInput";
 import { Menu } from "react-native-paper";
 import { WhiteTouchableOpacity } from "../../../components/design/WhiteTouchableOpacity";
+import { BitcoinIcon, EtheriumIcon, TetherIcon } from "../../../icons";
 // import { TouchableOpacity } from "react-native-gesture-handler";
 
 type VaultDepositOption = {
@@ -64,13 +65,25 @@ const vaultDepositOptions = [
   }
 ]
 
+const cryotpyIcon = (shortName: string) => {
+  switch (shortName) {
+    case 'USDT':
+      return <TetherIcon />
+
+    case 'BTC':
+      return <BitcoinIcon />
+
+    case 'ETH':
+      return <EtheriumIcon />
+  
+    default:
+      break;
+  }
+}
+
 const selectedOption = vaultDepositOptions[0];
 
 const CreateVaultScreen = ({navigation} : VaultCreationNavProps<"CreateVault">) => {
-  // from params:
-  // vaultOptions=vaultDepositOptions, 
-  // selectedOption
-
   const [activeVaultOption, setActiveVaultOption] = useState(() => selectedOption)
   const [amount, setAmount] = useState<string>('')
   const [menuVisibility, setMenuVisibility] = useState(false);
@@ -100,7 +113,12 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<"CreateVault">) 
       />
       <WhiteView style={styles.createVault}>
         <View style={styles.createVaultInfo}>
-          <Text>{activeVaultOption.crypto.shortName} Deposit</Text>
+          <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: 60}}>
+            <View style={{marginRight: 15}}>
+              {cryotpyIcon(activeVaultOption.crypto.shortName)}
+            </View>
+            <Text>{activeVaultOption.crypto.shortName}</Text>
+          </View>
           <View>
             <Text style={styles.yellowText}>{activeVaultOption.interestRate}%</Text>
             <Text>Interest Rate</Text>

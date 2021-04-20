@@ -1,10 +1,13 @@
 import React from "react";
-import { Text, StyleSheet, Button, View } from "react-native";
+import { StyleSheet, Button, View } from "react-native";
+import { Text } from "react-native-paper";
 
 import { DefaultLayout } from "../../../layouts/Default";
 import { SettingsNavProps } from "../SettingsParamList";
 import { AppButton } from "../../../components/design/AppButton";
 import Topbar from "../../../components/design/Topbar";
+import { WhiteTouchableOpacity } from "../../../components/design/WhiteTouchableOpacity";
+import { PencilIcon } from "../../../icons";
 
 const ProfileSettingsScreen = ({navigation}: SettingsNavProps<"ProfileSettings">) => {
   return (
@@ -21,40 +24,61 @@ const ProfileSettingsScreen = ({navigation}: SettingsNavProps<"ProfileSettings">
           <Text style={styles.profileItemTitle}>Name</Text>
           <View style={styles.profileItemValue}>
             <Text>Jon Snow</Text>
-            <AppButton
-              title="E"
-              color="white"
-              size="small"
-              style={styles.profileItemButton}  
+            <WhiteTouchableOpacity
               onPress={() => {}}
-            />
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                paddingHorizontal: 10,
+                paddingVertical: 10,
+                borderRadius: 8,
+              }}
+            >
+              <View style={{width: 19, height: 19}}><PencilIcon /></View>
+            </WhiteTouchableOpacity>
           </View>
         </View>
         <View style={styles.profileItem}>
           <Text style={styles.profileItemTitle}>Phone No</Text>
           <View style={styles.profileItemValue}>
             <Text>9856846848</Text>
-            <AppButton
-              title="E"
-              color="white"
-              size="small"
-              style={styles.profileItemButton}  
+            <WhiteTouchableOpacity
               onPress={() => {}}
-            />
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                paddingHorizontal: 10,
+                paddingVertical: 10,
+                borderRadius: 8,
+              }}
+            >
+              <View style={{width: 19, height: 19}}><PencilIcon /></View>
+            </WhiteTouchableOpacity>
           </View>
         </View>
         <View style={styles.profileItem}>
           <Text style={styles.profileItemTitle}>Email</Text>
-          <View style={styles.profileItemValue}>
+          <View style={[styles.profileItemValue]}>
             <Text>Jonsnow@gmail.com</Text>
-            <AppButton
-              title="E"
-              color="white"
-              size="small"
-              style={styles.profileItemButton}  
-              onPress={() => {}}
-            />
           </View>
+        </View>
+        <View style={{flexDirection: 'row-reverse'}}>
+          <WhiteTouchableOpacity
+            onPress={() => {}}
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingHorizontal: 10,
+              paddingVertical: 10,
+              borderRadius: 8,
+              width: 130
+            }}
+          >
+            <Text style={{color: '#F7931A', textAlign: 'center'}}>Change Email</Text>
+          </WhiteTouchableOpacity>
         </View>
       </View>
     </DefaultLayout>

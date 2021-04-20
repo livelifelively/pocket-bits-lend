@@ -7,6 +7,7 @@ import { VaultHistoryNavProps } from "../VaultParamList";
 import { AppButton } from "../../../components/design/AppButton";
 import Topbar from "../../../components/design/Topbar";
 import { WhiteView } from "../../../components/design/WhiteView";
+import { BitcoinIcon, EtheriumIcon, TetherIcon } from "../../../icons";
 
 
 const vaultHistory = [
@@ -41,7 +42,7 @@ const vaultHistory = [
     currentBalance: 0.123,
     crypto: {
       name: 'Bitcoin',
-      shortName: 'BTC'
+      shortName: 'ETH'
     },
     interestRate: 12,
     duration: '1 month',
@@ -54,7 +55,7 @@ const vaultHistory = [
     currentBalance: 0.123,
     crypto: {
       name: 'Bitcoin',
-      shortName: 'BTC'
+      shortName: 'USDT'
     },
     interestRate: 12,
     duration: '1 month',
@@ -63,6 +64,22 @@ const vaultHistory = [
     withdrawDate: '19 Mar, 21',
   }
 ]
+
+const cryotpyIcon = (shortName: string) => {
+  switch (shortName) {
+    case 'USDT':
+      return <TetherIcon />
+
+    case 'BTC':
+      return <BitcoinIcon />
+
+    case 'ETH':
+      return <EtheriumIcon />
+  
+    default:
+      break;
+  }
+}
 
 const VaultHistoryScreen = ({navigation} : VaultHistoryNavProps<"VaultHistory">) => {
   return (
@@ -77,23 +94,27 @@ const VaultHistoryScreen = ({navigation} : VaultHistoryNavProps<"VaultHistory">)
         vaultHistory && vaultHistory.map((val) => {
           return (
             <WhiteView style={styles.vaultHistoryListUnit} key={val.id}>
-              <View>
-                <Text>{val.crypto.shortName}</Text>
-                <Text style={styles.subtext}>Token</Text>
+              <View style={{width: 60}}>
+                <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: 60}}>
+                  <View style={{marginRight: 15}}>
+                    {cryotpyIcon(val.crypto.shortName)}
+                  </View>
+                  <Text>{val.crypto.shortName}</Text>
+                </View>
+                <Text style={[styles.subtext, {textAlign: 'center'}]}>Token</Text>
               </View>
               <View>
-                <Text style={styles.vaultHistoryListUnitBalance}>{`${val.currentBalance} ${val.crypto.shortName}`}</Text>
-                <Text style={styles.subtext}>Amount</Text>
+                <Text style={styles.vaultHistoryListUnitBalance}>{val.currentBalance}</Text>
+                <Text style={[styles.subtext, {textAlign: 'center'}]}>Amount</Text>
               </View>
               <View>
-                <Text>{val.startDate}</Text>
-                <Text style={styles.subtext}>Start Date</Text>
+                <Text style={styles.vaultHistoryDates}>{val.startDate}</Text>
+                <Text style={[styles.subtext, {textAlign: 'center'}]}>Start Date</Text>
               </View>
               <View>
-                <Text>{val.withdrawDate}</Text>
-                <Text style={styles.subtext}>Withdraw Date</Text>
-              </View>
-              
+                <Text style={styles.vaultHistoryDates}>{val.withdrawDate}</Text>
+                <Text style={[styles.subtext, {textAlign: 'center'}]}>Withdraw Date</Text>
+              </View> 
             </WhiteView>
           )
         })
@@ -104,7 +125,7 @@ const VaultHistoryScreen = ({navigation} : VaultHistoryNavProps<"VaultHistory">)
 
 const styles = StyleSheet.create({
   vaultHistoryListUnitBalance: {
-    
+    fontFamily: 'Poppins-Bold'
   },
   subtext: {
     color: '#625E59',
@@ -115,7 +136,12 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 10
+    marginBottom: 10,
+    alignItems: 'center'
+  },
+  vaultHistoryDates: {
+    fontSize: 12,
+    textAlign: 'center'
   }
 });
 

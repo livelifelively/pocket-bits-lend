@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, Button, View } from "react-native";
+import { Text, StyleSheet, TouchableOpacity, View } from "react-native";
 
 import { DefaultLayout } from "../../../layouts/Default";
 import { SettingsNavProps } from "../SettingsParamList";
 import { AppButton } from "../../../components/design/AppButton";
 import Topbar from "../../../components/design/Topbar";
-import { WhiteView } from "../../../components/design/WhiteView";
 import { Title } from "react-native-paper";
 import { AppTextInput } from "../../../components/design/AppTextInput";
+import { YellowCopyIcon } from "../../../icons";
 
 const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<"TwoFactorAuthentication">) => {
   const [verificationCode, setVerificationCode] = useState('')
@@ -25,11 +25,16 @@ const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<"TwoFactor
       <Title style={styles.component}>Scan the QR Code</Title>
       <Title style={styles.component}>OR</Title>
       <Title style={styles.component}>Copy this Key</Title>
-      <View style={{...styles.component, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#FAFAFA', width: '100%', alignItems: 'center', paddingHorizontal: 15, borderRadius: 15}}>
+      <View style={{
+        marginBottom: 25, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#FAFAFA', width: '100%', 
+        alignItems: 'center', paddingHorizontal: 15, borderRadius: 15, paddingVertical: 20
+      }}>
         <View>
           <Text style={{color: '#625E59', fontSize: 12}}>3F8QCEXUrRQcjoyp2J8ng71xre3vd33dcer</Text>
         </View>
-        <AppButton title="C" onPress={() => {}} />
+        <TouchableOpacity onPress={() => {}} style={{marginRight: 10}}>
+          <YellowCopyIcon />
+        </TouchableOpacity>
       </View>
       <AppTextInput
         autoCorrect={false}

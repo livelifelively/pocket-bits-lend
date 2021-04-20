@@ -54,13 +54,16 @@ export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({children,
           vaults && vaults.map((val) => {
             return (
               <WhiteView style={styles.vaultFixedDeposit} key={val.id}>
-                <TouchableOpacity onPress={() => {
-                  onPress()
-                }}>
+                <TouchableOpacity 
+                  activeOpacity={0.7}
+                  onPress={() => {
+                    onPress()
+                  }}
+                >
                   <Text style={styles.vaultFixedDepositInterestRate}>{val.interestRatePercent}%</Text>
-                  <Text style={styles.subtext}>Interest Rate</Text>
+                  <Text style={[styles.subtext, {textAlign: 'center'}]}>Interest Rate</Text>
                   <YellowView style={styles.vaultFixedDepositDuration}>
-                    <Text>{`${val.vaultDuration.value} ${val.vaultDuration.timeUnit}`} vault</Text>
+                    <Text style={{textAlign: 'center'}}>{`${val.vaultDuration.value} ${val.vaultDuration.timeUnit}`} vault</Text>
                   </YellowView>
                 </TouchableOpacity>
               </WhiteView>
@@ -69,7 +72,7 @@ export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({children,
         }
       </View>
       <View>
-        <Text style={styles.subtext}>+ view more</Text>
+        <Text style={[styles.subtext, {textAlign: 'right'}]}>+ view more</Text>
       </View>
     </View>
   )
@@ -94,7 +97,8 @@ const styles = StyleSheet.create({
   vaultFixedDepositInterestRate: {
     color: '#FFB850',
     fontSize: 24,
-    fontFamily: 'Poppins-Bold'
+    fontFamily: 'Poppins-Bold',
+    textAlign: 'center'
   },
   subtext: {
     color: '#625E59',

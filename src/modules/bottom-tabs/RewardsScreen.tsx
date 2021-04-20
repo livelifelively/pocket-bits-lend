@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { ValueCreated } from "../../components/business/ValueCreated";
 import Topbar from "../../components/design/Topbar";
 import { Title, Text } from "react-native-paper";
@@ -7,7 +7,7 @@ import { Title, Text } from "react-native-paper";
 import { DefaultLayout } from "../../layouts/Default";
 import { RewardsNavProps } from "./TabsParamList";
 import { WhiteView } from "../../components/design/WhiteView";
-import { AppButton } from "../../components/design/AppButton";
+import { YellowCopyIcon } from "../../icons";
 
 const RewardScreen = ({navigation}: RewardsNavProps<"InviteFriends">) => {
   return (
@@ -24,11 +24,16 @@ const RewardScreen = ({navigation}: RewardsNavProps<"InviteFriends">) => {
           Invite your friends and earn some percentage of interest that they make on every deposits.
         </Text>
       </View>
-      <View style={{marginBottom: 25, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#FAFAFA', width: '100%', alignItems: 'center', paddingHorizontal: 15, borderRadius: 15}}>
+      <View style={{
+        marginBottom: 25, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#FAFAFA', width: '100%', 
+        alignItems: 'center', paddingHorizontal: 15, borderRadius: 15, paddingVertical: 20
+      }}>
         <View>
-          <Text style={{color: '#625E59', fontSize: 12}}>3F8QCEXUrRQcjoyp2J8ng71xre3vd33dcer</Text>
+          <Text style={{color: '#625E59', fontSize: 12}}>Pcys2cyl10</Text>
         </View>
-        <AppButton title="C" onPress={() => {}} />
+        <TouchableOpacity onPress={() => {}} style={{marginRight: 10}}>
+          <YellowCopyIcon />
+        </TouchableOpacity>
       </View>
       <View style={{marginBottom: 25, width: '100%'}}>
         <Title style={{marginBottom: 10}}>Your Referrals</Title>

@@ -28,7 +28,7 @@ const activeDeposits = [
     currentBalance: 0.123,
     crypto: {
       name: 'Bitcoin',
-      shortName: 'BTC'
+      shortName: 'ETH'
     },
     interestRate: 12,
     duration: '1 month',
@@ -40,7 +40,7 @@ const activeDeposits = [
     currentBalance: 0.123,
     crypto: {
       name: 'Bitcoin',
-      shortName: 'BTC'
+      shortName: 'USDT'
     },
     interestRate: 12,
     duration: '1 month',
@@ -77,7 +77,7 @@ export const VaultActiveDeposits: React.FC<VaultActiveDepositsProps> = ({style, 
       {
         activeDeposits && activeDeposits.map((val) => {
           return (
-            <VaultActiveDepositsListUnit depositDetails={val} key={val.id} />
+            <VaultActiveDepositsListUnit expandableListUnit={expandableListUnit} depositDetails={val} key={val.id} />
           )
         })
       }
