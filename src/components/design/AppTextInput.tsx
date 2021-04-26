@@ -53,5 +53,7 @@ const styles = StyleSheet.create({
   appTextInput: {
     padding: 15, backgroundColor: '#f7f7f7', fontSize: 14, borderRadius: 15, borderWidth: 1, borderColor: '#f7f7f7'
   },
-  appTextInputWrapper: {},
+  appTextInputWrapper: {
+    width: '100%'
+  },
 })

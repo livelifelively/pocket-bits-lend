@@ -49,13 +49,6 @@ const DepositScreen = ({navigation}: WalletNavProps<"Deposit">) => {
         <View style={{width: 19, height: 19, marginRight: 20}}><YellowShareIcon /></View>
         <View><Text>Share</Text></View>
       </WhiteTouchableOpacity>
-      {/* <AppButton
-        title="Share"
-        color="white"
-        size="small"
-        style={{marginBottom: 10, marginHorizontal: 13, shadowOpacity: 0.3, shadowRadius: 5, shadowColor: '#a3a3a3', shadowOffset: { height: 0, width: 0 }, elevation: 1}}
-        
-      /> */}
     </DefaultLayout>
   )
 };

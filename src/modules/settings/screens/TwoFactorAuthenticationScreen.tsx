@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Text, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Formik } from "formik";
+import * as Yup from "yup";
 
 import { DefaultLayout } from "../../../layouts/Default";
 import { SettingsNavProps } from "../SettingsParamList";
@@ -8,10 +10,18 @@ import Topbar from "../../../components/design/Topbar";
 import { Title } from "react-native-paper";
 import { AppTextInput } from "../../../components/design/AppTextInput";
 import { YellowCopyIcon } from "../../../icons";
+import { RequestResponse, twoFactorAuthenticationVefificationPost } from "../../../api/requests";
+import { globalStyles } from "../../../theme/globalStyles";
 
 const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<"TwoFactorAuthentication">) => {
-  const [verificationCode, setVerificationCode] = useState('')
-  const onVerificationCodeChange = () => {}
+  const twoFactorAuthenticationSchema = Yup.object().shape({
+    verificationCode: Yup.string()
+          .required()
+          .matches(/^[0-9]+$/, "Must be only digits")
+          .min(6, 'Must be exactly 6 digits')
+          .max(6, 'Must be exactly 6 digits'),
+    // email: Yup.string().email().required(),
+  })
 
   return (
     <DefaultLayout backgroundColor='#ffffff'>
@@ -36,15 +46,44 @@ const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<"TwoFactor
           <YellowCopyIcon />
         </TouchableOpacity>
       </View>
-      <AppTextInput
-        autoCorrect={false}
-        style={{...styles.component, width: '100%', backgroundColor: '#F7F7F7'}}
-        value={`${verificationCode}`}
-        onChangeText={onVerificationCodeChange}
-        placeholder="Enter your verification code"
-        maxLength={15}
-      />
-      <AppButton title="Enable" onPress={() => {}} />
+      <Formik
+        initialValues={{
+          verificationCode: '',
+          email: ''
+        }}
+        validationSchema={twoFactorAuthenticationSchema}
+        onSubmit={ async (values) => {
+          const signedUp: RequestResponse = await twoFactorAuthenticationVefificationPost({
+            verificationCode: values.verificationCode,
+            email: values.email
+          })
+          if (signedUp.status === 'SUCCESS') {
+            // navigation.navigate('SetPasscode')
+          }
+        }}
+      >
+        {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => (
+          <View style={{width: '100%'}}>
+            <AppTextInput
+              autoCorrect={false}
+              style={{ input: styles.textInput, wrapper: styles.textInputWrapper}}
+              value={values.verificationCode}
+              onChangeText={handleChange('verificationCode')}
+              onBlur={handleBlur('verificationCode')}
+              placeholder="Enter your Verification Code"
+              error={touched.verificationCode ? errors.verificationCode : ''}
+            />
+            <AppButton
+              title="Enable"
+              onPress={() => {
+                handleSubmit()
+              }}
+              size='normal'
+              style={{paddingHorizontal: 50}}
+            />
+          </View>
+        )}
+      </Formik>
       <View>
         <Text>Step 1 : Install an authenticator app such as Google authenticator or Authy.</Text>
       </View>
@@ -64,6 +103,12 @@ const styles = StyleSheet.create({
   },
   component: {
     marginBottom: 25
+  },
+  textInputWrapper: {marginBottom: 10},
+  textInput: {
+    width: '100%', 
+    backgroundColor: '#F7F7F7', 
+    padding: 18
   }
 });
 

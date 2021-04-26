@@ -37,14 +37,27 @@ function SignupScreen({ navigation, route }: AuthNavProps<"SignUp">) {
         }}
         validationSchema={signupSchema}
         onSubmit={ async (values) => {
-          const signedUp: RequestResponse= await signupPost({
-            email: values.email,
-            password: values.password,
-            // #TODO
-            referralCode: ''
-          })
-          if (signedUp.status === 'SUCCESS') {
-            navigation.navigate('VerifyEmail')
+          try {
+            const signedUp:any = await signupPost({
+              email: values.email,
+              password: values.password,
+              // #TODO
+              referralCode: ''
+            })
+            console.log('+++++++++++++++++++++++++++++++++++++++')
+            console.log('+++++++++++++++++++++++++++++++++++++++')
+            console.log('+++++++++++++++++++++++++++++++++++++++')
+            
+            console.log('SUBMIT_FORM', signedUp)
+            if (signedUp.status === 'SUCCESS') {
+              navigation.navigate('VerifyEmail')
+            }
+          } catch(e) {
+            console.log('FLAG SIGNUP PAGE')
+            // console.log(e)
+            console.log('=======================================')
+            console.log('=======================================')
+            console.log('=======================================')
           }
         }}
       >
@@ -61,7 +74,6 @@ function SignupScreen({ navigation, route }: AuthNavProps<"SignUp">) {
               autoCapitalize="none"
               error={touched.email ? errors.email : ''}
             />
-            
             <AppTextInput
               autoCorrect={false}
               style={{ input: styles.textInput, wrapper: styles.textInputWrapper}}
@@ -123,12 +135,31 @@ function SignupScreen({ navigation, route }: AuthNavProps<"SignUp">) {
 }
 
 const styles = StyleSheet.create({
-  logo: {height: 65, width: '100%', backgroundColor: '#EBEBEB', marginTop: 100, marginBottom: 65, alignItems: 'center', flexDirection: 'column', justifyContent: 'center'},
-  logoText: {textAlign: 'center', fontSize: 24},
-  pageTitle: {fontSize: 24, fontFamily: 'Poppins-Medium'},
+  logo: {
+    height: 65,
+    width: '100%', 
+    backgroundColor: '#EBEBEB', 
+    marginTop: 100, 
+    marginBottom: 65, 
+    alignItems: 'center', 
+    flexDirection: 'column', 
+    justifyContent: 'center'
+  },
+  logoText: {
+    textAlign: 'center', 
+    fontSize: 24
+  },
+  pageTitle: {
+    fontSize: 24, 
+    fontFamily: 'Poppins-Medium'
+  },
   pageTitleWrapper: {marginBottom: 40},
   textInputWrapper: {marginBottom: 10},
-  textInput: {width: '100%', backgroundColor: '#F7F7F7', padding: 18}
+  textInput: {
+    width: '100%', 
+    backgroundColor: '#F7F7F7', 
+    padding: 18
+  }
 })
 
 export default SignupScreen;

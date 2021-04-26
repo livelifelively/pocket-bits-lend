@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
+import { Formik } from "formik";
+import * as Yup from "yup";
 
 import { DefaultLayout } from "../../../layouts/Default";
 import { WalletNavProps } from "../WalletParamList";
@@ -9,8 +11,6 @@ import { AppTextInput } from "../../../components/design/AppTextInput";
 import { PasteIcon } from "../../../icons";
 import { AppButton } from "../../../components/design/AppButton";
 import { WhiteTouchableOpacity } from "../../../components/design/WhiteTouchableOpacity";
-
-const availableFundsInCrypto = 1.41;
 
 type Wallet = {
   id: number,
@@ -59,19 +59,11 @@ const accounts = [
 const activeAccount = accounts[0]
 
 const WithdrawScreen = ({navigation}: WalletNavProps<"Withdraw">) => {
-  const [amount, setAmount] = useState<string>('')
-  const [destinationAddress, setDestinationAddress] = useState('');
-  
-  const onCryptoAmountChange = (text: string) => {
-    const inputNumber = parseInt(text)
-    if (!isNaN(inputNumber))setAmount(`${inputNumber}`)
-    else setAmount('')
-  }
-
-  const onDestinationAddressChange = (text: string) => {
-    // validate address
-    setDestinationAddress('')
-  }
+  const withdrawCryptoSchema = Yup.object().shape({
+    destinationAddress: Yup.string().required(),
+    withdrawalAmount: Yup.string().required()
+    // email: Yup.string().email().required(),
+  })
 
   return (
     <DefaultLayout backgroundColor='#FFFFFF'>
@@ -82,51 +74,68 @@ const WithdrawScreen = ({navigation}: WalletNavProps<"Withdraw">) => {
         title="Send BTC"
       />
       <View style={{ paddingHorizontal:45, marginTop: 55 }}>
-        <View style={[styles.inputAmount]}>
-          <AppTextInput
-            autoCorrect={false}
-            value={`${destinationAddress}`}
-            style={styles.inputAmountTextInput}
-            onChangeText={onDestinationAddressChange}
-            placeholder={`Destination Address`}
-            keyboardType="number-pad"
-            maxLength={15}
-          />
-          <View style={[styles.inputAmountText]}>
-            <View style={{marginBottom: 10, marginTop: 10}}><PasteIcon /></View>
-            <View><Text style={[styles.subtext, {textAlign: 'center'}]}>Paste</Text></View>
-          </View>
-        </View>
-        <View style={[styles.inputAmount]}>
-          <AppTextInput
-            autoCorrect={false}
-            value={`${destinationAddress}`}
-            style={styles.inputAmountTextInput}
-            onChangeText={onDestinationAddressChange}
-            placeholder={`Destination Address`}
-            keyboardType="number-pad"
-            maxLength={15}
-          />
-          <View style={[styles.inputAmountText]}>
-            <Text>{activeAccount.amount} {activeAccount.crypto.shortName}</Text>
-            <Text style={[styles.subtext, {textAlign: 'center'}]}>Available</Text>
-          </View>
-        </View>
-        <View style={{flexDirection: 'row',justifyContent: 'flex-end', marginBottom: 20, alignItems: 'center'}}>
-          <WhiteTouchableOpacity style={styles.percentButtons}>
-            <Text style={styles.percentButtonsText}>25%</Text>
-          </WhiteTouchableOpacity>
-          <WhiteTouchableOpacity style={styles.percentButtons}>
-            <Text style={styles.percentButtonsText}>50%</Text>
-          </WhiteTouchableOpacity>
-          <WhiteTouchableOpacity style={styles.percentButtons}>
-            <Text style={styles.percentButtonsText}>75%</Text>
-          </WhiteTouchableOpacity>
-          <WhiteTouchableOpacity style={styles.percentButtons}>
-            <Text style={styles.percentButtonsText}>100%</Text>
-          </WhiteTouchableOpacity>
-        </View>
-        <AppButton title="Send" onPress={() => navigation.goBack()} />
+        <Formik
+          initialValues={{
+            destinationAddress: '',
+            withdrawalAmount: ''
+          }}
+          validationSchema={withdrawCryptoSchema}
+          onSubmit={ async (values) => {
+            navigation.goBack()
+          }}
+        >
+          {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => (
+            <View>
+              <View style={[styles.inputAmount]}>
+                <AppTextInput
+                  autoCorrect={false}
+                  style={{ input: styles.textInput, wrapper: styles.textInputWrapper}}
+                  value={values.destinationAddress}
+                  onChangeText={handleChange('destinationAddress')}
+                  onBlur={handleBlur('destinationAddress')}
+                  placeholder={`Destination Address`}
+                  error={touched.destinationAddress ? errors.destinationAddress : ''}
+                />
+                <View style={[styles.inputAmountText]}>
+                  <View style={{marginBottom: 10, marginTop: 10}}><PasteIcon /></View>
+                  <View><Text style={[styles.subtext, {textAlign: 'center'}]}>Paste</Text></View>
+                </View>
+              </View>
+              <View style={[styles.inputAmount]}>
+                <AppTextInput
+                  autoCorrect={false}
+                  style={{ input: styles.textInput, wrapper: styles.textInputWrapper}}
+                  value={values.withdrawalAmount}
+                  onChangeText={handleChange('withdrawalAmount')}
+                  onBlur={handleBlur('withdrawalAmount')}
+                  placeholder={`Enter Amount in ${activeAccount.crypto.shortName}`}
+                  error={touched.withdrawalAmount ? errors.withdrawalAmount : ''}
+                  keyboardType="number-pad"
+                  maxLength={15}
+                />
+                <View style={[styles.inputAmountText]}>
+                  <Text>{activeAccount.amount} {activeAccount.crypto.shortName}</Text>
+                  <Text style={[styles.subtext, {textAlign: 'center'}]}>Available</Text>
+                </View>
+              </View>
+              <View style={{flexDirection: 'row',justifyContent: 'flex-end', marginBottom: 20, alignItems: 'center'}}>
+                <WhiteTouchableOpacity style={styles.percentButtons}>
+                  <Text style={styles.percentButtonsText}>25%</Text>
+                </WhiteTouchableOpacity>
+                <WhiteTouchableOpacity style={styles.percentButtons}>
+                  <Text style={styles.percentButtonsText}>50%</Text>
+                </WhiteTouchableOpacity>
+                <WhiteTouchableOpacity style={styles.percentButtons}>
+                  <Text style={styles.percentButtonsText}>75%</Text>
+                </WhiteTouchableOpacity>
+                <WhiteTouchableOpacity style={styles.percentButtons}>
+                  <Text style={styles.percentButtonsText}>100%</Text>
+                </WhiteTouchableOpacity>
+              </View>
+              <AppButton title="Send" onPress={() => handleSubmit()} />
+            </View>
+          )}
+        </Formik>
       </View>
     </DefaultLayout>
   )
@@ -153,6 +162,12 @@ const styles = StyleSheet.create({
     fontSize: 10,
     marginTop: 5
   },
+  textInputWrapper: {marginBottom: 10},
+  textInput: {
+    width: '100%', 
+    backgroundColor: '#F7F7F7', 
+    padding: 18
+  }
 });
 
 export default WithdrawScreen;

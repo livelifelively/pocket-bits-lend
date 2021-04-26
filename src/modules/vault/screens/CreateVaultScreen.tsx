@@ -1,7 +1,8 @@
-import React, { createRef, useState } from "react";
-import { Text, StyleSheet, View, TextInput, NativeSyntheticEvent, TouchableOpacity } from "react-native";
-// import { TextInput } from "react-native-paper";
-import { isNaN, isNumber } from "lodash";
+import React, { useState } from "react";
+import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import { Menu } from "react-native-paper";
 
 import { DefaultLayout } from "../../../layouts/Default";
 import { VaultCreationNavProps } from "../VaultParamList";
@@ -9,10 +10,8 @@ import { AppButton } from "../../../components/design/AppButton";
 import Topbar from "../../../components/design/Topbar";
 import { WhiteView } from "../../../components/design/WhiteView";
 import { AppTextInput } from "../../../components/design/AppTextInput";
-import { Menu } from "react-native-paper";
 import { WhiteTouchableOpacity } from "../../../components/design/WhiteTouchableOpacity";
 import { BitcoinIcon, EtheriumIcon, TetherIcon } from "../../../icons";
-// import { TouchableOpacity } from "react-native-gesture-handler";
 
 type VaultDepositOption = {
   id: number,
@@ -85,15 +84,8 @@ const selectedOption = vaultDepositOptions[0];
 
 const CreateVaultScreen = ({navigation} : VaultCreationNavProps<"CreateVault">) => {
   const [activeVaultOption, setActiveVaultOption] = useState(() => selectedOption)
-  const [amount, setAmount] = useState<string>('')
   const [menuVisibility, setMenuVisibility] = useState(false);
   
-  const onCryptoAmountChange = (text: string) => {
-    const inputNumber = parseInt(text)
-    if (!isNaN(inputNumber))setAmount(`${inputNumber}`)
-    else setAmount('')
-  }
-
   const openMenu = () => setMenuVisibility(true);
 
   const closeMenu = () => setMenuVisibility(false);
@@ -102,6 +94,13 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<"CreateVault">) 
     setActiveVaultOption(val)
     closeMenu()
   }
+
+  const twoFactorAuthenticationSchema = Yup.object().shape({
+    verificationCode: Yup.string()
+          .required()
+          .matches(/^[0-9]+$/, "Must be only digits")
+    // email: Yup.string().email().required(),
+  })
 
   return (
     <DefaultLayout style={{paddingHorizontal: 30}}>
@@ -125,60 +124,75 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<"CreateVault">) 
           </View>
         </View>
         
-        <View style={[styles.inputAmount]}>          
-          <AppTextInput
-            autoCorrect={false}
-            value={`${amount}`}
-            style={styles.inputAmountTextInput}
-            onChangeText={onCryptoAmountChange}
-            placeholder={`Enter Amount in ${activeVaultOption.crypto.shortName}`}
-            keyboardType="number-pad"
-            maxLength={15}
-          />
-          <View style={[styles.inputAmountText]}>
-            <Text>{availableFundsInCrypto} {activeVaultOption.crypto.shortName}</Text>
-            <Text style={[styles.subtext, {textAlign: 'center'}]}>Available</Text>
-          </View>
-        </View>
-        <View style={{flexDirection: 'row',justifyContent: 'flex-end', marginBottom: 20, alignItems: 'center'}}>
-          <WhiteTouchableOpacity style={styles.percentButtons}>
-            <Text style={styles.percentButtonsText}>25%</Text>
-          </WhiteTouchableOpacity>
-          <WhiteTouchableOpacity style={styles.percentButtons}>
-            <Text style={styles.percentButtonsText}>50%</Text>
-          </WhiteTouchableOpacity>
-          <WhiteTouchableOpacity style={styles.percentButtons}>
-            <Text style={styles.percentButtonsText}>75%</Text>
-          </WhiteTouchableOpacity>
-          <WhiteTouchableOpacity style={styles.percentButtons}>
-            <Text style={styles.percentButtonsText}>100%</Text>
-          </WhiteTouchableOpacity>
-        </View>
-
-        <View
-          style={styles.dropdownMenuWrapper}
+        <Formik
+          initialValues={{
+            cryptoAmount: '',
+          }}
+          validationSchema={twoFactorAuthenticationSchema}
+          onSubmit={ async (values) => {
+            navigation.navigate("VaultCreated")
+          }}
         >
-          <Menu
-            visible={menuVisibility}
-            onDismiss={closeMenu}
-            anchor={
-              <TouchableOpacity onPress={openMenu} style={styles.dropdownMenuAnchor}>
-                <Text>{activeVaultOption.duration}</Text>
-                <Text>v</Text>
-              </TouchableOpacity>
-            }
-          >
-            {
-              vaultDepositOptions && vaultDepositOptions.map((val) => {
-                return <Menu.Item onPress={() => {selectMenuItem(val)}} title={val.duration} />;
-              })
-            }
-          </Menu>
-        </View>
-        <Text style={styles.instructions}>
-          Lock {activeVaultOption.crypto.shortName} for {activeVaultOption.duration} at {activeVaultOption.interestRate}% interest
-        </Text>
-        <AppButton title="Lock in Vault" onPress={() => {navigation.navigate("VaultCreated")}} />
+          {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => (
+            <View>
+              <View style={[styles.inputAmount]}>          
+                <AppTextInput
+                  autoCorrect={false}
+                  style={{ input: styles.textInput, wrapper: styles.textInputWrapper}}
+                  value={values.cryptoAmount}
+                  onChangeText={handleChange('cryptoAmount')}
+                  onBlur={handleBlur('cryptoAmount')}
+                  keyboardType="number-pad"
+                  maxLength={15}
+                  placeholder={`Enter Amount in ${activeVaultOption.crypto.shortName}`}
+                  error={touched.cryptoAmount ? errors.cryptoAmount : ''}
+                />
+                <View style={[styles.inputAmountText]}>
+                  <Text>{availableFundsInCrypto} {activeVaultOption.crypto.shortName}</Text>
+                  <Text style={[styles.subtext, {textAlign: 'center'}]}>Available</Text>
+                </View>
+              </View>
+              <View style={{flexDirection: 'row',justifyContent: 'flex-end', marginBottom: 20, alignItems: 'center'}}>
+                <WhiteTouchableOpacity style={styles.percentButtons}>
+                  <Text style={styles.percentButtonsText}>25%</Text>
+                </WhiteTouchableOpacity>
+                <WhiteTouchableOpacity style={styles.percentButtons}>
+                  <Text style={styles.percentButtonsText}>50%</Text>
+                </WhiteTouchableOpacity>
+                <WhiteTouchableOpacity style={styles.percentButtons}>
+                  <Text style={styles.percentButtonsText}>75%</Text>
+                </WhiteTouchableOpacity>
+                <WhiteTouchableOpacity style={styles.percentButtons}>
+                  <Text style={styles.percentButtonsText}>100%</Text>
+                </WhiteTouchableOpacity>
+              </View>
+              <View
+                style={styles.dropdownMenuWrapper}
+              >
+                <Menu
+                  visible={menuVisibility}
+                  onDismiss={closeMenu}
+                  anchor={
+                    <TouchableOpacity onPress={openMenu} style={styles.dropdownMenuAnchor}>
+                      <Text>{activeVaultOption.duration}</Text>
+                      <Text>v</Text>
+                    </TouchableOpacity>
+                  }
+                >
+                  {
+                    vaultDepositOptions && vaultDepositOptions.map((val) => {
+                      return <Menu.Item onPress={() => {selectMenuItem(val)}} title={val.duration} />;
+                    })
+                  }
+                </Menu>
+              </View>
+              <Text style={styles.instructions}>
+                Lock {activeVaultOption.crypto.shortName} for {activeVaultOption.duration} at {activeVaultOption.interestRate}% interest
+              </Text>
+              <AppButton title="Lock in Vault" onPress={() => {handleSubmit()}} />
+            </View>
+          )}
+        </Formik>
       </WhiteView>
     </DefaultLayout>
   );
@@ -203,7 +217,12 @@ const styles = StyleSheet.create({
   inputAmount: {flexDirection: 'row', alignItems: 'center', width: '100%', backgroundColor: '#f7f7f7', justifyContent: 'center', borderRadius: 15, marginBottom: 15,},
   inputAmountTextInput: {padding: 20, backgroundColor: '#f7f7f7', fontSize: 14, borderRadius: 15, width: 200,},
   inputAmountText: {paddingVertical: 10, borderLeftWidth: 1, borderLeftColor: '#e5e5e5', alignItems: 'center', justifyContent: 'center', width: 80},
-  
+  textInputWrapper: {marginBottom: 10},
+  textInput: {
+    width: '100%', 
+    backgroundColor: '#F7F7F7', 
+    padding: 18
+  },
   
   dropdownMenuWrapper: {
     borderWidth: 1,
