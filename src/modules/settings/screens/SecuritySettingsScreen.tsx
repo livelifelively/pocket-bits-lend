@@ -3,11 +3,10 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { SettingsNavProps } from '../SettingsParamList';
-import { AppButton } from '../../../components/design/AppButton';
 import Topbar from '../../../components/design/Topbar';
 import { WhiteView } from '../../../components/design/WhiteView';
-import LockIcon from '../../../icons/Lock';
-import MobilePasscodeIcon from '../../../icons/MobilePasscodeIcon';
+import {LockIcon, MobilePasscodeIcon} from '../../../icons';
+
 
 const SecuritySettingsScreen = ({navigation}: SettingsNavProps<'SecuritySettings'>) => {
   return (

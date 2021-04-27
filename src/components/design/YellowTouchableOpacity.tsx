@@ -5,7 +5,7 @@ import Theme from '../../theme';
 
 interface YellowTouchableOpacityProps {
   onPress: () => void;
-  style?: {}
+  style?: Record<string, unknown>,
 }
 
 export const YellowTouchableOpacity: React.FC<YellowTouchableOpacityProps> = ({children, onPress, style={}}) => {

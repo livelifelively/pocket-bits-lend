@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 interface WhiteViewProps {
-  style?: {}
+  style?: Record<string, unknown>,
 }
 
 export const WhiteView: React.FC<WhiteViewProps> = ({children, style}) => {

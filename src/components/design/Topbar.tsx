@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { Title, Text } from 'react-native-paper';
+import { Title } from 'react-native-paper';
 import { BackIcon } from '../../icons';
 import {WhiteTouchableOpacity} from './WhiteTouchableOpacity';
 
@@ -12,7 +12,7 @@ interface TopBarProps {
   showSettingsButton?: boolean
 }
 
-const Topbar: React.FC<TopBarProps> = ({onBackButtonPress=() => {}, title, showBackButton=true, onSettingsButtonPress=() => {}, showSettingsButton=false}) => {
+const Topbar: React.FC<TopBarProps> = ({onBackButtonPress, title, showBackButton=true, onSettingsButtonPress, showSettingsButton=false}) => {
   return (
     <View style={styles.navBar}>
       <View style={styles.pageTitleAndBack}>

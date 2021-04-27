@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 interface YellowViewProps {
-  style?: {}
+  style?: Record<string, unknown>,
 }
 
 export const YellowView: React.FC<YellowViewProps> = ({children, style}) => {

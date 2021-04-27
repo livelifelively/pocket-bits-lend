@@ -1,16 +1,16 @@
-export { default as MobilePasscodeIconIconard } from './MobilePasscodeIcon';
-export { default as LockIcon } from './Lock';
-export { default as LogoutIcon } from './Logout';
-export { default as ReceiveIcon } from './Receive';
-export { default as SendIcon } from './Send';
-export { default as UserIcon } from './User';
-export { default as PencilIcon } from './Pencil';
-export { default as YellowPlusIcon } from './YellowPlus';
-export { default as BackIcon } from './Back';
-export { default as CopyOutlineIcon } from './CopyOutline';
-export { default as TetherIcon } from './Tether';
-export { default as BitcoinIcon } from './Bitcoin';
-export { default as EtheriumIcon } from './Etherium';
+export { default as MobilePasscodeIcon } from './MobilePasscodeIcon';
+export { default as LockIcon } from './LockIcon';
+export { default as LogoutIcon } from './LogoutIcon';
+export { default as ReceiveIcon } from './ReceiveIcon';
+export { default as SendIcon } from './SendIcon';
+export { default as UserIcon } from './UserIcon';
+export { default as PencilIcon } from './PencilIcon';
+export { default as YellowPlusIcon } from './YellowPlusIcon';
+export { default as BackIcon } from './BackIcon';
+export { default as CopyOutlineIcon } from './CopyOutlineIcon';
+export { default as TetherIcon } from './TetherIcon';
+export { default as BitcoinIcon } from './BitcoinIcon';
+export { default as EtheriumIcon } from './EtheriumIcon';
 export { default as VaultBuildingIcon } from './VaultBuildingIcon';
 export { default as InfoIcon } from './InfoIcon';
 export { default as VaultIcon } from './VaultIcon';
@@ -22,6 +22,7 @@ export { default as PasteIcon } from './PasteIcon';
 export { default as YellowActiveVaultIcon } from './YellowActiveVaultIcon';
 export { default as YellowHistoryIcon } from './YellowHistoryIcon';
 export { default as TelegramIcon } from './TelegramIcon';
+
 
 
 

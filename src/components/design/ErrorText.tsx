@@ -9,7 +9,7 @@ interface ErrorTextProps {
   error: string,
 }
 
-export const ErrorText: React.FC<ErrorTextProps> = ({children, error}) => {
+export const ErrorText: React.FC<ErrorTextProps> = ({error}) => {
   return (
     <View style={styles.errorTextWrapper}>
       <Text style={styles.errorText}>{capitalize(error)}</Text>

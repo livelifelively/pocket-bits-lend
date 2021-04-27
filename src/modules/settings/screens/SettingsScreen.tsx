@@ -4,12 +4,9 @@ import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { DefaultLayout } from '../../../layouts/Default';
 import { SettingsNavProps } from '../SettingsParamList';
 import { AuthContext } from '../../auth/AuthProvider';
-import { AppButton } from '../../../components/design/AppButton';
 import Topbar from '../../../components/design/Topbar';
 import { WhiteView } from '../../../components/design/WhiteView';
-import Logout from '../../../icons/Logout';
-import LockIcon from '../../../icons/Lock';
-import User from '../../../icons/User';
+import {LockIcon, LogoutIcon, UserIcon} from '../../../icons';
 
 const SettingsScreen = ({navigation}: SettingsNavProps<'Settings'>) => {
   const {logout} = useContext(AuthContext);
@@ -25,7 +22,7 @@ const SettingsScreen = ({navigation}: SettingsNavProps<'Settings'>) => {
       <TouchableOpacity style={styles.settingsAction} onPress={() => {navigation.navigate('ProfileSettings');}}>
         <WhiteView style={styles.settingsActionWrapper}>
           <View style={styles.settingsActionIcon}>
-            <User />
+            <UserIcon />
           </View>
           <View>
             <Text style={styles.settingsActionTitle}>Profile</Text>
@@ -45,7 +42,7 @@ const SettingsScreen = ({navigation}: SettingsNavProps<'Settings'>) => {
       <TouchableOpacity style={styles.settingsAction} onPress={() => {logout();}}>
         <WhiteView style={styles.settingsActionWrapper}>
           <View style={styles.settingsActionIcon}>
-            <Logout />
+            <LogoutIcon />
           </View>
           <View>
             <Text style={styles.settingsActionTitle}>Log Out</Text>

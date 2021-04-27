@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 
 interface WhiteTouchableOpacityProps {
   onPress?: () => void;
-  style?: {}
+  style?: Record<string, unknown>,
 }
 
 export const WhiteTouchableOpacity: React.FC<WhiteTouchableOpacityProps> = ({children, onPress, style={}}) => {
