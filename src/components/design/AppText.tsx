@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, Text } from "react-native";
+import React from 'react';
+import { StyleSheet, Text } from 'react-native';
 
 interface AppTextProps {}
 
@@ -8,12 +8,12 @@ export const AppText: React.FC<AppTextProps> = ({children}) => {
     <Text style={styles.textStyles}>
       {children}
     </Text>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   textStyles: {
     fontFamily: 'Poppins-Regular',
     fontSize: 12
   }
-})
+});

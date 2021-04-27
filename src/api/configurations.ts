@@ -1,8 +1,8 @@
-import { API } from "../constants/api";
+import { API } from '../constants/api';
 
 const URLPrefixes = {
   'AUTH': `${API.baseURL}${API.apiPrefix}` 
-}
+};
 
 export type SignUpRequest = {
   email: string,
@@ -33,9 +33,9 @@ export const AuthAPIConfigurations = {
     method: 'POST',
     errorHandlers: {
       '409': (response: any) => {
-        console.log('HANDLE 409 ERROR', response)
+        console.log('HANDLE 409 ERROR', response);
       },
-      'default': (response: any) => {console.log('HANDLE GENERIC ERROR', response)}
+      'default': (response: any) => {console.log('HANDLE GENERIC ERROR', response);}
     }
   },
   'SIGNIN': {
@@ -43,7 +43,7 @@ export const AuthAPIConfigurations = {
     apiCallId: 'SIGNIN',
     method: 'POST',
     errorHandlers: {
-      'default': (response: any) => {console.log('HANDLE GENERIC ERROR', response)}
+      'default': (response: any) => {console.log('HANDLE GENERIC ERROR', response);}
     }
   },
   'EMAIL_VERIFICATION': {
@@ -51,7 +51,7 @@ export const AuthAPIConfigurations = {
     apiCallId: 'EMAIL_VERIFICATION',
     method: 'POST',
     errorHandlers: {
-      'default': (response: any) => {console.log('HANDLE GENERIC ERROR', response)}
+      'default': (response: any) => {console.log('HANDLE GENERIC ERROR', response);}
     }
   },
   '2FA_VERIFICATION': {
@@ -59,7 +59,7 @@ export const AuthAPIConfigurations = {
     apiCallId: 'EMAIL_VERIFICATION',
     method: 'POST',
     errorHandlers: {
-      'default': (response: any) => {console.log('HANDLE GENERIC ERROR', response)}
+      'default': (response: any) => {console.log('HANDLE GENERIC ERROR', response);}
     }
   }
-}
+};

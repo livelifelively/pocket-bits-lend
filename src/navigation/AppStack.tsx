@@ -1,18 +1,18 @@
-import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { AntDesign, EvilIcons } from "@expo/vector-icons";
-import { createStackNavigator } from "@react-navigation/stack";
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { AntDesign, EvilIcons } from '@expo/vector-icons';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import { AppTabsParamList, AppStackParamList } from "./AppParamList";
+import { AppTabsParamList, AppStackParamList } from './AppParamList';
 
-import HomeScreen from "../modules/bottom-tabs/HomeScreen";
-import VaultScreen from "../modules/bottom-tabs/VaultScreen";
-import RewardsScreen from "../modules/bottom-tabs/RewardsScreen";
+import HomeScreen from '../modules/bottom-tabs/HomeScreen';
+import VaultScreen from '../modules/bottom-tabs/VaultScreen';
+import RewardsScreen from '../modules/bottom-tabs/RewardsScreen';
 
-import { VaultActiveDepositsStack, VaultCreationStack, VaultHistoryStack } from "../modules/vault/VaultStack";
-import { WalletStack } from "../modules/wallet/WalletStack";
-import { SettingsStack } from "../modules/settings/SettingsStack";
-import { HomeIcon, RewardIcon, VaultIcon } from "../icons";
+import { VaultActiveDepositsStack, VaultCreationStack, VaultHistoryStack } from '../modules/vault/VaultStack';
+import { WalletStack } from '../modules/wallet/WalletStack';
+import { SettingsStack } from '../modules/settings/SettingsStack';
+import { HomeIcon, RewardIcon, VaultIcon } from '../icons';
 
 interface AppTabsProps {}
 interface AppStackProps {}
@@ -26,21 +26,21 @@ const AppTabs: React.FC<AppTabsProps> = ({}) => {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           switch (route.name) {
-            case "Home":
-              return <HomeIcon />;
-            case "Rewards":
-              return <RewardIcon />;
-            case "Vault":
-              return <VaultIcon />;
+          case 'Home':
+            return <HomeIcon />;
+          case 'Rewards':
+            return <RewardIcon />;
+          case 'Vault':
+            return <VaultIcon />;
 
-            default:
-              break;
+          default:
+            break;
           }
         }
       })}
       tabBarOptions={{
-        activeTintColor: "tomato",
-        inactiveTintColor: "gray",
+        activeTintColor: 'tomato',
+        inactiveTintColor: 'gray',
         showLabel: false,
       }}
     >

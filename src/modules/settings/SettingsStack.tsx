@@ -1,13 +1,13 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import { SettingsParamList } from "./SettingsParamList";
+import { SettingsParamList } from './SettingsParamList';
 
-import SettingsScreen from "./screens/SettingsScreen";
-import ProfileSettingsScreen from "./screens/ProfileSettingsScreen";
-import SecuritySettingsScreen from "./screens/SecuritySettingsScreen";
-import TwoFactorAuthenticationScreen from "./screens/TwoFactorAuthenticationScreen";
-import ChangePasscodeScreen from "./screens/ChangePasscodeScreen";
+import SettingsScreen from './screens/SettingsScreen';
+import ProfileSettingsScreen from './screens/ProfileSettingsScreen';
+import SecuritySettingsScreen from './screens/SecuritySettingsScreen';
+import TwoFactorAuthenticationScreen from './screens/TwoFactorAuthenticationScreen';
+import ChangePasscodeScreen from './screens/ChangePasscodeScreen';
 
 interface SettingsStackProps {}
 

@@ -1,27 +1,27 @@
-import React, { useState } from "react";
-import { Text, StyleSheet, TouchableOpacity, View } from "react-native";
-import { Formik } from "formik";
-import * as Yup from "yup";
+import React, { useState } from 'react';
+import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
-import { DefaultLayout } from "../../../layouts/Default";
-import { SettingsNavProps } from "../SettingsParamList";
-import { AppButton } from "../../../components/design/AppButton";
-import Topbar from "../../../components/design/Topbar";
-import { Title } from "react-native-paper";
-import { AppTextInput } from "../../../components/design/AppTextInput";
-import { YellowCopyIcon } from "../../../icons";
-import { RequestResponse, twoFactorAuthenticationVefificationPost } from "../../../api/requests";
-import { globalStyles } from "../../../theme/globalStyles";
+import { DefaultLayout } from '../../../layouts/Default';
+import { SettingsNavProps } from '../SettingsParamList';
+import { AppButton } from '../../../components/design/AppButton';
+import Topbar from '../../../components/design/Topbar';
+import { Title } from 'react-native-paper';
+import { AppTextInput } from '../../../components/design/AppTextInput';
+import { YellowCopyIcon } from '../../../icons';
+import { RequestResponse, twoFactorAuthenticationVefificationPost } from '../../../api/requests';
+import { globalStyles } from '../../../theme/globalStyles';
 
-const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<"TwoFactorAuthentication">) => {
+const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<'TwoFactorAuthentication'>) => {
   const twoFactorAuthenticationSchema = Yup.object().shape({
     verificationCode: Yup.string()
-          .required()
-          .matches(/^[0-9]+$/, "Must be only digits")
-          .min(6, 'Must be exactly 6 digits')
-          .max(6, 'Must be exactly 6 digits'),
+      .required()
+      .matches(/^[0-9]+$/, 'Must be only digits')
+      .min(6, 'Must be exactly 6 digits')
+      .max(6, 'Must be exactly 6 digits'),
     // email: Yup.string().email().required(),
-  })
+  });
 
   return (
     <DefaultLayout backgroundColor='#ffffff'>
@@ -56,7 +56,7 @@ const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<"TwoFactor
           const signedUp: RequestResponse = await twoFactorAuthenticationVefificationPost({
             verificationCode: values.verificationCode,
             email: values.email
-          })
+          });
           if (signedUp.status === 'SUCCESS') {
             // navigation.navigate('SetPasscode')
           }
@@ -76,7 +76,7 @@ const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<"TwoFactor
             <AppButton
               title="Enable"
               onPress={() => {
-                handleSubmit()
+                handleSubmit();
               }}
               size='normal'
               style={{paddingHorizontal: 50}}
@@ -91,7 +91,7 @@ const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<"TwoFactor
         <Text>Step 2 : Scan this QR code or copy the key phrase to add 2FA.</Text>
       </View>
     </DefaultLayout>
-  )
+  );
 };
 
 const styles = StyleSheet.create({

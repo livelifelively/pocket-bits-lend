@@ -1,10 +1,10 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Title, Text } from "react-native-paper";
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Title, Text } from 'react-native-paper';
 
-import { TetherIcon, EtheriumIcon, BitcoinIcon } from "../../icons";
-import {WhiteView} from "../design/WhiteView";
+import { TetherIcon, EtheriumIcon, BitcoinIcon } from '../../icons';
+import {WhiteView} from '../design/WhiteView';
 
 interface WalletsProps {
   style?: {},
@@ -63,28 +63,28 @@ const wallets = [
       changeValue: '2.56'
     }
   }
-]
+];
 
 const cryotpyIcon = (shortName: string) => {
   switch (shortName) {
-    case 'USDT':
-      return <TetherIcon />
+  case 'USDT':
+    return <TetherIcon />;
 
-    case 'BTC':
-      return <BitcoinIcon />
+  case 'BTC':
+    return <BitcoinIcon />;
 
-    case 'ETH':
-      return <EtheriumIcon />
+  case 'ETH':
+    return <EtheriumIcon />;
   
-    default:
-      break;
+  default:
+    break;
   }
-}
+};
 
 export const Wallets: React.FC<WalletsProps> = ({children, style, onPress}) => {
   const onWalletPress = (walletDetails={}) => {
-    onPress(walletDetails)
-  }
+    onPress(walletDetails);
+  };
 
   return (
     <View style={{...styles.WalletsWrapper, ...style}}>
@@ -118,12 +118,12 @@ export const Wallets: React.FC<WalletsProps> = ({children, style, onPress}) => {
                 </View>
               </WhiteView>
             </TouchableOpacity>
-          )
+          );
         })
       }
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   WalletsWrapper: {
@@ -159,4 +159,4 @@ const styles = StyleSheet.create({
     fontSize: 10,
     textAlign: 'center'
   }
-})
+});

@@ -1,10 +1,10 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Text, Title } from "react-native-paper";
-import { ReceiveIcon, SendIcon } from "../../icons";
-import { AppButton } from "../design/AppButton";
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Text, Title } from 'react-native-paper';
+import { ReceiveIcon, SendIcon } from '../../icons';
+import { AppButton } from '../design/AppButton';
 
-import {WhiteView} from "../design/WhiteView";
+import {WhiteView} from '../design/WhiteView';
 
 interface WalletTransactionHistoryProps {
   style?: {}
@@ -41,7 +41,7 @@ const history = [
     transactionType: 'Deposit',
     time: '20 Feb, 21 10:27 a.m.'
   }
-]
+];
 
 export const WalletTransactionHistory: React.FC<WalletTransactionHistoryProps> = ({style}) => {
   // const action = 
@@ -73,12 +73,12 @@ export const WalletTransactionHistory: React.FC<WalletTransactionHistoryProps> =
                 </Text>
               </View>
             </WhiteView>
-          )
+          );
         })
       }
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   WalletTransactionHistoryWrapper: {
@@ -112,4 +112,4 @@ const styles = StyleSheet.create({
   walletTransactionValue: {
     fontSize: 18
   }
-})
+});

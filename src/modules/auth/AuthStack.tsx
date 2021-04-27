@@ -1,14 +1,14 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import { AuthParamList } from "./AuthParamList";
+import { AuthParamList } from './AuthParamList';
 
-import HomeGuestScreen from "./screens/HomeGuestScreen";
-import LoginEmailScreen from "./screens/LoginEmailScreen";
-import LoginPasscodeScreen from "./screens/LoginPasscodeScreen";
-import SignupScreen from "./screens/SignupScreen";
-import SetPasscodeScreen from "./screens/SetPasscodeScreen";
-import VerifyEmailScreen from "./screens/VerifyEmailScreen";
+import HomeGuestScreen from './screens/HomeGuestScreen';
+import LoginEmailScreen from './screens/LoginEmailScreen';
+import LoginPasscodeScreen from './screens/LoginPasscodeScreen';
+import SignupScreen from './screens/SignupScreen';
+import SetPasscodeScreen from './screens/SetPasscodeScreen';
+import VerifyEmailScreen from './screens/VerifyEmailScreen';
 
 interface AuthStackProps {}
 

@@ -1,9 +1,9 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Text } from "react-native-paper";
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
 
-import {WhiteView} from "../design/WhiteView";
-import { VaultBuildingIcon } from "../../icons";
+import {WhiteView} from '../design/WhiteView';
+import { VaultBuildingIcon } from '../../icons';
 
 interface VaultIntroProps {
   style?: {}
@@ -22,8 +22,8 @@ export const VaultIntro: React.FC<VaultIntroProps> = ({children, style}) => {
         </Text>
       </View>
     </WhiteView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   vaultIntroWrapper: {
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Medium',
     color: '#625E59'
   }
-})
+});

@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 
 interface WhiteViewProps {
   style?: {}
@@ -10,8 +10,8 @@ export const WhiteView: React.FC<WhiteViewProps> = ({children, style}) => {
     <View style={{...styles.whiteView, ...style}}>
       {children}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   whiteView: {
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
     shadowColor: '#d7d7d7',
     shadowOffset: { height: 0, width: 0 }
   }
-})
+});

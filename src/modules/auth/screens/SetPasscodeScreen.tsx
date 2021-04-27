@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
-import { Text, StyleSheet, Button } from "react-native";
+import React, { useContext } from 'react';
+import { Text, StyleSheet, Button } from 'react-native';
 
-import { DefaultLayout } from "../../../layouts/Default";
-import { AuthNavProps } from "../AuthParamList";
-import { AuthContext } from "../AuthProvider";
-import { AppButton } from "../../../components/design/AppButton";
+import { DefaultLayout } from '../../../layouts/Default';
+import { AuthNavProps } from '../AuthParamList';
+import { AuthContext } from '../AuthProvider';
+import { AppButton } from '../../../components/design/AppButton';
 
-const SetPasscodeScreen = ({navigation, route}: AuthNavProps<"SetPasscode">) => {
-  const {login} = useContext(AuthContext)
+const SetPasscodeScreen = ({navigation, route}: AuthNavProps<'SetPasscode'>) => {
+  const {login} = useContext(AuthContext);
 
   return (
     <DefaultLayout>
@@ -16,14 +16,14 @@ const SetPasscodeScreen = ({navigation, route}: AuthNavProps<"SetPasscode">) => 
         title="Confirm"
         onPress={() => {
           // Set passcode: true, SignUp: true, User and go home
-          login()
+          login();
         }}
       />
       <AppButton
         title="Skip"
         onPress={() => {
           // Set passcode: false, SignUp: true, User and go home
-          login()
+          login();
         }}
       />
     </DefaultLayout>

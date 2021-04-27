@@ -1,5 +1,5 @@
-import React from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import React from 'react';
+import { View, StyleSheet, ScrollView } from 'react-native';
 
 interface DefaultLayoutProps {
   style?: {}
@@ -18,8 +18,8 @@ export const DefaultLayout: React.FC<DefaultLayoutProps> = ({
         {children}
       </View>
     </ScrollView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

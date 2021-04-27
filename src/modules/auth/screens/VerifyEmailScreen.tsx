@@ -1,27 +1,27 @@
-import React, { useState } from "react";
-import { StyleSheet,View } from "react-native";
-import { Text } from "react-native-paper";
-import { Formik } from "formik";
-import * as Yup from "yup";
+import React, { useState } from 'react';
+import { StyleSheet,View } from 'react-native';
+import { Text } from 'react-native-paper';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
-import { DefaultLayout } from "../../../layouts/Default";
-import { AuthNavProps } from "../AuthParamList";
-import { AppButton } from "../../../components/design/AppButton";
-import { AppTextInput } from "../../../components/design/AppTextInput";
-import { globalStyles } from "../../../theme/globalStyles";
-import { RequestResponse, verifyEmailPost } from "../../../api/requests";
+import { DefaultLayout } from '../../../layouts/Default';
+import { AuthNavProps } from '../AuthParamList';
+import { AppButton } from '../../../components/design/AppButton';
+import { AppTextInput } from '../../../components/design/AppTextInput';
+import { globalStyles } from '../../../theme/globalStyles';
+import { RequestResponse, verifyEmailPost } from '../../../api/requests';
 
-const VerifyEmailScreen = ({ navigation, route }: AuthNavProps<"VerifyEmail">) => {
-  const email = 'deviced.in@gmail.com'
+const VerifyEmailScreen = ({ navigation, route }: AuthNavProps<'VerifyEmail'>) => {
+  const email = 'deviced.in@gmail.com';
 
   const emailVerificationSchema = Yup.object().shape({
     otp: Yup.string()
-          .required()
-          .matches(/^[0-9]+$/, "Must be only digits")
-          .min(6, 'Must be exactly 6 digits')
-          .max(6, 'Must be exactly 6 digits'),
+      .required()
+      .matches(/^[0-9]+$/, 'Must be only digits')
+      .min(6, 'Must be exactly 6 digits')
+      .max(6, 'Must be exactly 6 digits'),
     email: Yup.string().email().required(),
-  })
+  });
 
   return (
     <DefaultLayout backgroundColor='#FCFCFC' paddingHorizontal={45}>
@@ -41,9 +41,9 @@ const VerifyEmailScreen = ({ navigation, route }: AuthNavProps<"VerifyEmail">) =
           const signedUp: RequestResponse = await verifyEmailPost({
             otp: values.otp,
             email: values.email
-          })
+          });
           if (signedUp.status === 'SUCCESS') {
-            navigation.navigate('SetPasscode')
+            navigation.navigate('SetPasscode');
           }
         }}
       >
@@ -66,7 +66,7 @@ const VerifyEmailScreen = ({ navigation, route }: AuthNavProps<"VerifyEmail">) =
             <AppButton
               title="Confirm Email"
               onPress={() => {
-                handleSubmit()
+                handleSubmit();
               }}
               size='normal'
               style={{paddingHorizontal: 50}}
@@ -75,7 +75,7 @@ const VerifyEmailScreen = ({ navigation, route }: AuthNavProps<"VerifyEmail">) =
         )}
       </Formik>
     </DefaultLayout>
-  )
+  );
 };
 
 const styles = StyleSheet.create({

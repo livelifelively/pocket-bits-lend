@@ -1,15 +1,15 @@
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import { DefaultLayout } from "../../../layouts/Default";
-import { SettingsNavProps } from "../SettingsParamList";
-import { AppButton } from "../../../components/design/AppButton";
-import Topbar from "../../../components/design/Topbar";
-import { WhiteView } from "../../../components/design/WhiteView";
-import LockIcon from "../../../icons/Lock";
-import MobilePasscodeIcon from "../../../icons/MobilePasscodeIcon";
+import { DefaultLayout } from '../../../layouts/Default';
+import { SettingsNavProps } from '../SettingsParamList';
+import { AppButton } from '../../../components/design/AppButton';
+import Topbar from '../../../components/design/Topbar';
+import { WhiteView } from '../../../components/design/WhiteView';
+import LockIcon from '../../../icons/Lock';
+import MobilePasscodeIcon from '../../../icons/MobilePasscodeIcon';
 
-const SecuritySettingsScreen = ({navigation}: SettingsNavProps<"SecuritySettings">) => {
+const SecuritySettingsScreen = ({navigation}: SettingsNavProps<'SecuritySettings'>) => {
   return (
     <DefaultLayout>
       <Topbar
@@ -18,7 +18,7 @@ const SecuritySettingsScreen = ({navigation}: SettingsNavProps<"SecuritySettings
         }}
         title="Security Settings"
       />
-      <TouchableOpacity style={styles.settingsAction} onPress={() => {navigation.navigate("TwoFactorAuthentication")}}>
+      <TouchableOpacity style={styles.settingsAction} onPress={() => {navigation.navigate('TwoFactorAuthentication');}}>
         <WhiteView style={styles.settingsActionWrapper}>
           <View style={styles.settingsActionIcon}>
             <LockIcon />
@@ -28,9 +28,9 @@ const SecuritySettingsScreen = ({navigation}: SettingsNavProps<"SecuritySettings
           </View>
         </WhiteView>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.settingsAction} onPress={() => {navigation.navigate("ChangePasscode")}}>
+      <TouchableOpacity style={styles.settingsAction} onPress={() => {navigation.navigate('ChangePasscode');}}>
         <WhiteView style={styles.settingsActionWrapper}>
-        <View style={styles.settingsActionIcon}>
+          <View style={styles.settingsActionIcon}>
             <MobilePasscodeIcon />
           </View>
           <View>
@@ -39,7 +39,7 @@ const SecuritySettingsScreen = ({navigation}: SettingsNavProps<"SecuritySettings
         </WhiteView>
       </TouchableOpacity>
     </DefaultLayout>
-  )
+  );
 };
 
 const styles = StyleSheet.create({

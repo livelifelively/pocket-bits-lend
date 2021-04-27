@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import React from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
 interface WhiteTouchableOpacityProps {
   onPress?: () => void;
@@ -18,8 +18,8 @@ export const WhiteTouchableOpacity: React.FC<WhiteTouchableOpacityProps> = ({chi
     >
       {children}
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   touchableOpacity: {
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   }
-})
+});

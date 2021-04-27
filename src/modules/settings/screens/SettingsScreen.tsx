@@ -1,17 +1,17 @@
-import React, { useContext } from "react";
-import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
+import React, { useContext } from 'react';
+import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 
-import { DefaultLayout } from "../../../layouts/Default";
-import { SettingsNavProps } from "../SettingsParamList";
-import { AuthContext } from "../../auth/AuthProvider";
-import { AppButton } from "../../../components/design/AppButton";
-import Topbar from "../../../components/design/Topbar";
-import { WhiteView } from "../../../components/design/WhiteView";
-import Logout from "../../../icons/Logout";
-import LockIcon from "../../../icons/Lock";
-import User from "../../../icons/User";
+import { DefaultLayout } from '../../../layouts/Default';
+import { SettingsNavProps } from '../SettingsParamList';
+import { AuthContext } from '../../auth/AuthProvider';
+import { AppButton } from '../../../components/design/AppButton';
+import Topbar from '../../../components/design/Topbar';
+import { WhiteView } from '../../../components/design/WhiteView';
+import Logout from '../../../icons/Logout';
+import LockIcon from '../../../icons/Lock';
+import User from '../../../icons/User';
 
-const SettingsScreen = ({navigation}: SettingsNavProps<"Settings">) => {
+const SettingsScreen = ({navigation}: SettingsNavProps<'Settings'>) => {
   const {logout} = useContext(AuthContext);
 
   return (
@@ -22,7 +22,7 @@ const SettingsScreen = ({navigation}: SettingsNavProps<"Settings">) => {
         }}
         title="Settings"
       />
-      <TouchableOpacity style={styles.settingsAction} onPress={() => {navigation.navigate("ProfileSettings")}}>
+      <TouchableOpacity style={styles.settingsAction} onPress={() => {navigation.navigate('ProfileSettings');}}>
         <WhiteView style={styles.settingsActionWrapper}>
           <View style={styles.settingsActionIcon}>
             <User />
@@ -32,7 +32,7 @@ const SettingsScreen = ({navigation}: SettingsNavProps<"Settings">) => {
           </View>
         </WhiteView>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.settingsAction} onPress={() => {navigation.navigate("SecuritySettings")}}>
+      <TouchableOpacity style={styles.settingsAction} onPress={() => {navigation.navigate('SecuritySettings');}}>
         <WhiteView style={styles.settingsActionWrapper}>
           <View style={styles.settingsActionIcon}>
             <LockIcon />
@@ -42,7 +42,7 @@ const SettingsScreen = ({navigation}: SettingsNavProps<"Settings">) => {
           </View>
         </WhiteView>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.settingsAction} onPress={() => {logout()}}>
+      <TouchableOpacity style={styles.settingsAction} onPress={() => {logout();}}>
         <WhiteView style={styles.settingsActionWrapper}>
           <View style={styles.settingsActionIcon}>
             <Logout />
@@ -53,7 +53,7 @@ const SettingsScreen = ({navigation}: SettingsNavProps<"Settings">) => {
         </WhiteView>
       </TouchableOpacity>
     </DefaultLayout>
-  )
+  );
 };
 
 const styles = StyleSheet.create({

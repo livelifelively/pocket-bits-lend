@@ -1,10 +1,10 @@
-import React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import React from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
-import Theme from "../../theme";
+import Theme from '../../theme';
 
 interface YellowTouchableOpacityProps {
-  onPress?: () => void;
+  onPress: () => void;
   style?: {}
 }
 
@@ -20,8 +20,8 @@ export const YellowTouchableOpacity: React.FC<YellowTouchableOpacityProps> = ({c
     >
       {children}
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   touchableOpacity: {
@@ -34,5 +34,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
+    padding: 15
   }
-})
+});

@@ -1,8 +1,8 @@
-import React from "react";
-import { StyleSheet, TextInput, View } from "react-native";
-import { Text } from "react-native-paper";
-import { globalStyles } from "../../theme/globalStyles";
-import { ErrorText } from "./ErrorText";
+import React from 'react';
+import { StyleSheet, TextInput, View } from 'react-native';
+import { Text } from 'react-native-paper';
+import { globalStyles } from '../../theme/globalStyles';
+import { ErrorText } from './ErrorText';
 
 interface AppTextInputProps {
   onChangeText: (text: string) => void
@@ -17,7 +17,7 @@ interface AppTextInputProps {
   autoCorrect?: boolean,
   maxLength?: number,
   placeholderTextColor?: string,
-  autoCapitalize?: "sentences" | "none" | "words" | "characters" | undefined,
+  autoCapitalize?: 'sentences' | 'none' | 'words' | 'characters' | undefined,
   secureTextEntry?: boolean,
   onBlur?: (e:any) => void,
   error?: string
@@ -28,7 +28,7 @@ export const AppTextInput: React.FC<AppTextInputProps> = ({
   onChangeText, placeholder, style={}, size='normal', value='', autoCorrect=false, maxLength, keyboardType='default', placeholderTextColor='#625E59',
   autoCapitalize='sentences', secureTextEntry=false, onBlur=(e) => {}, error=''
 }) => {
-  let errorStyle = error.length > 0 ? {borderColor: globalStyles.errorText.color} : {}
+  const errorStyle = error.length > 0 ? {borderColor: globalStyles.errorText.color} : {};
 
   return (
     <View style={[styles.appTextInputWrapper, style.wrapper]}>
@@ -47,8 +47,8 @@ export const AppTextInput: React.FC<AppTextInputProps> = ({
       />
       <ErrorText error={error} />
     </View>
-  )
-}
+  );
+};
 const styles = StyleSheet.create({
   appTextInput: {
     padding: 15, backgroundColor: '#f7f7f7', fontSize: 14, borderRadius: 15, borderWidth: 1, borderColor: '#f7f7f7'
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
   appTextInputWrapper: {
     width: '100%'
   },
-})
+});

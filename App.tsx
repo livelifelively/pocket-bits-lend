@@ -5,8 +5,8 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import useCachedResources from './src/hooks/useCachedResources';
 import useColorScheme from './src/hooks/useColorScheme';
 import Navigation from './src/navigation';
-import { AuthProvider } from "./src/modules/auth/AuthProvider";
-import Theme from "./src/theme";
+import { AuthProvider } from './src/modules/auth/AuthProvider';
+import Theme from './src/theme';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();

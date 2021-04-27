@@ -1,12 +1,12 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import { WalletParamList } from "./WalletParamList";
+import { WalletParamList } from './WalletParamList';
 
-import DepositScreen from "./screens/DepositScreen";
+import DepositScreen from './screens/DepositScreen';
 // import WalletScreen from "../WalletScreen";
-import WalletScreen from "./screens/WalletScreen";
-import WithdrawScreen from "./screens/WithdrawScreen";
+import WalletScreen from './screens/WalletScreen';
+import WithdrawScreen from './screens/WithdrawScreen';
 
 interface WalletStackProps {}
 
@@ -20,9 +20,9 @@ export const WalletStack: React.FC<WalletStackProps> = ({}) => {
       }}
       initialRouteName="Wallet"
     >
-      <Stack.Screen options={{ headerTitle: "Wallet" }} name="Wallet" component={WalletScreen} />
-      <Stack.Screen options={{ headerTitle: "Deposit" }} name="Deposit" component={DepositScreen} />
-      <Stack.Screen options={{ headerTitle: "Withdraw" }} name="Withdraw" component={WithdrawScreen} />
+      <Stack.Screen options={{ headerTitle: 'Wallet' }} name="Wallet" component={WalletScreen} />
+      <Stack.Screen options={{ headerTitle: 'Deposit' }} name="Deposit" component={DepositScreen} />
+      <Stack.Screen options={{ headerTitle: 'Withdraw' }} name="Withdraw" component={WithdrawScreen} />
     </Stack.Navigator>
   );
 };

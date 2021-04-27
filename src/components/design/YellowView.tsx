@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 
 interface YellowViewProps {
   style?: {}
@@ -10,8 +10,8 @@ export const YellowView: React.FC<YellowViewProps> = ({children, style}) => {
     <View style={{...styles.yellowView, ...style}}>
       {children}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   yellowView: {
@@ -20,4 +20,4 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     width: '100%'
   }
-})
+});

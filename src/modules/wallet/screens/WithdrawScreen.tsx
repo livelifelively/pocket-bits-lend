@@ -1,16 +1,16 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Text } from "react-native-paper";
-import { Formik } from "formik";
-import * as Yup from "yup";
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
-import { DefaultLayout } from "../../../layouts/Default";
-import { WalletNavProps } from "../WalletParamList";
-import Topbar from "../../../components/design/Topbar";
-import { AppTextInput } from "../../../components/design/AppTextInput";
-import { PasteIcon } from "../../../icons";
-import { AppButton } from "../../../components/design/AppButton";
-import { WhiteTouchableOpacity } from "../../../components/design/WhiteTouchableOpacity";
+import { DefaultLayout } from '../../../layouts/Default';
+import { WalletNavProps } from '../WalletParamList';
+import Topbar from '../../../components/design/Topbar';
+import { AppTextInput } from '../../../components/design/AppTextInput';
+import { PasteIcon } from '../../../icons';
+import { AppButton } from '../../../components/design/AppButton';
+import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
 
 type Wallet = {
   id: number,
@@ -54,16 +54,16 @@ const accounts = [
     },
     amount: 1.41
   }
-]
+];
 
-const activeAccount = accounts[0]
+const activeAccount = accounts[0];
 
-const WithdrawScreen = ({navigation}: WalletNavProps<"Withdraw">) => {
+const WithdrawScreen = ({navigation}: WalletNavProps<'Withdraw'>) => {
   const withdrawCryptoSchema = Yup.object().shape({
     destinationAddress: Yup.string().required(),
     withdrawalAmount: Yup.string().required()
     // email: Yup.string().email().required(),
-  })
+  });
 
   return (
     <DefaultLayout backgroundColor='#FFFFFF'>
@@ -81,7 +81,7 @@ const WithdrawScreen = ({navigation}: WalletNavProps<"Withdraw">) => {
           }}
           validationSchema={withdrawCryptoSchema}
           onSubmit={ async (values) => {
-            navigation.goBack()
+            navigation.goBack();
           }}
         >
           {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => (
@@ -93,7 +93,7 @@ const WithdrawScreen = ({navigation}: WalletNavProps<"Withdraw">) => {
                   value={values.destinationAddress}
                   onChangeText={handleChange('destinationAddress')}
                   onBlur={handleBlur('destinationAddress')}
-                  placeholder={`Destination Address`}
+                  placeholder={'Destination Address'}
                   error={touched.destinationAddress ? errors.destinationAddress : ''}
                 />
                 <View style={[styles.inputAmountText]}>
@@ -138,7 +138,7 @@ const WithdrawScreen = ({navigation}: WalletNavProps<"Withdraw">) => {
         </Formik>
       </View>
     </DefaultLayout>
-  )
+  );
 };
 
 const styles = StyleSheet.create({

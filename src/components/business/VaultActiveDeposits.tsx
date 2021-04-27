@@ -1,8 +1,8 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Text, Title } from "react-native-paper";
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Text, Title } from 'react-native-paper';
 
-import { VaultActiveDepositsListUnit } from "./VaultActiveDepositsListUnit";
+import { VaultActiveDepositsListUnit } from './VaultActiveDepositsListUnit';
 
 interface VaultActiveDepositsProps {
   style?: {},
@@ -59,7 +59,7 @@ const activeDeposits = [
     startDate: '19 Mar, 21',
     endDate: '19 Mar, 21',
   }
-]
+];
 
 export const VaultActiveDeposits: React.FC<VaultActiveDepositsProps> = ({style, showTitle=true, expandableListUnit=false}) => {
   return (
@@ -68,7 +68,7 @@ export const VaultActiveDeposits: React.FC<VaultActiveDepositsProps> = ({style, 
         showTitle && (
           <View style={styles.componentTitle}>
             <Title>
-              {`Active Deposits `}
+              {'Active Deposits '}
               <Text style={styles.activeDepositsCount}>(4)</Text>
             </Title>
           </View>
@@ -78,12 +78,12 @@ export const VaultActiveDeposits: React.FC<VaultActiveDepositsProps> = ({style, 
         activeDeposits && activeDeposits.map((val) => {
           return (
             <VaultActiveDepositsListUnit expandableListUnit={expandableListUnit} depositDetails={val} key={val.id} />
-          )
+          );
         })
       }
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   vaultActiveDepositsWrapper: {
@@ -97,4 +97,4 @@ const styles = StyleSheet.create({
     color: '#FFB850',
     fontFamily: 'Poppins-Bold'
   }
-})
+});

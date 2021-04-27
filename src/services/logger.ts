@@ -1,14 +1,14 @@
 // LOGGER
 const Logger = {
   info: (idString: string, data:any) => {
-    console.log(idString, data)
+    console.log(idString, data);
   },
   warn: (idString: string, data:any) => {
-    console.warn(idString, data)
+    console.warn(idString, data);
   },
   error: (idString: string, data:any) => {
-    console.error(idString, data)
+    console.error(idString, data);
   },
-}
+};
 
-export default Logger
+export default Logger;

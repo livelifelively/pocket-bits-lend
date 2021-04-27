@@ -1,6 +1,6 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Checkbox } from "react-native-paper";
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Checkbox } from 'react-native-paper';
 
 interface AppCheckboxProps {
   value: boolean,
@@ -22,11 +22,11 @@ export const AppCheckbox: React.FC<AppCheckboxProps> = ({children, value, onPres
         {children}
       </View>
     </View>
-  )
-}
+  );
+};
 const styles = StyleSheet.create({
   appCheckbox: {
     padding: 15, backgroundColor: '#f7f7f7', fontSize: 14, borderRadius: 15
   },
   appCheckboxWrapper: {}
-})
+});

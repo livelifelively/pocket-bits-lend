@@ -1,9 +1,9 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Text } from "react-native-paper";
-import { InfoIcon } from "../../icons";
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
+import { InfoIcon } from '../../icons';
 
-import {YellowView} from "../design/YellowView";
+import {YellowView} from '../design/YellowView';
 
 interface ValueCreatedProps {
   style?: {}
@@ -26,7 +26,7 @@ const data = {
     },
     value: 3607
   }
-}
+};
 
 export const ValueCreated: React.FC<ValueCreatedProps> = ({children, style}) => {
   return (
@@ -45,8 +45,8 @@ export const ValueCreated: React.FC<ValueCreatedProps> = ({children, style}) => 
         </View>
       </View>
     </YellowView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   valueCreatedWrapper: {
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
   valueCreatedDetailsSubtext: {
     fontSize: 12
   }
-})
+});

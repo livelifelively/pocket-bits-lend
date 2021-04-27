@@ -1,10 +1,10 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Text } from "react-native-paper";
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
 
-import {WhiteView} from "../design/WhiteView";
-import { YellowPlusIcon } from "../../icons";
-import { WhiteTouchableOpacity } from "../design/WhiteTouchableOpacity";
+import {WhiteView} from '../design/WhiteView';
+import { YellowPlusIcon } from '../../icons';
+import { WhiteTouchableOpacity } from '../design/WhiteTouchableOpacity';
 
 interface WalletBalanceProps {
   style?: {},
@@ -16,14 +16,14 @@ export const WalletBalance: React.FC<WalletBalanceProps> = ({children, style, on
     <WhiteView style={{...styles.walletBalanceWrapper, ...style}}>
       <View style={styles.walletBalanceGraph}>
         <Text style={styles.walletBalanceGraphValue}>0.433</Text>
-        <Text style={[styles.walletBalanceSubtext, {textAlign: "center"}]}>Total Balance</Text>
+        <Text style={[styles.walletBalanceSubtext, {textAlign: 'center'}]}>Total Balance</Text>
         <Text style={styles.walletBalanceGraphCurrencyValue}>$18,324</Text>
       </View>
       <View style={styles.walletVaultStatus}>
         <View>
           <Text>
             <Text style={styles.walletBalanceValue}>
-              {`0.215 `}
+              {'0.215 '}
               <Text style={styles.walletBalanceSubtext}>BTC</Text>
             </Text>
           </Text>
@@ -32,14 +32,14 @@ export const WalletBalance: React.FC<WalletBalanceProps> = ({children, style, on
             <Text style={styles.walletBalanceSubtext}>Balance</Text>
           </View>
           <Text style={styles.walletBalanceSubtext}>
-            {`Interest `}
+            {'Interest '}
             <Text style={{...styles.walletBalanceSubtext, fontFamily: 'Poppins-Bold'}}>12%</Text>
           </Text>
         </View>
         <View>
           <Text>
             <Text style={styles.walletBalanceValue}>
-              {`0.215 `}
+              {'0.215 '}
               <Text style={styles.walletBalanceSubtext}>BTC</Text>
             </Text>
           </Text>
@@ -48,7 +48,7 @@ export const WalletBalance: React.FC<WalletBalanceProps> = ({children, style, on
             <Text style={styles.walletBalanceSubtext}>Locked in vault</Text>
           </View>
           <Text style={styles.walletBalanceSubtext}>
-            {`Interest `}
+            {'Interest '}
             <Text style={{...styles.walletBalanceSubtext, fontFamily: 'Poppins-Bold'}}>12%</Text>
           </Text>
         </View>
@@ -69,8 +69,8 @@ export const WalletBalance: React.FC<WalletBalanceProps> = ({children, style, on
         </WhiteTouchableOpacity>
       </View>
     </WhiteView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   walletBalanceWrapper: {
@@ -113,4 +113,4 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: '#5A5A5A'
   }
-})
+});

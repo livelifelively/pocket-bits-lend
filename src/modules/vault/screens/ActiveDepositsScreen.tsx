@@ -1,12 +1,12 @@
-import React from "react";
-import { StyleSheet} from "react-native";
+import React from 'react';
+import { StyleSheet} from 'react-native';
 
-import { DefaultLayout } from "../../../layouts/Default";
-import { VaultActiveDepositsNavProps } from "../VaultParamList";
-import { VaultActiveDeposits } from "../../../components/business/VaultActiveDeposits";
-import Topbar from "../../../components/design/Topbar";
+import { DefaultLayout } from '../../../layouts/Default';
+import { VaultActiveDepositsNavProps } from '../VaultParamList';
+import { VaultActiveDeposits } from '../../../components/business/VaultActiveDeposits';
+import Topbar from '../../../components/design/Topbar';
 
-const ActiveDepositsScreen = ({navigation} : VaultActiveDepositsNavProps<"ActiveDeposits">) => {
+const ActiveDepositsScreen = ({navigation} : VaultActiveDepositsNavProps<'ActiveDeposits'>) => {
   return (
     <DefaultLayout>
       <Topbar
@@ -17,7 +17,7 @@ const ActiveDepositsScreen = ({navigation} : VaultActiveDepositsNavProps<"Active
       />
       <VaultActiveDeposits showTitle={false} expandableListUnit={true} />
     </DefaultLayout>
-  )
+  );
 };
 
 const styles = StyleSheet.create({

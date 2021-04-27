@@ -1,9 +1,9 @@
-import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Title } from "react-native-paper";
+import React from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Title } from 'react-native-paper';
 
-import {WhiteView} from "../design/WhiteView";
-import { YellowView } from "../design/YellowView";
+import {WhiteView} from '../design/WhiteView';
+import { YellowView } from '../design/YellowView';
 
 interface VaultFixedDepositsProps {
   style?: {},
@@ -43,7 +43,7 @@ const vaults = [
       timeUnit: 'year'
     }
   }
-]
+];
 
 export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({children, style, onPress}) => {
   return (
@@ -57,7 +57,7 @@ export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({children,
                 <TouchableOpacity 
                   activeOpacity={0.7}
                   onPress={() => {
-                    onPress()
+                    onPress();
                   }}
                 >
                   <Text style={styles.vaultFixedDepositInterestRate}>{val.interestRatePercent}%</Text>
@@ -67,7 +67,7 @@ export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({children,
                   </YellowView>
                 </TouchableOpacity>
               </WhiteView>
-            )
+            );
           })
         }
       </View>
@@ -75,8 +75,8 @@ export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({children,
         <Text style={[styles.subtext, {textAlign: 'right'}]}>+ view more</Text>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   title: {
@@ -107,4 +107,4 @@ const styles = StyleSheet.create({
   vaultFixedDepositDuration: {
     marginTop: 15
   }
-})
+});

@@ -1,13 +1,13 @@
-import React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import React from 'react';
+import { Text, StyleSheet, View } from 'react-native';
 
-import { DefaultLayout } from "../../../layouts/Default";
-import { VaultCreationNavProps } from "../VaultParamList";
-import { AppButton } from "../../../components/design/AppButton";
-import Topbar from "../../../components/design/Topbar";
-import VaultCreatedImage from "../../../icons/VaultCreatedImage";
+import { DefaultLayout } from '../../../layouts/Default';
+import { VaultCreationNavProps } from '../VaultParamList';
+import { AppButton } from '../../../components/design/AppButton';
+import Topbar from '../../../components/design/Topbar';
+import VaultCreatedImage from '../../../icons/VaultCreatedImage';
 
-const VaultCreatedScreen = ({navigation} : VaultCreationNavProps<"VaultCreated">) => {
+const VaultCreatedScreen = ({navigation} : VaultCreationNavProps<'VaultCreated'>) => {
   return (
     <DefaultLayout>
       <Topbar
@@ -22,7 +22,7 @@ const VaultCreatedScreen = ({navigation} : VaultCreationNavProps<"VaultCreated">
       <View style={styles.successMessageWrapper}>
         <Text style={styles.successMessage}>Vault Successfully Created</Text>
       </View>
-      <AppButton title="Okay" onPress={() => {navigation.goBack()}} />
+      <AppButton title="Okay" onPress={() => {navigation.goBack();}} />
     </DefaultLayout>
   );
 };

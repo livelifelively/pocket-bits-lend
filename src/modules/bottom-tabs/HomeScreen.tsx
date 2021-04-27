@@ -1,17 +1,17 @@
-import React from "react";
-import { StyleSheet} from "react-native";
+import React from 'react';
+import { StyleSheet} from 'react-native';
 
-import { DefaultLayout } from "../../layouts/Default";
-import { HomeNavProps } from "./TabsParamList";
-import { Wallets } from "../../components/business/Wallets";
-import { VaultIntro } from "../../components/business/VaultIntro";
-import { ValueCreated } from "../../components/business/ValueCreated";
-import Topbar from "../../components/design/Topbar";
+import { DefaultLayout } from '../../layouts/Default';
+import { HomeNavProps } from './TabsParamList';
+import { Wallets } from '../../components/business/Wallets';
+import { VaultIntro } from '../../components/business/VaultIntro';
+import { ValueCreated } from '../../components/business/ValueCreated';
+import Topbar from '../../components/design/Topbar';
 
-const HomeScreen = ({navigation}: HomeNavProps<"Home">) => {
+const HomeScreen = ({navigation}: HomeNavProps<'Home'>) => {
   const onWalletPress = (walletDetails:{}) => {
-    navigation.navigate("WalletStack", walletDetails);
-  }
+    navigation.navigate('WalletStack', walletDetails);
+  };
 
   return (
     <DefaultLayout>
@@ -19,13 +19,13 @@ const HomeScreen = ({navigation}: HomeNavProps<"Home">) => {
         showBackButton={false}
         title=""
         showSettingsButton={true}
-        onSettingsButtonPress={() => navigation.navigate("SettingsStack")}
+        onSettingsButtonPress={() => navigation.navigate('SettingsStack')}
       />
       <ValueCreated />
       <VaultIntro style={{...styles.components}} />
       <Wallets onPress={onWalletPress} />
     </DefaultLayout>
-  )
+  );
 };
 
 const styles = StyleSheet.create({

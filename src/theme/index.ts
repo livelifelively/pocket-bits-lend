@@ -68,4 +68,4 @@ const Theme = {
   fonts: configureFonts(fontConfig)
 };
 
-export default Theme
+export default Theme;

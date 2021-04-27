@@ -5,7 +5,9 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "lint:js": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-pattern lib --ignore-pattern node_modules",
+    "lint": "yarn lint:js"
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
@@ -43,6 +45,10 @@
     "@types/react": "~16.9.35",
     "@types/react-dom": "~16.9.8",
     "@types/react-native": "~0.63.2",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.25.0",
+    "eslint-plugin-react": "^7.23.2",
     "typescript": "~4.0.0"
   },
   "private": true

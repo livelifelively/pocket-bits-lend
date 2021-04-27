@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet } from "react-native";
+import React from 'react';
+import { StyleSheet } from 'react-native';
 
 export const globalStyles = StyleSheet.create({
   errorText: {
@@ -11,4 +11,4 @@ export const globalStyles = StyleSheet.create({
     color: '#625E59', 
     fontSize: 12
   }
-})
+});

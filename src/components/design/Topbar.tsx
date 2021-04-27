@@ -1,8 +1,8 @@
-import React from "react";
-import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { Title, Text } from "react-native-paper";
-import { BackIcon } from "../../icons";
-import {WhiteTouchableOpacity} from "./WhiteTouchableOpacity";
+import React from 'react';
+import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Title, Text } from 'react-native-paper';
+import { BackIcon } from '../../icons';
+import {WhiteTouchableOpacity} from './WhiteTouchableOpacity';
 
 interface TopBarProps {
   onBackButtonPress?: () => void,
@@ -62,12 +62,12 @@ const Topbar: React.FC<TopBarProps> = ({onBackButtonPress=() => {}, title, showB
         }
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   navBar: {
-    flexDirection: "row",
+    flexDirection: 'row',
     width: '100%',
     marginBottom: 25,
     alignItems: 'center',
@@ -80,6 +80,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   }
-})
+});
 
 export default Topbar;

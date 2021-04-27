@@ -1,24 +1,24 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import { Text } from "react-native-paper";
-import { Formik } from "formik";
-import * as Yup from "yup";
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Text } from 'react-native-paper';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
-import { AuthNavProps } from "../AuthParamList";
-import { DefaultLayout } from "../../../layouts/Default";
-import { AppButton } from "../../../components/design/AppButton";
-import { AppTextInput } from "../../../components/design/AppTextInput";
-import { AppCheckbox } from "../../../components/design/AppCheckbox";
-import { globalStyles } from "../../../theme/globalStyles";
-import { signupPost, RequestResponse } from "../../../api/requests";
+import { AuthNavProps } from '../AuthParamList';
+import { DefaultLayout } from '../../../layouts/Default';
+import { AppButton } from '../../../components/design/AppButton';
+import { AppTextInput } from '../../../components/design/AppTextInput';
+import { AppCheckbox } from '../../../components/design/AppCheckbox';
+import { globalStyles } from '../../../theme/globalStyles';
+import { signupPost, RequestResponse } from '../../../api/requests';
 
-function SignupScreen({ navigation, route }: AuthNavProps<"SignUp">) {
+function SignupScreen({ navigation, route }: AuthNavProps<'SignUp'>) {
   const signupSchema = Yup.object().shape({
     email: Yup.string().email().required(),
     password: Yup.string().min(8).required(),
     confirmPassword: Yup.string().required().oneOf([Yup.ref('password'), null], 'Passwords must match'),
     termsAndConditions: Yup.boolean().required().test('terms-conditions', 'Please accept the terms and conditions', (value) => value === true)
-  })
+  });
 
   return (
     <DefaultLayout backgroundColor='#FCFCFC' paddingHorizontal={45}>
@@ -43,21 +43,21 @@ function SignupScreen({ navigation, route }: AuthNavProps<"SignUp">) {
               password: values.password,
               // #TODO
               referralCode: ''
-            })
-            console.log('+++++++++++++++++++++++++++++++++++++++')
-            console.log('+++++++++++++++++++++++++++++++++++++++')
-            console.log('+++++++++++++++++++++++++++++++++++++++')
+            });
+            console.log('+++++++++++++++++++++++++++++++++++++++');
+            console.log('+++++++++++++++++++++++++++++++++++++++');
+            console.log('+++++++++++++++++++++++++++++++++++++++');
             
-            console.log('SUBMIT_FORM', signedUp)
+            console.log('SUBMIT_FORM', signedUp);
             if (signedUp.status === 'SUCCESS') {
-              navigation.navigate('VerifyEmail')
+              navigation.navigate('VerifyEmail');
             }
           } catch(e) {
-            console.log('FLAG SIGNUP PAGE')
+            console.log('FLAG SIGNUP PAGE');
             // console.log(e)
-            console.log('=======================================')
-            console.log('=======================================')
-            console.log('=======================================')
+            console.log('=======================================');
+            console.log('=======================================');
+            console.log('=======================================');
           }
         }}
       >
@@ -99,7 +99,7 @@ function SignupScreen({ navigation, route }: AuthNavProps<"SignUp">) {
             <View>
               <AppCheckbox
                 onPress={() => {
-                  setFieldValue('termsAndConditions', !values.termsAndConditions)
+                  setFieldValue('termsAndConditions', !values.termsAndConditions);
                 }}
                 value={values.termsAndConditions}
               >
@@ -110,7 +110,7 @@ function SignupScreen({ navigation, route }: AuthNavProps<"SignUp">) {
             <AppButton
               title="Sign Up"
               onPress={() => {
-                handleSubmit()
+                handleSubmit();
               }}
               size='normal'
               style={{paddingHorizontal: 50}}
@@ -126,7 +126,7 @@ function SignupScreen({ navigation, route }: AuthNavProps<"SignUp">) {
           mode="text"
           color="#363eff"
           onPress={() => {
-            navigation.navigate("LoginEmail");
+            navigation.navigate('LoginEmail');
           }}
         />
       </View>
@@ -160,6 +160,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F7F7F7', 
     padding: 18
   }
-})
+});
 
 export default SignupScreen;

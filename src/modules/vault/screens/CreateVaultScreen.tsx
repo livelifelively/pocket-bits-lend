@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import { Menu } from "react-native-paper";
+import React, { useState } from 'react';
+import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { Menu } from 'react-native-paper';
 
-import { DefaultLayout } from "../../../layouts/Default";
-import { VaultCreationNavProps } from "../VaultParamList";
-import { AppButton } from "../../../components/design/AppButton";
-import Topbar from "../../../components/design/Topbar";
-import { WhiteView } from "../../../components/design/WhiteView";
-import { AppTextInput } from "../../../components/design/AppTextInput";
-import { WhiteTouchableOpacity } from "../../../components/design/WhiteTouchableOpacity";
-import { BitcoinIcon, EtheriumIcon, TetherIcon } from "../../../icons";
+import { DefaultLayout } from '../../../layouts/Default';
+import { VaultCreationNavProps } from '../VaultParamList';
+import { AppButton } from '../../../components/design/AppButton';
+import Topbar from '../../../components/design/Topbar';
+import { WhiteView } from '../../../components/design/WhiteView';
+import { AppTextInput } from '../../../components/design/AppTextInput';
+import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
+import { BitcoinIcon, EtheriumIcon, TetherIcon } from '../../../icons';
 
 type VaultDepositOption = {
   id: number,
@@ -62,28 +62,28 @@ const vaultDepositOptions = [
       shortName: 'BTC'
     }
   }
-]
+];
 
 const cryotpyIcon = (shortName: string) => {
   switch (shortName) {
-    case 'USDT':
-      return <TetherIcon />
+  case 'USDT':
+    return <TetherIcon />;
 
-    case 'BTC':
-      return <BitcoinIcon />
+  case 'BTC':
+    return <BitcoinIcon />;
 
-    case 'ETH':
-      return <EtheriumIcon />
+  case 'ETH':
+    return <EtheriumIcon />;
   
-    default:
-      break;
+  default:
+    break;
   }
-}
+};
 
 const selectedOption = vaultDepositOptions[0];
 
-const CreateVaultScreen = ({navigation} : VaultCreationNavProps<"CreateVault">) => {
-  const [activeVaultOption, setActiveVaultOption] = useState(() => selectedOption)
+const CreateVaultScreen = ({navigation} : VaultCreationNavProps<'CreateVault'>) => {
+  const [activeVaultOption, setActiveVaultOption] = useState(() => selectedOption);
   const [menuVisibility, setMenuVisibility] = useState(false);
   
   const openMenu = () => setMenuVisibility(true);
@@ -91,16 +91,16 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<"CreateVault">) 
   const closeMenu = () => setMenuVisibility(false);
 
   const selectMenuItem = (val: VaultDepositOption) => {
-    setActiveVaultOption(val)
-    closeMenu()
-  }
+    setActiveVaultOption(val);
+    closeMenu();
+  };
 
   const twoFactorAuthenticationSchema = Yup.object().shape({
     verificationCode: Yup.string()
-          .required()
-          .matches(/^[0-9]+$/, "Must be only digits")
+      .required()
+      .matches(/^[0-9]+$/, 'Must be only digits')
     // email: Yup.string().email().required(),
-  })
+  });
 
   return (
     <DefaultLayout style={{paddingHorizontal: 30}}>
@@ -130,7 +130,7 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<"CreateVault">) 
           }}
           validationSchema={twoFactorAuthenticationSchema}
           onSubmit={ async (values) => {
-            navigation.navigate("VaultCreated")
+            navigation.navigate('VaultCreated');
           }}
         >
           {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => (
@@ -181,7 +181,7 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<"CreateVault">) 
                 >
                   {
                     vaultDepositOptions && vaultDepositOptions.map((val) => {
-                      return <Menu.Item onPress={() => {selectMenuItem(val)}} title={val.duration} />;
+                      return <Menu.Item onPress={() => {selectMenuItem(val);}} title={val.duration} />;
                     })
                   }
                 </Menu>
@@ -189,7 +189,7 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<"CreateVault">) 
               <Text style={styles.instructions}>
                 Lock {activeVaultOption.crypto.shortName} for {activeVaultOption.duration} at {activeVaultOption.interestRate}% interest
               </Text>
-              <AppButton title="Lock in Vault" onPress={() => {handleSubmit()}} />
+              <AppButton title="Lock in Vault" onPress={() => {handleSubmit();}} />
             </View>
           )}
         </Formik>

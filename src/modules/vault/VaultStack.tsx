@@ -1,5 +1,5 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import { 
   VaultHistoryParamList,
@@ -8,12 +8,12 @@ import {
   // VaultCreationNavProps,
   // VaultActiveDepositsNavProps,
   // VaultHistoryNavProps
-} from "./VaultParamList";
+} from './VaultParamList';
 
-import ActiveDepositsScreen from "./screens/ActiveDepositsScreen";
-import CreateVaultScreen from "./screens/CreateVaultScreen";
-import VaultCreatedScreen from "./screens/VaultCreatedScreen";
-import VaultHistoryScreen from "./screens/VaultHistoryScreen";
+import ActiveDepositsScreen from './screens/ActiveDepositsScreen';
+import CreateVaultScreen from './screens/CreateVaultScreen';
+import VaultCreatedScreen from './screens/VaultCreatedScreen';
+import VaultHistoryScreen from './screens/VaultHistoryScreen';
 
 interface VaultHistoryStackProps {}
 interface VaultCreationStackProps {}

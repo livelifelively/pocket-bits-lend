@@ -1,9 +1,9 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import { RewardsParamList } from "./RewardsParamList";
+import { RewardsParamList } from './RewardsParamList';
 
-import RewardsScreen from "../RewardsScreen";
+import RewardsScreen from '../RewardsScreen';
 
 interface RewardsStackProps {}
 
@@ -17,7 +17,7 @@ export const RewardsStack: React.FC<RewardsStackProps> = ({}) => {
       }}
       initialRouteName="Rewards"
     >
-      <Stack.Screen options={{ headerTitle: "Rewards" }} name="Rewards" component={RewardsScreen} />
+      <Stack.Screen options={{ headerTitle: 'Rewards' }} name="Rewards" component={RewardsScreen} />
     </Stack.Navigator>
   );
 };

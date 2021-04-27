@@ -2,28 +2,28 @@ import React, {useContext, useEffect, useState} from 'react';
 import { ColorSchemeName, View, ActivityIndicator } from 'react-native';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 
-import { AuthContext } from "../modules/auth/AuthProvider";
-import { AuthStack } from "../modules/auth/AuthStack";
-import { AppStack } from "./AppStack";
+import { AuthContext } from '../modules/auth/AuthProvider';
+import { AuthStack } from '../modules/auth/AuthStack';
+import { AppStack } from './AppStack';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
-  const { user, login } = useContext(AuthContext)
-  const [loading, setLoading] = useState(true)
+  const { user, login } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     AsyncStorage.getItem('user')
       .then((userString) => {
         if (userString) {
-          login()
+          login();
         }
-        setLoading(false)
+        setLoading(false);
       })
       .catch((err) => {
         // TODO better logging.
-        console.log(err)
-      })
-  }, [])
+        console.log(err);
+      });
+  }, []);
 
   if (loading) {
     return (

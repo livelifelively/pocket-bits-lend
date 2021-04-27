@@ -1,5 +1,5 @@
-import React from "react";
-import { Text, StyleSheet } from "react-native";
+import React from 'react';
+import { Text, StyleSheet } from 'react-native';
 
 const SplashScreen = () => {
   return <Text style={styles.text}>Splash</Text>;

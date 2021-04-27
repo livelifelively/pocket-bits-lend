@@ -1,34 +1,24 @@
-import React, {useContext, useState} from "react";
-import { StyleSheet, View } from "react-native";
-import { Text } from "react-native-paper";
-import { Formik } from "formik";
-import * as Yup from "yup";
+import React, {useContext, useState} from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
-import { AuthContext } from "../AuthProvider";
-import { AuthNavProps } from "../AuthParamList";
-import { DefaultLayout } from "../../../layouts/Default";
-import { AppButton } from "../../../components/design/AppButton";
-import { AppTextInput } from "../../../components/design/AppTextInput";
-import { RequestResponse, signinPost } from "../../../api/requests";
+import { AuthContext } from '../AuthProvider';
+import { AuthNavProps } from '../AuthParamList';
+import { DefaultLayout } from '../../../layouts/Default';
+import { AppButton } from '../../../components/design/AppButton';
+import { AppTextInput } from '../../../components/design/AppTextInput';
+import { RequestResponse, signinPost } from '../../../api/requests';
+import { YellowTouchableOpacity } from '../../../components/design/YellowTouchableOpacity';
 
-function LoginEmailScreen({ navigation }: AuthNavProps<"LoginEmail">) {
-  const [email, setEmail] = useState(() => '')
-  const [password, setPassword] = useState(() => '')
-  
+function LoginEmailScreen({ navigation }: AuthNavProps<'LoginEmail'>) {
   const { login } = useContext(AuthContext);
-
-  const onEmailChange = (text: string) => {
-    setEmail(text)
-  }
-
-  const onPasswordChange = (text: string) => {
-    setPassword(text)
-  }
 
   const loginSchema = Yup.object().shape({
     email: Yup.string().email().required(),
     password: Yup.string().min(8).required()
-  })
+  });
 
   return (
     <DefaultLayout backgroundColor='#FCFCFC' paddingHorizontal={45}>
@@ -51,7 +41,7 @@ function LoginEmailScreen({ navigation }: AuthNavProps<"LoginEmail">) {
             password: values.password,
             // #TODO
             verificationCode: ''
-          })
+          });
           if (signedUp.status === 'SUCCESS') {
             // handle cases for wrong email password combination
             login();
@@ -82,10 +72,13 @@ function LoginEmailScreen({ navigation }: AuthNavProps<"LoginEmail">) {
               secureTextEntry={true}
               error={touched.password ? errors.password : ''}
             />
+            <YellowTouchableOpacity onPress={() => {}}>
+              <Text style={{textAlign: 'center', width: '100%', fontSize: 14, fontFamily: 'Poppins-Medium'}}>Sign In</Text>
+            </YellowTouchableOpacity>
             <AppButton
               title="Sign In"
               onPress={() => {
-                handleSubmit()
+                handleSubmit();
               }}
               size='normal'
               style={{paddingHorizontal: 50}}
@@ -101,7 +94,7 @@ function LoginEmailScreen({ navigation }: AuthNavProps<"LoginEmail">) {
           mode="text"
           color="#363eff"
           onPress={() => {
-            navigation.navigate("SignUp");
+            navigation.navigate('SignUp');
           }}
         />
       </View>

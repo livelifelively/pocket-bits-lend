@@ -1,13 +1,13 @@
 
-import React from "react";
-import { Text, StyleSheet, Button, View } from "react-native";
+import React from 'react';
+import { Text, StyleSheet, Button, View } from 'react-native';
 
-import { DefaultLayout } from "../../../layouts/Default";
-import { VaultHistoryNavProps } from "../VaultParamList";
-import { AppButton } from "../../../components/design/AppButton";
-import Topbar from "../../../components/design/Topbar";
-import { WhiteView } from "../../../components/design/WhiteView";
-import { BitcoinIcon, EtheriumIcon, TetherIcon } from "../../../icons";
+import { DefaultLayout } from '../../../layouts/Default';
+import { VaultHistoryNavProps } from '../VaultParamList';
+import { AppButton } from '../../../components/design/AppButton';
+import Topbar from '../../../components/design/Topbar';
+import { WhiteView } from '../../../components/design/WhiteView';
+import { BitcoinIcon, EtheriumIcon, TetherIcon } from '../../../icons';
 
 
 const vaultHistory = [
@@ -63,25 +63,25 @@ const vaultHistory = [
     endDate: '19 Mar, 21',
     withdrawDate: '19 Mar, 21',
   }
-]
+];
 
 const cryotpyIcon = (shortName: string) => {
   switch (shortName) {
-    case 'USDT':
-      return <TetherIcon />
+  case 'USDT':
+    return <TetherIcon />;
 
-    case 'BTC':
-      return <BitcoinIcon />
+  case 'BTC':
+    return <BitcoinIcon />;
 
-    case 'ETH':
-      return <EtheriumIcon />
+  case 'ETH':
+    return <EtheriumIcon />;
   
-    default:
-      break;
+  default:
+    break;
   }
-}
+};
 
-const VaultHistoryScreen = ({navigation} : VaultHistoryNavProps<"VaultHistory">) => {
+const VaultHistoryScreen = ({navigation} : VaultHistoryNavProps<'VaultHistory'>) => {
   return (
     <DefaultLayout>
       <Topbar
@@ -116,11 +116,11 @@ const VaultHistoryScreen = ({navigation} : VaultHistoryNavProps<"VaultHistory">)
                 <Text style={[styles.subtext, {textAlign: 'center'}]}>Withdraw Date</Text>
               </View> 
             </WhiteView>
-          )
+          );
         })
       }
     </DefaultLayout>
-  )
+  );
 };
 
 const styles = StyleSheet.create({

@@ -1,16 +1,16 @@
-import React from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { Text } from "react-native-paper";
+import React from 'react';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Text } from 'react-native-paper';
 
-import { DefaultLayout } from "../../layouts/Default";
-import { VaultNavProps } from "./TabsParamList";
-import { ValueCreated } from "../../components/business/ValueCreated";
-import { VaultFixedDeposits } from "../../components/business/VaultFixedDeposits";
-import { VaultActiveDeposits } from "../../components/business/VaultActiveDeposits";
-import Topbar from "../../components/design/Topbar";
-import { YellowActiveVaultIcon, YellowHistoryIcon } from "../../icons";
+import { DefaultLayout } from '../../layouts/Default';
+import { VaultNavProps } from './TabsParamList';
+import { ValueCreated } from '../../components/business/ValueCreated';
+import { VaultFixedDeposits } from '../../components/business/VaultFixedDeposits';
+import { VaultActiveDeposits } from '../../components/business/VaultActiveDeposits';
+import Topbar from '../../components/design/Topbar';
+import { YellowActiveVaultIcon, YellowHistoryIcon } from '../../icons';
 
-const VaultScreen = ({navigation}: VaultNavProps<"VaultCreationStack">) => {
+const VaultScreen = ({navigation}: VaultNavProps<'VaultCreationStack'>) => {
   return (
     <DefaultLayout>
       <Topbar
@@ -24,7 +24,7 @@ const VaultScreen = ({navigation}: VaultNavProps<"VaultCreationStack">) => {
             activeOpacity={0.7}
             style={[styles.vaultActionsButtons, {backgroundColor: '#ffffff', height: 53, width: 53, borderRadius: 53, alignItems: 'center', justifyContent: 'center'}]}
             onPress={() => {
-              navigation.navigate("VaultActiveDepositsStack");
+              navigation.navigate('VaultActiveDepositsStack');
             }}
           >
             <YellowActiveVaultIcon />
@@ -36,7 +36,7 @@ const VaultScreen = ({navigation}: VaultNavProps<"VaultCreationStack">) => {
             activeOpacity={0.7}
             style={[styles.vaultActionsButtons, {backgroundColor: '#ffffff', height: 53, width: 53, borderRadius: 53, alignItems: 'center', justifyContent: 'center'}]}
             onPress={() => {
-              navigation.navigate("VaultHistoryStack");
+              navigation.navigate('VaultHistoryStack');
             }}
           >
             <YellowHistoryIcon />
@@ -44,7 +44,7 @@ const VaultScreen = ({navigation}: VaultNavProps<"VaultCreationStack">) => {
           <Text style={styles.vaultActionsSubtext}>History</Text>
         </View>
       </View>
-      <VaultFixedDeposits style={{marginBottom: 25}} onPress={(data={}) => {navigation.navigate("VaultCreationStack", data)}} />
+      <VaultFixedDeposits style={{marginBottom: 25}} onPress={(data={}) => {navigation.navigate('VaultCreationStack', data);}} />
       <VaultActiveDeposits />
     </DefaultLayout>
   );

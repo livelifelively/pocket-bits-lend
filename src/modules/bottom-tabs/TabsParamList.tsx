@@ -1,6 +1,6 @@
 // VaultNavProps
-import { RouteProp } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 export type VaultParamList = {
   VaultCreationStack: {};

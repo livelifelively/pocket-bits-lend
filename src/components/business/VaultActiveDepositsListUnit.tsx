@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Text } from "react-native-paper";
+import React, { useState } from 'react';
+import { Text } from 'react-native-paper';
 
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { AppButton } from "../design/AppButton";
-import {WhiteView} from "../design/WhiteView";
-import { BitcoinIcon, EtheriumIcon, TetherIcon } from "../../icons";
-import { WhiteTouchableOpacity } from "../design/WhiteTouchableOpacity";
-import RedCrossIcon from "../../icons/RedCrossIcon";
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { AppButton } from '../design/AppButton';
+import {WhiteView} from '../design/WhiteView';
+import { BitcoinIcon, EtheriumIcon, TetherIcon } from '../../icons';
+import { WhiteTouchableOpacity } from '../design/WhiteTouchableOpacity';
+import RedCrossIcon from '../../icons/RedCrossIcon';
 
 type DepositDetails = {
   id: number,
@@ -86,24 +86,24 @@ const VaultActiveDepositsListUnitDetails = ({hideDetails, depositDetails}: {hide
         <Text style={styles.subtext}>Cancel</Text>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const cryotpyIcon = (shortName: string) => {
   switch (shortName) {
-    case 'USDT':
-      return <TetherIcon />
+  case 'USDT':
+    return <TetherIcon />;
 
-    case 'BTC':
-      return <BitcoinIcon />
+  case 'BTC':
+    return <BitcoinIcon />;
 
-    case 'ETH':
-      return <EtheriumIcon />
+  case 'ETH':
+    return <EtheriumIcon />;
   
-    default:
-      break;
+  default:
+    break;
   }
-}
+};
 
 const VaultActiveDepositsListUnitBasic = ({showDetails, depositDetails}: {showDetails: () => void, depositDetails: DepositDetails}) => {
   return (
@@ -140,29 +140,29 @@ const VaultActiveDepositsListUnitBasic = ({showDetails, depositDetails}: {showDe
         <Text style={[styles.subtext, {textAlign: 'center'}]}>Current Balance</Text>
       </View>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 export const VaultActiveDepositsListUnit: React.FC<VaultActiveDepositsListUnitProps> = ({style, expanded=false, depositDetails, expandableListUnit=false}) => {
-  const [expansion, setExpansion] = useState(() => expanded)
+  const [expansion, setExpansion] = useState(() => expanded);
   
   const showDetails = () => {
-    setExpansion(true)
-  }
+    setExpansion(true);
+  };
   const hideDetails = () => {
-    setExpansion(false)
-  }
+    setExpansion(false);
+  };
 
   return (
     <WhiteView style={styles.vaultActiveDepositsListUnitWrapper}>
       {
         expansion ? 
           <VaultActiveDepositsListUnitDetails hideDetails={hideDetails} depositDetails={depositDetails} /> 
-        : <VaultActiveDepositsListUnitBasic showDetails={expandableListUnit ? showDetails : () => {}} depositDetails={depositDetails}/>
+          : <VaultActiveDepositsListUnitBasic showDetails={expandableListUnit ? showDetails : () => {}} depositDetails={depositDetails}/>
       }
     </WhiteView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   vaultActiveDepositsListUnitWrapper: {
@@ -203,4 +203,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center'
   }
-})
+});

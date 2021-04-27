@@ -1,22 +1,22 @@
-import React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import React from 'react';
+import { Text, StyleSheet, View } from 'react-native';
 
-import { AuthNavProps } from "../AuthParamList";
-import { DefaultLayout } from "../../../layouts/Default";
-import { AppText } from "../../../components/design/AppText";
-import { AppButton } from "../../../components/design/AppButton";
-import { VaultIntro } from "../../../components/business/VaultIntro";
-import { Wallets } from "../../../components/business/Wallets";
+import { AuthNavProps } from '../AuthParamList';
+import { DefaultLayout } from '../../../layouts/Default';
+import { AppText } from '../../../components/design/AppText';
+import { AppButton } from '../../../components/design/AppButton';
+import { VaultIntro } from '../../../components/business/VaultIntro';
+import { Wallets } from '../../../components/business/Wallets';
 
 
-function HomeGuestScreen({ navigation }: AuthNavProps<"HomeGuest">) {
+function HomeGuestScreen({ navigation }: AuthNavProps<'HomeGuest'>) {
   return (
     <DefaultLayout>
       <View style={{...styles.authButtonsWrapper, ...styles.components}}>
         <AppButton
           title="Sign In"
           onPress={() => {
-            navigation.navigate("LoginEmail");
+            navigation.navigate('LoginEmail');
           }}
           size="large"
           style={styles.authButtons}
@@ -24,7 +24,7 @@ function HomeGuestScreen({ navigation }: AuthNavProps<"HomeGuest">) {
         <AppButton
           title="Sign Up"
           onPress={() => {
-            navigation.navigate("SignUp");
+            navigation.navigate('SignUp');
           }}
           mode="outlined"
           size="large"

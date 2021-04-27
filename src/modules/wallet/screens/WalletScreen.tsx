@@ -1,18 +1,18 @@
-import React from "react";
-import { StyleSheet, Button, View, TouchableOpacity } from "react-native";
-import { Text } from "react-native-paper";
+import React from 'react';
+import { StyleSheet, Button, View, TouchableOpacity } from 'react-native';
+import { Text } from 'react-native-paper';
 
-import { DefaultLayout } from "../../../layouts/Default";
-import { WalletNavProps } from "../WalletParamList";
-import { AppButton } from "../../../components/design/AppButton";
-import { WalletBalance } from "../../../components/business/WalletBalance";
-import Topbar from "../../../components/design/Topbar";
-import { WalletTransactionHistory } from "../../../components/business/WalletTransactionHistory";
+import { DefaultLayout } from '../../../layouts/Default';
+import { WalletNavProps } from '../WalletParamList';
+import { AppButton } from '../../../components/design/AppButton';
+import { WalletBalance } from '../../../components/business/WalletBalance';
+import Topbar from '../../../components/design/Topbar';
+import { WalletTransactionHistory } from '../../../components/business/WalletTransactionHistory';
 
-import { CopyOutlineIcon, ReceiveIcon, SendIcon } from "../../../icons";
+import { CopyOutlineIcon, ReceiveIcon, SendIcon } from '../../../icons';
 // import { TouchableOpacity } from "react-native-gesture-handler";
 
-const WalletScreen = ({navigation}: WalletNavProps<"Wallet">) => {
+const WalletScreen = ({navigation}: WalletNavProps<'Wallet'>) => {
   return (
     <DefaultLayout>
       <Topbar
@@ -27,7 +27,7 @@ const WalletScreen = ({navigation}: WalletNavProps<"Wallet">) => {
           <TouchableOpacity
             style={[styles.walletActionsButtons, {backgroundColor: '#ffffff', height: 53, width: 53, borderRadius: 53, alignItems: 'center', justifyContent: 'center'}]}
             onPress={() => {
-              navigation.navigate("Withdraw");
+              navigation.navigate('Withdraw');
             }}
           >
             <SendIcon />
@@ -38,7 +38,7 @@ const WalletScreen = ({navigation}: WalletNavProps<"Wallet">) => {
           <TouchableOpacity
             style={[styles.walletActionsButtons, {backgroundColor: '#ffffff', height: 53, width: 53, borderRadius: 53, alignItems: 'center', justifyContent: 'center'}]}
             onPress={() => {
-              navigation.navigate("Deposit");
+              navigation.navigate('Deposit');
             }}
           >
             <ReceiveIcon />
@@ -57,7 +57,7 @@ const WalletScreen = ({navigation}: WalletNavProps<"Wallet">) => {
       </View>
       <WalletTransactionHistory />
     </DefaultLayout>
-  )
+  );
 };
 
 const styles = StyleSheet.create({

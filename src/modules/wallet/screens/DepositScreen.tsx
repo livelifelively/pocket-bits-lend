@@ -1,15 +1,15 @@
-import React from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { Text, Title } from "react-native-paper";
+import React from 'react';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Text, Title } from 'react-native-paper';
 
-import { DefaultLayout } from "../../../layouts/Default";
-import { WalletNavProps } from "../WalletParamList";
-import { AppButton } from "../../../components/design/AppButton";
-import Topbar from "../../../components/design/Topbar";
-import { YellowCopyIcon, YellowShareIcon } from "../../../icons";
-import { WhiteTouchableOpacity } from "../../../components/design/WhiteTouchableOpacity";
+import { DefaultLayout } from '../../../layouts/Default';
+import { WalletNavProps } from '../WalletParamList';
+import { AppButton } from '../../../components/design/AppButton';
+import Topbar from '../../../components/design/Topbar';
+import { YellowCopyIcon, YellowShareIcon } from '../../../icons';
+import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
 
-const DepositScreen = ({navigation}: WalletNavProps<"Deposit">) => {
+const DepositScreen = ({navigation}: WalletNavProps<'Deposit'>) => {
   return (
     <DefaultLayout backgroundColor='#ffffff'>
       <Topbar
@@ -34,7 +34,7 @@ const DepositScreen = ({navigation}: WalletNavProps<"Deposit">) => {
       </View>
       <WhiteTouchableOpacity
         onPress={() => {
-          navigation.navigate("Withdraw");
+          navigation.navigate('Withdraw');
         }}
         style={{
           flexDirection: 'row',
@@ -50,7 +50,7 @@ const DepositScreen = ({navigation}: WalletNavProps<"Deposit">) => {
         <View><Text>Share</Text></View>
       </WhiteTouchableOpacity>
     </DefaultLayout>
-  )
+  );
 };
 
 const styles = StyleSheet.create({

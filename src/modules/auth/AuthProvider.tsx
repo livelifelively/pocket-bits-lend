@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 type User = null | { username: string, hasPasscode: boolean, };
@@ -8,12 +8,12 @@ export const AuthContext = React.createContext<{
   login: () => void;
   logout: () => void;
   signUp: (userAddedPasscode: boolean) => void;
-}>({
-  user: null,
-  login: () => {},
-  logout: () => {},
-  signUp: (userAddedPasscode: boolean) => {}
-});
+    }>({
+      user: null,
+      login: () => {},
+      logout: () => {},
+      signUp: (userAddedPasscode: boolean) => {}
+    });
 
 interface AuthProviderProps {}
 
@@ -25,13 +25,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       value={{
         user,
         login: () => {
-          const fakeUser = { username: "bob", hasPasscode: false };
+          const fakeUser = { username: 'bob', hasPasscode: false };
           setUser(fakeUser);
-          AsyncStorage.setItem("user", JSON.stringify(fakeUser));
+          AsyncStorage.setItem('user', JSON.stringify(fakeUser));
         },
         logout: () => {
           setUser(null);
-          AsyncStorage.removeItem("user");
+          AsyncStorage.removeItem('user');
         },
         signUp: (userAddedPasscode: boolean) => {
           // 
