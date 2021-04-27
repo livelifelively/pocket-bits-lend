@@ -1,10 +1,10 @@
 import React from 'react';
 
-export const WalletContext = React.createContext<{}>({});
+export const WalletContext = React.createContext<Record<string, unknown>>({});
 
-interface WalletProviderProps {}
+// interface WalletProviderProps {}
 
-export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
+export const WalletProvider: React.FC = ({ children }) => {
   return (
     <WalletContext.Provider value={{}}>
       {children}

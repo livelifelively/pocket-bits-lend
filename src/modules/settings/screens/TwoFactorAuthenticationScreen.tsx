@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -11,7 +11,6 @@ import { Title } from 'react-native-paper';
 import { AppTextInput } from '../../../components/design/AppTextInput';
 import { YellowCopyIcon } from '../../../icons';
 import { RequestResponse, twoFactorAuthenticationVefificationPost } from '../../../api/requests';
-import { globalStyles } from '../../../theme/globalStyles';
 
 const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<'TwoFactorAuthentication'>) => {
   const twoFactorAuthenticationSchema = Yup.object().shape({
@@ -42,7 +41,7 @@ const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<'TwoFactor
         <View>
           <Text style={{color: '#625E59', fontSize: 12}}>3F8QCEXUrRQcjoyp2J8ng71xre3vd33dcer</Text>
         </View>
-        <TouchableOpacity onPress={() => {}} style={{marginRight: 10}}>
+        <TouchableOpacity onPress={() => null} style={{marginRight: 10}}>
           <YellowCopyIcon />
         </TouchableOpacity>
       </View>

@@ -9,7 +9,7 @@ import { ValueCreated } from '../../components/business/ValueCreated';
 import Topbar from '../../components/design/Topbar';
 
 const HomeScreen = ({navigation}: HomeNavProps<'Home'>) => {
-  const onWalletPress = (walletDetails:{}) => {
+  const onWalletPress = (walletDetails:Record<string, unknown>) => {
     navigation.navigate('WalletStack', walletDetails);
   };
 

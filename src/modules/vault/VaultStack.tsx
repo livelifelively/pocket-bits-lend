@@ -15,15 +15,15 @@ import CreateVaultScreen from './screens/CreateVaultScreen';
 import VaultCreatedScreen from './screens/VaultCreatedScreen';
 import VaultHistoryScreen from './screens/VaultHistoryScreen';
 
-interface VaultHistoryStackProps {}
-interface VaultCreationStackProps {}
-interface VaultActiveDepositsStackProps {}
+// interface VaultHistoryStackProps {}
+// interface VaultCreationStackProps {}
+// interface VaultActiveDepositsStackProps {}
 
 const VaultHistory = createStackNavigator<VaultHistoryParamList>();
 const VaultActiveDeposits = createStackNavigator<VaultActiveDepositsParamList>();
 const VaultCreation = createStackNavigator<VaultCreationParamList>();
 
-export const VaultCreationStack: React.FC<VaultCreationStackProps> = ({}) => {
+export const VaultCreationStack: React.FC = () => {
   return (
     <VaultCreation.Navigator
       screenOptions={{
@@ -38,7 +38,7 @@ export const VaultCreationStack: React.FC<VaultCreationStackProps> = ({}) => {
 };
 
 
-export const VaultHistoryStack: React.FC<VaultHistoryStackProps> = ({}) => {
+export const VaultHistoryStack: React.FC = () => {
   return (
     <VaultHistory.Navigator
       screenOptions={{
@@ -51,7 +51,7 @@ export const VaultHistoryStack: React.FC<VaultHistoryStackProps> = ({}) => {
   );
 };
 
-export const VaultActiveDepositsStack: React.FC<VaultActiveDepositsStackProps> = ({}) => {
+export const VaultActiveDepositsStack: React.FC = () => {
   return (
     <VaultActiveDeposits.Navigator
       screenOptions={{

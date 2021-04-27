@@ -7,17 +7,17 @@ export const AuthContext = React.createContext<{
   user: User;
   login: () => void;
   logout: () => void;
-  signUp: (userAddedPasscode: boolean) => void;
+  signUp: () => void;
     }>({
       user: null,
       login: () => {},
       logout: () => {},
-      signUp: (userAddedPasscode: boolean) => {}
+      signUp: () => {}
     });
 
-interface AuthProviderProps {}
+// interface AuthProviderProps {}
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User>(null);
 
   return (
@@ -33,7 +33,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           setUser(null);
           AsyncStorage.removeItem('user');
         },
-        signUp: (userAddedPasscode: boolean) => {
+        signUp: () => {
           // 
         }
       }}

@@ -3,7 +3,7 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 export type VaultParamList = {
-  VaultCreationStack: {};
+  VaultCreationStack: Record<string, unknown>;
   VaultHistoryStack: undefined;
   VaultActiveDepositsStack: undefined;
 };
@@ -15,7 +15,7 @@ export type VaultNavProps<T extends keyof VaultParamList> = {
 
 export type HomeParamList = {
   Home: undefined;
-  WalletStack: {};
+  WalletStack: Record<string, unknown>;
   SettingsStack: undefined
 };
 

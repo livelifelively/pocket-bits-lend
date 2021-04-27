@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 
 interface DefaultLayoutProps {
-  style?: {}
+  style?: Record<string, unknown>,
   backgroundColor?: string
   paddingHorizontal?: number
 }

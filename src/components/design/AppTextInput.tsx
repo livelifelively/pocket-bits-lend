@@ -25,7 +25,7 @@ interface AppTextInputProps {
 
 
 export const AppTextInput: React.FC<AppTextInputProps> = ({
-  onChangeText, placeholder, style={}, size='normal', value='', autoCorrect=false, maxLength, keyboardType='default', placeholderTextColor='#625E59',
+  onChangeText, placeholder, style={}, value='', autoCorrect=false, maxLength, keyboardType='default', placeholderTextColor='#625E59',
   autoCapitalize='sentences', secureTextEntry=false, onBlur, error=''
 }) => {
   const errorStyle = error.length > 0 ? {borderColor: globalStyles.errorText.color} : {};

@@ -1,10 +1,10 @@
 import React from 'react';
 
-export const SettingsContext = React.createContext<{}>({});
+export const SettingsContext = React.createContext<Record<string, unknown>>({});
 
-interface SettingsProviderProps {}
+// interface SettingsProviderProps {}
 
-export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) => {
+export const SettingsProvider: React.FC = ({ children }) => {
   return (
     <SettingsContext.Provider value={{}}>
       {children}

@@ -181,7 +181,7 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<'CreateVault'>) 
                 >
                   {
                     vaultDepositOptions && vaultDepositOptions.map((val) => {
-                      return <Menu.Item onPress={() => {selectMenuItem(val);}} title={val.duration} />;
+                      return <Menu.Item onPress={() => {selectMenuItem(val);}} key={val.id} title={val.duration} />;
                     })
                   }
                 </Menu>

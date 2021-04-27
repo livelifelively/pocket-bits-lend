@@ -9,11 +9,11 @@ import SecuritySettingsScreen from './screens/SecuritySettingsScreen';
 import TwoFactorAuthenticationScreen from './screens/TwoFactorAuthenticationScreen';
 import ChangePasscodeScreen from './screens/ChangePasscodeScreen';
 
-interface SettingsStackProps {}
+// interface SettingsStackProps {}
 
 const Stack = createStackNavigator<SettingsParamList>();
 
-export const SettingsStack: React.FC<SettingsStackProps> = ({}) => {
+export const SettingsStack: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{

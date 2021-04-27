@@ -14,13 +14,13 @@ import { WalletStack } from '../modules/wallet/WalletStack';
 import { SettingsStack } from '../modules/settings/SettingsStack';
 import { HomeIcon, RewardIcon, VaultIcon } from '../icons';
 
-interface AppTabsProps {}
-interface AppStackProps {}
+// interface AppTabsProps {}
+// interface AppStackProps {}
 
 const Tabs = createBottomTabNavigator<AppTabsParamList>();
 const Stack = createStackNavigator<AppStackParamList>();
 
-const AppTabs: React.FC<AppTabsProps> = ({}) => {
+const AppTabs: React.FC = () => {
   return (
     <Tabs.Navigator
       screenOptions={({ route }) => ({
@@ -51,7 +51,7 @@ const AppTabs: React.FC<AppTabsProps> = ({}) => {
   );
 };
 
-export const AppStack: React.FC<AppStackProps> = ({}) => {
+export const AppStack: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{

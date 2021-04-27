@@ -10,11 +10,11 @@ import SignupScreen from './screens/SignupScreen';
 import SetPasscodeScreen from './screens/SetPasscodeScreen';
 import VerifyEmailScreen from './screens/VerifyEmailScreen';
 
-interface AuthStackProps {}
+// interface AuthStackProps {}
 
 const Stack = createStackNavigator<AuthParamList>();
 
-export const AuthStack: React.FC<AuthStackProps> = ({}) => {
+export const AuthStack: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{

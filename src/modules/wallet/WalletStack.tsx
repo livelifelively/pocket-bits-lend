@@ -8,11 +8,11 @@ import DepositScreen from './screens/DepositScreen';
 import WalletScreen from './screens/WalletScreen';
 import WithdrawScreen from './screens/WithdrawScreen';
 
-interface WalletStackProps {}
+// interface WalletStackProps {}
 
 const Stack = createStackNavigator<WalletParamList>();
 
-export const WalletStack: React.FC<WalletStackProps> = ({}) => {
+export const WalletStack: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{
