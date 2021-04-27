@@ -1,10 +1,9 @@
 import React from 'react';
-import { StyleSheet, Button, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { WalletNavProps } from '../WalletParamList';
-import { AppButton } from '../../../components/design/AppButton';
 import { WalletBalance } from '../../../components/business/WalletBalance';
 import Topbar from '../../../components/design/Topbar';
 import { WalletTransactionHistory } from '../../../components/business/WalletTransactionHistory';

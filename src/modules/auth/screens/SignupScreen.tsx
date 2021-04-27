@@ -10,9 +10,9 @@ import { AppButton } from '../../../components/design/AppButton';
 import { AppTextInput } from '../../../components/design/AppTextInput';
 import { AppCheckbox } from '../../../components/design/AppCheckbox';
 import { globalStyles } from '../../../theme/globalStyles';
-import { signupPost, RequestResponse } from '../../../api/requests';
+import { signupPost } from '../../../api/requests';
 
-function SignupScreen({ navigation, route }: AuthNavProps<'SignUp'>) {
+function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
   const signupSchema = Yup.object().shape({
     email: Yup.string().email().required(),
     password: Yup.string().min(8).required(),

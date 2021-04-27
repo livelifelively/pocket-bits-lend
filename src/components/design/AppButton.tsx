@@ -15,7 +15,7 @@ interface AppButtonProps {
 }
 
 
-export const AppButton: React.FC<AppButtonProps> = ({onPress, title, mode='contained', style={}, size='normal', color=Theme.colors.primary, icon}) => {
+export const AppButton: React.FC<AppButtonProps> = ({onPress, title, mode='contained', style={}, size='normal', color=Theme.colors.primary}) => {
   const {buttonStyle, textStyle} = extendStylesByParams(
     {size, mode, color}, 
     {...styles.appButtonContainer, ...style},

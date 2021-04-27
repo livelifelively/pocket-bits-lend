@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet,View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Formik } from 'formik';
@@ -11,7 +11,7 @@ import { AppTextInput } from '../../../components/design/AppTextInput';
 import { globalStyles } from '../../../theme/globalStyles';
 import { RequestResponse, verifyEmailPost } from '../../../api/requests';
 
-const VerifyEmailScreen = ({ navigation, route }: AuthNavProps<'VerifyEmail'>) => {
+const VerifyEmailScreen = ({ navigation }: AuthNavProps<'VerifyEmail'>) => {
   const email = 'deviced.in@gmail.com';
 
   const emailVerificationSchema = Yup.object().shape({
@@ -47,7 +47,7 @@ const VerifyEmailScreen = ({ navigation, route }: AuthNavProps<'VerifyEmail'>) =
           }
         }}
       >
-        {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => (
+        {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
           <View style={{width: '100%'}}>
             <AppTextInput
               autoCorrect={false}

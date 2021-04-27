@@ -12,14 +12,14 @@ import { PasteIcon } from '../../../icons';
 import { AppButton } from '../../../components/design/AppButton';
 import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
 
-type Wallet = {
-  id: number,
-  crypto: {
-    name: string,
-    shortName: string
-  },
-  amount: number
-}
+// type Wallet = {
+//   id: number,
+//   crypto: {
+//     name: string,
+//     shortName: string
+//   },
+//   amount: number
+// }
 
 const accounts = [
   {
@@ -80,11 +80,11 @@ const WithdrawScreen = ({navigation}: WalletNavProps<'Withdraw'>) => {
             withdrawalAmount: ''
           }}
           validationSchema={withdrawCryptoSchema}
-          onSubmit={ async (values) => {
+          onSubmit={ async () => {
             navigation.goBack();
           }}
         >
-          {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => (
+          {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <View>
               <View style={[styles.inputAmount]}>
                 <AppTextInput

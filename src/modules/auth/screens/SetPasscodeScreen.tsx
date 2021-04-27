@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
-import { Text, StyleSheet, Button } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 
 import { DefaultLayout } from '../../../layouts/Default';
-import { AuthNavProps } from '../AuthParamList';
 import { AuthContext } from '../AuthProvider';
 import { AppButton } from '../../../components/design/AppButton';
 
-const SetPasscodeScreen = ({navigation, route}: AuthNavProps<'SetPasscode'>) => {
+const SetPasscodeScreen = () => {
   const {login} = useContext(AuthContext);
 
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text } from 'react-native';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { SettingsNavProps } from '../SettingsParamList';
@@ -23,9 +23,5 @@ const ChangePasscodeScreen = ({navigation}: SettingsNavProps<'ChangePasscode'>) 
     </DefaultLayout>
   );
 };
-
-const styles = StyleSheet.create({
-  
-});
 
 export default ChangePasscodeScreen;

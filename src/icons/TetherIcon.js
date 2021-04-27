@@ -9,7 +9,7 @@ import Svg, {
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-export default function TetherIcon ({style={}}) {
+export default function TetherIcon () {
   return (
     <View
       style={[

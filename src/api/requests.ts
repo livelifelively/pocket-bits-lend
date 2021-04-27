@@ -41,7 +41,7 @@ export function structureAPIResponse (res: any, apiCallId=''): RequestResponse {
 }
 
 export function structureAPIError (
-  {err, apiCallId, requestData, errorResponse}: {err:any, apiCallId:string, requestData:any, errorResponse: any}
+  {apiCallId, requestData, errorResponse}: {err:any, apiCallId:string, requestData:any, errorResponse: any}
 ): RequestResponse {
   const returnData: RequestResponse = {
     status: 'FAILED',

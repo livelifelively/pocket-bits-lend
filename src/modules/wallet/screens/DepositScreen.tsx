@@ -4,7 +4,6 @@ import { Text, Title } from 'react-native-paper';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { WalletNavProps } from '../WalletParamList';
-import { AppButton } from '../../../components/design/AppButton';
 import Topbar from '../../../components/design/Topbar';
 import { YellowCopyIcon, YellowShareIcon } from '../../../icons';
 import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';

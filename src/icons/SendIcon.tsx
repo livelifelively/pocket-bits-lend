@@ -5,7 +5,7 @@ import Svg, {
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-export default function SendIcon ({style={}}) {
+export default function SendIcon () {
   return (
     <View
       style={[

@@ -1,6 +1,5 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AntDesign, EvilIcons } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { AppTabsParamList, AppStackParamList } from './AppParamList';
@@ -24,7 +23,7 @@ const AppTabs: React.FC = () => {
   return (
     <Tabs.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: () => {
           switch (route.name) {
           case 'Home':
             return <HomeIcon />;

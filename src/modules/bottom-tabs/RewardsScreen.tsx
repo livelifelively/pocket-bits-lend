@@ -1,15 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { ValueCreated } from '../../components/business/ValueCreated';
 import Topbar from '../../components/design/Topbar';
 import { Title, Text } from 'react-native-paper';
 
 import { DefaultLayout } from '../../layouts/Default';
-import { RewardsNavProps } from './TabsParamList';
 import { WhiteView } from '../../components/design/WhiteView';
 import { YellowCopyIcon } from '../../icons';
 
-const RewardScreen = ({navigation}: RewardsNavProps<'InviteFriends'>) => {
+const RewardScreen = () => {
   return (
     <DefaultLayout backgroundColor='#ffffff'>
       <Topbar
@@ -55,9 +54,5 @@ const RewardScreen = ({navigation}: RewardsNavProps<'InviteFriends'>) => {
     </DefaultLayout>
   );
 };
-
-const styles = StyleSheet.create({
-  
-});
 
 export default RewardScreen;

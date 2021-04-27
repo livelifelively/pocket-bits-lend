@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet} from 'react-native';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { VaultActiveDepositsNavProps } from '../VaultParamList';
@@ -19,11 +18,5 @@ const ActiveDepositsScreen = ({navigation} : VaultActiveDepositsNavProps<'Active
     </DefaultLayout>
   );
 };
-
-const styles = StyleSheet.create({
-  component: {
-    marginBottom: 30
-  }
-});
 
 export default ActiveDepositsScreen;

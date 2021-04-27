@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Formik } from 'formik';
@@ -48,7 +48,7 @@ function LoginEmailScreen({ navigation }: AuthNavProps<'LoginEmail'>) {
           }
         }}
       >
-        {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => (
+        {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
           <View style={{width: '100%'}}>
             <AppTextInput
               autoCorrect={false}

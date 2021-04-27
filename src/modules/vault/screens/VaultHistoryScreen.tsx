@@ -1,10 +1,9 @@
 
 import React from 'react';
-import { Text, StyleSheet, Button, View } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { VaultHistoryNavProps } from '../VaultParamList';
-import { AppButton } from '../../../components/design/AppButton';
 import Topbar from '../../../components/design/Topbar';
 import { WhiteView } from '../../../components/design/WhiteView';
 import { BitcoinIcon, EtheriumIcon, TetherIcon } from '../../../icons';

@@ -99,7 +99,6 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<'CreateVault'>) 
     verificationCode: Yup.string()
       .required()
       .matches(/^[0-9]+$/, 'Must be only digits')
-    // email: Yup.string().email().required(),
   });
 
   return (
@@ -129,11 +128,11 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<'CreateVault'>) 
             cryptoAmount: '',
           }}
           validationSchema={twoFactorAuthenticationSchema}
-          onSubmit={ async (values) => {
+          onSubmit={ async () => {
             navigation.navigate('VaultCreated');
           }}
         >
-          {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => (
+          {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <View>
               <View style={[styles.inputAmount]}>          
                 <AppTextInput

@@ -28,6 +28,7 @@ interface VaultActiveDepositsListUnitProps {
 }
 
 const VaultActiveDepositsListUnitDetails = ({hideDetails, depositDetails}: {hideDetails: () => void, depositDetails: DepositDetails}) => {
+  console.log(hideDetails);
   return (
     <View style={styles.vaultActiveDepositsListUnit}>
       <View>

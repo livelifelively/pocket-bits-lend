@@ -61,7 +61,7 @@ const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<'TwoFactor
           }
         }}
       >
-        {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => (
+        {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
           <View style={{width: '100%'}}>
             <AppTextInput
               autoCorrect={false}
