@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { API } from '../constants/api';
 
 const URLPrefixes = {

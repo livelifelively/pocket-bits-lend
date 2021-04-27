@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 // LOGGER
 const Logger = {
   info: (idString: string, data:any) => {
