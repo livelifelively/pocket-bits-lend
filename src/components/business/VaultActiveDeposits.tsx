@@ -5,7 +5,7 @@ import { Text, Title } from 'react-native-paper';
 import { VaultActiveDepositsListUnit } from './VaultActiveDepositsListUnit';
 
 interface VaultActiveDepositsProps {
-  style?: {},
+  style?: Record<string, unknown>,
   showTitle?: boolean,
   expandableListUnit?: boolean
 }

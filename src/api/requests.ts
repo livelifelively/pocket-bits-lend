@@ -1,10 +1,7 @@
 import Axios from 'axios';
 
-import { API } from '../constants/api';
 import Logger from '../services/logger';
 import { AuthAPIConfigurations, SignUpRequest, SignInRequest, TwoFactorAuthenticationRequest, VerifyEmailRequest } from './configurations';
-
-const apiUrl = `${API.baseURL}${API.apiPrefix}`; 
 
 export type RequestResponse = {
   status: 'SUCCESS' | 'FAILED',
@@ -13,7 +10,7 @@ export type RequestResponse = {
   error: any
 }
 
-export function structureAPIResponse (res: any, apiCallId='') {
+export function structureAPIResponse (res: any, apiCallId=''): RequestResponse {
   let returnData: RequestResponse;
   if (res.status === 200) {
     Logger.info(`SUCCESS_API_REQUEST: ${apiCallId}`, res.data);
@@ -43,10 +40,10 @@ export function structureAPIResponse (res: any, apiCallId='') {
   return returnData;
 }
 
-export function structureAPIError ({err, apiCallId, requestData, errorResponse}: {err:any, apiCallId:string, requestData:any, errorResponse: any}) {
-  let returnData: RequestResponse;
-
-  returnData = {
+export function structureAPIError (
+  {err, apiCallId, requestData, errorResponse}: {err:any, apiCallId:string, requestData:any, errorResponse: any}
+): RequestResponse {
+  const returnData: RequestResponse = {
     status: 'FAILED',
     // TODO handle whether to send password to log or not.
     request: requestData,
@@ -61,7 +58,7 @@ export function structureAPIError ({err, apiCallId, requestData, errorResponse}:
   return returnData;
 }
 
-export function errorResponseAsPerStatusCode (err: any, errorHandlers: any) {
+export function errorResponseAsPerStatusCode (err: any, errorHandlers: any): void {
   if (err.response?.status) {
     if (errorHandlers[err.response?.status]) errorHandlers[err.response?.status](err.response);
     else errorHandlers['default'](err.response);
@@ -82,7 +79,8 @@ export async function postRequestHandler (requestData: any, requestConfiguration
 }
 
 export const signupPost = async (requestData: SignUpRequest) => {
-  return postRequestHandler(requestData, AuthAPIConfigurations['SIGNUP']);
+  const returnValue = await postRequestHandler(requestData, AuthAPIConfigurations['SIGNUP']);
+  return returnValue; 
 };
 
 export const signinPost = (requestData: SignInRequest) => {

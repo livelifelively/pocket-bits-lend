@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Text } from 'react-native-paper';
 
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { AppButton } from '../design/AppButton';
-import {WhiteView} from '../design/WhiteView';
+import { WhiteView } from '../design/WhiteView';
 import { BitcoinIcon, EtheriumIcon, TetherIcon } from '../../icons';
 import { WhiteTouchableOpacity } from '../design/WhiteTouchableOpacity';
 import RedCrossIcon from '../../icons/RedCrossIcon';
@@ -22,10 +21,10 @@ type DepositDetails = {
 };
 
 interface VaultActiveDepositsListUnitProps {
-  style?: {};
+  style?: Record<string, unknown>;
   expanded?: boolean;
-  depositDetails: DepositDetails,
-  expandableListUnit?: boolean
+  depositDetails: DepositDetails;
+  expandableListUnit?: boolean;
 }
 
 const VaultActiveDepositsListUnitDetails = ({hideDetails, depositDetails}: {hideDetails: () => void, depositDetails: DepositDetails}) => {
@@ -79,7 +78,7 @@ const VaultActiveDepositsListUnitDetails = ({hideDetails, depositDetails}: {hide
       <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
         <WhiteTouchableOpacity
           style={{backgroundColor: '#ffffff', height: 35, width: 35, borderRadius: 35, alignItems: 'center', justifyContent: 'center', marginBottom: 10}}
-          onPress={() => {}}
+          onPress={() => {return null;}}
         >
           <RedCrossIcon />
         </WhiteTouchableOpacity>
@@ -143,7 +142,7 @@ const VaultActiveDepositsListUnitBasic = ({showDetails, depositDetails}: {showDe
   );
 };
 
-export const VaultActiveDepositsListUnit: React.FC<VaultActiveDepositsListUnitProps> = ({style, expanded=false, depositDetails, expandableListUnit=false}) => {
+export const VaultActiveDepositsListUnit: React.FC<VaultActiveDepositsListUnitProps> = ({expanded=false, depositDetails, expandableListUnit=false}) => {
   const [expansion, setExpansion] = useState(() => expanded);
   
   const showDetails = () => {
@@ -158,7 +157,7 @@ export const VaultActiveDepositsListUnit: React.FC<VaultActiveDepositsListUnitPr
       {
         expansion ? 
           <VaultActiveDepositsListUnitDetails hideDetails={hideDetails} depositDetails={depositDetails} /> 
-          : <VaultActiveDepositsListUnitBasic showDetails={expandableListUnit ? showDetails : () => {}} depositDetails={depositDetails}/>
+          : <VaultActiveDepositsListUnitBasic showDetails={expandableListUnit ? showDetails : () => {return null;}} depositDetails={depositDetails}/>
       }
     </WhiteView>
   );

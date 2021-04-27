@@ -7,8 +7,8 @@ import { TetherIcon, EtheriumIcon, BitcoinIcon } from '../../icons';
 import {WhiteView} from '../design/WhiteView';
 
 interface WalletsProps {
-  style?: {},
-  onPress: (walletDetails:{}) => void
+  style?: Record<string, unknown>,
+  onPress: (walletDetails: Record<string, unknown>) => void
 }
 
 const wallets = [
@@ -81,7 +81,7 @@ const cryotpyIcon = (shortName: string) => {
   }
 };
 
-export const Wallets: React.FC<WalletsProps> = ({children, style, onPress}) => {
+export const Wallets: React.FC<WalletsProps> = ({style, onPress}) => {
   const onWalletPress = (walletDetails={}) => {
     onPress(walletDetails);
   };

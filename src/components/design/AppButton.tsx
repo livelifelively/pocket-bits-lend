@@ -8,7 +8,7 @@ interface AppButtonProps {
   onPress: () => void
   title: string,
   mode?: 'text' | 'outlined' | 'contained',
-  style?: {},
+  style?: Record<string, unknown>,
   size?: 'normal' | 'large' | 'small',
   color?: string,
   icon?: React.ReactNode

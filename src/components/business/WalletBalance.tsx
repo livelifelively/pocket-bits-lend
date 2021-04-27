@@ -7,11 +7,11 @@ import { YellowPlusIcon } from '../../icons';
 import { WhiteTouchableOpacity } from '../design/WhiteTouchableOpacity';
 
 interface WalletBalanceProps {
-  style?: {},
+  style?: Record<string, unknown>,
   onPress: () => void
 }
 
-export const WalletBalance: React.FC<WalletBalanceProps> = ({children, style, onPress}) => {
+export const WalletBalance: React.FC<WalletBalanceProps> = ({ style, onPress }) => {
   return (
     <WhiteView style={{...styles.walletBalanceWrapper, ...style}}>
       <View style={styles.walletBalanceGraph}>

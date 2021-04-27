@@ -1,9 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
-interface AppTextProps {}
-
-export const AppText: React.FC<AppTextProps> = ({children}) => {
+export const AppText: React.FC = ({children}) => {
   return (
     <Text style={styles.textStyles}>
       {children}

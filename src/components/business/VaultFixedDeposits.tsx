@@ -6,7 +6,7 @@ import {WhiteView} from '../design/WhiteView';
 import { YellowView } from '../design/YellowView';
 
 interface VaultFixedDepositsProps {
-  style?: {},
+  style?: Record<string, unknown>,
   onPress: () => void
 }
 
@@ -45,7 +45,7 @@ const vaults = [
   }
 ];
 
-export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({children, style, onPress}) => {
+export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({style, onPress}) => {
   return (
     <View style={{...styles.vaultFixedDepositsWrapper, ...style}}>
       <Title style={styles.title}>Fixed Deposits</Title>

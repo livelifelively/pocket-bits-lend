@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
-import { Text } from 'react-native-paper';
+
 import { globalStyles } from '../../theme/globalStyles';
 import { ErrorText } from './ErrorText';
 
@@ -8,8 +8,8 @@ interface AppTextInputProps {
   onChangeText: (text: string) => void
   placeholder: string,
   style?: {
-    input: {} | undefined,
-    wrapper: {} | undefined
+    input: Record<string, unknown> | undefined,
+    wrapper: Record<string, unknown> | undefined
   },
   size?: 'normal' | 'large',
   keyboardType?: 'default' | 'numeric' | 'email-address' | 'ascii-capable' | 'numbers-and-punctuation' | 'url' | 'number-pad' | 'phone-pad' | 'name-phone-pad' | 'decimal-pad' | 'twitter' | 'web-search' | 'visible-password',
@@ -26,7 +26,7 @@ interface AppTextInputProps {
 
 export const AppTextInput: React.FC<AppTextInputProps> = ({
   onChangeText, placeholder, style={}, size='normal', value='', autoCorrect=false, maxLength, keyboardType='default', placeholderTextColor='#625E59',
-  autoCapitalize='sentences', secureTextEntry=false, onBlur=(e) => {}, error=''
+  autoCapitalize='sentences', secureTextEntry=false, onBlur, error=''
 }) => {
   const errorStyle = error.length > 0 ? {borderColor: globalStyles.errorText.color} : {};
 

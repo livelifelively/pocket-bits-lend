@@ -6,7 +6,7 @@ import { InfoIcon } from '../../icons';
 import {YellowView} from '../design/YellowView';
 
 interface ValueCreatedProps {
-  style?: {}
+  style?: Record<string, unknown>
 }
 
 const data = {
@@ -28,7 +28,7 @@ const data = {
   }
 };
 
-export const ValueCreated: React.FC<ValueCreatedProps> = ({children, style}) => {
+export const ValueCreated: React.FC<ValueCreatedProps> = () => {
   return (
     <YellowView style={styles.valueCreatedWrapper}>
       <View style={{marginBottom: 20, flexDirection: 'row-reverse', alignItems: 'center', width: '100%', backgroundColor: 'red'}}>

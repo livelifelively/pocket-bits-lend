@@ -1,13 +1,12 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text, Title } from 'react-native-paper';
-import { ReceiveIcon, SendIcon } from '../../icons';
-import { AppButton } from '../design/AppButton';
 
+import { ReceiveIcon, SendIcon } from '../../icons';
 import {WhiteView} from '../design/WhiteView';
 
 interface WalletTransactionHistoryProps {
-  style?: {}
+  style?: Record<string, unknown>,
 }
 
 const history = [
@@ -44,7 +43,6 @@ const history = [
 ];
 
 export const WalletTransactionHistory: React.FC<WalletTransactionHistoryProps> = ({style}) => {
-  // const action = 
   return (
     <View style={{...styles.WalletTransactionHistoryWrapper, ...style}}>
       <View style={styles.componentTitle}>

@@ -6,10 +6,10 @@ import {WhiteView} from '../design/WhiteView';
 import { VaultBuildingIcon } from '../../icons';
 
 interface VaultIntroProps {
-  style?: {}
+  style?: Record<string, unknown>
 }
 
-export const VaultIntro: React.FC<VaultIntroProps> = ({children, style}) => {
+export const VaultIntro: React.FC<VaultIntroProps> = ({style}) => {
   return (
     <WhiteView style={{...styles.vaultIntroWrapper, ...style}}>
       <View style={styles.vaultInfoIcon}>
