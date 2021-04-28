@@ -7,7 +7,7 @@ import { AppText } from '../../../components/design/AppText';
 import { AppButton } from '../../../components/design/AppButton';
 import Topbar from '../../../components/design/Topbar';
 
-const ChangePasscodeScreen = ({navigation}: SettingsNavProps<'ChangePasscode'>) => {
+const ChangePasscodeScreen = ({ navigation }: SettingsNavProps<'ChangePasscode'>) => {
   return (
     <DefaultLayout>
       <Topbar
@@ -19,7 +19,12 @@ const ChangePasscodeScreen = ({navigation}: SettingsNavProps<'ChangePasscode'>) 
       <AppText>
         <Text></Text>
       </AppText>
-      <AppButton title="Back" onPress={() => {navigation.goBack();}} />
+      <AppButton
+        title="Back"
+        onPress={() => {
+          navigation.goBack();
+        }}
+      />
     </DefaultLayout>
   );
 };

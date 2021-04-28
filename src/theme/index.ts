@@ -1,4 +1,4 @@
-import { configureFonts, DefaultTheme} from 'react-native-paper';
+import { configureFonts, DefaultTheme } from 'react-native-paper';
 
 const fontConfig = {
   web: {
@@ -54,7 +54,7 @@ const fontConfig = {
       fontFamily: 'Poppins-Thin',
       // fontWeight: 'normal',
     },
-  }
+  },
 };
 
 const Theme = {
@@ -63,9 +63,9 @@ const Theme = {
     ...DefaultTheme.colors,
     primary: '#FFB850',
     background: '#FFB850',
-    text: '#2B2B2B'
+    text: '#2B2B2B',
   },
-  fonts: configureFonts(fontConfig)
+  fonts: configureFonts(fontConfig),
 };
 
 export default Theme;

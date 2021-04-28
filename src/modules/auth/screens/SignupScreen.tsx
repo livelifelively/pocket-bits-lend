@@ -18,12 +18,16 @@ function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
   const signupSchema = Yup.object().shape({
     email: Yup.string().email().required(),
     password: Yup.string().min(8).required(),
-    confirmPassword: Yup.string().required().oneOf([Yup.ref('password'), null], 'Passwords must match'),
-    termsAndConditions: Yup.boolean().required().test('terms-conditions', 'Please accept the terms and conditions', (value) => value === true)
+    confirmPassword: Yup.string()
+      .required()
+      .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+    termsAndConditions: Yup.boolean()
+      .required()
+      .test('terms-conditions', 'Please accept the terms and conditions', (value) => value === true),
   });
 
   return (
-    <DefaultLayout backgroundColor='#FCFCFC' paddingHorizontal={45}>
+    <DefaultLayout backgroundColor="#FCFCFC" paddingHorizontal={45}>
       <View style={styles.logo}>
         <Text style={styles.logoText}>logo</Text>
       </View>
@@ -35,26 +39,26 @@ function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
           email: '',
           password: '',
           confirmPassword: '',
-          termsAndConditions: false
+          termsAndConditions: false,
         }}
         validationSchema={signupSchema}
-        onSubmit={ async (values) => {
+        onSubmit={async (values) => {
           try {
-            const signedUp:any = await signupPost({
+            const signedUp: any = await signupPost({
               email: values.email,
               password: values.password,
               // #TODO
-              referralCode: ''
+              referralCode: '',
             });
             console.log('+++++++++++++++++++++++++++++++++++++++');
             console.log('+++++++++++++++++++++++++++++++++++++++');
             console.log('+++++++++++++++++++++++++++++++++++++++');
-            
+
             console.log('SUBMIT_FORM', signedUp);
             if (signedUp.status === 'SUCCESS') {
               navigation.navigate('VerifyEmail');
             }
-          } catch(e) {
+          } catch (e) {
             console.log('FLAG SIGNUP PAGE');
             // console.log(e)
             console.log('=======================================');
@@ -64,10 +68,10 @@ function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => (
-          <View style={{width: '100%'}}>
+          <View style={{ width: '100%' }}>
             <AppTextInput
               autoCorrect={false}
-              style={{ input: styles.textInput, wrapper: styles.textInputWrapper}}
+              style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
               value={values.email}
               onChangeText={handleChange('email')}
               onBlur={handleBlur('email')}
@@ -78,7 +82,7 @@ function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
             />
             <AppTextInput
               autoCorrect={false}
-              style={{ input: styles.textInput, wrapper: styles.textInputWrapper}}
+              style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
               value={values.password}
               onChangeText={handleChange('password')}
               onBlur={handleBlur('password')}
@@ -89,7 +93,7 @@ function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
             />
             <AppTextInput
               autoCorrect={false}
-              style={{ input: styles.textInput, wrapper: styles.textInputWrapper}}
+              style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
               value={values.confirmPassword}
               onChangeText={handleChange('confirmPassword')}
               onBlur={handleBlur('confirmPassword')}
@@ -114,14 +118,14 @@ function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
               onPress={() => {
                 handleSubmit();
               }}
-              size='normal'
-              style={{paddingHorizontal: 50}}
+              size="normal"
+              style={{ paddingHorizontal: 50 }}
             />
           </View>
         )}
       </Formik>
       <View>
-        <Text style={{fontFamily: 'Poppins-Bold'}}>Have an account, </Text>
+        <Text style={{ fontFamily: 'Poppins-Bold' }}>Have an account, </Text>
         <AppButton
           title="Sign In"
           size="small"
@@ -139,29 +143,29 @@ function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
 const styles = StyleSheet.create({
   logo: {
     height: 65,
-    width: '100%', 
-    backgroundColor: '#EBEBEB', 
-    marginTop: 100, 
-    marginBottom: 65, 
-    alignItems: 'center', 
-    flexDirection: 'column', 
-    justifyContent: 'center'
+    width: '100%',
+    backgroundColor: '#EBEBEB',
+    marginTop: 100,
+    marginBottom: 65,
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   logoText: {
-    textAlign: 'center', 
-    fontSize: 24
+    textAlign: 'center',
+    fontSize: 24,
   },
   pageTitle: {
-    fontSize: 24, 
-    fontFamily: 'Poppins-Medium'
+    fontSize: 24,
+    fontFamily: 'Poppins-Medium',
   },
-  pageTitleWrapper: {marginBottom: 40},
-  textInputWrapper: {marginBottom: 10},
+  pageTitleWrapper: { marginBottom: 40 },
+  textInputWrapper: { marginBottom: 10 },
   textInput: {
-    width: '100%', 
-    backgroundColor: '#F7F7F7', 
-    padding: 18
-  }
+    width: '100%',
+    backgroundColor: '#F7F7F7',
+    padding: 18,
+  },
 });
 
 export default SignupScreen;

@@ -8,16 +8,16 @@ import { WhiteTouchableOpacity } from '../design/WhiteTouchableOpacity';
 import RedCrossIcon from '../../icons/RedCrossIcon';
 
 type DepositDetails = {
-  id: number,
+  id: number;
   crypto: {
-    shortName: string,
-    name: string
-  },
-  interestRate: number,
-  duration: string,
-  currentBalance: number,
-  startDate: string,
-  endDate: string
+    shortName: string;
+    name: string;
+  };
+  interestRate: number;
+  duration: string;
+  currentBalance: number;
+  startDate: string;
+  endDate: string;
 };
 
 interface VaultActiveDepositsListUnitProps {
@@ -27,25 +27,29 @@ interface VaultActiveDepositsListUnitProps {
   expandableListUnit?: boolean;
 }
 
-const VaultActiveDepositsListUnitDetails = ({hideDetails, depositDetails}: {hideDetails: () => void, depositDetails: DepositDetails}) => {
+const VaultActiveDepositsListUnitDetails = ({
+  hideDetails,
+  depositDetails,
+}: {
+  hideDetails: () => void;
+  depositDetails: DepositDetails;
+}) => {
   console.log(hideDetails);
   return (
     <View style={styles.vaultActiveDepositsListUnit}>
       <View>
         <View style={styles.upperRow}>
-          <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center'}}>
-            <View style={{marginRight: 15}}>
-              {cryotpyIcon(depositDetails.crypto.shortName)}
-            </View>
+          <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
+            <View style={{ marginRight: 15 }}>{cryotpyIcon(depositDetails.crypto.shortName)}</View>
             <Text>{depositDetails.crypto.shortName}</Text>
           </View>
-          <Text style={[styles.subtext, {textAlign: 'center'}]}>Token</Text>
+          <Text style={[styles.subtext, { textAlign: 'center' }]}>Token</Text>
         </View>
         <View style={styles.lowerRow}>
           <View>
             <Text style={styles.lowerRowTitle}>{depositDetails.startDate}</Text>
           </View>
-          <Text style={[styles.subtext, {textAlign: 'center'}]}>Start date</Text>
+          <Text style={[styles.subtext, { textAlign: 'center' }]}>Start date</Text>
         </View>
       </View>
       <View>
@@ -53,13 +57,13 @@ const VaultActiveDepositsListUnitDetails = ({hideDetails, depositDetails}: {hide
           <View>
             <Text style={styles.upperRowTitle}>{depositDetails.currentBalance}</Text>
           </View>
-          <Text style={[styles.subtext, {textAlign: 'center'}]}>Amount</Text>
+          <Text style={[styles.subtext, { textAlign: 'center' }]}>Amount</Text>
         </View>
         <View style={styles.lowerRow}>
           <View>
             <Text style={styles.lowerRowTitle}>{depositDetails.endDate}</Text>
           </View>
-          <Text style={[styles.subtext, {textAlign: 'center'}]}>End date</Text>
+          <Text style={[styles.subtext, { textAlign: 'center' }]}>End date</Text>
         </View>
       </View>
       <View>
@@ -67,19 +71,29 @@ const VaultActiveDepositsListUnitDetails = ({hideDetails, depositDetails}: {hide
           <View>
             <Text style={styles.upperRowTitle}>{`${depositDetails.interestRate}%`}</Text>
           </View>
-          <Text style={[styles.subtext, {textAlign: 'center'}]}>Interest Rate</Text>
+          <Text style={[styles.subtext, { textAlign: 'center' }]}>Interest Rate</Text>
         </View>
         <View style={styles.lowerRow}>
           <View>
             <Text style={[styles.lowerRowTitle]}>{depositDetails.duration}</Text>
           </View>
-          <Text style={[styles.subtext, {textAlign: 'center'}]}>Time Period</Text>
+          <Text style={[styles.subtext, { textAlign: 'center' }]}>Time Period</Text>
         </View>
       </View>
-      <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+      <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <WhiteTouchableOpacity
-          style={{backgroundColor: '#ffffff', height: 35, width: 35, borderRadius: 35, alignItems: 'center', justifyContent: 'center', marginBottom: 10}}
-          onPress={() => {return null;}}
+          style={{
+            backgroundColor: '#ffffff',
+            height: 35,
+            width: 35,
+            borderRadius: 35,
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: 10,
+          }}
+          onPress={() => {
+            return null;
+          }}
         >
           <RedCrossIcon />
         </WhiteTouchableOpacity>
@@ -91,61 +105,67 @@ const VaultActiveDepositsListUnitDetails = ({hideDetails, depositDetails}: {hide
 
 const cryotpyIcon = (shortName: string) => {
   switch (shortName) {
-  case 'USDT':
-    return <TetherIcon />;
+    case 'USDT':
+      return <TetherIcon />;
 
-  case 'BTC':
-    return <BitcoinIcon />;
+    case 'BTC':
+      return <BitcoinIcon />;
 
-  case 'ETH':
-    return <EtheriumIcon />;
-  
-  default:
-    break;
+    case 'ETH':
+      return <EtheriumIcon />;
+
+    default:
+      break;
   }
 };
 
-const VaultActiveDepositsListUnitBasic = ({showDetails, depositDetails}: {showDetails: () => void, depositDetails: DepositDetails}) => {
+const VaultActiveDepositsListUnitBasic = ({
+  showDetails,
+  depositDetails,
+}: {
+  showDetails: () => void;
+  depositDetails: DepositDetails;
+}) => {
   return (
     <TouchableOpacity activeOpacity={0.7} style={styles.vaultActiveDepositsListUnit} onPress={showDetails}>
       <View>
-        <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: 60}}>
-          <View style={{marginRight: 15}}>
-            {cryotpyIcon(depositDetails.crypto.shortName)}
-          </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: 60 }}>
+          <View style={{ marginRight: 15 }}>{cryotpyIcon(depositDetails.crypto.shortName)}</View>
           <Text>{depositDetails.crypto.shortName}</Text>
         </View>
-        <Text style={[styles.subtext, {textAlign: 'center'}]}>Token</Text>
+        <Text style={[styles.subtext, { textAlign: 'center' }]}>Token</Text>
       </View>
       <View>
         <View>
-          <Text style={{textAlign: 'center'}}>{`${depositDetails.interestRate}%`}</Text>
+          <Text style={{ textAlign: 'center' }}>{`${depositDetails.interestRate}%`}</Text>
         </View>
-        <Text style={[styles.subtext, {textAlign: 'center'}]}>Int Rate</Text>
+        <Text style={[styles.subtext, { textAlign: 'center' }]}>Int Rate</Text>
       </View>
       <View>
         <View>
-          <Text style={{textAlign: 'center'}}>
-            {depositDetails.duration}
-          </Text>
+          <Text style={{ textAlign: 'center' }}>{depositDetails.duration}</Text>
         </View>
-        <Text style={[styles.subtext, {textAlign: 'center'}]}>Time</Text>
+        <Text style={[styles.subtext, { textAlign: 'center' }]}>Time</Text>
       </View>
       <View>
         <View>
-          <Text style={[styles.vaultActiveDepositsListUnitBalance, {textAlign: 'center'}]}>
+          <Text style={[styles.vaultActiveDepositsListUnitBalance, { textAlign: 'center' }]}>
             {`${depositDetails.currentBalance} ${depositDetails.crypto.shortName}`}
           </Text>
         </View>
-        <Text style={[styles.subtext, {textAlign: 'center'}]}>Current Balance</Text>
+        <Text style={[styles.subtext, { textAlign: 'center' }]}>Current Balance</Text>
       </View>
     </TouchableOpacity>
   );
 };
 
-export const VaultActiveDepositsListUnit: React.FC<VaultActiveDepositsListUnitProps> = ({expanded=false, depositDetails, expandableListUnit=false}) => {
+export const VaultActiveDepositsListUnit: React.FC<VaultActiveDepositsListUnitProps> = ({
+  expanded = false,
+  depositDetails,
+  expandableListUnit = false,
+}) => {
   const [expansion, setExpansion] = useState(() => expanded);
-  
+
   const showDetails = () => {
     setExpansion(true);
   };
@@ -155,11 +175,20 @@ export const VaultActiveDepositsListUnit: React.FC<VaultActiveDepositsListUnitPr
 
   return (
     <WhiteView style={styles.vaultActiveDepositsListUnitWrapper}>
-      {
-        expansion ? 
-          <VaultActiveDepositsListUnitDetails hideDetails={hideDetails} depositDetails={depositDetails} /> 
-          : <VaultActiveDepositsListUnitBasic showDetails={expandableListUnit ? showDetails : () => {return null;}} depositDetails={depositDetails}/>
-      }
+      {expansion ? (
+        <VaultActiveDepositsListUnitDetails hideDetails={hideDetails} depositDetails={depositDetails} />
+      ) : (
+        <VaultActiveDepositsListUnitBasic
+          showDetails={
+            expandableListUnit
+              ? showDetails
+              : () => {
+                  return null;
+                }
+          }
+          depositDetails={depositDetails}
+        />
+      )}
     </WhiteView>
   );
 };
@@ -168,39 +197,39 @@ const styles = StyleSheet.create({
   vaultActiveDepositsListUnitWrapper: {
     flexDirection: 'column',
     width: '100%',
-    marginBottom: 10
+    marginBottom: 10,
   },
   componentTitle: {
-    marginBottom: 15
+    marginBottom: 15,
   },
   vaultActiveDepositsListUnit: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
   activeDepositsCount: {
     color: '#FFB850',
-    fontFamily: 'Poppins-Bold'
+    fontFamily: 'Poppins-Bold',
   },
   subtext: {
     color: '#625E59',
-    fontSize: 10
+    fontSize: 10,
   },
   vaultActiveDepositsListUnitBalance: {
-    fontSize: 16
+    fontSize: 16,
   },
   lowerRowTitle: {
     fontFamily: 'Poppins-Medium',
     fontSize: 12,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   lowerRow: {},
   upperRow: {
-    marginBottom: 10
+    marginBottom: 10,
   },
   upperRowTitle: {
     fontFamily: 'Poppins-Bold',
     fontSize: 14,
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });

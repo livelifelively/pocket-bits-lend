@@ -5,9 +5,9 @@ import { Text, Title } from 'react-native-paper';
 import { VaultActiveDepositsListUnit } from './VaultActiveDepositsListUnit';
 
 interface VaultActiveDepositsProps {
-  style?: Record<string, unknown>,
-  showTitle?: boolean,
-  expandableListUnit?: boolean
+  style?: Record<string, unknown>;
+  showTitle?: boolean;
+  expandableListUnit?: boolean;
 }
 
 const activeDeposits = [
@@ -16,7 +16,7 @@ const activeDeposits = [
     currentBalance: 0.123,
     crypto: {
       name: 'Bitcoin',
-      shortName: 'BTC'
+      shortName: 'BTC',
     },
     interestRate: 12,
     duration: '1 month',
@@ -28,7 +28,7 @@ const activeDeposits = [
     currentBalance: 0.123,
     crypto: {
       name: 'Bitcoin',
-      shortName: 'ETH'
+      shortName: 'ETH',
     },
     interestRate: 12,
     duration: '1 month',
@@ -40,7 +40,7 @@ const activeDeposits = [
     currentBalance: 0.123,
     crypto: {
       name: 'Bitcoin',
-      shortName: 'USDT'
+      shortName: 'USDT',
     },
     interestRate: 12,
     duration: '1 month',
@@ -52,35 +52,36 @@ const activeDeposits = [
     currentBalance: 0.123,
     crypto: {
       name: 'Bitcoin',
-      shortName: 'BTC'
+      shortName: 'BTC',
     },
     interestRate: 12,
     duration: '1 month',
     startDate: '19 Mar, 21',
     endDate: '19 Mar, 21',
-  }
+  },
 ];
 
-export const VaultActiveDeposits: React.FC<VaultActiveDepositsProps> = ({style, showTitle=true, expandableListUnit=false}) => {
+export const VaultActiveDeposits: React.FC<VaultActiveDepositsProps> = ({
+  style,
+  showTitle = true,
+  expandableListUnit = false,
+}) => {
   return (
-    <View style={{...styles.vaultActiveDepositsWrapper, ...style}}>
-      {
-        showTitle && (
-          <View style={styles.componentTitle}>
-            <Title>
-              {'Active Deposits '}
-              <Text style={styles.activeDepositsCount}>(4)</Text>
-            </Title>
-          </View>
-        )
-      }
-      {
-        activeDeposits && activeDeposits.map((val) => {
+    <View style={{ ...styles.vaultActiveDepositsWrapper, ...style }}>
+      {showTitle && (
+        <View style={styles.componentTitle}>
+          <Title>
+            {'Active Deposits '}
+            <Text style={styles.activeDepositsCount}>(4)</Text>
+          </Title>
+        </View>
+      )}
+      {activeDeposits &&
+        activeDeposits.map((val) => {
           return (
             <VaultActiveDepositsListUnit expandableListUnit={expandableListUnit} depositDetails={val} key={val.id} />
           );
-        })
-      }
+        })}
     </View>
   );
 };
@@ -88,13 +89,13 @@ export const VaultActiveDeposits: React.FC<VaultActiveDepositsProps> = ({style, 
 const styles = StyleSheet.create({
   vaultActiveDepositsWrapper: {
     flexDirection: 'column',
-    width: '100%'
+    width: '100%',
   },
   componentTitle: {
-    marginBottom: 15
+    marginBottom: 15,
   },
   activeDepositsCount: {
     color: '#FFB850',
-    fontFamily: 'Poppins-Bold'
-  }
+    fontFamily: 'Poppins-Bold',
+  },
 });

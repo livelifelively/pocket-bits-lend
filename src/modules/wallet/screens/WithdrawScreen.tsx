@@ -26,61 +26,61 @@ const accounts = [
     id: 1,
     crypto: {
       name: 'Bitcoin',
-      shortName: 'BTC'
+      shortName: 'BTC',
     },
-    amount: 1.41
+    amount: 1.41,
   },
   {
     id: 2,
     crypto: {
       name: 'Etherium',
-      shortName: 'ETH'
+      shortName: 'ETH',
     },
-    amount: 1.41
+    amount: 1.41,
   },
   {
     id: 3,
     crypto: {
       name: 'Bitcoin',
-      shortName: 'BTC'
+      shortName: 'BTC',
     },
-    amount: 1.41
+    amount: 1.41,
   },
   {
     id: 4,
     crypto: {
       name: 'Bitcoin',
-      shortName: 'BTC'
+      shortName: 'BTC',
     },
-    amount: 1.41
-  }
+    amount: 1.41,
+  },
 ];
 
 const activeAccount = accounts[0];
 
-const WithdrawScreen = ({navigation}: WalletNavProps<'Withdraw'>) => {
+const WithdrawScreen = ({ navigation }: WalletNavProps<'Withdraw'>) => {
   const withdrawCryptoSchema = Yup.object().shape({
     destinationAddress: Yup.string().required(),
-    withdrawalAmount: Yup.string().required()
+    withdrawalAmount: Yup.string().required(),
     // email: Yup.string().email().required(),
   });
 
   return (
-    <DefaultLayout backgroundColor='#FFFFFF'>
+    <DefaultLayout backgroundColor="#FFFFFF">
       <Topbar
         onBackButtonPress={() => {
           navigation.goBack();
         }}
         title="Send BTC"
       />
-      <View style={{ paddingHorizontal:45, marginTop: 55 }}>
+      <View style={{ paddingHorizontal: 45, marginTop: 55 }}>
         <Formik
           initialValues={{
             destinationAddress: '',
-            withdrawalAmount: ''
+            withdrawalAmount: '',
           }}
           validationSchema={withdrawCryptoSchema}
-          onSubmit={ async () => {
+          onSubmit={async () => {
             navigation.goBack();
           }}
         >
@@ -89,7 +89,7 @@ const WithdrawScreen = ({navigation}: WalletNavProps<'Withdraw'>) => {
               <View style={[styles.inputAmount]}>
                 <AppTextInput
                   autoCorrect={false}
-                  style={{ input: styles.textInput, wrapper: styles.textInputWrapper}}
+                  style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
                   value={values.destinationAddress}
                   onChangeText={handleChange('destinationAddress')}
                   onBlur={handleBlur('destinationAddress')}
@@ -97,14 +97,18 @@ const WithdrawScreen = ({navigation}: WalletNavProps<'Withdraw'>) => {
                   error={touched.destinationAddress ? errors.destinationAddress : ''}
                 />
                 <View style={[styles.inputAmountText]}>
-                  <View style={{marginBottom: 10, marginTop: 10}}><PasteIcon /></View>
-                  <View><Text style={[styles.subtext, {textAlign: 'center'}]}>Paste</Text></View>
+                  <View style={{ marginBottom: 10, marginTop: 10 }}>
+                    <PasteIcon />
+                  </View>
+                  <View>
+                    <Text style={[styles.subtext, { textAlign: 'center' }]}>Paste</Text>
+                  </View>
                 </View>
               </View>
               <View style={[styles.inputAmount]}>
                 <AppTextInput
                   autoCorrect={false}
-                  style={{ input: styles.textInput, wrapper: styles.textInputWrapper}}
+                  style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
                   value={values.withdrawalAmount}
                   onChangeText={handleChange('withdrawalAmount')}
                   onBlur={handleBlur('withdrawalAmount')}
@@ -114,11 +118,15 @@ const WithdrawScreen = ({navigation}: WalletNavProps<'Withdraw'>) => {
                   maxLength={15}
                 />
                 <View style={[styles.inputAmountText]}>
-                  <Text>{activeAccount.amount} {activeAccount.crypto.shortName}</Text>
-                  <Text style={[styles.subtext, {textAlign: 'center'}]}>Available</Text>
+                  <Text>
+                    {activeAccount.amount} {activeAccount.crypto.shortName}
+                  </Text>
+                  <Text style={[styles.subtext, { textAlign: 'center' }]}>Available</Text>
                 </View>
               </View>
-              <View style={{flexDirection: 'row',justifyContent: 'flex-end', marginBottom: 20, alignItems: 'center'}}>
+              <View
+                style={{ flexDirection: 'row', justifyContent: 'flex-end', marginBottom: 20, alignItems: 'center' }}
+              >
                 <WhiteTouchableOpacity style={styles.percentButtons}>
                   <Text style={styles.percentButtonsText}>25%</Text>
                 </WhiteTouchableOpacity>
@@ -143,31 +151,46 @@ const WithdrawScreen = ({navigation}: WalletNavProps<'Withdraw'>) => {
 
 const styles = StyleSheet.create({
   component: {
-    marginBottom: 15
+    marginBottom: 15,
   },
   percentButtons: {
     paddingVertical: 7,
     paddingHorizontal: 10,
     marginLeft: 10,
-    borderRadius: 2
+    borderRadius: 2,
   },
   percentButtonsText: {
-    fontSize: 12
+    fontSize: 12,
   },
-  inputAmount: {flexDirection: 'row', alignItems: 'center', width: 280, backgroundColor: '#f7f7f7', justifyContent: 'space-between', borderRadius: 15, marginBottom: 15},
-  inputAmountTextInput: {padding: 20, backgroundColor: '#f7f7f7', fontSize: 14, borderRadius: 15, width: 200},
-  inputAmountText: {paddingVertical: 10, borderLeftWidth: 1, borderLeftColor: '#e5e5e5', alignItems: 'center', justifyContent: 'center', width: 80},
+  inputAmount: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: 280,
+    backgroundColor: '#f7f7f7',
+    justifyContent: 'space-between',
+    borderRadius: 15,
+    marginBottom: 15,
+  },
+  inputAmountTextInput: { padding: 20, backgroundColor: '#f7f7f7', fontSize: 14, borderRadius: 15, width: 200 },
+  inputAmountText: {
+    paddingVertical: 10,
+    borderLeftWidth: 1,
+    borderLeftColor: '#e5e5e5',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 80,
+  },
   subtext: {
     color: '#625E59',
     fontSize: 10,
-    marginTop: 5
+    marginTop: 5,
   },
-  textInputWrapper: {marginBottom: 10},
+  textInputWrapper: { marginBottom: 10 },
   textInput: {
-    width: '100%', 
-    backgroundColor: '#F7F7F7', 
-    padding: 18
-  }
+    width: '100%',
+    backgroundColor: '#F7F7F7',
+    padding: 18,
+  },
 });
 
 export default WithdrawScreen;

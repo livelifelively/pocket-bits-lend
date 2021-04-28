@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ColorSchemeName, View, ActivityIndicator } from 'react-native';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 
@@ -34,8 +34,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
   }
 
   return (
-    <NavigationContainer
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <NavigationContainer theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       {user ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
   );

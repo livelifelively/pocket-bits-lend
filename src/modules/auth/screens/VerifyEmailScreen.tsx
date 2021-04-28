@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -24,7 +24,7 @@ const VerifyEmailScreen = ({ navigation }: AuthNavProps<'VerifyEmail'>) => {
   });
 
   return (
-    <DefaultLayout backgroundColor='#FCFCFC' paddingHorizontal={45}>
+    <DefaultLayout backgroundColor="#FCFCFC" paddingHorizontal={45}>
       <View style={styles.logo}>
         <Text style={styles.logoText}>logo</Text>
       </View>
@@ -34,13 +34,13 @@ const VerifyEmailScreen = ({ navigation }: AuthNavProps<'VerifyEmail'>) => {
       <Formik
         initialValues={{
           otp: '',
-          email
+          email,
         }}
         validationSchema={emailVerificationSchema}
-        onSubmit={ async (values) => {
+        onSubmit={async (values) => {
           const signedUp: RequestResponse = await verifyEmailPost({
             otp: values.otp,
-            email: values.email
+            email: values.email,
           });
           if (signedUp.status === 'SUCCESS') {
             navigation.navigate('SetPasscode');
@@ -48,10 +48,10 @@ const VerifyEmailScreen = ({ navigation }: AuthNavProps<'VerifyEmail'>) => {
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
-          <View style={{width: '100%'}}>
+          <View style={{ width: '100%' }}>
             <AppTextInput
               autoCorrect={false}
-              style={{ input: styles.textInput, wrapper: styles.textInputWrapper}}
+              style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
               value={values.otp}
               onChangeText={handleChange('otp')}
               onBlur={handleBlur('otp')}
@@ -60,7 +60,7 @@ const VerifyEmailScreen = ({ navigation }: AuthNavProps<'VerifyEmail'>) => {
               error={touched.otp ? errors.otp : ''}
               maxLength={6}
             />
-            <View style={{marginBottom: 70}}>
+            <View style={{ marginBottom: 70 }}>
               <Text style={globalStyles.subtext}>You’ll receive a 6 digit OTP on your registered email</Text>
             </View>
             <AppButton
@@ -68,8 +68,8 @@ const VerifyEmailScreen = ({ navigation }: AuthNavProps<'VerifyEmail'>) => {
               onPress={() => {
                 handleSubmit();
               }}
-              size='normal'
-              style={{paddingHorizontal: 50}}
+              size="normal"
+              style={{ paddingHorizontal: 50 }}
             />
           </View>
         )}
@@ -81,29 +81,29 @@ const VerifyEmailScreen = ({ navigation }: AuthNavProps<'VerifyEmail'>) => {
 const styles = StyleSheet.create({
   logo: {
     height: 65,
-    width: '100%', 
-    backgroundColor: '#EBEBEB', 
-    marginTop: 100, 
+    width: '100%',
+    backgroundColor: '#EBEBEB',
+    marginTop: 100,
     marginBottom: 120,
-    alignItems: 'center', 
-    flexDirection: 'column', 
-    justifyContent: 'center'
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   logoText: {
-    textAlign: 'center', 
-    fontSize: 24
+    textAlign: 'center',
+    fontSize: 24,
   },
   pageTitle: {
-    fontSize: 24, 
-    fontFamily: 'Poppins-Medium'
+    fontSize: 24,
+    fontFamily: 'Poppins-Medium',
   },
-  pageTitleWrapper: {marginBottom: 40},
-  textInputWrapper: {marginBottom: 10},
+  pageTitleWrapper: { marginBottom: 40 },
+  textInputWrapper: { marginBottom: 10 },
   textInput: {
-    width: '100%', 
-    backgroundColor: '#F7F7F7', 
-    padding: 18
-  }
+    width: '100%',
+    backgroundColor: '#F7F7F7',
+    padding: 18,
+  },
 });
 
 export default VerifyEmailScreen;

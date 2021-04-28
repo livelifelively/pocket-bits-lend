@@ -18,7 +18,7 @@ export const AuthStack: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        header: () => null
+        header: () => null,
       }}
       initialRouteName="HomeGuest"
     >

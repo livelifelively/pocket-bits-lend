@@ -3,19 +3,12 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 
 interface WhiteTouchableOpacityProps {
   onPress?: () => void;
-  style?: Record<string, unknown>,
+  style?: Record<string, unknown>;
 }
 
-export const WhiteTouchableOpacity: React.FC<WhiteTouchableOpacityProps> = ({children, onPress, style={}}) => {
+export const WhiteTouchableOpacity: React.FC<WhiteTouchableOpacityProps> = ({ children, onPress, style = {} }) => {
   return (
-    <TouchableOpacity
-      activeOpacity={0.7}
-      onPress={onPress}
-      style={[
-        styles.touchableOpacity,
-        style
-      ]}
-    >
+    <TouchableOpacity activeOpacity={0.7} onPress={onPress} style={[styles.touchableOpacity, style]}>
       {children}
     </TouchableOpacity>
   );
@@ -32,5 +25,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
-  }
+  },
 });

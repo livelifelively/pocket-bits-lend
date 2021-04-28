@@ -17,7 +17,7 @@ export const SettingsStack: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        header: () => null
+        header: () => null,
       }}
       initialRouteName="Settings"
     >

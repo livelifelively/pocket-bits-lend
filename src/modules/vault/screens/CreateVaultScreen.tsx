@@ -14,14 +14,14 @@ import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchable
 import { BitcoinIcon, EtheriumIcon, TetherIcon } from '../../../icons';
 
 type VaultDepositOption = {
-  id: number,
-  interestRate: number,
-  duration: string,
+  id: number;
+  interestRate: number;
+  duration: string;
   crypto: {
-    name: string,
-    shortName: string
-  }
-}
+    name: string;
+    shortName: string;
+  };
+};
 
 const availableFundsInCrypto = 1.41;
 
@@ -32,8 +32,8 @@ const vaultDepositOptions = [
     duration: '1 month',
     crypto: {
       name: 'Bitcoin',
-      shortName: 'BTC'
-    }
+      shortName: 'BTC',
+    },
   },
   {
     id: 2,
@@ -41,8 +41,8 @@ const vaultDepositOptions = [
     duration: '3 months',
     crypto: {
       name: 'Bitcoin',
-      shortName: 'BTC'
-    }
+      shortName: 'BTC',
+    },
   },
   {
     id: 3,
@@ -50,8 +50,8 @@ const vaultDepositOptions = [
     duration: '6 months',
     crypto: {
       name: 'Bitcoin',
-      shortName: 'BTC'
-    }
+      shortName: 'BTC',
+    },
   },
   {
     id: 4,
@@ -59,33 +59,33 @@ const vaultDepositOptions = [
     duration: '1 year',
     crypto: {
       name: 'Bitcoin',
-      shortName: 'BTC'
-    }
-  }
+      shortName: 'BTC',
+    },
+  },
 ];
 
 const cryotpyIcon = (shortName: string) => {
   switch (shortName) {
-  case 'USDT':
-    return <TetherIcon />;
+    case 'USDT':
+      return <TetherIcon />;
 
-  case 'BTC':
-    return <BitcoinIcon />;
+    case 'BTC':
+      return <BitcoinIcon />;
 
-  case 'ETH':
-    return <EtheriumIcon />;
-  
-  default:
-    break;
+    case 'ETH':
+      return <EtheriumIcon />;
+
+    default:
+      break;
   }
 };
 
 const selectedOption = vaultDepositOptions[0];
 
-const CreateVaultScreen = ({navigation} : VaultCreationNavProps<'CreateVault'>) => {
+const CreateVaultScreen = ({ navigation }: VaultCreationNavProps<'CreateVault'>) => {
   const [activeVaultOption, setActiveVaultOption] = useState(() => selectedOption);
   const [menuVisibility, setMenuVisibility] = useState(false);
-  
+
   const openMenu = () => setMenuVisibility(true);
 
   const closeMenu = () => setMenuVisibility(false);
@@ -98,11 +98,11 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<'CreateVault'>) 
   const twoFactorAuthenticationSchema = Yup.object().shape({
     verificationCode: Yup.string()
       .required()
-      .matches(/^[0-9]+$/, 'Must be only digits')
+      .matches(/^[0-9]+$/, 'Must be only digits'),
   });
 
   return (
-    <DefaultLayout style={{paddingHorizontal: 30}}>
+    <DefaultLayout style={{ paddingHorizontal: 30 }}>
       <Topbar
         onBackButtonPress={() => {
           navigation.goBack();
@@ -111,10 +111,8 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<'CreateVault'>) 
       />
       <WhiteView style={styles.createVault}>
         <View style={styles.createVaultInfo}>
-          <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: 60}}>
-            <View style={{marginRight: 15}}>
-              {cryotpyIcon(activeVaultOption.crypto.shortName)}
-            </View>
+          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: 60 }}>
+            <View style={{ marginRight: 15 }}>{cryotpyIcon(activeVaultOption.crypto.shortName)}</View>
             <Text>{activeVaultOption.crypto.shortName}</Text>
           </View>
           <View>
@@ -122,22 +120,22 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<'CreateVault'>) 
             <Text>Interest Rate</Text>
           </View>
         </View>
-        
+
         <Formik
           initialValues={{
             cryptoAmount: '',
           }}
           validationSchema={twoFactorAuthenticationSchema}
-          onSubmit={ async () => {
+          onSubmit={async () => {
             navigation.navigate('VaultCreated');
           }}
         >
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <View>
-              <View style={[styles.inputAmount]}>          
+              <View style={[styles.inputAmount]}>
                 <AppTextInput
                   autoCorrect={false}
-                  style={{ input: styles.textInput, wrapper: styles.textInputWrapper}}
+                  style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
                   value={values.cryptoAmount}
                   onChangeText={handleChange('cryptoAmount')}
                   onBlur={handleBlur('cryptoAmount')}
@@ -147,11 +145,15 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<'CreateVault'>) 
                   error={touched.cryptoAmount ? errors.cryptoAmount : ''}
                 />
                 <View style={[styles.inputAmountText]}>
-                  <Text>{availableFundsInCrypto} {activeVaultOption.crypto.shortName}</Text>
-                  <Text style={[styles.subtext, {textAlign: 'center'}]}>Available</Text>
+                  <Text>
+                    {availableFundsInCrypto} {activeVaultOption.crypto.shortName}
+                  </Text>
+                  <Text style={[styles.subtext, { textAlign: 'center' }]}>Available</Text>
                 </View>
               </View>
-              <View style={{flexDirection: 'row',justifyContent: 'flex-end', marginBottom: 20, alignItems: 'center'}}>
+              <View
+                style={{ flexDirection: 'row', justifyContent: 'flex-end', marginBottom: 20, alignItems: 'center' }}
+              >
                 <WhiteTouchableOpacity style={styles.percentButtons}>
                   <Text style={styles.percentButtonsText}>25%</Text>
                 </WhiteTouchableOpacity>
@@ -165,9 +167,7 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<'CreateVault'>) 
                   <Text style={styles.percentButtonsText}>100%</Text>
                 </WhiteTouchableOpacity>
               </View>
-              <View
-                style={styles.dropdownMenuWrapper}
-              >
+              <View style={styles.dropdownMenuWrapper}>
                 <Menu
                   visible={menuVisibility}
                   onDismiss={closeMenu}
@@ -178,17 +178,30 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<'CreateVault'>) 
                     </TouchableOpacity>
                   }
                 >
-                  {
-                    vaultDepositOptions && vaultDepositOptions.map((val) => {
-                      return <Menu.Item onPress={() => {selectMenuItem(val);}} key={val.id} title={val.duration} />;
-                    })
-                  }
+                  {vaultDepositOptions &&
+                    vaultDepositOptions.map((val) => {
+                      return (
+                        <Menu.Item
+                          onPress={() => {
+                            selectMenuItem(val);
+                          }}
+                          key={val.id}
+                          title={val.duration}
+                        />
+                      );
+                    })}
                 </Menu>
               </View>
               <Text style={styles.instructions}>
-                Lock {activeVaultOption.crypto.shortName} for {activeVaultOption.duration} at {activeVaultOption.interestRate}% interest
+                Lock {activeVaultOption.crypto.shortName} for {activeVaultOption.duration} at{' '}
+                {activeVaultOption.interestRate}% interest
               </Text>
-              <AppButton title="Lock in Vault" onPress={() => {handleSubmit();}} />
+              <AppButton
+                title="Lock in Vault"
+                onPress={() => {
+                  handleSubmit();
+                }}
+              />
             </View>
           )}
         </Formik>
@@ -199,57 +212,71 @@ const CreateVaultScreen = ({navigation} : VaultCreationNavProps<'CreateVault'>) 
 
 const styles = StyleSheet.create({
   createVault: {
-    padding: 30
+    padding: 30,
   },
-  createVaultInfo: {flexDirection: 'row', width: '100%', justifyContent: 'space-between', marginBottom: 30},
-
+  createVaultInfo: { flexDirection: 'row', width: '100%', justifyContent: 'space-between', marginBottom: 30 },
 
   percentButtons: {
     paddingVertical: 7,
     paddingHorizontal: 10,
     marginLeft: 10,
-    borderRadius: 2
+    borderRadius: 2,
   },
   percentButtonsText: {
-    fontSize: 12
+    fontSize: 12,
   },
-  inputAmount: {flexDirection: 'row', alignItems: 'center', width: '100%', backgroundColor: '#f7f7f7', justifyContent: 'center', borderRadius: 15, marginBottom: 15,},
-  inputAmountTextInput: {padding: 20, backgroundColor: '#f7f7f7', fontSize: 14, borderRadius: 15, width: 200,},
-  inputAmountText: {paddingVertical: 10, borderLeftWidth: 1, borderLeftColor: '#e5e5e5', alignItems: 'center', justifyContent: 'center', width: 80},
-  textInputWrapper: {marginBottom: 10},
+  inputAmount: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    backgroundColor: '#f7f7f7',
+    justifyContent: 'center',
+    borderRadius: 15,
+    marginBottom: 15,
+  },
+  inputAmountTextInput: { padding: 20, backgroundColor: '#f7f7f7', fontSize: 14, borderRadius: 15, width: 200 },
+  inputAmountText: {
+    paddingVertical: 10,
+    borderLeftWidth: 1,
+    borderLeftColor: '#e5e5e5',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 80,
+  },
+  textInputWrapper: { marginBottom: 10 },
   textInput: {
-    width: '100%', 
-    backgroundColor: '#F7F7F7', 
-    padding: 18
+    width: '100%',
+    backgroundColor: '#F7F7F7',
+    padding: 18,
   },
-  
+
   dropdownMenuWrapper: {
     borderWidth: 1,
     borderColor: '#f5f5f5',
     flexDirection: 'row',
     marginBottom: 15,
-    width: 100
+    width: 100,
   },
-  dropdownMenuAnchor: {padding: 10, width: '100%', flexDirection: 'row', justifyContent: 'space-between'},
+  dropdownMenuAnchor: { padding: 10, width: '100%', flexDirection: 'row', justifyContent: 'space-between' },
   subtext: {
     color: '#625E59',
     fontSize: 10,
-    marginTop: 5
+    marginTop: 5,
   },
-  percentButtonsRow: {flexDirection: 'row', justifyContent: 'flex-end', marginBottom: 10},
-  instructions: {textAlign: 'center', marginBottom: 25, color: '#625E59'},
+  percentButtonsRow: { flexDirection: 'row', justifyContent: 'flex-end', marginBottom: 10 },
+  instructions: { textAlign: 'center', marginBottom: 25, color: '#625E59' },
   percentButton: {
     marginLeft: 5,
     elevation: 4,
     padding: 5,
-    borderColor: '#f5f5f5'
+    borderColor: '#f5f5f5',
   },
   yellowText: {
     color: '#FFB850',
     fontSize: 18,
     fontFamily: 'Poppins-Bold',
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });
 
 export default CreateVaultScreen;

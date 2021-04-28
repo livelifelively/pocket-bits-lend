@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Formik } from 'formik';
@@ -17,30 +17,41 @@ function LoginEmailScreen({ navigation }: AuthNavProps<'LoginEmail'>) {
 
   const loginSchema = Yup.object().shape({
     email: Yup.string().email().required(),
-    password: Yup.string().min(8).required()
+    password: Yup.string().min(8).required(),
   });
 
   return (
-    <DefaultLayout backgroundColor='#FCFCFC' paddingHorizontal={45}>
-      <View style={{height: 65, width: '100%', backgroundColor: '#EBEBEB', marginTop: 100, marginBottom: 65, alignItems: 'center', flexDirection: 'column', justifyContent: 'center'}}>
-        <Text style={{textAlign: 'center', fontSize: 24}}>logo</Text>
+    <DefaultLayout backgroundColor="#FCFCFC" paddingHorizontal={45}>
+      <View
+        style={{
+          height: 65,
+          width: '100%',
+          backgroundColor: '#EBEBEB',
+          marginTop: 100,
+          marginBottom: 65,
+          alignItems: 'center',
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}
+      >
+        <Text style={{ textAlign: 'center', fontSize: 24 }}>logo</Text>
       </View>
-      <View style={{marginBottom: 40}}>
-        <Text style={{fontSize: 24, fontFamily: 'Poppins-Medium'}}>Sign In</Text>
+      <View style={{ marginBottom: 40 }}>
+        <Text style={{ fontSize: 24, fontFamily: 'Poppins-Medium' }}>Sign In</Text>
       </View>
       <Formik
         initialValues={{
           email: '',
           password: '',
-          termsAndConditions: false
+          termsAndConditions: false,
         }}
         validationSchema={loginSchema}
-        onSubmit={ async (values) => {
+        onSubmit={async (values) => {
           const signedUp: RequestResponse = await signinPost({
             email: values.email,
             password: values.password,
             // #TODO
-            verificationCode: ''
+            verificationCode: '',
           });
           if (signedUp.status === 'SUCCESS') {
             // handle cases for wrong email password combination
@@ -49,10 +60,10 @@ function LoginEmailScreen({ navigation }: AuthNavProps<'LoginEmail'>) {
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
-          <View style={{width: '100%'}}>
+          <View style={{ width: '100%' }}>
             <AppTextInput
               autoCorrect={false}
-              style={{ input: styles.textInput, wrapper: styles.textInputWrapper}}
+              style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
               value={values.email}
               onChangeText={handleChange('email')}
               onBlur={handleBlur('email')}
@@ -63,7 +74,7 @@ function LoginEmailScreen({ navigation }: AuthNavProps<'LoginEmail'>) {
             />
             <AppTextInput
               autoCorrect={false}
-              style={{ input: styles.textInput, wrapper: styles.textInputWrapper}}
+              style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
               value={values.password}
               onChangeText={handleChange('password')}
               onBlur={handleBlur('password')}
@@ -73,21 +84,23 @@ function LoginEmailScreen({ navigation }: AuthNavProps<'LoginEmail'>) {
               error={touched.password ? errors.password : ''}
             />
             <YellowTouchableOpacity onPress={() => {}}>
-              <Text style={{textAlign: 'center', width: '100%', fontSize: 14, fontFamily: 'Poppins-Medium'}}>Sign In</Text>
+              <Text style={{ textAlign: 'center', width: '100%', fontSize: 14, fontFamily: 'Poppins-Medium' }}>
+                Sign In
+              </Text>
             </YellowTouchableOpacity>
             <AppButton
               title="Sign In"
               onPress={() => {
                 handleSubmit();
               }}
-              size='normal'
-              style={{paddingHorizontal: 50}}
+              size="normal"
+              style={{ paddingHorizontal: 50 }}
             />
           </View>
         )}
       </Formik>
       <View>
-        <Text style={{fontFamily: 'Poppins-Bold'}}>Don’t have an account, </Text>
+        <Text style={{ fontFamily: 'Poppins-Bold' }}>Don’t have an account, </Text>
         <AppButton
           title="Sign Up"
           size="small"
@@ -103,12 +116,12 @@ function LoginEmailScreen({ navigation }: AuthNavProps<'LoginEmail'>) {
 }
 
 const styles = StyleSheet.create({
-  textInputWrapper: {marginBottom: 10},
+  textInputWrapper: { marginBottom: 10 },
   textInput: {
-    width: '100%', 
-    backgroundColor: '#F7F7F7', 
-    padding: 18
-  }
+    width: '100%',
+    backgroundColor: '#F7F7F7',
+    padding: 18,
+  },
 });
 
 export default LoginEmailScreen;

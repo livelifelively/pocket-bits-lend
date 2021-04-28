@@ -16,7 +16,7 @@ export const WalletStack: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        header: () => null
+        header: () => null,
       }}
       initialRouteName="Wallet"
     >

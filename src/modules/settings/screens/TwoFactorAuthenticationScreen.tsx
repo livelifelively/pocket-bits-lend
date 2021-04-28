@@ -12,7 +12,7 @@ import { AppTextInput } from '../../../components/design/AppTextInput';
 import { YellowCopyIcon } from '../../../icons';
 import { RequestResponse, twoFactorAuthenticationVefificationPost } from '../../../api/requests';
 
-const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<'TwoFactorAuthentication'>) => {
+const TwoFactorAuthenticationScreen = ({ navigation }: SettingsNavProps<'TwoFactorAuthentication'>) => {
   const twoFactorAuthenticationSchema = Yup.object().shape({
     verificationCode: Yup.string()
       .required()
@@ -23,7 +23,7 @@ const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<'TwoFactor
   });
 
   return (
-    <DefaultLayout backgroundColor='#ffffff'>
+    <DefaultLayout backgroundColor="#ffffff">
       <Topbar
         onBackButtonPress={() => {
           navigation.goBack();
@@ -34,27 +34,36 @@ const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<'TwoFactor
       <Title style={styles.component}>Scan the QR Code</Title>
       <Title style={styles.component}>OR</Title>
       <Title style={styles.component}>Copy this Key</Title>
-      <View style={{
-        marginBottom: 25, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#FAFAFA', width: '100%', 
-        alignItems: 'center', paddingHorizontal: 15, borderRadius: 15, paddingVertical: 20
-      }}>
+      <View
+        style={{
+          marginBottom: 25,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          backgroundColor: '#FAFAFA',
+          width: '100%',
+          alignItems: 'center',
+          paddingHorizontal: 15,
+          borderRadius: 15,
+          paddingVertical: 20,
+        }}
+      >
         <View>
-          <Text style={{color: '#625E59', fontSize: 12}}>3F8QCEXUrRQcjoyp2J8ng71xre3vd33dcer</Text>
+          <Text style={{ color: '#625E59', fontSize: 12 }}>3F8QCEXUrRQcjoyp2J8ng71xre3vd33dcer</Text>
         </View>
-        <TouchableOpacity onPress={() => null} style={{marginRight: 10}}>
+        <TouchableOpacity onPress={() => null} style={{ marginRight: 10 }}>
           <YellowCopyIcon />
         </TouchableOpacity>
       </View>
       <Formik
         initialValues={{
           verificationCode: '',
-          email: ''
+          email: '',
         }}
         validationSchema={twoFactorAuthenticationSchema}
-        onSubmit={ async (values) => {
+        onSubmit={async (values) => {
           const signedUp: RequestResponse = await twoFactorAuthenticationVefificationPost({
             verificationCode: values.verificationCode,
-            email: values.email
+            email: values.email,
           });
           if (signedUp.status === 'SUCCESS') {
             // navigation.navigate('SetPasscode')
@@ -62,10 +71,10 @@ const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<'TwoFactor
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
-          <View style={{width: '100%'}}>
+          <View style={{ width: '100%' }}>
             <AppTextInput
               autoCorrect={false}
-              style={{ input: styles.textInput, wrapper: styles.textInputWrapper}}
+              style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
               value={values.verificationCode}
               onChangeText={handleChange('verificationCode')}
               onBlur={handleBlur('verificationCode')}
@@ -77,8 +86,8 @@ const TwoFactorAuthenticationScreen = ({navigation}: SettingsNavProps<'TwoFactor
               onPress={() => {
                 handleSubmit();
               }}
-              size='normal'
-              style={{paddingHorizontal: 50}}
+              size="normal"
+              style={{ paddingHorizontal: 50 }}
             />
           </View>
         )}
@@ -98,17 +107,17 @@ const styles = StyleSheet.create({
     width: 175,
     height: 175,
     marginBottom: 50,
-    backgroundColor: '#000'
+    backgroundColor: '#000',
   },
   component: {
-    marginBottom: 25
+    marginBottom: 25,
   },
-  textInputWrapper: {marginBottom: 10},
+  textInputWrapper: { marginBottom: 10 },
   textInput: {
-    width: '100%', 
-    backgroundColor: '#F7F7F7', 
-    padding: 18
-  }
+    width: '100%',
+    backgroundColor: '#F7F7F7',
+    padding: 18,
+  },
 });
 
 export default TwoFactorAuthenticationScreen;

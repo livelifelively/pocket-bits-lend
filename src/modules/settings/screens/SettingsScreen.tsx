@@ -6,10 +6,10 @@ import { SettingsNavProps } from '../SettingsParamList';
 import { AuthContext } from '../../auth/AuthProvider';
 import Topbar from '../../../components/design/Topbar';
 import { WhiteView } from '../../../components/design/WhiteView';
-import {LockIcon, LogoutIcon, UserIcon} from '../../../icons';
+import { LockIcon, LogoutIcon, UserIcon } from '../../../icons';
 
-const SettingsScreen = ({navigation}: SettingsNavProps<'Settings'>) => {
-  const {logout} = useContext(AuthContext);
+const SettingsScreen = ({ navigation }: SettingsNavProps<'Settings'>) => {
+  const { logout } = useContext(AuthContext);
 
   return (
     <DefaultLayout>
@@ -19,7 +19,12 @@ const SettingsScreen = ({navigation}: SettingsNavProps<'Settings'>) => {
         }}
         title="Settings"
       />
-      <TouchableOpacity style={styles.settingsAction} onPress={() => {navigation.navigate('ProfileSettings');}}>
+      <TouchableOpacity
+        style={styles.settingsAction}
+        onPress={() => {
+          navigation.navigate('ProfileSettings');
+        }}
+      >
         <WhiteView style={styles.settingsActionWrapper}>
           <View style={styles.settingsActionIcon}>
             <UserIcon />
@@ -29,7 +34,12 @@ const SettingsScreen = ({navigation}: SettingsNavProps<'Settings'>) => {
           </View>
         </WhiteView>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.settingsAction} onPress={() => {navigation.navigate('SecuritySettings');}}>
+      <TouchableOpacity
+        style={styles.settingsAction}
+        onPress={() => {
+          navigation.navigate('SecuritySettings');
+        }}
+      >
         <WhiteView style={styles.settingsActionWrapper}>
           <View style={styles.settingsActionIcon}>
             <LockIcon />
@@ -39,7 +49,12 @@ const SettingsScreen = ({navigation}: SettingsNavProps<'Settings'>) => {
           </View>
         </WhiteView>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.settingsAction} onPress={() => {logout();}}>
+      <TouchableOpacity
+        style={styles.settingsAction}
+        onPress={() => {
+          logout();
+        }}
+      >
         <WhiteView style={styles.settingsActionWrapper}>
           <View style={styles.settingsActionIcon}>
             <LogoutIcon />
@@ -60,7 +75,7 @@ const styles = StyleSheet.create({
   },
   settingsActionTitle: {
     fontSize: 15,
-    fontFamily: 'Poppins-Medium'
+    fontFamily: 'Poppins-Medium',
   },
   settingsActionWrapper: {
     padding: 20,
@@ -71,7 +86,7 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     marginRight: 20,
-  }
+  },
 });
 
 export default SettingsScreen;

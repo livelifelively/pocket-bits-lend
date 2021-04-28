@@ -16,19 +16,19 @@ export type VaultNavProps<T extends keyof VaultParamList> = {
 export type HomeParamList = {
   Home: undefined;
   WalletStack: Record<string, unknown>;
-  SettingsStack: undefined
+  SettingsStack: undefined;
 };
 
 export type HomeNavProps<T extends keyof HomeParamList> = {
-  navigation: StackNavigationProp<HomeParamList, T>
-  route: RouteProp<HomeParamList, T>
-}
+  navigation: StackNavigationProp<HomeParamList, T>;
+  route: RouteProp<HomeParamList, T>;
+};
 
 export type RewardsParamList = {
-  InviteFriends: undefined
-}
+  InviteFriends: undefined;
+};
 
 export type RewardsNavProps<T extends keyof RewardsParamList> = {
   navigation: StackNavigationProp<RewardsParamList, T>;
   route: RouteProp<RewardsParamList, T>;
-}
+};

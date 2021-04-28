@@ -7,11 +7,10 @@ import { AppButton } from '../../../components/design/AppButton';
 import { VaultIntro } from '../../../components/business/VaultIntro';
 import { Wallets } from '../../../components/business/Wallets';
 
-
 function HomeGuestScreen({ navigation }: AuthNavProps<'HomeGuest'>) {
   return (
     <DefaultLayout>
-      <View style={{...styles.authButtonsWrapper, ...styles.components}}>
+      <View style={{ ...styles.authButtonsWrapper, ...styles.components }}>
         <AppButton
           title="Sign In"
           onPress={() => {
@@ -30,7 +29,7 @@ function HomeGuestScreen({ navigation }: AuthNavProps<'HomeGuest'>) {
           style={styles.authButtons}
         />
       </View>
-      <VaultIntro style={{...styles.components}} />
+      <VaultIntro style={{ ...styles.components }} />
       <Wallets onPress={() => {}} />
     </DefaultLayout>
   );
@@ -38,17 +37,17 @@ function HomeGuestScreen({ navigation }: AuthNavProps<'HomeGuest'>) {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 30
+    fontSize: 30,
   },
   authButtons: {
-    width: '100%'
+    width: '100%',
   },
   authButtonsWrapper: {
-    width: '100%'
+    width: '100%',
   },
   components: {
-    marginBottom: 15
-  }
+    marginBottom: 15,
+  },
 });
 
 export default HomeGuestScreen;

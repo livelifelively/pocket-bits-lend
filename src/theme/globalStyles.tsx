@@ -7,7 +7,7 @@ export const globalStyles = StyleSheet.create({
     fontFamily: 'Poppins-Medium',
   },
   subtext: {
-    color: '#625E59', 
-    fontSize: 12
-  }
+    color: '#625E59',
+    fontSize: 12,
+  },
 });

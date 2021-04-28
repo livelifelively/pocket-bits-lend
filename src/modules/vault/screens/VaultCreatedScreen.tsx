@@ -7,7 +7,7 @@ import { AppButton } from '../../../components/design/AppButton';
 import Topbar from '../../../components/design/Topbar';
 import VaultCreatedImage from '../../../icons/VaultCreatedImage';
 
-const VaultCreatedScreen = ({navigation} : VaultCreationNavProps<'VaultCreated'>) => {
+const VaultCreatedScreen = ({ navigation }: VaultCreationNavProps<'VaultCreated'>) => {
   return (
     <DefaultLayout>
       <Topbar
@@ -22,14 +22,19 @@ const VaultCreatedScreen = ({navigation} : VaultCreationNavProps<'VaultCreated'>
       <View style={styles.successMessageWrapper}>
         <Text style={styles.successMessage}>Vault Successfully Created</Text>
       </View>
-      <AppButton title="Okay" onPress={() => {navigation.goBack();}} />
+      <AppButton
+        title="Okay"
+        onPress={() => {
+          navigation.goBack();
+        }}
+      />
     </DefaultLayout>
   );
 };
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 30
+    fontSize: 30,
   },
   successImage: {
     width: 175,
@@ -37,12 +42,12 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   successMessageWrapper: {
-    marginBottom: 40
+    marginBottom: 40,
   },
   successMessage: {
     fontSize: 18,
-    fontFamily: 'Poppins-Medium'
-  }
+    fontFamily: 'Poppins-Medium',
+  },
 });
 
 export default VaultCreatedScreen;

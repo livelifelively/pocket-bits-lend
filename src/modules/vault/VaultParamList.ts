@@ -25,7 +25,6 @@ export type VaultHistoryNavProps<T extends keyof VaultHistoryParamList> = {
   route: RouteProp<VaultHistoryParamList, T>;
 };
 
-
 export type VaultCreationNavProps<T extends keyof VaultCreationParamList> = {
   navigation: StackNavigationProp<VaultCreationParamList, T>;
   route: RouteProp<VaultCreationParamList, T>;

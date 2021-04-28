@@ -7,8 +7,8 @@ const OnboardingScreen = () => {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 30
-  }
+    fontSize: 30,
+  },
 });
 
 export default OnboardingScreen;

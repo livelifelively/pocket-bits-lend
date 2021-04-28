@@ -14,5 +14,3 @@ export type AppStackParamList = {
   WalletStack: undefined;
   SettingsStack: undefined;
 };
-
-

@@ -8,9 +8,9 @@ import Topbar from '../../../components/design/Topbar';
 import { YellowCopyIcon, YellowShareIcon } from '../../../icons';
 import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
 
-const DepositScreen = ({navigation}: WalletNavProps<'Deposit'>) => {
+const DepositScreen = ({ navigation }: WalletNavProps<'Deposit'>) => {
   return (
-    <DefaultLayout backgroundColor='#ffffff'>
+    <DefaultLayout backgroundColor="#ffffff">
       <Topbar
         onBackButtonPress={() => {
           navigation.goBack();
@@ -20,14 +20,23 @@ const DepositScreen = ({navigation}: WalletNavProps<'Deposit'>) => {
       <View style={styles.depositQRCode}></View>
       <Title style={styles.component}>Scan the QR Code</Title>
       <Title style={styles.component}>OR</Title>
-      <View style={{
-        marginBottom: 25, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#FAFAFA', width: '100%', 
-        alignItems: 'center', paddingHorizontal: 15, borderRadius: 15, paddingVertical: 20
-      }}>
+      <View
+        style={{
+          marginBottom: 25,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          backgroundColor: '#FAFAFA',
+          width: '100%',
+          alignItems: 'center',
+          paddingHorizontal: 15,
+          borderRadius: 15,
+          paddingVertical: 20,
+        }}
+      >
         <View>
-          <Text style={{color: '#625E59', fontSize: 12}}>3F8QCEXUrRQcjoyp2J8ng71xre3vd33dcer</Text>
+          <Text style={{ color: '#625E59', fontSize: 12 }}>3F8QCEXUrRQcjoyp2J8ng71xre3vd33dcer</Text>
         </View>
-        <TouchableOpacity onPress={() => {}} style={{marginRight: 10}}>
+        <TouchableOpacity onPress={() => {}} style={{ marginRight: 10 }}>
           <YellowCopyIcon />
         </TouchableOpacity>
       </View>
@@ -42,11 +51,15 @@ const DepositScreen = ({navigation}: WalletNavProps<'Deposit'>) => {
           paddingHorizontal: 15,
           paddingVertical: 8,
           borderRadius: 8,
-          width: 130
+          width: 130,
         }}
       >
-        <View style={{width: 19, height: 19, marginRight: 20}}><YellowShareIcon /></View>
-        <View><Text>Share</Text></View>
+        <View style={{ width: 19, height: 19, marginRight: 20 }}>
+          <YellowShareIcon />
+        </View>
+        <View>
+          <Text>Share</Text>
+        </View>
       </WhiteTouchableOpacity>
     </DefaultLayout>
   );
@@ -57,11 +70,11 @@ const styles = StyleSheet.create({
     width: 175,
     height: 175,
     marginBottom: 50,
-    backgroundColor: '#000'
+    backgroundColor: '#000',
   },
   component: {
-    marginBottom: 30
-  }
+    marginBottom: 30,
+  },
 });
 
 export default DepositScreen;

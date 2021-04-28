@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { 
+import {
   VaultHistoryParamList,
   VaultCreationParamList,
   VaultActiveDepositsParamList,
@@ -27,7 +27,7 @@ export const VaultCreationStack: React.FC = () => {
   return (
     <VaultCreation.Navigator
       screenOptions={{
-        header: () => null
+        header: () => null,
       }}
       initialRouteName="CreateVault"
     >
@@ -37,12 +37,11 @@ export const VaultCreationStack: React.FC = () => {
   );
 };
 
-
 export const VaultHistoryStack: React.FC = () => {
   return (
     <VaultHistory.Navigator
       screenOptions={{
-        header: () => null
+        header: () => null,
       }}
       initialRouteName="VaultHistory"
     >
@@ -55,7 +54,7 @@ export const VaultActiveDepositsStack: React.FC = () => {
   return (
     <VaultActiveDeposits.Navigator
       screenOptions={{
-        header: () => null
+        header: () => null,
       }}
       initialRouteName="ActiveDeposits"
     >

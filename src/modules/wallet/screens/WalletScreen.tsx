@@ -11,7 +11,7 @@ import { WalletTransactionHistory } from '../../../components/business/WalletTra
 import { CopyOutlineIcon, ReceiveIcon, SendIcon } from '../../../icons';
 // import { TouchableOpacity } from "react-native-gesture-handler";
 
-const WalletScreen = ({navigation}: WalletNavProps<'Wallet'>) => {
+const WalletScreen = ({ navigation }: WalletNavProps<'Wallet'>) => {
   return (
     <DefaultLayout>
       <Topbar
@@ -21,10 +21,20 @@ const WalletScreen = ({navigation}: WalletNavProps<'Wallet'>) => {
         title="Wallet"
       />
       <WalletBalance style={styles.component} onPress={() => {}} />
-      <View style={{...styles.walletActions, ...styles.component}}>
+      <View style={{ ...styles.walletActions, ...styles.component }}>
         <View>
           <TouchableOpacity
-            style={[styles.walletActionsButtons, {backgroundColor: '#ffffff', height: 53, width: 53, borderRadius: 53, alignItems: 'center', justifyContent: 'center'}]}
+            style={[
+              styles.walletActionsButtons,
+              {
+                backgroundColor: '#ffffff',
+                height: 53,
+                width: 53,
+                borderRadius: 53,
+                alignItems: 'center',
+                justifyContent: 'center',
+              },
+            ]}
             onPress={() => {
               navigation.navigate('Withdraw');
             }}
@@ -35,7 +45,17 @@ const WalletScreen = ({navigation}: WalletNavProps<'Wallet'>) => {
         </View>
         <View>
           <TouchableOpacity
-            style={[styles.walletActionsButtons, {backgroundColor: '#ffffff', height: 53, width: 53, borderRadius: 53, alignItems: 'center', justifyContent: 'center'}]}
+            style={[
+              styles.walletActionsButtons,
+              {
+                backgroundColor: '#ffffff',
+                height: 53,
+                width: 53,
+                borderRadius: 53,
+                alignItems: 'center',
+                justifyContent: 'center',
+              },
+            ]}
             onPress={() => {
               navigation.navigate('Deposit');
             }}
@@ -46,7 +66,17 @@ const WalletScreen = ({navigation}: WalletNavProps<'Wallet'>) => {
         </View>
         <View>
           <TouchableOpacity
-            style={[styles.walletActionsButtons, {backgroundColor: '#ffffff', height: 53, width: 53, borderRadius: 53, alignItems: 'center', justifyContent: 'center'}]}
+            style={[
+              styles.walletActionsButtons,
+              {
+                backgroundColor: '#ffffff',
+                height: 53,
+                width: 53,
+                borderRadius: 53,
+                alignItems: 'center',
+                justifyContent: 'center',
+              },
+            ]}
             onPress={() => {}}
           >
             <CopyOutlineIcon />
@@ -61,21 +91,26 @@ const WalletScreen = ({navigation}: WalletNavProps<'Wallet'>) => {
 
 const styles = StyleSheet.create({
   component: {
-    marginBottom: 20
+    marginBottom: 20,
   },
   walletActions: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '80%'
+    width: '80%',
   },
   walletActionsButtons: {
-    marginBottom: 10, marginHorizontal: 13, shadowOpacity: 0.3, shadowRadius: 5, shadowColor: '#a3a3a3', shadowOffset: { height: 0, width: 0 }
+    marginBottom: 10,
+    marginHorizontal: 13,
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    shadowColor: '#a3a3a3',
+    shadowOffset: { height: 0, width: 0 },
   },
   walletActionsSubtext: {
     color: '#625E59',
     textAlign: 'center',
-    fontSize: 12
-  }
+    fontSize: 12,
+  },
 });
 
 export default WalletScreen;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { DefaultLayout } from '../../layouts/Default';
 import { HomeNavProps } from './TabsParamList';
@@ -8,8 +8,8 @@ import { VaultIntro } from '../../components/business/VaultIntro';
 import { ValueCreated } from '../../components/business/ValueCreated';
 import Topbar from '../../components/design/Topbar';
 
-const HomeScreen = ({navigation}: HomeNavProps<'Home'>) => {
-  const onWalletPress = (walletDetails:Record<string, unknown>) => {
+const HomeScreen = ({ navigation }: HomeNavProps<'Home'>) => {
+  const onWalletPress = (walletDetails: Record<string, unknown>) => {
     navigation.navigate('WalletStack', walletDetails);
   };
 
@@ -22,7 +22,7 @@ const HomeScreen = ({navigation}: HomeNavProps<'Home'>) => {
         onSettingsButtonPress={() => navigation.navigate('SettingsStack')}
       />
       <ValueCreated />
-      <VaultIntro style={{...styles.components}} />
+      <VaultIntro style={{ ...styles.components }} />
       <Wallets onPress={onWalletPress} />
     </DefaultLayout>
   );
@@ -30,17 +30,17 @@ const HomeScreen = ({navigation}: HomeNavProps<'Home'>) => {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 30
+    fontSize: 30,
   },
   authButtons: {
-    width: '100%'
+    width: '100%',
   },
   authButtonsWrapper: {
-    width: '100%'
+    width: '100%',
   },
   components: {
-    marginBottom: 15
-  }
+    marginBottom: 15,
+  },
 });
 
 export default HomeScreen;

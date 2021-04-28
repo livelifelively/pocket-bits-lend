@@ -2,13 +2,13 @@
 
 // LOGGER
 const Logger = {
-  info: (idString: string, data:any) => {
+  info: (idString: string, data: any) => {
     console.log(idString, data);
   },
-  warn: (idString: string, data:any) => {
+  warn: (idString: string, data: any) => {
     console.warn(idString, data);
   },
-  error: (idString: string, data:any) => {
+  error: (idString: string, data: any) => {
     console.error(idString, data);
   },
 };

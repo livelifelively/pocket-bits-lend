@@ -5,10 +5,9 @@ import { DefaultLayout } from '../../../layouts/Default';
 import { SettingsNavProps } from '../SettingsParamList';
 import Topbar from '../../../components/design/Topbar';
 import { WhiteView } from '../../../components/design/WhiteView';
-import {LockIcon, MobilePasscodeIcon} from '../../../icons';
+import { LockIcon, MobilePasscodeIcon } from '../../../icons';
 
-
-const SecuritySettingsScreen = ({navigation}: SettingsNavProps<'SecuritySettings'>) => {
+const SecuritySettingsScreen = ({ navigation }: SettingsNavProps<'SecuritySettings'>) => {
   return (
     <DefaultLayout>
       <Topbar
@@ -17,7 +16,12 @@ const SecuritySettingsScreen = ({navigation}: SettingsNavProps<'SecuritySettings
         }}
         title="Security Settings"
       />
-      <TouchableOpacity style={styles.settingsAction} onPress={() => {navigation.navigate('TwoFactorAuthentication');}}>
+      <TouchableOpacity
+        style={styles.settingsAction}
+        onPress={() => {
+          navigation.navigate('TwoFactorAuthentication');
+        }}
+      >
         <WhiteView style={styles.settingsActionWrapper}>
           <View style={styles.settingsActionIcon}>
             <LockIcon />
@@ -27,7 +31,12 @@ const SecuritySettingsScreen = ({navigation}: SettingsNavProps<'SecuritySettings
           </View>
         </WhiteView>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.settingsAction} onPress={() => {navigation.navigate('ChangePasscode');}}>
+      <TouchableOpacity
+        style={styles.settingsAction}
+        onPress={() => {
+          navigation.navigate('ChangePasscode');
+        }}
+      >
         <WhiteView style={styles.settingsActionWrapper}>
           <View style={styles.settingsActionIcon}>
             <MobilePasscodeIcon />
@@ -48,7 +57,7 @@ const styles = StyleSheet.create({
   },
   settingsActionTitle: {
     fontSize: 15,
-    fontFamily: 'Poppins-Medium'
+    fontFamily: 'Poppins-Medium',
   },
   settingsActionWrapper: {
     padding: 20,
@@ -59,7 +68,7 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     marginRight: 20,
-  }
+  },
 });
 
 export default SecuritySettingsScreen;

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { Text } from 'react-native';
 
 import { AuthContext } from '../AuthProvider';

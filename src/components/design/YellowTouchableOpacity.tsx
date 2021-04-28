@@ -5,19 +5,12 @@ import Theme from '../../theme';
 
 interface YellowTouchableOpacityProps {
   onPress: () => void;
-  style?: Record<string, unknown>,
+  style?: Record<string, unknown>;
 }
 
-export const YellowTouchableOpacity: React.FC<YellowTouchableOpacityProps> = ({children, onPress, style={}}) => {
+export const YellowTouchableOpacity: React.FC<YellowTouchableOpacityProps> = ({ children, onPress, style = {} }) => {
   return (
-    <TouchableOpacity
-      activeOpacity={0.7}
-      onPress={onPress}
-      style={[
-        styles.touchableOpacity,
-        style
-      ]}
-    >
+    <TouchableOpacity activeOpacity={0.7} onPress={onPress} style={[styles.touchableOpacity, style]}>
       {children}
     </TouchableOpacity>
   );
@@ -34,6 +27,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
-    padding: 15
-  }
+    padding: 15,
+  },
 });

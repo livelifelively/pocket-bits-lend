@@ -2,15 +2,11 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 interface YellowViewProps {
-  style?: Record<string, unknown>,
+  style?: Record<string, unknown>;
 }
 
-export const YellowView: React.FC<YellowViewProps> = ({children, style}) => {
-  return (
-    <View style={{...styles.yellowView, ...style}}>
-      {children}
-    </View>
-  );
+export const YellowView: React.FC<YellowViewProps> = ({ children, style }) => {
+  return <View style={{ ...styles.yellowView, ...style }}>{children}</View>;
 };
 
 const styles = StyleSheet.create({
@@ -18,6 +14,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFB850',
     padding: 15,
     borderRadius: 15,
-    width: '100%'
-  }
+    width: '100%',
+  },
 });

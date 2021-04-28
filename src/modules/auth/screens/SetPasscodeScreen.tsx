@@ -6,7 +6,7 @@ import { AuthContext } from '../AuthProvider';
 import { AppButton } from '../../../components/design/AppButton';
 
 const SetPasscodeScreen = () => {
-  const {login} = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   return (
     <DefaultLayout>
@@ -31,8 +31,8 @@ const SetPasscodeScreen = () => {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 30
-  }
+    fontSize: 30,
+  },
 });
 
 export default SetPasscodeScreen;

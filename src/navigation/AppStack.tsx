@@ -25,17 +25,17 @@ const AppTabs: React.FC = () => {
       screenOptions={({ route }) => ({
         tabBarIcon: () => {
           switch (route.name) {
-          case 'Home':
-            return <HomeIcon />;
-          case 'Rewards':
-            return <RewardIcon />;
-          case 'Vault':
-            return <VaultIcon />;
+            case 'Home':
+              return <HomeIcon />;
+            case 'Rewards':
+              return <RewardIcon />;
+            case 'Vault':
+              return <VaultIcon />;
 
-          default:
-            break;
+            default:
+              break;
           }
-        }
+        },
       })}
       tabBarOptions={{
         activeTintColor: 'tomato',
@@ -54,7 +54,7 @@ export const AppStack: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        header: () => null
+        header: () => null,
       }}
     >
       <Stack.Screen name="Landing" component={AppTabs} />
