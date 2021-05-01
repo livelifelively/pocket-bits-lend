@@ -1,14 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
-import { Button } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
 
 import Theme from '../../theme';
+import { TouchOpacityButton } from './TouchOpacityButton';
 
 interface AppButtonProps {
   onPress: () => void;
   title: string;
   mode?: 'text' | 'outlined' | 'contained';
-  style?: Record<string, unknown>;
+  buttonTextStyle?: Record<string, unknown>;
+  buttonWrapperStyle?: Record<string, unknown>;
   size?: 'normal' | 'large' | 'small';
   color?: string;
   icon?: React.ReactNode;
@@ -18,29 +19,51 @@ export const AppButton: React.FC<AppButtonProps> = ({
   onPress,
   title,
   mode = 'contained',
-  style = {},
+  buttonWrapperStyle = {},
+  buttonTextStyle = {},
   size = 'normal',
   color = Theme.colors.primary,
 }) => {
   const { buttonStyle, textStyle } = extendStylesByParams(
     { size, mode, color },
-    { ...styles.appButtonContainer, ...style },
-    { ...styles.appButtonText }
+    { ...styles.appButtonContainer, ...buttonWrapperStyle },
+    { ...styles.appButtonText, ...buttonTextStyle }
   );
 
-  return (
-    <Button
-      style={buttonStyle}
-      color={color}
-      onPress={() => {
-        onPress();
-      }}
-      mode={mode}
-    >
-      {/* {icon ? {icon} : ''} */}
-      <Text style={textStyle}>{title}</Text>
-    </Button>
-  );
+  if (mode === 'text') {
+    return (
+      <TouchOpacityButton
+        title={title}
+        onPress={onPress}
+        wrapperStyles={{
+          ...buttonStyle,
+          backgroundColor: 'transparent',
+          paddingHorizontal: 0,
+          paddingVertical: 0,
+          padding: 0,
+        }}
+        textStyles={textStyle}
+      />
+    );
+  } else if (mode === 'outlined') {
+    return (
+      <TouchOpacityButton
+        title={title}
+        onPress={onPress}
+        wrapperStyles={{ ...buttonStyle, borderColor: color, backgroundColor: 'transparent' }}
+        textStyles={textStyle}
+      />
+    );
+  } else if (mode === 'contained') {
+    return (
+      <TouchOpacityButton
+        title={title}
+        onPress={onPress}
+        wrapperStyles={{ ...buttonStyle, borderColor: color, backgroundColor: color }}
+        textStyles={textStyle}
+      />
+    );
+  }
 };
 
 const extendStylesByParams = ({ mode = '', size = '', color = '' }, baseButtonStyle = {}, baseTextStyle = {}) => {
@@ -67,12 +90,13 @@ const extendStylesByMode = ({ mode = '', color = '' }) => {
     case 'text':
       textModeStyle = {
         ...textModeStyle,
-        color: color,
+        color: Theme.colors.textButton,
         padding: 0,
       };
       buttonModeStyle = {
         ...buttonModeStyle,
         padding: 0,
+        borderWidth: 0,
       };
 
       break;
@@ -86,25 +110,28 @@ const extendStylesByMode = ({ mode = '', color = '' }) => {
 
 const extendStylesBySize = (size = '') => {
   let textStyle = {};
-  const buttonStyle = {};
+  let buttonStyle = {};
 
   switch (size) {
     case 'large':
       textStyle = {
         fontSize: 18,
-        lineHeight: 38,
+        lineHeight: 18,
+      };
+      buttonStyle = {
+        paddingVertical: 20,
       };
       break;
     case 'small':
       textStyle = {
         fontSize: 12,
-        lineHeight: 16,
+        lineHeight: 12,
       };
       break;
     case 'normal':
       textStyle = {
         fontSize: 14,
-        lineHeight: 16,
+        lineHeight: 14,
       };
       break;
     default:
@@ -125,10 +152,8 @@ const styles = StyleSheet.create({
   },
   appButtonText: {
     fontSize: 18,
-    lineHeight: 24,
     color: Theme.colors.text,
     fontWeight: '600',
     alignSelf: 'center',
-    textTransform: 'capitalize',
   },
 });

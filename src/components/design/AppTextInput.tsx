@@ -8,7 +8,7 @@ import { ErrorText } from './ErrorText';
 
 interface AppTextInputProps {
   onChangeText: (text: string) => void;
-  placeholder: string;
+  placeholder?: string;
   style?: {
     input: Record<string, unknown> | undefined;
     wrapper: Record<string, unknown> | undefined;
@@ -52,7 +52,15 @@ export const AppTextInput: React.FC<AppTextInputProps> = ({
   onBlur,
   error = '',
 }) => {
-  const errorStyle = error.length > 0 ? { borderColor: globalStyles.errorText.color } : {};
+  const errorStyle =
+    error.length > 0
+      ? {
+          borderTopColor: globalStyles.errorText.color,
+          borderLeftColor: globalStyles.errorText.color,
+          borderRightColor: globalStyles.errorText.color,
+          borderBottomColor: globalStyles.errorText.color,
+        }
+      : {};
 
   return (
     <View style={[styles.appTextInputWrapper, style.wrapper]}>

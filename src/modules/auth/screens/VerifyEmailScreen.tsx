@@ -63,14 +63,16 @@ const VerifyEmailScreen = ({ navigation }: AuthNavProps<'VerifyEmail'>) => {
             <View style={{ marginBottom: 70 }}>
               <Text style={globalStyles.subtext}>You’ll receive a 6 digit OTP on your registered email</Text>
             </View>
-            <AppButton
-              title="Confirm Email"
-              onPress={() => {
-                handleSubmit();
-              }}
-              size="normal"
-              style={{ paddingHorizontal: 50 }}
-            />
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+              <AppButton
+                title="Confirm Email"
+                onPress={() => {
+                  handleSubmit();
+                }}
+                size="normal"
+                buttonWrapperStyle={{ paddingHorizontal: 50 }}
+              />
+            </View>
           </View>
         )}
       </Formik>

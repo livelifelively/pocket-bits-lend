@@ -7,8 +7,10 @@ import {
   AuthAPIConfigurations,
   SignUpRequest,
   SignInRequest,
+  SignInOTPRequest,
   TwoFactorAuthenticationRequest,
   VerifyEmailRequest,
+  ResendEmailOTPRequest,
 } from './configurations';
 
 export type RequestResponse = {
@@ -24,9 +26,7 @@ export function structureAPIResponse(res: any, apiCallId = ''): RequestResponse 
     Logger.info(`SUCCESS_API_REQUEST: ${apiCallId}`, res.data);
     returnData = {
       status: 'SUCCESS',
-      data: {
-        data: res.data,
-      },
+      data: res.data,
       error: {
         message: '',
       },
@@ -36,9 +36,7 @@ export function structureAPIResponse(res: any, apiCallId = ''): RequestResponse 
 
   returnData = {
     status: 'FAILED',
-    data: {
-      data: res.data,
-    },
+    data: res.data,
     error: {
       message: 'Request Failed',
     },
@@ -93,8 +91,28 @@ export async function postRequestHandler(requestData: any, requestConfigurations
   }
 }
 
+export async function getRequestHandler(requestData: any, requestConfigurations: any) {
+  const { apiCallId, url, errorHandlers } = requestConfigurations;
+
+  try {
+    const res = await Axios.get(url, {
+      params: requestData,
+    });
+    // TODO can pass in adapters as well if needed.
+    return structureAPIResponse(res, apiCallId);
+  } catch (err) {
+    errorResponseAsPerStatusCode(err, errorHandlers);
+    return structureAPIError({ err, errorResponse: err.response, apiCallId, requestData });
+  }
+}
+
 export const signupPost = async (requestData: SignUpRequest) => {
   const returnValue = await postRequestHandler(requestData, AuthAPIConfigurations['SIGNUP']);
+  return returnValue;
+};
+
+export const signinOTPPost = async (requestData: SignInOTPRequest) => {
+  const returnValue = await postRequestHandler(requestData, AuthAPIConfigurations['SIGNIN_OTP']);
   return returnValue;
 };
 
@@ -108,4 +126,8 @@ export const verifyEmailPost = (requestData: VerifyEmailRequest) => {
 
 export const twoFactorAuthenticationVefificationPost = (requestData: TwoFactorAuthenticationRequest) => {
   return postRequestHandler(requestData, AuthAPIConfigurations['2FA_VERIFICATION']);
+};
+
+export const resendOTPEmailGet = (requestData: ResendEmailOTPRequest) => {
+  return getRequestHandler(requestData, AuthAPIConfigurations['RESEND_EMAIL_OTP']);
 };

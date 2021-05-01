@@ -1,0 +1,119 @@
+import React, { useContext } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
+import { AuthNavProps } from '../AuthParamList';
+import { DefaultLayout } from '../../../layouts/Default';
+import { AppButton } from '../../../components/design/AppButton';
+import { AppTextInput } from '../../../components/design/AppTextInput';
+import { RequestResponse, resendOTPEmailGet, signinPost } from '../../../api/requests';
+import { AuthContext } from '../AuthProvider';
+import { globalStyles } from '../../../theme/globalStyles';
+import Logger from '../../../services/logger';
+
+function LoginEmailVerifyOTPScreen({ route }: AuthNavProps<'LoginEmail'>) {
+  const { loginEmailPassword } = useContext(AuthContext);
+  const { email, password } = route.params;
+
+  const loginSchema = Yup.object().shape({
+    otp: Yup.string()
+      .required()
+      .matches(/^[0-9]+$/, 'Must be only digits')
+      .min(6, 'Must be exactly 6 digits')
+      .max(6, 'Must be exactly 6 digits'),
+  });
+
+  return (
+    <DefaultLayout backgroundColor="#FCFCFC" paddingHorizontal={45}>
+      <View
+        style={{
+          height: 65,
+          width: '100%',
+          backgroundColor: '#EBEBEB',
+          marginTop: 100,
+          marginBottom: 65,
+          alignItems: 'center',
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}
+      >
+        <Text style={{ textAlign: 'center', fontSize: 24 }}>logo</Text>
+      </View>
+      <View style={{ marginBottom: 40 }}>
+        <Text style={{ fontSize: 24, fontFamily: 'Poppins-Medium' }}>Verify Your OTP</Text>
+      </View>
+      <Formik
+        initialValues={{
+          otp: '',
+        }}
+        validationSchema={loginSchema}
+        onSubmit={async (values) => {
+          console.log(values);
+          const signedUp: RequestResponse = await signinPost({
+            login: email,
+            password: password,
+            verificationCode: values.otp,
+          });
+          if (signedUp.status === 'SUCCESS' && signedUp.data?.id_token) {
+            // TODO handle cases for wrong email password combination
+            loginEmailPassword({ email, token: signedUp.data?.id_token });
+            Logger.info('LOGIN_EMAIL_VERIFY_OTP', {});
+          }
+        }}
+      >
+        {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+          <View style={{ width: '100%' }}>
+            <AppTextInput
+              autoCorrect={false}
+              style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
+              value={values.otp}
+              onChangeText={handleChange('otp')}
+              onBlur={handleBlur('otp')}
+              placeholder="Enter your OTP"
+              keyboardType="numeric"
+              autoCapitalize="none"
+              error={touched.otp ? errors.otp : ''}
+            />
+            <View style={{ paddingHorizontal: 20, marginBottom: 25 }}>
+              <Text style={globalStyles.subtext}>You’ll receive a 6 digit OTP on your registered email</Text>
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 40 }}>
+              <AppButton
+                title="Resend OTP"
+                size="small"
+                mode="text"
+                onPress={async () => {
+                  await resendOTPEmailGet({ email, type: 'login' });
+                }}
+              />
+              <Text style={{ color: '#625E59' }}>2:00</Text>
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+              <AppButton
+                title="Verify"
+                onPress={() => {
+                  handleSubmit();
+                }}
+                size="normal"
+                buttonWrapperStyle={{ paddingHorizontal: 50 }}
+              />
+            </View>
+          </View>
+        )}
+      </Formik>
+    </DefaultLayout>
+  );
+}
+
+const styles = StyleSheet.create({
+  textInputWrapper: { marginBottom: 0 },
+  textInput: {
+    width: '100%',
+    backgroundColor: '#F7F7F7',
+    padding: 18,
+  },
+});
+
+export default LoginEmailVerifyOTPScreen;

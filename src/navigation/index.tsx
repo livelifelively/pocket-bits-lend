@@ -1,41 +1,34 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { ColorSchemeName, View, ActivityIndicator } from 'react-native';
+import React, { useContext } from 'react';
+import { ColorSchemeName } from 'react-native';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 
 import { AuthContext } from '../modules/auth/AuthProvider';
 import { AuthStack } from '../modules/auth/AuthStack';
+import { PasscodeAuthStack } from '../modules/passcode-auth/PasscodeAuthStack';
+import { SetPasscodeStack } from '../modules/set-passcode/SetPasscodeStack';
 import { AppStack } from './AppStack';
-import AsyncStorage from '@react-native-community/async-storage';
+import Logger from '../services/logger';
+import { User } from '../types';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
-  const { user, login } = useContext(AuthContext);
-  const [loading, setLoading] = useState(true);
+  const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    AsyncStorage.getItem('user')
-      .then((userString) => {
-        if (userString) {
-          login();
-        }
-        setLoading(false);
-      })
-      .catch((err) => {
-        // TODO better logging.
-        console.log(err);
-      });
-  }, []);
-
-  if (loading) {
-    return (
-      <View>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
+  Logger.info('NAVIGATION', user);
 
   return (
     <NavigationContainer theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      {user ? <AppStack /> : <AuthStack />}
+      <ActiveStack user={user} />
     </NavigationContainer>
   );
+}
+
+function ActiveStack({ user }: { user: User }) {
+  if (user && user.token && user.email && user.passcode === '') {
+    return <SetPasscodeStack />;
+  } else if (user && user.token && user.email && user.passcode.length === 4 && !user.userAuthenticated) {
+    return <PasscodeAuthStack />;
+  } else if (user && user.token && user.email && user.passcode.length === 4 && user.userAuthenticated) {
+    return <AppStack />;
+  }
+  return <AuthStack />;
 }

@@ -12,8 +12,13 @@ export type SignUpRequest = {
   referralCode: string;
 };
 
+export type SignInOTPRequest = {
+  login: string;
+  password: string;
+};
+
 export type SignInRequest = {
-  email: string;
+  login: string;
   password: string;
   verificationCode: string;
 };
@@ -28,6 +33,11 @@ export type TwoFactorAuthenticationRequest = {
   email: string;
 };
 
+export type ResendEmailOTPRequest = {
+  email: string;
+  type: 'login';
+};
+
 export const AuthAPIConfigurations = {
   SIGNUP: {
     url: URLPrefixes.AUTH + '/register',
@@ -37,6 +47,16 @@ export const AuthAPIConfigurations = {
       '409': (response: any) => {
         console.log('HANDLE 409 ERROR', response);
       },
+      default: (response: any) => {
+        console.log('HANDLE GENERIC ERROR', response);
+      },
+    },
+  },
+  SIGNIN_OTP: {
+    url: URLPrefixes.AUTH + '/loginOtp',
+    apiCallId: 'SIGNIN_OTP',
+    method: 'POST',
+    errorHandlers: {
       default: (response: any) => {
         console.log('HANDLE GENERIC ERROR', response);
       },
@@ -66,6 +86,16 @@ export const AuthAPIConfigurations = {
     url: URLPrefixes.AUTH + '/verifyEmail',
     apiCallId: 'EMAIL_VERIFICATION',
     method: 'POST',
+    errorHandlers: {
+      default: (response: any) => {
+        console.log('HANDLE GENERIC ERROR', response);
+      },
+    },
+  },
+  RESEND_EMAIL_OTP: {
+    url: URLPrefixes.AUTH + '/resendOtpEmail',
+    apiCallId: 'RESEND_EMAIL_OTP',
+    method: 'GET',
     errorHandlers: {
       default: (response: any) => {
         console.log('HANDLE GENERIC ERROR', response);

@@ -1,20 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { AuthContext } from '../AuthProvider';
 import { AuthNavProps } from '../AuthParamList';
 import { DefaultLayout } from '../../../layouts/Default';
 import { AppButton } from '../../../components/design/AppButton';
 import { AppTextInput } from '../../../components/design/AppTextInput';
-import { RequestResponse, signinPost } from '../../../api/requests';
-import { YellowTouchableOpacity } from '../../../components/design/YellowTouchableOpacity';
+import { RequestResponse, signinOTPPost } from '../../../api/requests';
 
 function LoginEmailScreen({ navigation }: AuthNavProps<'LoginEmail'>) {
-  const { login } = useContext(AuthContext);
-
   const loginSchema = Yup.object().shape({
     email: Yup.string().email().required(),
     password: Yup.string().min(8).required(),
@@ -47,15 +43,15 @@ function LoginEmailScreen({ navigation }: AuthNavProps<'LoginEmail'>) {
         }}
         validationSchema={loginSchema}
         onSubmit={async (values) => {
-          const signedUp: RequestResponse = await signinPost({
-            email: values.email,
+          const signedUp: RequestResponse = await signinOTPPost({
+            login: values.email,
             password: values.password,
-            // #TODO
-            verificationCode: '',
           });
           if (signedUp.status === 'SUCCESS') {
-            // handle cases for wrong email password combination
-            login();
+            navigation.navigate('LoginEmailVerifyOTP', {
+              email: values.email,
+              password: values.password,
+            });
           }
         }}
       >
@@ -83,29 +79,25 @@ function LoginEmailScreen({ navigation }: AuthNavProps<'LoginEmail'>) {
               secureTextEntry={true}
               error={touched.password ? errors.password : ''}
             />
-            <YellowTouchableOpacity onPress={() => {}}>
-              <Text style={{ textAlign: 'center', width: '100%', fontSize: 14, fontFamily: 'Poppins-Medium' }}>
-                Sign In
-              </Text>
-            </YellowTouchableOpacity>
-            <AppButton
-              title="Sign In"
-              onPress={() => {
-                handleSubmit();
-              }}
-              size="normal"
-              style={{ paddingHorizontal: 50 }}
-            />
+            <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
+              <AppButton
+                title="Sign In"
+                onPress={() => {
+                  handleSubmit();
+                }}
+                size="normal"
+                buttonWrapperStyle={{ width: 150 }}
+              />
+            </View>
           </View>
         )}
       </Formik>
-      <View>
-        <Text style={{ fontFamily: 'Poppins-Bold' }}>Don’t have an account, </Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+        <Text style={{ fontFamily: 'Poppins-Bold' }}>Don’t have an account,</Text>
         <AppButton
           title="Sign Up"
-          size="small"
           mode="text"
-          color="#363eff"
+          buttonTextStyle={{ fontFamily: 'Poppins-Bold' }}
           onPress={() => {
             navigation.navigate('SignUp');
           }}

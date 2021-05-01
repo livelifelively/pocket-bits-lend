@@ -13,6 +13,7 @@ import { AppTextInput } from '../../../components/design/AppTextInput';
 import { AppCheckbox } from '../../../components/design/AppCheckbox';
 import { globalStyles } from '../../../theme/globalStyles';
 import { signupPost } from '../../../api/requests';
+import Logger from '../../../services/logger';
 
 function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
   const signupSchema = Yup.object().shape({
@@ -50,20 +51,12 @@ function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
               // #TODO
               referralCode: '',
             });
-            console.log('+++++++++++++++++++++++++++++++++++++++');
-            console.log('+++++++++++++++++++++++++++++++++++++++');
-            console.log('+++++++++++++++++++++++++++++++++++++++');
-
-            console.log('SUBMIT_FORM', signedUp);
             if (signedUp.status === 'SUCCESS') {
               navigation.navigate('VerifyEmail');
             }
           } catch (e) {
-            console.log('FLAG SIGNUP PAGE');
-            // console.log(e)
-            console.log('=======================================');
-            console.log('=======================================');
-            console.log('=======================================');
+            // TODO standardise error structure
+            Logger.error('SIGNUP_SCREEN__SUBMIT--FAILED', e);
           }
         }}
       >
@@ -113,24 +106,25 @@ function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
               </AppCheckbox>
               <Text style={globalStyles.errorText}>{errors.termsAndConditions}</Text>
             </View>
-            <AppButton
-              title="Sign Up"
-              onPress={() => {
-                handleSubmit();
-              }}
-              size="normal"
-              style={{ paddingHorizontal: 50 }}
-            />
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+              <AppButton
+                title="Sign Up"
+                onPress={() => {
+                  handleSubmit();
+                }}
+                size="normal"
+                buttonWrapperStyle={{ width: 170 }}
+              />
+            </View>
           </View>
         )}
       </Formik>
-      <View>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <Text style={{ fontFamily: 'Poppins-Bold' }}>Have an account, </Text>
         <AppButton
           title="Sign In"
-          size="small"
           mode="text"
-          color="#363eff"
+          buttonTextStyle={{ fontFamily: 'Poppins-Bold' }}
           onPress={() => {
             navigation.navigate('LoginEmail');
           }}

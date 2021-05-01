@@ -8,6 +8,10 @@ export type AuthParamList = {
   SetPasscode: undefined;
   VerifyEmail: undefined;
   HomeGuest: undefined;
+  LoginEmailVerifyOTP: {
+    email: string;
+    password: string;
+  };
 };
 
 export type AuthNavProps<T extends keyof AuthParamList> = {

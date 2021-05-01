@@ -17,7 +17,7 @@ function HomeGuestScreen({ navigation }: AuthNavProps<'HomeGuest'>) {
             navigation.navigate('LoginEmail');
           }}
           size="large"
-          style={styles.authButtons}
+          buttonWrapperStyle={styles.authButtons}
         />
         <AppButton
           title="Sign Up"
@@ -26,7 +26,7 @@ function HomeGuestScreen({ navigation }: AuthNavProps<'HomeGuest'>) {
           }}
           mode="outlined"
           size="large"
-          style={styles.authButtons}
+          buttonWrapperStyle={styles.authButtons}
         />
       </View>
       <VaultIntro style={{ ...styles.components }} />
