@@ -1,13 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Axios from 'axios';
 
 import Logger from '../services/logger';
-
-export type RequestResponse = {
-  status: 'SUCCESS' | 'FAILED';
-  data: any;
-  request?: any;
-  error: any;
-};
+import { RequestResponse } from './types';
 
 export function structureAPIResponse(res: any, apiCallId = ''): RequestResponse {
   let returnData: RequestResponse;

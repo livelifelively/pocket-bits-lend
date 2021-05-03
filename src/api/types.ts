@@ -1,3 +1,10 @@
+export type RequestResponse = {
+  status: 'SUCCESS' | 'FAILED';
+  data: any;
+  request?: any;
+  error: any;
+};
+
 export type SignUpRequest = {
   email: string;
   password: string;

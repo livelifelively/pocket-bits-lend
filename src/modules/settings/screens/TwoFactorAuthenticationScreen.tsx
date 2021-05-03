@@ -10,7 +10,8 @@ import Topbar from '../../../components/design/Topbar';
 import { Title } from 'react-native-paper';
 import { AppTextInput } from '../../../components/design/AppTextInput';
 import { YellowCopyIcon } from '../../../icons';
-import { RequestResponse, twoFactorAuthenticationVefificationPost } from '../../../api/requests';
+import { twoFactorAuthenticationVefificationPost } from '../../../api/requests';
+import { RequestResponse } from '../../../api/types';
 
 const TwoFactorAuthenticationScreen = ({ navigation }: SettingsNavProps<'TwoFactorAuthentication'>) => {
   const twoFactorAuthenticationSchema = Yup.object().shape({

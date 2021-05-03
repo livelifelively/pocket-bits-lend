@@ -8,7 +8,8 @@ import { AuthNavProps } from '../AuthParamList';
 import { DefaultLayout } from '../../../layouts/Default';
 import { AppButton } from '../../../components/design/AppButton';
 import { AppTextInput } from '../../../components/design/AppTextInput';
-import { RequestResponse, signinOTPPost } from '../../../api/requests';
+import { signinOTPPost } from '../../../api/requests';
+import { RequestResponse } from '../../../api/types';
 
 function LoginEmailScreen({ navigation }: AuthNavProps<'LoginEmail'>) {
   const loginSchema = Yup.object().shape({
