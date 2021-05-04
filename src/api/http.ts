@@ -1,9 +1,61 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import Axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import Logger from '../services/logger';
-import { RequestResponse } from './types';
+import { cloneDeep } from 'lodash';
+
+const http = Axios.create({
+  baseURL: '/api',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+http.interceptors.request.use(
+  async (config) => {
+    const newConfig = cloneDeep(config);
+
+    const userDataStringFromStorage = await AsyncStorage.getItem('user');
+
+    if (userDataStringFromStorage) {
+      const userDataObjectFromStorage = JSON.parse(userDataStringFromStorage);
+      if (userDataObjectFromStorage.token) {
+        newConfig.headers['Authorization'] = `Bearer ${userDataObjectFromStorage.token}`;
+      }
+    }
+
+    Logger.debug('HTTP_REQUEST_INTERCEPTOR', 'WORKING WORKING WORKING');
+
+    // newConfig = populateOptions(newConfig);
+    return newConfig;
+  },
+  (error) => {
+    // TODO structure the error
+    return Promise.reject(error);
+  }
+);
+
+/**
+ * Response Interceptor - applicable on all responses via this service
+ * Processes response just after its received.
+ */
+http.interceptors.response.use(
+  (response) => {
+    Logger.debug('HTTP_RESPONSE_INTERCEPTOR--TRY', 'WORKING WORKING WORKING');
+    return response;
+  },
+  (error) => {
+    Logger.debug('HTTP_RESPONSE_INTERCEPTOR--CATCH', 'WORKING WORKING WORKING');
+    // TODO: call central error display service here
+    if (error.response.status === 401) {
+      // application wide error.
+      // redirect to login/email or login/password, based on the situation
+    }
+    throw error;
+  }
+);
 
 export function structureAPIResponse(res: any, apiCallId = ''): RequestResponse {
   let returnData: RequestResponse;
@@ -67,7 +119,7 @@ export async function postRequestHandler(requestData: any, requestConfigurations
   const { apiCallId, url, errorHandlers } = requestConfigurations;
 
   try {
-    const res = await Axios.post(url, requestData);
+    const res = await http.post(url, requestData);
     // TODO can pass in adapters as well if needed.
     return structureAPIResponse(res, apiCallId);
   } catch (err) {

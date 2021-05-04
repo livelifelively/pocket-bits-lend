@@ -9,8 +9,7 @@ import { AuthNavProps } from '../AuthParamList';
 import { AppButton } from '../../../components/design/AppButton';
 import { AppTextInput } from '../../../components/design/AppTextInput';
 import { globalStyles } from '../../../theme/globalStyles';
-import { verifyEmailPost } from '../../../api/requests';
-import { RequestResponse } from '../../../api/types';
+import { verifyEmailPost } from '../../../api/auth/requests';
 
 const VerifyEmailScreen = ({ navigation }: AuthNavProps<'VerifyEmail'>) => {
   const email = 'deviced.in@gmail.com';

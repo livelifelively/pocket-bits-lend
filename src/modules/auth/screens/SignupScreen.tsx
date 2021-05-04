@@ -12,7 +12,7 @@ import { AppButton } from '../../../components/design/AppButton';
 import { AppTextInput } from '../../../components/design/AppTextInput';
 import { AppCheckbox } from '../../../components/design/AppCheckbox';
 import { globalStyles } from '../../../theme/globalStyles';
-import { signupPost } from '../../../api/requests';
+import { signupPost } from '../../../api/auth/requests';
 import Logger from '../../../services/logger';
 
 function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {

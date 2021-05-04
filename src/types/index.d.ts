@@ -1,38 +1,40 @@
-export type RequestResponse = {
+type User = null | { email: string; token: string; passcode: string; userAuthenticated: boolean };
+
+type RequestResponse = {
   status: 'SUCCESS' | 'FAILED';
   data: any;
   request?: any;
   error: any;
 };
 
-export type SignUpRequest = {
+type SignUpRequest = {
   email: string;
   password: string;
   referralCode: string;
 };
 
-export type SignInOTPRequest = {
+type SignInOTPRequest = {
   login: string;
   password: string;
 };
 
-export type SignInRequest = {
+type SignInRequest = {
   login: string;
   password: string;
   verificationCode: string;
 };
 
-export type VerifyEmailRequest = {
+type VerifyEmailRequest = {
   otp: string;
   email: string;
 };
 
-export type TwoFactorAuthenticationRequest = {
+type TwoFactorAuthenticationRequest = {
   verificationCode: string;
   email: string;
 };
 
-export type ResendEmailOTPRequest = {
+type ResendEmailOTPRequest = {
   email: string;
   type: 'login';
 };

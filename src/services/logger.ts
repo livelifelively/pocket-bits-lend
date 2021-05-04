@@ -8,6 +8,9 @@ const Logger = {
   warn: (idString: string, data: any) => {
     console.warn(idString, data);
   },
+  debug: (idString: string, data: any) => {
+    console.debug(idString, data);
+  },
   error: (idString: string, data: any) => {
     console.error(idString, data);
   },

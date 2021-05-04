@@ -1,14 +1,5 @@
-import { AuthAPIConfigurations } from './configurations';
-import { postRequestHandler, getRequestHandler } from './http';
-
-import {
-  SignUpRequest,
-  SignInRequest,
-  SignInOTPRequest,
-  TwoFactorAuthenticationRequest,
-  VerifyEmailRequest,
-  ResendEmailOTPRequest,
-} from './types';
+import { AuthAPIConfigurations } from '../configurations';
+import { postRequestHandler, getRequestHandler } from '../http';
 
 export const signupPost = async (requestData: SignUpRequest) => {
   const returnValue = await postRequestHandler(requestData, AuthAPIConfigurations['SIGNUP']);
