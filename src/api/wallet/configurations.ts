@@ -44,4 +44,12 @@ export const WalletAPIConfigurations = {
       },
     },
   },
+  COIN_TICKER: {
+    url: () => 'https://ticker.pocketbits.in/api/v1/ticker',
+    apiCallId: 'COIN_TICKER',
+    method: 'GET',
+    errorHandlers: {
+      default: (response: any) => {},
+    },
+  },
 };

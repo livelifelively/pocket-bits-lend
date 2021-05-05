@@ -44,3 +44,19 @@ type WalletBalanceForCoinRequest = {
 };
 
 type WalletsBalanceRequest = Record<string, never>;
+
+type WalletBalanceResponse = {
+  addressPresent: boolean;
+  availableBalance: string;
+  coinId: string;
+  vaultBalance: string;
+};
+
+type CoinTickerResponse = {
+  at: number;
+  buy: string;
+  high: string;
+  low: string;
+  sell: string;
+  symbol: string;
+};

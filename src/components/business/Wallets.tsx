@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Title, Text } from 'react-native-paper';
@@ -11,79 +11,6 @@ interface WalletsProps {
   style?: Record<string, unknown>;
   onPress: (walletDetails: Record<string, unknown>) => void;
 }
-
-const wallets = [
-  {
-    id: 1,
-    currency: {
-      name: 'United States Dollor',
-      shortName: 'USD',
-      symbol: '$',
-    },
-    holding: {
-      value: '0.000',
-      holdingValueInUserCurrency: '0.000',
-    },
-    crypto: {
-      valueInUserCurrency: '50,021',
-      name: 'Bitcoin',
-      shortName: 'BTC',
-      changeInPercent: {
-        changeDirection: '-',
-        changeValue: '2.56',
-      },
-    },
-  },
-  {
-    id: 2,
-    currency: {
-      name: 'United States Dollor',
-      shortName: 'USD',
-      symbol: '$',
-    },
-    holding: {
-      value: '0.000',
-      holdingValueInUserCurrency: '0.000',
-    },
-    crypto: {
-      valueInUserCurrency: '50,021',
-      name: 'Etherium',
-      shortName: 'ETH',
-      changeInPercent: {
-        changeDirection: '-',
-        changeValue: '2.56',
-      },
-    },
-  },
-  {
-    id: 3,
-    currency: {
-      name: 'United States Dollor',
-      shortName: 'USD',
-      symbol: '$',
-    },
-    holding: {
-      value: '0.000',
-      holdingValueInUserCurrency: '0.000',
-    },
-    crypto: {
-      valueInUserCurrency: '50,021',
-      name: 'USDT',
-      shortName: 'USDT',
-      changeInPercent: {
-        changeDirection: '-',
-        changeValue: '2.56',
-      },
-    },
-  },
-];
-
-// {
-//   "addressPresent": false,
-//   "availableBalance": "00",
-//   "coinId": "USDT",
-//   "vaultBalance": "0.000000",
-// }
 
 const cryotpyIcon = (shortName: string) => {
   switch (shortName) {
@@ -102,10 +29,12 @@ const cryotpyIcon = (shortName: string) => {
 };
 
 export const Wallets: React.FC<WalletsProps> = ({ style, onPress }) => {
+  const [wallets, setWallets] = useState(() => []);
+
   useEffect(() => {
     async function onloadAPICalls() {
       const data = await walletsAllGet({});
-      // console.log(data);
+      setWallets(data);
     }
 
     onloadAPICalls();
@@ -127,17 +56,24 @@ export const Wallets: React.FC<WalletsProps> = ({ style, onPress }) => {
           return (
             <TouchableOpacity activeOpacity={0.7} onPress={() => onWalletPress(val)} key={val.id}>
               <WhiteView style={styles.WalletRowWrapper}>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: 75 }}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                    width: 75,
+                  }}
+                >
                   <View style={{ marginRight: 15 }}>{cryotpyIcon(val.crypto.shortName)}</View>
                   <Text style={styles.cryptoName}>{val.crypto.shortName}</Text>
                 </View>
-                <View>
+                <View style={{ flex: 2 }}>
                   <Text style={styles.cryptoHolding}>{val.holding.value}</Text>
                   <Text
                     style={styles.cryptoHoldingSubtext}
                   >{`${val.currency.symbol} ${val.holding.holdingValueInUserCurrency}`}</Text>
                 </View>
-                <View>
+                <View style={{ flex: 2 }}>
                   <Text
                     style={styles.cryptoHoldingValue}
                   >{`${val.currency.symbol}${val.crypto.valueInUserCurrency}`}</Text>
@@ -171,6 +107,7 @@ const styles = StyleSheet.create({
   cryptoHolding: {
     fontFamily: 'Poppins-Bold',
     fontSize: 18,
+    textAlign: 'center',
   },
   cryptoHoldingSubtext: {
     fontSize: 10,
@@ -180,6 +117,7 @@ const styles = StyleSheet.create({
   cryptoHoldingValue: {
     fontWeight: '400',
     fontSize: 16,
+    textAlign: 'left',
   },
   cryptoHoldingValueSubtext: {
     fontSize: 10,

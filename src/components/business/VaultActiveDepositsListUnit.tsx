@@ -34,7 +34,6 @@ const VaultActiveDepositsListUnitDetails = ({
   hideDetails: () => void;
   depositDetails: DepositDetails;
 }) => {
-  console.log(hideDetails);
   return (
     <View style={styles.vaultActiveDepositsListUnit}>
       <View>

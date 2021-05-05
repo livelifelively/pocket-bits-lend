@@ -57,7 +57,7 @@ http.interceptors.response.use(
 export function structureAPIResponse(res: any, apiCallId = ''): RequestResponse {
   let returnData: RequestResponse;
   if (res.status === 200) {
-    Logger.info(`SUCCESS_API_REQUEST: ${apiCallId}`, res.data);
+    Logger.debug(`SUCCESS_API_REQUEST: ${apiCallId}`, res.data);
     returnData = {
       status: 'SUCCESS',
       data: res.data,

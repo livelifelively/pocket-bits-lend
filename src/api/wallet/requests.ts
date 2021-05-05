@@ -1,5 +1,6 @@
 import { WalletAPIConfigurations } from './configurations';
 import { postRequestHandler, getRequestHandler } from '../http';
+import { A_WalletsCoinsValue } from './adapter';
 
 // export const signupPost = async (requestData: SignUpRequest) => {
 //   const returnValue = await postRequestHandler(requestData, WalletAPIConfigurations['SIGNUP']);
@@ -10,6 +11,18 @@ export const walletBalanceForCoinGet = (requestData: WalletBalanceForCoinRequest
   return getRequestHandler(requestData, WalletAPIConfigurations['RESEND_EMAIL_OTP']);
 };
 
-export const walletsAllGet = (requestData: WalletsBalanceRequest) => {
-  return getRequestHandler(requestData, WalletAPIConfigurations['WALLET_ALL']);
+export const coinTickerGet = async (requestData: any) => {
+  const returnValue = await getRequestHandler(requestData, WalletAPIConfigurations['COIN_TICKER']);
+  return returnValue;
+};
+
+export const walletsAllGet = async (requestData: WalletsBalanceRequest) => {
+  try {
+    const wallets = await getRequestHandler(requestData, WalletAPIConfigurations['WALLET_ALL']);
+    const coins = await coinTickerGet({});
+    return A_WalletsCoinsValue(wallets.data, coins.data);
+  } catch (e) {
+    // handle errors w.r.t. data value. API success, but data not suitable.
+    console.log(e);
+  }
 };

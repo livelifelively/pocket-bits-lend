@@ -50,7 +50,6 @@ function LoginEmailVerifyOTPScreen({ route }: AuthNavProps<'LoginEmail'>) {
         }}
         validationSchema={loginSchema}
         onSubmit={async (values) => {
-          console.log(values);
           const signedUp: RequestResponse = await signinPost({
             login: email,
             password: password,
