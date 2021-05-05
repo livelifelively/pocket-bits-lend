@@ -1,4 +1,4 @@
-import { AuthAPIConfigurations } from '../configurations';
+import { AuthAPIConfigurations } from './configurations';
 import { postRequestHandler, getRequestHandler } from '../http';
 
 export const signupPost = async (requestData: SignUpRequest) => {

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Title, Text } from 'react-native-paper';
+import { walletsAllGet } from '../../api/wallet/requests';
 
 import { TetherIcon, EtheriumIcon, BitcoinIcon } from '../../icons';
 import { WhiteView } from '../design/WhiteView';
@@ -14,56 +15,75 @@ interface WalletsProps {
 const wallets = [
   {
     id: 1,
-    cryptoCurrencyName: 'Bitcoin',
-    cryptoCurrencyShortName: 'BTC',
     currency: {
       name: 'United States Dollor',
       shortName: 'USD',
       symbol: '$',
     },
-    holding: '0.000',
-    holdingSubtext: '0.000',
-    holdingValueInCurrency: '50,021',
-    changeInPercent: {
-      changeDirection: '+',
-      changeValue: '2.56',
+    holding: {
+      value: '0.000',
+      holdingValueInUserCurrency: '0.000',
+    },
+    crypto: {
+      valueInUserCurrency: '50,021',
+      name: 'Bitcoin',
+      shortName: 'BTC',
+      changeInPercent: {
+        changeDirection: '-',
+        changeValue: '2.56',
+      },
     },
   },
   {
     id: 2,
-    cryptoCurrencyName: 'Etherium',
-    cryptoCurrencyShortName: 'ETH',
     currency: {
       name: 'United States Dollor',
       shortName: 'USD',
       symbol: '$',
     },
-    holding: '0.000',
-    holdingSubtext: '0.000',
-    holdingValueInCurrency: '50,021',
-    changeInPercent: {
-      changeDirection: '+',
-      changeValue: '2.56',
+    holding: {
+      value: '0.000',
+      holdingValueInUserCurrency: '0.000',
+    },
+    crypto: {
+      valueInUserCurrency: '50,021',
+      name: 'Etherium',
+      shortName: 'ETH',
+      changeInPercent: {
+        changeDirection: '-',
+        changeValue: '2.56',
+      },
     },
   },
   {
     id: 3,
-    cryptoCurrencyName: 'USDT',
-    cryptoCurrencyShortName: 'USDT',
     currency: {
       name: 'United States Dollor',
       shortName: 'USD',
       symbol: '$',
     },
-    holding: '0.000',
-    holdingSubtext: '0.000',
-    holdingValueInCurrency: '50,021',
-    changeInPercent: {
-      changeDirection: '-',
-      changeValue: '2.56',
+    holding: {
+      value: '0.000',
+      holdingValueInUserCurrency: '0.000',
+    },
+    crypto: {
+      valueInUserCurrency: '50,021',
+      name: 'USDT',
+      shortName: 'USDT',
+      changeInPercent: {
+        changeDirection: '-',
+        changeValue: '2.56',
+      },
     },
   },
 ];
+
+// {
+//   "addressPresent": false,
+//   "availableBalance": "00",
+//   "coinId": "USDT",
+//   "vaultBalance": "0.000000",
+// }
 
 const cryotpyIcon = (shortName: string) => {
   switch (shortName) {
@@ -82,6 +102,15 @@ const cryotpyIcon = (shortName: string) => {
 };
 
 export const Wallets: React.FC<WalletsProps> = ({ style, onPress }) => {
+  useEffect(() => {
+    async function onloadAPICalls() {
+      const data = await walletsAllGet({});
+      // console.log(data);
+    }
+
+    onloadAPICalls();
+  }, []);
+
   const onWalletPress = (walletDetails = {}) => {
     onPress(walletDetails);
   };
@@ -93,23 +122,27 @@ export const Wallets: React.FC<WalletsProps> = ({ style, onPress }) => {
       </View>
       {wallets &&
         wallets.map((val) => {
-          const changeDirectionColor = val.changeInPercent.changeDirection === '+' ? '#44CBB3' : '#EA6D6D';
+          const changeDirectionColor = val.crypto.changeInPercent.changeDirection === '+' ? '#44CBB3' : '#EA6D6D';
 
           return (
             <TouchableOpacity activeOpacity={0.7} onPress={() => onWalletPress(val)} key={val.id}>
               <WhiteView style={styles.WalletRowWrapper}>
                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: 75 }}>
-                  <View style={{ marginRight: 15 }}>{cryotpyIcon(val.cryptoCurrencyShortName)}</View>
-                  <Text style={styles.cryptoName}>{val.cryptoCurrencyShortName}</Text>
+                  <View style={{ marginRight: 15 }}>{cryotpyIcon(val.crypto.shortName)}</View>
+                  <Text style={styles.cryptoName}>{val.crypto.shortName}</Text>
                 </View>
                 <View>
-                  <Text style={styles.cryptoHolding}>{val.holding}</Text>
-                  <Text style={styles.cryptoHoldingSubtext}>{`${val.currency.symbol} ${val.holdingSubtext}`}</Text>
+                  <Text style={styles.cryptoHolding}>{val.holding.value}</Text>
+                  <Text
+                    style={styles.cryptoHoldingSubtext}
+                  >{`${val.currency.symbol} ${val.holding.holdingValueInUserCurrency}`}</Text>
                 </View>
                 <View>
-                  <Text style={styles.cryptoHoldingValue}>{`${val.currency.symbol}${val.holdingValueInCurrency}`}</Text>
+                  <Text
+                    style={styles.cryptoHoldingValue}
+                  >{`${val.currency.symbol}${val.crypto.valueInUserCurrency}`}</Text>
                   <Text style={{ ...styles.cryptoHoldingValueSubtext, color: changeDirectionColor }}>
-                    {`${val.changeInPercent.changeDirection}${val.changeInPercent.changeValue}%`}
+                    {`${val.crypto.changeInPercent.changeDirection}${val.crypto.changeInPercent.changeValue}%`}
                   </Text>
                 </View>
               </WhiteView>

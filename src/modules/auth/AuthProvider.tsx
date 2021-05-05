@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import { User } from '../../types';
 import Logger from '../../services/logger';
 
 export const AuthContext = React.createContext<{
@@ -30,12 +29,13 @@ export const AuthProvider: React.FC = ({ children }) => {
       value={{
         user,
         loginEmailPassword: async (userAuth) => {
-          setUser({ ...userAuth, passcode: '', userAuthenticated: false });
-          await AsyncStorage.setItem('user', JSON.stringify(user));
-          return;
+          const userUpdated = { ...userAuth, passcode: '', userAuthenticated: false };
+          setUser(userUpdated);
+          Logger.debug('AUTH_PROVIDER__LOGIN_EMAIL', userUpdated);
+          await AsyncStorage.setItem('user', JSON.stringify(userUpdated));
         },
         loginPasscode: async (passcode) => {
-          Logger.info('AUTH_PROVIDER__LOGIN_PASSCODE--USER_INPUT_RECIEVED', user);
+          Logger.debug('AUTH_PROVIDER__LOGIN_PASSCODE--USER_INPUT_RECIEVED', user);
           const userDataStringFromStorage = await AsyncStorage.getItem('user');
 
           if (userDataStringFromStorage) {
@@ -48,7 +48,7 @@ export const AuthProvider: React.FC = ({ children }) => {
               return;
             }
           }
-          Logger.info('AUTH_PROVIDER__LOGIN_PASSCODE--USER_PASSCODE_MATCH_FAILED', user);
+          Logger.debug('AUTH_PROVIDER__LOGIN_PASSCODE--USER_PASSCODE_MATCH_FAILED', user);
           // TODO tell user.
         },
         logout: () => {

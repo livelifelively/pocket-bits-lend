@@ -38,3 +38,9 @@ type ResendEmailOTPRequest = {
   email: string;
   type: 'login';
 };
+
+type WalletBalanceForCoinRequest = {
+  coinId: 'ETH' | 'BTC' | 'USDT';
+};
+
+type WalletsBalanceRequest = Record<string, never>;

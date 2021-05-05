@@ -7,9 +7,7 @@ import { WalletNavProps } from '../WalletParamList';
 import { WalletBalance } from '../../../components/business/WalletBalance';
 import Topbar from '../../../components/design/Topbar';
 import { WalletTransactionHistory } from '../../../components/business/WalletTransactionHistory';
-
 import { CopyOutlineIcon, ReceiveIcon, SendIcon } from '../../../icons';
-// import { TouchableOpacity } from "react-native-gesture-handler";
 
 const WalletScreen = ({ navigation }: WalletNavProps<'Wallet'>) => {
   return (

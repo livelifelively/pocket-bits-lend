@@ -25,10 +25,7 @@ http.interceptors.request.use(
         newConfig.headers['Authorization'] = `Bearer ${userDataObjectFromStorage.token}`;
       }
     }
-
-    Logger.debug('HTTP_REQUEST_INTERCEPTOR', 'WORKING WORKING WORKING');
-
-    // newConfig = populateOptions(newConfig);
+    Logger.debug('HTTP_REQUEST_INTERCEPTOR--CONFIGS', newConfig);
     return newConfig;
   },
   (error) => {
@@ -119,7 +116,7 @@ export async function postRequestHandler(requestData: any, requestConfigurations
   const { apiCallId, url, errorHandlers } = requestConfigurations;
 
   try {
-    const res = await http.post(url, requestData);
+    const res = await http.post(url(), requestData);
     // TODO can pass in adapters as well if needed.
     return structureAPIResponse(res, apiCallId);
   } catch (err) {
@@ -132,9 +129,7 @@ export async function getRequestHandler(requestData: any, requestConfigurations:
   const { apiCallId, url, errorHandlers } = requestConfigurations;
 
   try {
-    const res = await Axios.get(url, {
-      params: requestData,
-    });
+    const res = await http.get(url());
     // TODO can pass in adapters as well if needed.
     return structureAPIResponse(res, apiCallId);
   } catch (err) {

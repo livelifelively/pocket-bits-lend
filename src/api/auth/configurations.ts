@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { API } from '../constants/api';
+import { API } from '../../constants/api';
 
 const URLPrefixes = {
   AUTH: `${API.baseURL}${API.apiPrefix}`,
@@ -8,7 +8,7 @@ const URLPrefixes = {
 
 export const AuthAPIConfigurations = {
   SIGNUP: {
-    url: URLPrefixes.AUTH + '/register',
+    url: () => URLPrefixes.AUTH + '/register',
     apiCallId: 'SIGNUP',
     method: 'POST',
     errorHandlers: {
@@ -16,57 +16,58 @@ export const AuthAPIConfigurations = {
         console.log('HANDLE 409 ERROR', response);
       },
       default: (response: any) => {
-        console.log('HANDLE GENERIC ERROR', response);
+        // console.log('HANDLE GENERIC ERROR', response);
       },
     },
   },
   SIGNIN_OTP: {
-    url: URLPrefixes.AUTH + '/loginOtp',
+    url: () => URLPrefixes.AUTH + '/loginOtp',
     apiCallId: 'SIGNIN_OTP',
     method: 'POST',
     errorHandlers: {
       default: (response: any) => {
-        console.log('HANDLE GENERIC ERROR', response);
+        // console.log('HANDLE GENERIC ERROR', response);
       },
     },
   },
   SIGNIN: {
-    url: URLPrefixes.AUTH + '/authenticate',
+    url: () => URLPrefixes.AUTH + '/authenticate',
     apiCallId: 'SIGNIN',
     method: 'POST',
     errorHandlers: {
       default: (response: any) => {
-        console.log('HANDLE GENERIC ERROR', response);
+        // console.log('HANDLE GENERIC ERROR', response);
       },
     },
   },
   EMAIL_VERIFICATION: {
-    url: URLPrefixes.AUTH + '/verifyEmail',
+    url: () => URLPrefixes.AUTH + '/verifyEmail',
     apiCallId: 'EMAIL_VERIFICATION',
     method: 'POST',
     errorHandlers: {
       default: (response: any) => {
-        console.log('HANDLE GENERIC ERROR', response);
+        // console.log('HANDLE GENERIC ERROR', response);
       },
     },
   },
   '2FA_VERIFICATION': {
-    url: URLPrefixes.AUTH + '/verifyEmail',
+    url: () => URLPrefixes.AUTH + '/verifyEmail',
     apiCallId: 'EMAIL_VERIFICATION',
     method: 'POST',
     errorHandlers: {
       default: (response: any) => {
-        console.log('HANDLE GENERIC ERROR', response);
+        // console.log('HANDLE GENERIC ERROR', response);
       },
     },
   },
   RESEND_EMAIL_OTP: {
-    url: URLPrefixes.AUTH + '/resendOtpEmail',
+    url: (requestData: ResendEmailOTPRequest) =>
+      URLPrefixes.AUTH + `/resendOtpEmail?email=${requestData.email}&type=${requestData.type}`,
     apiCallId: 'RESEND_EMAIL_OTP',
     method: 'GET',
     errorHandlers: {
       default: (response: any) => {
-        console.log('HANDLE GENERIC ERROR', response);
+        // console.log('HANDLE GENERIC ERROR', response);
       },
     },
   },
