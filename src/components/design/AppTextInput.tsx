@@ -55,6 +55,7 @@ export const AppTextInput: React.FC<AppTextInputProps> = ({
   const errorStyle =
     error.length > 0
       ? {
+          borderColor: globalStyles.errorText.color,
           borderTopColor: globalStyles.errorText.color,
           borderLeftColor: globalStyles.errorText.color,
           borderRightColor: globalStyles.errorText.color,

@@ -2,7 +2,9 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 export type WalletParamList = {
-  Wallet: undefined;
+  Wallet: {
+    walletDetails: Record<string, unknown>;
+  };
   Deposit: undefined;
   Withdraw: undefined;
 };

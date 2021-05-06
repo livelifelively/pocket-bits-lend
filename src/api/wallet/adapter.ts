@@ -11,15 +11,25 @@ export const A_WalletsCoinsValue = (wallets: [WalletBalanceResponse], coins: [Co
   };
   return wallets.map((val: WalletBalanceResponse) => {
     const walletCurrency: any = keyedCoins[val.coinId + userCurrency.shortName];
-    const userHolding = parseFloat(val.availableBalance) + parseFloat(val.vaultBalance);
-    const userHoldingValueInCurrency = floor(userHolding * walletCurrency.sell);
+    const userTotalHolding = parseFloat(val.availableBalance) + parseFloat(val.vaultBalance);
+    const userTotalHoldingInCurrency = floor(userTotalHolding * walletCurrency.sell);
 
     return {
       id: val.coinId,
       currency: { ...userCurrency },
       holding: {
-        value: userHolding,
-        holdingValueInUserCurrency: userHoldingValueInCurrency,
+        total: {
+          value: userTotalHolding,
+          valueInUserCurrency: userTotalHoldingInCurrency,
+        },
+        available: {
+          value: parseFloat(val.availableBalance),
+          valueInUserCurrency: floor(parseFloat(val.vaultBalance) * walletCurrency.sell),
+        },
+        vault: {
+          value: parseFloat(val.vaultBalance),
+          valueInUserCurrency: floor(parseFloat(val.vaultBalance) * walletCurrency.sell),
+        },
       },
       crypto: {
         valueInUserCurrency: walletCurrency.sell,

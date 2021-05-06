@@ -12,7 +12,7 @@ import WithdrawScreen from './screens/WithdrawScreen';
 
 const Stack = createStackNavigator<WalletParamList>();
 
-export const WalletStack: React.FC = () => {
+export const WalletStack: React.FC = ({ route }) => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -20,7 +20,9 @@ export const WalletStack: React.FC = () => {
       }}
       initialRouteName="Wallet"
     >
-      <Stack.Screen options={{ headerTitle: 'Wallet' }} name="Wallet" component={WalletScreen} />
+      <Stack.Screen options={{ headerTitle: 'Wallet' }} name="Wallet">
+        {(props) => <WalletScreen {...props} walletDetails={route.params} />}
+      </Stack.Screen>
       <Stack.Screen options={{ headerTitle: 'Deposit' }} name="Deposit" component={DepositScreen} />
       <Stack.Screen options={{ headerTitle: 'Withdraw' }} name="Withdraw" component={WithdrawScreen} />
     </Stack.Navigator>

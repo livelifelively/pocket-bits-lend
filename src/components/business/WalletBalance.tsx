@@ -9,22 +9,25 @@ import { WhiteTouchableOpacity } from '../design/WhiteTouchableOpacity';
 interface WalletBalanceProps {
   style?: Record<string, unknown>;
   onPress: () => void;
+  walletDetails: WalletDetails;
 }
 
-export const WalletBalance: React.FC<WalletBalanceProps> = ({ style, onPress }) => {
+export const WalletBalance: React.FC<WalletBalanceProps> = ({ style, onPress, walletDetails }) => {
   return (
     <WhiteView style={{ ...styles.walletBalanceWrapper, ...style }}>
       <View style={styles.walletBalanceGraph}>
-        <Text style={styles.walletBalanceGraphValue}>0.433</Text>
+        <Text style={styles.walletBalanceGraphValue}>{walletDetails.holding.total.value}</Text>
         <Text style={[styles.walletBalanceSubtext, { textAlign: 'center' }]}>Total Balance</Text>
-        <Text style={styles.walletBalanceGraphCurrencyValue}>$18,324</Text>
+        <Text
+          style={styles.walletBalanceGraphCurrencyValue}
+        >{`${walletDetails.currency.symbol} ${walletDetails.holding.total.valueInUserCurrency}`}</Text>
       </View>
       <View style={styles.walletVaultStatus}>
         <View>
           <Text>
             <Text style={styles.walletBalanceValue}>
-              {'0.215 '}
-              <Text style={styles.walletBalanceSubtext}>BTC</Text>
+              {`${walletDetails.holding.available.value} `}
+              <Text style={styles.walletBalanceSubtext}>{walletDetails.crypto.shortName}</Text>
             </Text>
           </Text>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -39,8 +42,8 @@ export const WalletBalance: React.FC<WalletBalanceProps> = ({ style, onPress }) 
         <View>
           <Text>
             <Text style={styles.walletBalanceValue}>
-              {'0.215 '}
-              <Text style={styles.walletBalanceSubtext}>BTC</Text>
+              {`${walletDetails.holding.vault.value} `}
+              <Text style={styles.walletBalanceSubtext}>{walletDetails.crypto.shortName}</Text>
             </Text>
           </Text>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>

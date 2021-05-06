@@ -29,7 +29,7 @@ const cryotpyIcon = (shortName: string) => {
 };
 
 export const Wallets: React.FC<WalletsProps> = ({ style, onPress }) => {
-  const [wallets, setWallets] = useState(() => []);
+  const [wallets, setWallets] = useState<[] | [WalletDetails]>(() => []);
 
   useEffect(() => {
     async function onloadAPICalls() {
@@ -50,7 +50,7 @@ export const Wallets: React.FC<WalletsProps> = ({ style, onPress }) => {
         <Title>Wallets</Title>
       </View>
       {wallets &&
-        wallets.map((val) => {
+        wallets.map((val: WalletDetails) => {
           const changeDirectionColor = val.crypto.changeInPercent.changeDirection === '+' ? '#44CBB3' : '#EA6D6D';
 
           return (
@@ -68,15 +68,15 @@ export const Wallets: React.FC<WalletsProps> = ({ style, onPress }) => {
                   <Text style={styles.cryptoName}>{val.crypto.shortName}</Text>
                 </View>
                 <View style={{ flex: 2 }}>
-                  <Text style={styles.cryptoHolding}>{val.holding.value}</Text>
+                  <Text style={styles.cryptoHolding}>{val.holding.total.value}</Text>
                   <Text
                     style={styles.cryptoHoldingSubtext}
-                  >{`${val.currency.symbol} ${val.holding.holdingValueInUserCurrency}`}</Text>
+                  >{`${val.currency.symbol} ${val.holding.total.valueInUserCurrency}`}</Text>
                 </View>
                 <View style={{ flex: 2 }}>
                   <Text
                     style={styles.cryptoHoldingValue}
-                  >{`${val.currency.symbol}${val.crypto.valueInUserCurrency}`}</Text>
+                  >{`${val.currency.symbol} ${val.crypto.valueInUserCurrency}`}</Text>
                   <Text style={{ ...styles.cryptoHoldingValueSubtext, color: changeDirectionColor }}>
                     {`${val.crypto.changeInPercent.changeDirection}${val.crypto.changeInPercent.changeValue}%`}
                   </Text>
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   cryptoHoldingValue: {
     fontWeight: '400',
     fontSize: 16,
-    textAlign: 'left',
+    textAlign: 'right',
   },
   cryptoHoldingValueSubtext: {
     fontSize: 10,

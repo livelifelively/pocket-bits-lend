@@ -12,57 +12,12 @@ import { PasteIcon } from '../../../icons';
 import { AppButton } from '../../../components/design/AppButton';
 import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
 
-// type Wallet = {
-//   id: number,
-//   crypto: {
-//     name: string,
-//     shortName: string
-//   },
-//   amount: number
-// }
+const WithdrawScreen = ({ navigation, route }: WalletNavProps<'Withdraw'>) => {
+  const { walletDetails } = route.params;
 
-const accounts = [
-  {
-    id: 1,
-    crypto: {
-      name: 'Bitcoin',
-      shortName: 'BTC',
-    },
-    amount: 1.41,
-  },
-  {
-    id: 2,
-    crypto: {
-      name: 'Etherium',
-      shortName: 'ETH',
-    },
-    amount: 1.41,
-  },
-  {
-    id: 3,
-    crypto: {
-      name: 'Bitcoin',
-      shortName: 'BTC',
-    },
-    amount: 1.41,
-  },
-  {
-    id: 4,
-    crypto: {
-      name: 'Bitcoin',
-      shortName: 'BTC',
-    },
-    amount: 1.41,
-  },
-];
-
-const activeAccount = accounts[0];
-
-const WithdrawScreen = ({ navigation }: WalletNavProps<'Withdraw'>) => {
   const withdrawCryptoSchema = Yup.object().shape({
     destinationAddress: Yup.string().required(),
     withdrawalAmount: Yup.string().required(),
-    // email: Yup.string().email().required(),
   });
 
   return (
@@ -71,9 +26,9 @@ const WithdrawScreen = ({ navigation }: WalletNavProps<'Withdraw'>) => {
         onBackButtonPress={() => {
           navigation.goBack();
         }}
-        title="Send BTC"
+        title={'Send '}
       />
-      <View style={{ paddingHorizontal: 45, marginTop: 55 }}>
+      <View style={{ paddingHorizontal: 15, marginTop: 55 }}>
         <Formik
           initialValues={{
             destinationAddress: '',
@@ -112,14 +67,14 @@ const WithdrawScreen = ({ navigation }: WalletNavProps<'Withdraw'>) => {
                   value={values.withdrawalAmount}
                   onChangeText={handleChange('withdrawalAmount')}
                   onBlur={handleBlur('withdrawalAmount')}
-                  placeholder={`Enter Amount in ${activeAccount.crypto.shortName}`}
+                  placeholder={`Enter Amount in ${walletDetails.crypto.shortName}`}
                   error={touched.withdrawalAmount ? errors.withdrawalAmount : ''}
-                  keyboardType="number-pad"
+                  keyboardType="numeric"
                   maxLength={15}
                 />
                 <View style={[styles.inputAmountText]}>
-                  <Text>
-                    {activeAccount.amount} {activeAccount.crypto.shortName}
+                  <Text style={{ fontFamily: 'Poppins-Bold' }}>
+                    {walletDetails.holding.available.value} {walletDetails.crypto.shortName}
                   </Text>
                   <Text style={[styles.subtext, { textAlign: 'center' }]}>Available</Text>
                 </View>
@@ -165,29 +120,30 @@ const styles = StyleSheet.create({
   inputAmount: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: 280,
-    backgroundColor: '#f7f7f7',
     justifyContent: 'space-between',
     borderRadius: 15,
     marginBottom: 15,
   },
-  inputAmountTextInput: { padding: 20, backgroundColor: '#f7f7f7', fontSize: 14, borderRadius: 15, width: 200 },
   inputAmountText: {
-    paddingVertical: 10,
+    paddingVertical: 9,
     borderLeftWidth: 1,
     borderLeftColor: '#e5e5e5',
     alignItems: 'center',
     justifyContent: 'center',
     width: 80,
+    position: 'absolute',
+    right: 0,
+    top: 0,
   },
   subtext: {
     color: '#625E59',
     fontSize: 10,
     marginTop: 5,
   },
-  textInputWrapper: { marginBottom: 10 },
+  textInputWrapper: {
+    marginBottom: 10,
+  },
   textInput: {
-    width: '100%',
     backgroundColor: '#F7F7F7',
     padding: 18,
   },

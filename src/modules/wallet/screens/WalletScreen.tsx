@@ -3,13 +3,14 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
 
 import { DefaultLayout } from '../../../layouts/Default';
-import { WalletNavProps } from '../WalletParamList';
 import { WalletBalance } from '../../../components/business/WalletBalance';
 import Topbar from '../../../components/design/Topbar';
 import { WalletTransactionHistory } from '../../../components/business/WalletTransactionHistory';
 import { CopyOutlineIcon, ReceiveIcon, SendIcon } from '../../../icons';
+// import { WalletNavProps } from '../WalletParamList';
 
-const WalletScreen = ({ navigation }: WalletNavProps<'Wallet'>) => {
+const WalletScreen = ({ navigation, route, walletDetails }) => {
+  console.log(walletDetails);
   return (
     <DefaultLayout>
       <Topbar
@@ -18,7 +19,7 @@ const WalletScreen = ({ navigation }: WalletNavProps<'Wallet'>) => {
         }}
         title="Wallet"
       />
-      <WalletBalance style={styles.component} onPress={() => {}} />
+      <WalletBalance style={styles.component} onPress={() => {}} walletDetails={walletDetails} />
       <View style={{ ...styles.walletActions, ...styles.component }}>
         <View>
           <TouchableOpacity
@@ -34,7 +35,7 @@ const WalletScreen = ({ navigation }: WalletNavProps<'Wallet'>) => {
               },
             ]}
             onPress={() => {
-              navigation.navigate('Withdraw');
+              navigation.navigate('Withdraw', { walletDetails });
             }}
           >
             <SendIcon />
@@ -55,7 +56,7 @@ const WalletScreen = ({ navigation }: WalletNavProps<'Wallet'>) => {
               },
             ]}
             onPress={() => {
-              navigation.navigate('Deposit');
+              navigation.navigate('Deposit', { walletDetails });
             }}
           >
             <ReceiveIcon />

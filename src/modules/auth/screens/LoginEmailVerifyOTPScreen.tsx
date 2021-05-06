@@ -13,7 +13,7 @@ import { AuthContext } from '../AuthProvider';
 import { globalStyles } from '../../../theme/globalStyles';
 import Logger from '../../../services/logger';
 
-function LoginEmailVerifyOTPScreen({ route }: AuthNavProps<'LoginEmail'>) {
+function LoginEmailVerifyOTPScreen({ route }: AuthNavProps<'LoginEmailVerifyOTP'>) {
   const { loginEmailPassword } = useContext(AuthContext);
   const { email, password } = route.params;
 
