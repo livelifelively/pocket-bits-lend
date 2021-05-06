@@ -60,3 +60,34 @@ type CoinTickerResponse = {
   sell: string;
   symbol: string;
 };
+
+type CoinId = 'ETH' | 'BTC' | 'USDT';
+
+type UserCurrency = {
+  name: string;
+  shortName: 'INR' | 'USD';
+  symbol: string;
+};
+
+type Holding = {
+  value: number;
+  valueInUserCurrency: number;
+};
+
+type WalletDetails = {
+  id: CoinId;
+  currency: UserCurrency;
+  holding: {
+    total: Holding;
+    available: Holding;
+    vault: Holding;
+  };
+  crypto: {
+    valueInUserCurrency: number;
+    shortName: CoinId;
+    changeInPercent: {
+      changeDirection: '-' | '+';
+      changeValue: number;
+    };
+  };
+};
