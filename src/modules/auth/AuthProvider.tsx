@@ -5,21 +5,23 @@ import Logger from '../../services/logger';
 
 export const AuthContext = React.createContext<{
   user: User;
+  // setUser: (user: User) => void;
   loginEmailPassword: (user: { email: string; token: string }) => void;
   loginPasscode: (passcode: string) => void;
   logout: () => void;
   signUp: () => void;
+  softLogout: () => void;
   setPasscode: (passcode: string) => void;
 }>({
   user: null,
+  // setUser: (user: User) => {},
   loginEmailPassword: (user: { email: string; token: string }) => {},
   loginPasscode: (passcode: string) => {},
   logout: () => {},
   signUp: () => {},
+  softLogout: () => {},
   setPasscode: (passcode: string) => {},
 });
-
-// interface AuthProviderProps {}
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User>(() => null);
@@ -28,11 +30,14 @@ export const AuthProvider: React.FC = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
+        // setUser: (user) => {
+        //   setUser(user);
+        // },
         loginEmailPassword: async (userAuth) => {
           const userUpdated = { ...userAuth, passcode: '', userAuthenticated: false };
           setUser(userUpdated);
-          Logger.debug('AUTH_PROVIDER__LOGIN_EMAIL', userUpdated);
           await AsyncStorage.setItem('user', JSON.stringify(userUpdated));
+          Logger.debug('AUTH_PROVIDER__LOGIN_EMAIL', userUpdated);
         },
         loginPasscode: async (passcode) => {
           Logger.debug('AUTH_PROVIDER__LOGIN_PASSCODE--USER_INPUT_RECIEVED', user);
@@ -54,10 +59,20 @@ export const AuthProvider: React.FC = ({ children }) => {
         logout: () => {
           setUser(null);
           AsyncStorage.removeItem('user');
-          return;
+          Logger.debug('AUTH_PROVIDER__LOGOUT--USER_REMOVED', user);
         },
         signUp: () => {
           //
+        },
+        softLogout: async () => {
+          const userDataStringFromStorage = await AsyncStorage.getItem('user');
+          let userDataObjectFromStorage;
+
+          if (userDataStringFromStorage) userDataObjectFromStorage = JSON.parse(userDataStringFromStorage);
+          userDataObjectFromStorage = { ...userDataObjectFromStorage, userAuthenticated: false, token: '' };
+          setUser(userDataObjectFromStorage);
+          await AsyncStorage.setItem('user', JSON.stringify(userDataObjectFromStorage));
+          Logger.debug('AUTH_PROVIDER__LOGOUT-SOFT--USER_TOKEN_REMOVED', user);
         },
         setPasscode: async (passcode) => {
           Logger.info('AUTH_PROVIDER__SET_PASSCODE--USER_INPUT_RECIEVED', passcode);

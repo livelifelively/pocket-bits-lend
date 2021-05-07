@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text, Title } from 'react-native-paper';
+import { vaultsAllGet } from '../../api/vault/requests';
 
 import { VaultActiveDepositsListUnit } from './VaultActiveDepositsListUnit';
 
@@ -10,62 +11,35 @@ interface VaultActiveDepositsProps {
   expandableListUnit?: boolean;
 }
 
-const activeDeposits = [
-  {
-    id: 1,
-    currentBalance: 0.123,
-    crypto: {
-      name: 'Bitcoin',
-      shortName: 'BTC',
-    },
-    interestRate: 12,
-    duration: '1 month',
-    startDate: '19 Mar, 21',
-    endDate: '19 Mar, 21',
-  },
-  {
-    id: 2,
-    currentBalance: 0.123,
-    crypto: {
-      name: 'Bitcoin',
-      shortName: 'ETH',
-    },
-    interestRate: 12,
-    duration: '1 month',
-    startDate: '19 Mar, 21',
-    endDate: '19 Mar, 21',
-  },
-  {
-    id: 3,
-    currentBalance: 0.123,
-    crypto: {
-      name: 'Bitcoin',
-      shortName: 'USDT',
-    },
-    interestRate: 12,
-    duration: '1 month',
-    startDate: '19 Mar, 21',
-    endDate: '19 Mar, 21',
-  },
-  {
-    id: 4,
-    currentBalance: 0.123,
-    crypto: {
-      name: 'Bitcoin',
-      shortName: 'BTC',
-    },
-    interestRate: 12,
-    duration: '1 month',
-    startDate: '19 Mar, 21',
-    endDate: '19 Mar, 21',
-  },
-];
+// {
+//   id: val.id,
+//   principal: val.principal,
+//   coinId: val.coinId,
+//   tenure: {
+//     id: val.tenure,
+//     label: capitalize(val.tenure.split('_').join(' ')),
+//   },
+//   interestEarned: val.interestEarned,
+//   createdAt: val.createdAt,
+//   maturityDate: val.maturityDate,
+// }
 
 export const VaultActiveDeposits: React.FC<VaultActiveDepositsProps> = ({
   style,
   showTitle = true,
   expandableListUnit = false,
 }) => {
+  const [activeDeposits, setActiveDeposits] = useState(() => []);
+
+  useEffect(() => {
+    const onloadAPICalls = async () => {
+      const data = await vaultsAllGet({});
+      setActiveDeposits(data);
+    };
+
+    onloadAPICalls();
+  }, []);
+
   return (
     <View style={{ ...styles.vaultActiveDepositsWrapper, ...style }}>
       {showTitle && (

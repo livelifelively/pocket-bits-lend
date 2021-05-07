@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import Logger from '../services/logger';
 import { cloneDeep } from 'lodash';
+import { authToken } from '../services/auth';
 
 const http = Axios.create({
   baseURL: '/api',
@@ -17,14 +18,12 @@ http.interceptors.request.use(
   async (config) => {
     const newConfig = cloneDeep(config);
 
-    const userDataStringFromStorage = await AsyncStorage.getItem('user');
+    const user = await authToken();
 
-    if (userDataStringFromStorage) {
-      const userDataObjectFromStorage = JSON.parse(userDataStringFromStorage);
-      if (userDataObjectFromStorage.token) {
-        newConfig.headers['Authorization'] = `Bearer ${userDataObjectFromStorage.token}`;
-      }
+    if (user.token) {
+      newConfig.headers['Authorization'] = `Bearer ${user.token}`;
     }
+
     Logger.debug('HTTP_REQUEST_INTERCEPTOR--CONFIGS', newConfig);
     return newConfig;
   },
@@ -40,15 +39,21 @@ http.interceptors.request.use(
  */
 http.interceptors.response.use(
   (response) => {
-    Logger.debug('HTTP_RESPONSE_INTERCEPTOR--TRY', 'WORKING WORKING WORKING');
+    Logger.debug('HTTP_RESPONSE_INTERCEPTOR--TRY', '');
     return response;
   },
-  (error) => {
-    Logger.debug('HTTP_RESPONSE_INTERCEPTOR--CATCH', 'WORKING WORKING WORKING');
+  async (error) => {
+    Logger.debug('HTTP_RESPONSE_INTERCEPTOR--CATCH', '');
     // TODO: call central error display service here
+    const userDataStringFromStorage = await AsyncStorage.getItem('user');
+    let userDataObjectFromStorage;
+    if (userDataStringFromStorage) userDataObjectFromStorage = JSON.parse(userDataStringFromStorage);
     if (error.response.status === 401) {
       // application wide error.
       // redirect to login/email or login/password, based on the situation
+      console.log(userDataObjectFromStorage);
+      userDataObjectFromStorage = { ...userDataObjectFromStorage, userAuthenticated: false, token: '' };
+      await AsyncStorage.setItem('user', JSON.stringify(userDataObjectFromStorage));
     }
     throw error;
   }

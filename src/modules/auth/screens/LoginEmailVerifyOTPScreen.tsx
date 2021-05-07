@@ -12,9 +12,10 @@ import { resendOTPEmailGet, signinPost } from '../../../api/auth/requests';
 import { AuthContext } from '../AuthProvider';
 import { globalStyles } from '../../../theme/globalStyles';
 import Logger from '../../../services/logger';
+import { loginEmailPassword } from '../../../services/auth';
 
 function LoginEmailVerifyOTPScreen({ route }: AuthNavProps<'LoginEmailVerifyOTP'>) {
-  const { loginEmailPassword } = useContext(AuthContext);
+  // const { loginEmailPassword } = useContext(AuthContext);
   const { email, password } = route.params;
 
   const loginSchema = Yup.object().shape({

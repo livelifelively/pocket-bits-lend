@@ -34,6 +34,8 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 }
 
 function ActiveStack({ user }: { user: User }) {
+  console.log(user);
+
   if (user && user.token && user.email && user.passcode === '') {
     return <SetPasscodeStack />;
   } else if (user && user.token && user.email && user.passcode.length === 4 && !user.userAuthenticated) {

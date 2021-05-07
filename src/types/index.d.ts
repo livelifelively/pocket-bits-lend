@@ -91,3 +91,19 @@ type WalletDetails = {
     };
   };
 };
+
+type VaultDepositDuration = 'ONE_MONTH';
+
+type VaultDepositDetails = {
+  id: number;
+  coinId: CoinId;
+  interestRate?: number;
+  interestEarned: number;
+  tenure: {
+    id: VaultDepositDuration;
+    label: string;
+  };
+  principal: number;
+  createdAt: string;
+  maturityDate: string;
+};
