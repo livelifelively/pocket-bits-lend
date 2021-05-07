@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import Logger from '../../services/logger';
 
 export const AuthContext = React.createContext<{
   user: User;
-  // setUser: (user: User) => void;
   loginEmailPassword: (user: { email: string; token: string }) => void;
   loginPasscode: (passcode: string) => void;
   logout: () => void;
@@ -14,7 +13,6 @@ export const AuthContext = React.createContext<{
   setPasscode: (passcode: string) => void;
 }>({
   user: null,
-  // setUser: (user: User) => {},
   loginEmailPassword: (user: { email: string; token: string }) => {},
   loginPasscode: (passcode: string) => {},
   logout: () => {},
@@ -26,13 +24,23 @@ export const AuthContext = React.createContext<{
 export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User>(() => null);
 
+  // Load User state from AsyncStorage
+  useEffect(() => {
+    async function getUser() {
+      const userDataStringFromStorage = await AsyncStorage.getItem('user');
+      if (userDataStringFromStorage) {
+        const userDataObjectFromStorage = JSON.parse(userDataStringFromStorage);
+        setUser(userDataObjectFromStorage);
+      }
+    }
+
+    getUser();
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{
         user,
-        // setUser: (user) => {
-        //   setUser(user);
-        // },
         loginEmailPassword: async (userAuth) => {
           const userUpdated = { ...userAuth, passcode: '', userAuthenticated: false };
           setUser(userUpdated);

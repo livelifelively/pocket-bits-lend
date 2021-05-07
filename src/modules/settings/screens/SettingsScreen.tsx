@@ -7,10 +7,9 @@ import { AuthContext } from '../../auth/AuthProvider';
 import Topbar from '../../../components/design/Topbar';
 import { WhiteView } from '../../../components/design/WhiteView';
 import { LockIcon, LogoutIcon, UserIcon } from '../../../icons';
-import { logout } from '../../../services/auth';
 
 const SettingsScreen = ({ navigation }: SettingsNavProps<'Settings'>) => {
-  // const { logout } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
 
   return (
     <DefaultLayout>

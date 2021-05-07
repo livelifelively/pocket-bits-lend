@@ -8,7 +8,6 @@ import { DefaultLayout } from '../../../layouts/Default';
 import { AuthContext } from '../../auth/AuthProvider';
 import { AppButton } from '../../../components/design/AppButton';
 import { AppTextInput } from '../../../components/design/AppTextInput';
-import { setPasscode } from '../../../services/auth';
 
 const SetPasscodeScreen = () => {
   const [passcodeConfirmation, setPasscodeConfirmation] = useState(() => 'TO_ADD_PASSCODE');
@@ -22,7 +21,7 @@ const SetPasscodeScreen = () => {
       .required()
       .oneOf([Yup.ref('passcode'), null], 'Passcodes must match'),
   });
-  // const { setPasscode } = useContext(AuthContext);
+  const { setPasscode } = useContext(AuthContext);
 
   return (
     <DefaultLayout>
