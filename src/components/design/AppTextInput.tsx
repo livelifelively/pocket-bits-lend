@@ -4,7 +4,7 @@ import React from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 
 import { globalStyles } from '../../theme/globalStyles';
-import { ErrorText } from './ErrorText';
+import { InlineErrorText } from './InlineErrorText';
 
 interface AppTextInputProps {
   onChangeText: (text: string) => void;
@@ -78,7 +78,7 @@ export const AppTextInput: React.FC<AppTextInputProps> = ({
         secureTextEntry={secureTextEntry}
         onBlur={onBlur}
       />
-      <ErrorText error={error} />
+      <InlineErrorText error={error} />
     </View>
   );
 };

@@ -31,12 +31,12 @@ const cryotpyIcon = (shortName: string) => {
 export const Wallets: React.FC<WalletsProps> = ({ style, onPress }) => {
   const [wallets, setWallets] = useState<[] | [WalletDetails]>(() => []);
 
-  useEffect(() => {
-    async function onloadAPICalls() {
-      const data = await walletsAllGet({});
-      setWallets(data);
-    }
+  const onloadAPICalls = async () => {
+    const data = await walletsAllGet({});
+    setWallets(data);
+  };
 
+  useEffect(() => {
     onloadAPICalls();
   }, []);
 
