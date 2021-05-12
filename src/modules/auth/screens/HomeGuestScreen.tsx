@@ -6,6 +6,7 @@ import { DefaultLayout } from '../../../layouts/Default';
 import { AppButton } from '../../../components/design/AppButton';
 import { VaultIntro } from '../../../components/business/VaultIntro';
 import { Wallets } from '../../../components/business/Wallets';
+import ErrorBoundary from '../../../components/design/ErrorBoundary';
 
 function HomeGuestScreen({ navigation }: AuthNavProps<'HomeGuest'>) {
   return (
@@ -30,7 +31,9 @@ function HomeGuestScreen({ navigation }: AuthNavProps<'HomeGuest'>) {
         />
       </View>
       <VaultIntro style={{ ...styles.components }} />
-      <Wallets onPress={() => {}} />
+      <ErrorBoundary errorScope="COMPONENT">
+        <Wallets onPress={() => {}} />
+      </ErrorBoundary>
     </DefaultLayout>
   );
 }

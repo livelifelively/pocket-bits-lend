@@ -17,12 +17,7 @@ export const coinTickerGet = async (requestData: any) => {
 };
 
 export const walletsAllGet = async (requestData: WalletsBalanceRequest) => {
-  try {
-    const wallets = await getRequestHandler(requestData, WalletAPIConfigurations['WALLET_ALL']);
-    const coins = await coinTickerGet({});
-    return A_WalletsCoinsValue(wallets.data, coins.data);
-  } catch (e) {
-    // handle errors w.r.t. data value. API success, but data not suitable.
-    console.log(e);
-  }
+  const wallets = await getRequestHandler(requestData, WalletAPIConfigurations['WALLET_ALL']);
+  const coins = await coinTickerGet({});
+  return A_WalletsCoinsValue(wallets.data, coins.data);
 };

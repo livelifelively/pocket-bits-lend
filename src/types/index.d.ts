@@ -107,3 +107,5 @@ type VaultDepositDetails = {
   createdAt: string;
   maturityDate: string;
 };
+
+type ErrorBoundaryErrorScope = 'COMPONENT' | 'ROOT' | 'SCREEN';

@@ -8,13 +8,16 @@ import { SetPasscodeStack } from '../modules/set-passcode/SetPasscodeStack';
 import { AppStack } from './AppStack';
 import Logger from '../services/logger';
 import { AuthContext } from '../modules/auth/AuthProvider';
+import ErrorBoundary from '../components/design/ErrorBoundary';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   const { user } = useContext(AuthContext);
 
   return (
     <NavigationContainer theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <ActiveStack user={user} />
+      <ErrorBoundary errorScope="ROOT">
+        <ActiveStack user={user} />
+      </ErrorBoundary>
     </NavigationContainer>
   );
 }

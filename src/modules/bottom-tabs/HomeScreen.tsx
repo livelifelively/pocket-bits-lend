@@ -7,6 +7,7 @@ import { Wallets } from '../../components/business/Wallets';
 import { VaultIntro } from '../../components/business/VaultIntro';
 import { ValueCreated } from '../../components/business/ValueCreated';
 import Topbar from '../../components/design/Topbar';
+import ErrorBoundary from '../../components/design/ErrorBoundary';
 
 const HomeScreen = ({ navigation }: HomeNavProps<'Home'>) => {
   const onWalletPress = (walletDetails: Record<string, unknown>) => {
@@ -23,7 +24,9 @@ const HomeScreen = ({ navigation }: HomeNavProps<'Home'>) => {
       />
       <ValueCreated />
       <VaultIntro style={{ ...styles.components }} />
-      <Wallets onPress={onWalletPress} />
+      <ErrorBoundary errorScope="COMPONENT">
+        <Wallets onPress={onWalletPress} />
+      </ErrorBoundary>
     </DefaultLayout>
   );
 };

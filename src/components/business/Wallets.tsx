@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Title, Text } from 'react-native-paper';
 import { walletsAllGet } from '../../api/wallet/requests';
+import useComponentError from '../../hooks/useComponentError';
 
 import { TetherIcon, EtheriumIcon, BitcoinIcon } from '../../icons';
 import { WhiteView } from '../design/WhiteView';
@@ -30,15 +31,28 @@ const cryotpyIcon = (shortName: string) => {
 
 export const Wallets: React.FC<WalletsProps> = ({ style, onPress }) => {
   const [wallets, setWallets] = useState<[] | [WalletDetails]>(() => []);
+  const [componentError, setComponentError] = useState(() => {
+    return { hasError: false, message: '', id: '' };
+  });
 
   const onloadAPICalls = async () => {
-    const data = await walletsAllGet({});
-    setWallets(data);
+    try {
+      const data = await walletsAllGet({});
+      setWallets(data);
+    } catch (e) {
+      setComponentError({
+        hasError: true,
+        message: 'API request failed',
+        id: 'COMPONENT__WALLETS--API_REQUEST_FAILED',
+      });
+    }
   };
 
   useEffect(() => {
     onloadAPICalls();
   }, []);
+
+  useComponentError(componentError);
 
   const onWalletPress = (walletDetails = {}) => {
     onPress(walletDetails);
