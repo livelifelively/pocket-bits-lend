@@ -57,7 +57,7 @@ function LoginEmailVerifyOTPScreen({ route }: AuthNavProps<'LoginEmailVerifyOTP'
           });
           if (signedUp.status === 'SUCCESS' && signedUp.data?.id_token) {
             // TODO handle cases for wrong email password combination
-            loginEmailPassword({ email, token: signedUp.data?.id_token });
+            loginEmailPassword({ email, token: signedUp.data?.id_token, refreshToken: signedUp.data?.refresh_token });
             Logger.info('LOGIN_EMAIL_VERIFY_OTP', {});
           }
         }}

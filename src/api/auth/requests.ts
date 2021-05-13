@@ -1,5 +1,7 @@
 import { AuthAPIConfigurations } from './configurations';
 import { postRequestHandler, getRequestHandler } from '../http';
+import axios from 'axios';
+import Logger from '../../services/logger';
 
 export const signupPost = async (requestData: SignUpRequest) => {
   const returnValue = await postRequestHandler(requestData, AuthAPIConfigurations['SIGNUP']);
@@ -25,4 +27,25 @@ export const twoFactorAuthenticationVefificationPost = (requestData: TwoFactorAu
 
 export const resendOTPEmailGet = (requestData: ResendEmailOTPRequest) => {
   return getRequestHandler(requestData, AuthAPIConfigurations['RESEND_EMAIL_OTP']);
+};
+
+/**
+ * Get new token from refresh token and id token, if fails, logout user
+ * @param requestData refreshToken, idToken
+ * @returns refreshToken
+ */
+export const refreshTokenPost = async (requestData: RefreshTokenRequest) => {
+  const { url } = AuthAPIConfigurations['REFRESH_TOKEN'];
+  try {
+    const data = await axios.post(url(), AuthAPIConfigurations['REFRESH_TOKEN'], {
+      headers: {
+        'Refresh-Token': requestData.refreshToken,
+        'Id-Token': requestData.token,
+      },
+    });
+    return data;
+  } catch (e) {
+    Logger.error('AUTH__REFRESH_TOKEN', e);
+    throw e;
+  }
 };

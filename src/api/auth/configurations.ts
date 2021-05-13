@@ -52,7 +52,7 @@ export const AuthAPIConfigurations = {
   },
   '2FA_VERIFICATION': {
     url: () => URLPrefixes.AUTH + '/verifyEmail',
-    apiCallId: 'EMAIL_VERIFICATION',
+    apiCallId: '2FA_VERIFICATION',
     method: 'POST',
     errorHandlers: {
       default: (response: any) => {
@@ -65,6 +65,16 @@ export const AuthAPIConfigurations = {
       URLPrefixes.AUTH + `/resendOtpEmail?email=${requestData.email}&type=${requestData.type}`,
     apiCallId: 'RESEND_EMAIL_OTP',
     method: 'GET',
+    errorHandlers: {
+      default: (response: any) => {
+        // console.log('HANDLE GENERIC ERROR', response);
+      },
+    },
+  },
+  REFRESH_TOKEN: {
+    url: () => URLPrefixes.AUTH + '/refresh',
+    apiCallId: 'REFRESH_TOKEN',
+    method: 'POST',
     errorHandlers: {
       default: (response: any) => {
         // console.log('HANDLE GENERIC ERROR', response);

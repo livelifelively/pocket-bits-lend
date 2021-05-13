@@ -11,7 +11,9 @@ import { AuthContext } from '../modules/auth/AuthProvider';
 import ErrorBoundary from '../components/design/ErrorBoundary';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
-  const { user } = useContext(AuthContext);
+  const { user, refreshUserFromAsyncStorage } = useContext(AuthContext);
+
+  // refreshUserFromAsyncStorage();
 
   return (
     <NavigationContainer theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>

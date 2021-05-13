@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
+import { isEqual } from 'lodash';
 
 import Logger from '../../services/logger';
 
 export const AuthContext = React.createContext<{
   user: User;
-  loginEmailPassword: (user: { email: string; token: string }) => void;
+  loginEmailPassword: (user: { email: string; token: string; refreshToken: string }) => void;
   loginPasscode: (passcode: string) => void;
   logout: () => void;
   signUp: () => void;
   softLogout: () => void;
   setPasscode: (passcode: string) => void;
+  refreshUserFromAsyncStorage: () => void;
 }>({
   user: null,
-  loginEmailPassword: (user: { email: string; token: string }) => {},
+  loginEmailPassword: (user: { email: string; token: string; refreshToken: string }) => {},
   loginPasscode: (passcode: string) => {},
   logout: () => {},
   signUp: () => {},
   softLogout: () => {},
   setPasscode: (passcode: string) => {},
+  refreshUserFromAsyncStorage: () => {},
 });
 
 export const AuthProvider: React.FC = ({ children }) => {
@@ -95,6 +98,15 @@ export const AuthProvider: React.FC = ({ children }) => {
             Logger.info('AUTH_PROVIDER__SET_PASSCODE--USER_INPUT_RECIEVED', userObject);
           }
           return;
+        },
+        refreshUserFromAsyncStorage: async () => {
+          const userDataStringFromStorage = await AsyncStorage.getItem('user');
+          let userDataObjectFromStorage;
+
+          if (userDataStringFromStorage) {
+            userDataObjectFromStorage = JSON.parse(userDataStringFromStorage);
+            if (isEqual(userDataObjectFromStorage, user)) setUser(userDataObjectFromStorage);
+          }
         },
       }}
     >

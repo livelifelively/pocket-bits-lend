@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Logger from '../services/logger';
 import { cloneDeep } from 'lodash';
 import { authToken } from '../services/auth';
+import { refreshTokenPost } from './auth/requests';
 
 const http = Axios.create({
   baseURL: '/api',
@@ -49,14 +50,40 @@ http.interceptors.response.use(
     let userDataObjectFromStorage;
     if (userDataStringFromStorage) userDataObjectFromStorage = JSON.parse(userDataStringFromStorage);
     if (error.response.status === 401) {
-      // application wide error.
-      // redirect to login/email or login/password, based on the situation
-      userDataObjectFromStorage = { ...userDataObjectFromStorage, userAuthenticated: false, token: '' };
-      await AsyncStorage.setItem('user', JSON.stringify(userDataObjectFromStorage));
+      // refresh id_token, else logout.
+      try {
+        const refreshTokenData = await refreshTokenPost({
+          refreshToken: userDataObjectFromStorage.refreshToken,
+          token: userDataObjectFromStorage.token,
+        });
+
+        if (refreshTokenData.data?.id_token) {
+          await refreshUserToken(userDataObjectFromStorage, refreshTokenData.data);
+        } else {
+          await expireUserToken(userDataObjectFromStorage);
+        }
+      } catch (e) {
+        await expireUserToken(userDataObjectFromStorage);
+      }
+    } else {
+      throw error;
     }
-    throw error;
   }
 );
+
+async function expireUserToken(userDataObjectFromStorage: any) {
+  userDataObjectFromStorage = { ...userDataObjectFromStorage, userAuthenticated: false, token: '' };
+  await AsyncStorage.setItem('user', JSON.stringify(userDataObjectFromStorage));
+}
+
+async function refreshUserToken(userDataObjectFromStorage: any, refreshTokenData: any) {
+  userDataObjectFromStorage = {
+    ...userDataObjectFromStorage,
+    token: refreshTokenData.id_token,
+    refreshToken: refreshTokenData.refresh_token,
+  };
+  await AsyncStorage.setItem('user', JSON.stringify(userDataObjectFromStorage));
+}
 
 export function structureAPIResponse(res: any, apiCallId = ''): RequestResponse {
   let returnData: RequestResponse;
@@ -86,32 +113,29 @@ export function structureAPIResponse(res: any, apiCallId = ''): RequestResponse 
 
 export function structureAPIError({
   err,
-  apiCallId,
+  requestConfigurations,
   requestData,
 }: {
   err: any;
-  apiCallId: string;
   requestData: any;
-  errorResponse: any;
+  requestConfigurations: any;
 }) {
-  return err.response?.data
+  const error = err.response?.data
     ? {
         ...err.response?.data,
-        request: {
-          apiCallId,
-          requestData,
-        },
+        requestData,
+        requestConfigurations,
       }
     : {
         details: 'API Error',
         status: 500,
         message: 'error.http.500',
         title: 'Internal Server Error',
-        request: {
-          apiCallId,
-          requestData,
-        },
+        requestData,
+        requestConfigurations,
       };
+  Logger.error(`${error.message}`, error);
+  return error;
 }
 
 export function errorResponseAsPerStatusCode(err: any, errorHandlers: any): void {
@@ -121,23 +145,24 @@ export function errorResponseAsPerStatusCode(err: any, errorHandlers: any): void
   }
 }
 
-export async function postRequestHandler(requestData: any, requestConfigurations: any) {
+export async function postRequestHandler(requestData: any, requestConfigurations: any, headerData = {}) {
   const { apiCallId, url, errorHandlers } = requestConfigurations;
+  const headers = { ...headerData };
 
   try {
-    const res = await http.post(url(), requestData);
+    const res = await http.post(url(), requestData, { headers });
     // TODO can pass in adapters as well if needed.
     return structureAPIResponse(res, apiCallId);
   } catch (err) {
     errorResponseAsPerStatusCode(err, errorHandlers);
-    const structuredError = structureAPIError({ err, errorResponse: err.response, apiCallId, requestData });
+    const structuredError = structureAPIError({ err, requestData, requestConfigurations });
     throw structuredError;
   }
 }
 
 export async function getRequestHandler(requestData: any, requestConfigurations: any) {
   const { apiCallId, url, errorHandlers } = requestConfigurations;
-  const requestURL = url();
+  const requestURL = url(requestData);
 
   try {
     const res = await http.get(requestURL);
@@ -145,7 +170,7 @@ export async function getRequestHandler(requestData: any, requestConfigurations:
     return structureAPIResponse(res, apiCallId);
   } catch (err) {
     errorResponseAsPerStatusCode(err, errorHandlers);
-    const structuredError = structureAPIError({ err, errorResponse: err.response, apiCallId, requestData });
+    const structuredError = structureAPIError({ err, requestData, requestConfigurations });
     throw structuredError;
   }
 }

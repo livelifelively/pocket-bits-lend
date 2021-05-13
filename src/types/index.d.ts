@@ -39,8 +39,17 @@ type ResendEmailOTPRequest = {
   type: 'login';
 };
 
+type RefreshTokenRequest = {
+  refreshToken: string;
+  token: string;
+};
+
 type WalletBalanceForCoinRequest = {
-  coinId: 'ETH' | 'BTC' | 'USDT';
+  coinId: CoinId;
+};
+
+type WalletsAddressRequest = {
+  coinId: CoinId;
 };
 
 type WalletsBalanceRequest = Record<string, never>;
@@ -61,7 +70,7 @@ type CoinTickerResponse = {
   symbol: string;
 };
 
-type CoinId = 'ETH' | 'BTC' | 'USDT';
+type CoinId = 'ETH' | 'BTC' | 'USDT' | 'XRP';
 
 type UserCurrency = {
   name: string;
