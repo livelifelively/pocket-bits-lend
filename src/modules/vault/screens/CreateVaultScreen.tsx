@@ -1,84 +1,21 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Menu } from 'react-native-paper';
 
 import { DefaultLayout } from '../../../layouts/Default';
-import { VaultCreationNavProps } from '../VaultParamList';
 import { AppButton } from '../../../components/design/AppButton';
 import Topbar from '../../../components/design/Topbar';
 import { WhiteView } from '../../../components/design/WhiteView';
 import { AppTextInput } from '../../../components/design/AppTextInput';
 import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
 import CryptoIcon from '../../../components/design/CryptoIcon';
-import { CaretIcon } from '../../../icons';
-
-type VaultDepositOption = {
-  id: number;
-  interestRate: number;
-  duration: string;
-  crypto: {
-    name: string;
-    shortName: string;
-  };
-};
+import Dropdown from '../../../components/design/Dropdown';
 
 const availableFundsInCrypto = 1.41;
 
-const vaultDepositOptions = [
-  {
-    id: 1,
-    interestRate: 10,
-    duration: '1 month',
-    crypto: {
-      name: 'Bitcoin',
-      shortName: 'BTC',
-    },
-  },
-  {
-    id: 2,
-    interestRate: 12,
-    duration: '3 months',
-    crypto: {
-      name: 'Bitcoin',
-      shortName: 'BTC',
-    },
-  },
-  {
-    id: 3,
-    interestRate: 16,
-    duration: '6 months',
-    crypto: {
-      name: 'Bitcoin',
-      shortName: 'BTC',
-    },
-  },
-  {
-    id: 4,
-    interestRate: 20,
-    duration: '1 year',
-    crypto: {
-      name: 'Bitcoin',
-      shortName: 'BTC',
-    },
-  },
-];
-
-const selectedOption = vaultDepositOptions[0];
-
-const CreateVaultScreen = ({ navigation }: VaultCreationNavProps<'CreateVault'>) => {
-  const [activeVaultOption, setActiveVaultOption] = useState(() => selectedOption);
-  const [menuVisibility, setMenuVisibility] = useState(false);
-
-  const openMenu = () => setMenuVisibility(true);
-
-  const closeMenu = () => setMenuVisibility(false);
-
-  const selectMenuItem = (val: VaultDepositOption) => {
-    setActiveVaultOption(val);
-    closeMenu();
-  };
+const CreateVaultScreen = ({ navigation, vaults }) => {
+  const [activeVaultOption, setActiveVaultOption] = useState(() => vaults.active);
 
   const twoFactorAuthenticationSchema = Yup.object().shape({
     verificationCode: Yup.string()
@@ -98,12 +35,12 @@ const CreateVaultScreen = ({ navigation }: VaultCreationNavProps<'CreateVault'>)
         <View style={styles.createVaultInfo}>
           <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: 60 }}>
             <View style={{ marginRight: 15 }}>
-              <CryptoIcon shortName={activeVaultOption.crypto.shortName} />
+              <CryptoIcon shortName={activeVaultOption.coinId} />
             </View>
-            <Text>{activeVaultOption.crypto.shortName}</Text>
+            <Text>{activeVaultOption.coinId}</Text>
           </View>
           <View>
-            <Text style={styles.yellowText}>{activeVaultOption.interestRate}%</Text>
+            <Text style={styles.yellowText}>{activeVaultOption.interestRatePercent}%</Text>
             <Text>Interest Rate</Text>
           </View>
         </View>
@@ -128,12 +65,12 @@ const CreateVaultScreen = ({ navigation }: VaultCreationNavProps<'CreateVault'>)
                   onBlur={handleBlur('cryptoAmount')}
                   keyboardType="number-pad"
                   maxLength={15}
-                  placeholder={`Enter Amount in ${activeVaultOption.crypto.shortName}`}
+                  placeholder={`Enter Amount in ${activeVaultOption.coinId}`}
                   error={touched.cryptoAmount ? errors.cryptoAmount : ''}
                 />
                 <View style={[styles.inputAmountText]}>
                   <Text>
-                    {availableFundsInCrypto} {activeVaultOption.crypto.shortName}
+                    {availableFundsInCrypto} {activeVaultOption.coinId}
                   </Text>
                   <Text style={[styles.subtext, { textAlign: 'center' }]}>Available</Text>
                 </View>
@@ -154,40 +91,18 @@ const CreateVaultScreen = ({ navigation }: VaultCreationNavProps<'CreateVault'>)
                   <Text style={styles.percentButtonsText}>100%</Text>
                 </WhiteTouchableOpacity>
               </View>
-              <View style={styles.dropdownMenuWrapper}>
-                <Menu
-                  visible={menuVisibility}
-                  onDismiss={closeMenu}
-                  anchor={
-                    <TouchableOpacity onPress={openMenu} style={styles.dropdownMenuAnchor}>
-                      <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
-                        <View>
-                          <Text>{activeVaultOption.duration}</Text>
-                        </View>
-                        <View>
-                          <CaretIcon style={{ backgroundColor: 'red' }} />
-                        </View>
-                      </View>
-                    </TouchableOpacity>
-                  }
-                >
-                  {vaultDepositOptions &&
-                    vaultDepositOptions.map((val) => {
-                      return (
-                        <Menu.Item
-                          onPress={() => {
-                            selectMenuItem(val);
-                          }}
-                          key={val.id}
-                          title={val.duration}
-                        />
-                      );
-                    })}
-                </Menu>
-              </View>
+              <Dropdown
+                options={vaults.all}
+                activeOption={activeVaultOption}
+                onMenuItemSelect={setActiveVaultOption}
+                keyVal={(val: any) => val.id}
+                titleVal={(val: any) => {
+                  return <Text>{`${val.vaultDuration.value} ${val.vaultDuration.timeUnit}`}</Text>;
+                }}
+              />
               <Text style={styles.instructions}>
-                Lock {activeVaultOption.crypto.shortName} for {activeVaultOption.duration} at{' '}
-                {activeVaultOption.interestRate}% interest
+                Lock {activeVaultOption.coinId} for {activeVaultOption.vaultDuration.value}{' '}
+                {activeVaultOption.vaultDuration.timeUnit} at {activeVaultOption.interestRatePercent}% interest
               </Text>
               <AppButton
                 title="Lock in Vault"

@@ -23,7 +23,7 @@ const VaultHistory = createStackNavigator<VaultHistoryParamList>();
 const VaultActiveDeposits = createStackNavigator<VaultActiveDepositsParamList>();
 const VaultCreation = createStackNavigator<VaultCreationParamList>();
 
-export const VaultCreationStack: React.FC = () => {
+export const VaultCreationStack: React.FC = ({ route }) => {
   return (
     <VaultCreation.Navigator
       screenOptions={{
@@ -31,7 +31,9 @@ export const VaultCreationStack: React.FC = () => {
       }}
       initialRouteName="CreateVault"
     >
-      <VaultCreation.Screen name="CreateVault" component={CreateVaultScreen} />
+      <VaultCreation.Screen options={{ headerTitle: 'Wallet' }} name="CreateVault">
+        {(props) => <CreateVaultScreen {...props} vaults={route.params} />}
+      </VaultCreation.Screen>
       <VaultCreation.Screen name="VaultCreated" component={VaultCreatedScreen} />
     </VaultCreation.Navigator>
   );
