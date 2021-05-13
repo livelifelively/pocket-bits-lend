@@ -5,7 +5,7 @@ import { DefaultLayout } from '../../../layouts/Default';
 import { VaultHistoryNavProps } from '../VaultParamList';
 import Topbar from '../../../components/design/Topbar';
 import { WhiteView } from '../../../components/design/WhiteView';
-import { BitcoinIcon, EtheriumIcon, TetherIcon } from '../../../icons';
+import CryptoIcon from '../../../components/design/CryptoIcon';
 
 const vaultHistory = [
   {
@@ -62,22 +62,6 @@ const vaultHistory = [
   },
 ];
 
-const cryotpyIcon = (shortName: string) => {
-  switch (shortName) {
-    case 'USDT':
-      return <TetherIcon />;
-
-    case 'BTC':
-      return <BitcoinIcon />;
-
-    case 'ETH':
-      return <EtheriumIcon />;
-
-    default:
-      break;
-  }
-};
-
 const VaultHistoryScreen = ({ navigation }: VaultHistoryNavProps<'VaultHistory'>) => {
   return (
     <DefaultLayout>
@@ -93,7 +77,9 @@ const VaultHistoryScreen = ({ navigation }: VaultHistoryNavProps<'VaultHistory'>
             <WhiteView style={styles.vaultHistoryListUnit} key={val.id}>
               <View style={{ width: 60 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: 60 }}>
-                  <View style={{ marginRight: 15 }}>{cryotpyIcon(val.crypto.shortName)}</View>
+                  <View style={{ marginRight: 15 }}>
+                    <CryptoIcon shortName={val.crypto.shortName} />
+                  </View>
                   <Text>{val.crypto.shortName}</Text>
                 </View>
                 <Text style={[styles.subtext, { textAlign: 'center' }]}>Token</Text>

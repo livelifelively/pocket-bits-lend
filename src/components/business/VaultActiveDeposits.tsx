@@ -11,19 +11,6 @@ interface VaultActiveDepositsProps {
   expandableListUnit?: boolean;
 }
 
-// {
-//   id: val.id,
-//   principal: val.principal,
-//   coinId: val.coinId,
-//   tenure: {
-//     id: val.tenure,
-//     label: capitalize(val.tenure.split('_').join(' ')),
-//   },
-//   interestEarned: val.interestEarned,
-//   createdAt: val.createdAt,
-//   maturityDate: val.maturityDate,
-// }
-
 export const VaultActiveDeposits: React.FC<VaultActiveDepositsProps> = ({
   style,
   showTitle = true,

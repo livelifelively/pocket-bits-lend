@@ -3,9 +3,11 @@ import { Text } from 'react-native-paper';
 
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { WhiteView } from '../design/WhiteView';
-import { BitcoinIcon, EtheriumIcon, TetherIcon } from '../../icons';
 import { WhiteTouchableOpacity } from '../design/WhiteTouchableOpacity';
 import RedCrossIcon from '../../icons/RedCrossIcon';
+import CryptoIcon from '../design/CryptoIcon';
+import { formatDateTimeString } from '../../services/date-time';
+
 interface VaultActiveDepositsListUnitProps {
   style?: Record<string, unknown>;
   expanded?: boolean;
@@ -25,14 +27,16 @@ const VaultActiveDepositsListUnitDetails = ({
       <View>
         <View style={styles.upperRow}>
           <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-            <View style={{ marginRight: 15 }}>{cryotpyIcon(depositDetails.coinId)}</View>
+            <View style={{ marginRight: 15 }}>
+              <CryptoIcon shortName={depositDetails.coinId} />
+            </View>
             <Text>{depositDetails.coinId}</Text>
           </View>
           <Text style={[styles.subtext, { textAlign: 'center' }]}>Token</Text>
         </View>
         <View style={styles.lowerRow}>
           <View>
-            <Text style={styles.lowerRowTitle}>{depositDetails.createdAt}</Text>
+            <Text style={styles.lowerRowTitle}>{formatDateTimeString(depositDetails.createdAt, 'DD MMM, YY')}</Text>
           </View>
           <Text style={[styles.subtext, { textAlign: 'center' }]}>Start date</Text>
         </View>
@@ -46,7 +50,7 @@ const VaultActiveDepositsListUnitDetails = ({
         </View>
         <View style={styles.lowerRow}>
           <View>
-            <Text style={styles.lowerRowTitle}>{depositDetails.maturityDate}</Text>
+            <Text style={styles.lowerRowTitle}>{formatDateTimeString(depositDetails.maturityDate, 'DD MMM, YY')}</Text>
           </View>
           <Text style={[styles.subtext, { textAlign: 'center' }]}>End date</Text>
         </View>
@@ -88,22 +92,6 @@ const VaultActiveDepositsListUnitDetails = ({
   );
 };
 
-const cryotpyIcon = (shortName: string) => {
-  switch (shortName) {
-    case 'USDT':
-      return <TetherIcon />;
-
-    case 'BTC':
-      return <BitcoinIcon />;
-
-    case 'ETH':
-      return <EtheriumIcon />;
-
-    default:
-      break;
-  }
-};
-
 const VaultActiveDepositsListUnitBasic = ({
   showDetails,
   depositDetails,
@@ -115,7 +103,9 @@ const VaultActiveDepositsListUnitBasic = ({
     <TouchableOpacity activeOpacity={0.7} style={styles.vaultActiveDepositsListUnit} onPress={showDetails}>
       <View>
         <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: 60 }}>
-          <View style={{ marginRight: 15 }}>{cryotpyIcon(depositDetails.coinId)}</View>
+          <View style={{ marginRight: 15 }}>
+            <CryptoIcon shortName={depositDetails.coinId} />
+          </View>
           <Text>{depositDetails.coinId}</Text>
         </View>
         <Text style={[styles.subtext, { textAlign: 'center' }]}>Token</Text>
