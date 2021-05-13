@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, TouchableOpacity, Clipboard } from 'react-native';
 import { Text } from 'react-native-paper';
 
 import { DefaultLayout } from '../../../layouts/Default';
@@ -7,10 +7,32 @@ import { WalletBalance } from '../../../components/business/WalletBalance';
 import Topbar from '../../../components/design/Topbar';
 import { WalletTransactionHistory } from '../../../components/business/WalletTransactionHistory';
 import { CopyOutlineIcon, ReceiveIcon, SendIcon } from '../../../icons';
-// import { WalletNavProps } from '../WalletParamList';
+import { walletAddressGet } from '../../../api/wallet/requests';
 
-const WalletScreen = ({ navigation, route, walletDetails }) => {
-  console.log(walletDetails);
+const WalletScreen = ({ navigation, walletDetails }) => {
+  const [walletAddress, setWalletAddress] = useState(() => '');
+
+  const onloadAPICalls = async (coinId: CoinId) => {
+    try {
+      const data = await walletAddressGet({ coinId });
+      // setWallets(data);
+    } catch (e) {
+      // setComponentError({
+      //   hasError: true,
+      //   message: 'API request failed',
+      //   id: 'COMPONENT__WALLETS--API_REQUEST_FAILED',
+      // });
+    }
+  };
+
+  const copyToClipboard = () => {
+    Clipboard.setString(walletAddress);
+  };
+
+  useEffect(() => {
+    onloadAPICalls(walletDetails.crypto.shortName);
+  }, [walletDetails.crypto.shortName]);
+
   return (
     <DefaultLayout>
       <Topbar
@@ -35,7 +57,7 @@ const WalletScreen = ({ navigation, route, walletDetails }) => {
               },
             ]}
             onPress={() => {
-              navigation.navigate('Withdraw', { walletDetails });
+              navigation.navigate('Withdraw', { walletDetails: { ...walletDetails, address: walletAddress } });
             }}
           >
             <SendIcon />
@@ -56,7 +78,7 @@ const WalletScreen = ({ navigation, route, walletDetails }) => {
               },
             ]}
             onPress={() => {
-              navigation.navigate('Deposit', { walletDetails });
+              navigation.navigate('Deposit', { walletDetails: { ...walletDetails, address: walletAddress } });
             }}
           >
             <ReceiveIcon />
@@ -76,7 +98,9 @@ const WalletScreen = ({ navigation, route, walletDetails }) => {
                 justifyContent: 'center',
               },
             ]}
-            onPress={() => {}}
+            onPress={(e) => {
+              copyToClipboard(e);
+            }}
           >
             <CopyOutlineIcon />
           </TouchableOpacity>
