@@ -5,29 +5,13 @@ import { Title, Text } from 'react-native-paper';
 import { walletsAllGet } from '../../api/wallet/requests';
 import useComponentError from '../../hooks/useComponentError';
 
-import { TetherIcon, EtheriumIcon, BitcoinIcon } from '../../icons';
+import CryptoIcon from '../design/CryptoIcon';
 import { WhiteView } from '../design/WhiteView';
 
 interface WalletsProps {
   style?: Record<string, unknown>;
   onPress: (walletDetails: Record<string, unknown>) => void;
 }
-
-const cryotpyIcon = (shortName: string) => {
-  switch (shortName) {
-    case 'USDT':
-      return <TetherIcon />;
-
-    case 'BTC':
-      return <BitcoinIcon />;
-
-    case 'ETH':
-      return <EtheriumIcon />;
-
-    default:
-      break;
-  }
-};
 
 export const Wallets: React.FC<WalletsProps> = ({ style, onPress }) => {
   const [wallets, setWallets] = useState<[] | [WalletDetails]>(() => []);
@@ -78,7 +62,9 @@ export const Wallets: React.FC<WalletsProps> = ({ style, onPress }) => {
                     width: 75,
                   }}
                 >
-                  <View style={{ marginRight: 15 }}>{cryotpyIcon(val.crypto.shortName)}</View>
+                  <View style={{ marginRight: 15 }}>
+                    <CryptoIcon shortName={val.crypto.shortName} />
+                  </View>
                   <Text style={styles.cryptoName}>{val.crypto.shortName}</Text>
                 </View>
                 <View style={{ flex: 2 }}>

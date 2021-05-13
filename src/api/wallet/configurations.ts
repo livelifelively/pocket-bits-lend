@@ -33,6 +33,17 @@ export const WalletAPIConfigurations = {
       },
     },
   },
+  WALLET_ADDRESS: {
+    url: (requestData: WalletsAddressRequest) =>
+      URLPrefixes.AUTH + '/v1' + `/balances/getAddress/${requestData.coinId}`,
+    apiCallId: 'WALLET_ADDRESS',
+    method: 'GET',
+    errorHandlers: {
+      default: (response: any) => {
+        // console.log('HANDLE GENERIC ERROR', response);
+      },
+    },
+  },
   RESEND_EMAIL_OTP: {
     url: (requestData: WalletsBalanceRequest) =>
       URLPrefixes.AUTH + `/resendOtpEmail?email=${requestData.email}&type=${requestData.type}`,

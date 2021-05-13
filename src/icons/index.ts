@@ -22,3 +22,5 @@ export { default as PasteIcon } from './PasteIcon';
 export { default as YellowActiveVaultIcon } from './YellowActiveVaultIcon';
 export { default as YellowHistoryIcon } from './YellowHistoryIcon';
 export { default as TelegramIcon } from './TelegramIcon';
+export { default as XRPIcon } from './XRPIcon';
+export { default as CaretIcon } from './CaretIcon';

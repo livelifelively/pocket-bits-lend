@@ -11,7 +11,8 @@ import Topbar from '../../../components/design/Topbar';
 import { WhiteView } from '../../../components/design/WhiteView';
 import { AppTextInput } from '../../../components/design/AppTextInput';
 import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
-import { BitcoinIcon, EtheriumIcon, TetherIcon } from '../../../icons';
+import CryptoIcon from '../../../components/design/CryptoIcon';
+import { CaretIcon } from '../../../icons';
 
 type VaultDepositOption = {
   id: number;
@@ -64,22 +65,6 @@ const vaultDepositOptions = [
   },
 ];
 
-const cryotpyIcon = (shortName: string) => {
-  switch (shortName) {
-    case 'USDT':
-      return <TetherIcon />;
-
-    case 'BTC':
-      return <BitcoinIcon />;
-
-    case 'ETH':
-      return <EtheriumIcon />;
-
-    default:
-      break;
-  }
-};
-
 const selectedOption = vaultDepositOptions[0];
 
 const CreateVaultScreen = ({ navigation }: VaultCreationNavProps<'CreateVault'>) => {
@@ -112,7 +97,9 @@ const CreateVaultScreen = ({ navigation }: VaultCreationNavProps<'CreateVault'>)
       <WhiteView style={styles.createVault}>
         <View style={styles.createVaultInfo}>
           <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: 60 }}>
-            <View style={{ marginRight: 15 }}>{cryotpyIcon(activeVaultOption.crypto.shortName)}</View>
+            <View style={{ marginRight: 15 }}>
+              <CryptoIcon shortName={activeVaultOption.crypto.shortName} />
+            </View>
             <Text>{activeVaultOption.crypto.shortName}</Text>
           </View>
           <View>
@@ -173,8 +160,14 @@ const CreateVaultScreen = ({ navigation }: VaultCreationNavProps<'CreateVault'>)
                   onDismiss={closeMenu}
                   anchor={
                     <TouchableOpacity onPress={openMenu} style={styles.dropdownMenuAnchor}>
-                      <Text>{activeVaultOption.duration}</Text>
-                      <Text>v</Text>
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+                        <View>
+                          <Text>{activeVaultOption.duration}</Text>
+                        </View>
+                        <View>
+                          <CaretIcon style={{ backgroundColor: 'red' }} />
+                        </View>
+                      </View>
                     </TouchableOpacity>
                   }
                 >
@@ -228,20 +221,21 @@ const styles = StyleSheet.create({
   inputAmount: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '100%',
-    backgroundColor: '#f7f7f7',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     borderRadius: 15,
     marginBottom: 15,
   },
   inputAmountTextInput: { padding: 20, backgroundColor: '#f7f7f7', fontSize: 14, borderRadius: 15, width: 200 },
   inputAmountText: {
-    paddingVertical: 10,
+    paddingVertical: 9,
     borderLeftWidth: 1,
     borderLeftColor: '#e5e5e5',
     alignItems: 'center',
     justifyContent: 'center',
     width: 80,
+    position: 'absolute',
+    right: 0,
+    top: 0,
   },
   textInputWrapper: { marginBottom: 10 },
   textInput: {

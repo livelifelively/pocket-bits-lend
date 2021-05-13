@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Clipboard } from 'react-native';
 import { Text, Title } from 'react-native-paper';
 
 import { DefaultLayout } from '../../../layouts/Default';
@@ -8,7 +8,13 @@ import Topbar from '../../../components/design/Topbar';
 import { YellowCopyIcon, YellowShareIcon } from '../../../icons';
 import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
 
-const DepositScreen = ({ navigation }: WalletNavProps<'Deposit'>) => {
+const DepositScreen = ({ navigation, route }: WalletNavProps<'Deposit'>) => {
+  const { walletDetails } = route.params;
+
+  const copyToClipboard = () => {
+    Clipboard.setString(walletDetails.address);
+  };
+
   return (
     <DefaultLayout backgroundColor="#ffffff">
       <Topbar
@@ -36,7 +42,7 @@ const DepositScreen = ({ navigation }: WalletNavProps<'Deposit'>) => {
         <View>
           <Text style={{ color: '#625E59', fontSize: 12 }}>3F8QCEXUrRQcjoyp2J8ng71xre3vd33dcer</Text>
         </View>
-        <TouchableOpacity onPress={() => {}} style={{ marginRight: 10 }}>
+        <TouchableOpacity onPress={copyToClipboard} style={{ marginRight: 10 }}>
           <YellowCopyIcon />
         </TouchableOpacity>
       </View>

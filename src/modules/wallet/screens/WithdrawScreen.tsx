@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Formik } from 'formik';
@@ -11,14 +11,22 @@ import { AppTextInput } from '../../../components/design/AppTextInput';
 import { PasteIcon } from '../../../icons';
 import { AppButton } from '../../../components/design/AppButton';
 import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const WithdrawScreen = ({ navigation, route }: WalletNavProps<'Withdraw'>) => {
   const { walletDetails } = route.params;
+  // const [destinationAddress, setDestinationAddress] = useState(() => '');
+  const destinationAddressRef = useRef('');
 
   const withdrawCryptoSchema = Yup.object().shape({
     destinationAddress: Yup.string().required(),
     withdrawalAmount: Yup.string().required(),
   });
+
+  const fetchCopiedText = async () => {
+    const text = await Clipboard.getString();
+    destinationAddressRef.current.value = 'pasted';
+  };
 
   return (
     <DefaultLayout backgroundColor="#FFFFFF">
@@ -52,12 +60,14 @@ const WithdrawScreen = ({ navigation, route }: WalletNavProps<'Withdraw'>) => {
                   error={touched.destinationAddress ? errors.destinationAddress : ''}
                 />
                 <View style={[styles.inputAmountText]}>
-                  <View style={{ marginBottom: 10, marginTop: 10 }}>
-                    <PasteIcon />
-                  </View>
-                  <View>
-                    <Text style={[styles.subtext, { textAlign: 'center' }]}>Paste</Text>
-                  </View>
+                  <TouchableOpacity onPress={fetchCopiedText}>
+                    <View style={{ marginBottom: 10, marginTop: 10 }}>
+                      <PasteIcon />
+                    </View>
+                    <View>
+                      <Text style={[styles.subtext, { textAlign: 'center' }]}>Paste</Text>
+                    </View>
+                  </TouchableOpacity>
                 </View>
               </View>
               <View style={[styles.inputAmount]}>
