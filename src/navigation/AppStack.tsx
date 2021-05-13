@@ -12,9 +12,7 @@ import { VaultActiveDepositsStack, VaultCreationStack, VaultHistoryStack } from 
 import { WalletStack } from '../modules/wallet/WalletStack';
 import { SettingsStack } from '../modules/settings/SettingsStack';
 import { HomeIcon, RewardIcon, VaultIcon } from '../icons';
-
-// interface AppTabsProps {}
-// interface AppStackProps {}
+import { View, StyleSheet } from 'react-native';
 
 const Tabs = createBottomTabNavigator<AppTabsParamList>();
 const Stack = createStackNavigator<AppStackParamList>();
@@ -23,14 +21,31 @@ const AppTabs: React.FC = () => {
   return (
     <Tabs.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: () => {
+        tabBarIcon: ({ focused }) => {
+          let backgroundStyles = {};
+          if (focused) {
+            backgroundStyles = { backgroundColor: '#FFB850' };
+          }
+
           switch (route.name) {
             case 'Home':
-              return <HomeIcon />;
+              return (
+                <View style={[styles.buttonBackground, backgroundStyles]}>
+                  <HomeIcon strokeColor={focused ? '#ffffff' : '#FFBC5A'} />
+                </View>
+              );
             case 'Rewards':
-              return <RewardIcon />;
+              return (
+                <View style={[styles.buttonBackground, backgroundStyles]}>
+                  <RewardIcon strokeColor={focused ? '#ffffff' : '#FFBC5A'} />
+                </View>
+              );
             case 'Vault':
-              return <VaultIcon />;
+              return (
+                <View style={[styles.buttonBackground, backgroundStyles]}>
+                  <VaultIcon strokeColor={focused ? '#ffffff' : '#FFBC5A'} />
+                </View>
+              );
 
             default:
               break;
@@ -41,6 +56,9 @@ const AppTabs: React.FC = () => {
         activeTintColor: 'tomato',
         inactiveTintColor: 'gray',
         showLabel: false,
+        style: {
+          height: 110,
+        },
       }}
     >
       <Tabs.Screen name="Home" component={HomeScreen} />
@@ -49,6 +67,10 @@ const AppTabs: React.FC = () => {
     </Tabs.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  buttonBackground: { width: 65, height: 65, borderRadius: 65, padding: 10 },
+});
 
 export const AppStack: React.FC = () => {
   return (
