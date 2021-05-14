@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Clipboard } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -10,8 +10,7 @@ import Topbar from '../../../components/design/Topbar';
 import { AppTextInput } from '../../../components/design/AppTextInput';
 import { PasteIcon } from '../../../icons';
 import { AppButton } from '../../../components/design/AppButton';
-import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import CryptoInput from '../../../components/business/CryptoInput';
 
 const WithdrawScreen = ({ navigation, route }: WalletNavProps<'Withdraw'>) => {
   const { walletDetails } = route.params;
@@ -70,41 +69,20 @@ const WithdrawScreen = ({ navigation, route }: WalletNavProps<'Withdraw'>) => {
                   </TouchableOpacity>
                 </View>
               </View>
-              <View style={[styles.inputAmount]}>
-                <AppTextInput
-                  autoCorrect={false}
-                  style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
-                  value={values.withdrawalAmount}
-                  onChangeText={handleChange('withdrawalAmount')}
-                  onBlur={handleBlur('withdrawalAmount')}
-                  placeholder={`Enter Amount in ${walletDetails.crypto.shortName}`}
-                  error={touched.withdrawalAmount ? errors.withdrawalAmount : ''}
-                  keyboardType="numeric"
-                  maxLength={15}
-                />
-                <View style={[styles.inputAmountText]}>
-                  <Text style={{ fontFamily: 'Poppins-Bold' }}>
-                    {walletDetails.holding.available.value} {walletDetails.crypto.shortName}
-                  </Text>
-                  <Text style={[styles.subtext, { textAlign: 'center' }]}>Available</Text>
-                </View>
-              </View>
-              <View
-                style={{ flexDirection: 'row', justifyContent: 'flex-end', marginBottom: 20, alignItems: 'center' }}
-              >
-                <WhiteTouchableOpacity style={styles.percentButtons}>
-                  <Text style={styles.percentButtonsText}>25%</Text>
-                </WhiteTouchableOpacity>
-                <WhiteTouchableOpacity style={styles.percentButtons}>
-                  <Text style={styles.percentButtonsText}>50%</Text>
-                </WhiteTouchableOpacity>
-                <WhiteTouchableOpacity style={styles.percentButtons}>
-                  <Text style={styles.percentButtonsText}>75%</Text>
-                </WhiteTouchableOpacity>
-                <WhiteTouchableOpacity style={styles.percentButtons}>
-                  <Text style={styles.percentButtonsText}>100%</Text>
-                </WhiteTouchableOpacity>
-              </View>
+              <CryptoInput
+                textInput={{
+                  value: values.withdrawalAmount,
+                  onChangeText: handleChange('withdrawalAmount'),
+                  onBlur: handleBlur('withdrawalAmount'),
+                  placeholder: `Enter Amount in ${walletDetails.crypto.shortName}`,
+                  error: touched.withdrawalAmount ? errors.withdrawalAmount : '',
+                  style: { input: styles.textInput, wrapper: styles.textInputWrapper },
+                }}
+                holding={{
+                  value: walletDetails.holding.available.value,
+                  coinId: walletDetails.crypto.shortName,
+                }}
+              />
               <AppButton title="Send" onPress={() => handleSubmit()} />
             </View>
           )}

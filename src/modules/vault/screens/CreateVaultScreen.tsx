@@ -7,10 +7,9 @@ import { DefaultLayout } from '../../../layouts/Default';
 import { AppButton } from '../../../components/design/AppButton';
 import Topbar from '../../../components/design/Topbar';
 import { WhiteView } from '../../../components/design/WhiteView';
-import { AppTextInput } from '../../../components/design/AppTextInput';
-import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
 import CryptoIcon from '../../../components/design/CryptoIcon';
 import Dropdown from '../../../components/design/Dropdown';
+import CryptoInput from '../../../components/business/CryptoInput';
 
 const availableFundsInCrypto = 1.41;
 
@@ -56,41 +55,20 @@ const CreateVaultScreen = ({ navigation, vaults }) => {
         >
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <View>
-              <View style={[styles.inputAmount]}>
-                <AppTextInput
-                  autoCorrect={false}
-                  style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
-                  value={values.cryptoAmount}
-                  onChangeText={handleChange('cryptoAmount')}
-                  onBlur={handleBlur('cryptoAmount')}
-                  keyboardType="number-pad"
-                  maxLength={15}
-                  placeholder={`Enter Amount in ${activeVaultOption.coinId}`}
-                  error={touched.cryptoAmount ? errors.cryptoAmount : ''}
-                />
-                <View style={[styles.inputAmountText]}>
-                  <Text>
-                    {availableFundsInCrypto} {activeVaultOption.coinId}
-                  </Text>
-                  <Text style={[styles.subtext, { textAlign: 'center' }]}>Available</Text>
-                </View>
-              </View>
-              <View
-                style={{ flexDirection: 'row', justifyContent: 'flex-end', marginBottom: 20, alignItems: 'center' }}
-              >
-                <WhiteTouchableOpacity style={styles.percentButtons}>
-                  <Text style={styles.percentButtonsText}>25%</Text>
-                </WhiteTouchableOpacity>
-                <WhiteTouchableOpacity style={styles.percentButtons}>
-                  <Text style={styles.percentButtonsText}>50%</Text>
-                </WhiteTouchableOpacity>
-                <WhiteTouchableOpacity style={styles.percentButtons}>
-                  <Text style={styles.percentButtonsText}>75%</Text>
-                </WhiteTouchableOpacity>
-                <WhiteTouchableOpacity style={styles.percentButtons}>
-                  <Text style={styles.percentButtonsText}>100%</Text>
-                </WhiteTouchableOpacity>
-              </View>
+              <CryptoInput
+                textInput={{
+                  value: values.cryptoAmount,
+                  onChangeText: handleChange('cryptoAmount'),
+                  onBlur: handleBlur('cryptoAmount'),
+                  placeholder: `Enter Amount in ${activeVaultOption.coinId}`,
+                  error: touched.cryptoAmount ? errors.cryptoAmount : '',
+                  style: { input: styles.textInput, wrapper: styles.textInputWrapper },
+                }}
+                holding={{
+                  value: availableFundsInCrypto,
+                  coinId: activeVaultOption.coinId,
+                }}
+              />
               <Dropdown
                 options={vaults.all}
                 activeOption={activeVaultOption}
