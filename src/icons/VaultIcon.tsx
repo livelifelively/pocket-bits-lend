@@ -6,7 +6,7 @@ import { View, StyleSheet } from 'react-native';
 export default function VaultIcon({ style = {}, strokeColor = '#FFBC5A' }) {
   return (
     <View style={[StyleSheet.absoluteFill, { alignItems: 'center', justifyContent: 'center' }, style]}>
-      <Svg width="36" height="31" viewBox="0 0 36 31" fill="none">
+      <Svg width="29" height="24" viewBox="0 0 36 31" fill="none">
         <Path
           fill-rule="evenodd"
           clip-rule="evenodd"

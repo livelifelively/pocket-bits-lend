@@ -7,9 +7,11 @@ import { AuthContext } from '../../auth/AuthProvider';
 import Topbar from '../../../components/design/Topbar';
 import { WhiteView } from '../../../components/design/WhiteView';
 import { LockIcon, LogoutIcon, UserIcon } from '../../../icons';
+import { GlobalAlertsContext } from '../../../contexts/GlobalAlertsContext';
 
 const SettingsScreen = ({ navigation }: SettingsNavProps<'Settings'>) => {
   const { logout } = useContext(AuthContext);
+  const { prompt } = useContext(GlobalAlertsContext);
 
   return (
     <DefaultLayout>
@@ -52,7 +54,23 @@ const SettingsScreen = ({ navigation }: SettingsNavProps<'Settings'>) => {
       <TouchableOpacity
         style={styles.settingsAction}
         onPress={() => {
-          logout();
+          // logout();
+          prompt({
+            logId: 'LOGOUT_CONFIRM_REJECT',
+            title: 'Do you wish to Log out of your account?',
+            ctaType: 'CONFIRM_REJECT',
+            ctas: {
+              confirm: {
+                action: () => {
+                  logout();
+                },
+                label: 'Confirm',
+              },
+              // eslint-disable-next-line quotes
+              reject: { action: () => {}, label: "No, I don't" },
+            },
+            body: 'NOTE : You’ll only get 3% interest on withdrawal',
+          });
         }}
       >
         <WhiteView style={styles.settingsActionWrapper}>

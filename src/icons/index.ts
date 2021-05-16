@@ -24,3 +24,5 @@ export { default as YellowHistoryIcon } from './YellowHistoryIcon';
 export { default as TelegramIcon } from './TelegramIcon';
 export { default as XRPIcon } from './XRPIcon';
 export { default as CaretIcon } from './CaretIcon';
+export { default as GreenTickIcon } from './GreenTickIcon';
+export { default as RedCrossIcon } from './RedCrossIcon';

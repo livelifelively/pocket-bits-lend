@@ -56,9 +56,6 @@ const AppTabs: React.FC = () => {
         activeTintColor: 'tomato',
         inactiveTintColor: 'gray',
         showLabel: false,
-        style: {
-          height: 110,
-        },
       }}
     >
       <Tabs.Screen name="Home" component={HomeScreen} />
@@ -69,7 +66,7 @@ const AppTabs: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  buttonBackground: { width: 65, height: 65, borderRadius: 65, padding: 10 },
+  buttonBackground: { width: 45, height: 45, borderRadius: 45 },
 });
 
 export const AppStack: React.FC = () => {

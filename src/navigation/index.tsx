@@ -9,6 +9,7 @@ import { AppStack } from './AppStack';
 import Logger from '../services/logger';
 import { AuthContext } from '../modules/auth/AuthProvider';
 import ErrorBoundary from '../components/design/ErrorBoundary';
+import { GlobalAlertsProvider } from '../contexts/GlobalAlertsContext';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   const { user, refreshUserFromAsyncStorage } = useContext(AuthContext);
@@ -18,7 +19,9 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
   return (
     <NavigationContainer theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <ErrorBoundary errorScope="ROOT">
-        <ActiveStack user={user} />
+        <GlobalAlertsProvider>
+          <ActiveStack user={user} />
+        </GlobalAlertsProvider>
       </ErrorBoundary>
     </NavigationContainer>
   );

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Text } from 'react-native-paper';
 import { InfoIcon } from '../../icons';
+import { GlobalAlertsContext } from '../../contexts/GlobalAlertsContext';
 
 import { YellowView } from '../design/YellowView';
 
@@ -29,6 +31,8 @@ const data = {
 };
 
 export const ValueCreated: React.FC<ValueCreatedProps> = () => {
+  const { alert } = useContext(GlobalAlertsContext);
+
   return (
     <YellowView style={styles.valueCreatedWrapper}>
       <View
@@ -37,10 +41,22 @@ export const ValueCreated: React.FC<ValueCreatedProps> = () => {
           flexDirection: 'row-reverse',
           alignItems: 'center',
           width: '100%',
-          backgroundColor: 'red',
         }}
       >
-        <InfoIcon style={{ height: 13, width: 13 }} />
+        <TouchableOpacity
+          style={{ height: 13, width: 13 }}
+          onPress={() => {
+            alert({
+              logId: 'VALUE_CREATED',
+              title: 'This is the information that should be displayed here.',
+              ctas: {
+                acknowledge: { action: () => {}, label: 'Okay' },
+              },
+            });
+          }}
+        >
+          <InfoIcon style={{ height: 13, width: 13 }} />
+        </TouchableOpacity>
       </View>
       <View style={styles.valueCreatedDetails}>
         <View>

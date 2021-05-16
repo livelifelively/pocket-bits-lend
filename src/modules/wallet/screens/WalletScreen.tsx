@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Clipboard } from 'react-native';
 import { Text } from 'react-native-paper';
 
@@ -8,9 +8,11 @@ import Topbar from '../../../components/design/Topbar';
 import { WalletTransactionHistory } from '../../../components/business/WalletTransactionHistory';
 import { CopyOutlineIcon, ReceiveIcon, SendIcon } from '../../../icons';
 import { walletAddressGet } from '../../../api/wallet/requests';
+import { GlobalAlertsContext } from '../../../contexts/GlobalAlertsContext';
 
 const WalletScreen = ({ navigation, walletDetails }) => {
   const [walletAddress, setWalletAddress] = useState(() => '');
+  const { toast } = useContext(GlobalAlertsContext);
 
   const onloadAPICalls = async (coinId: CoinId) => {
     try {
@@ -100,6 +102,10 @@ const WalletScreen = ({ navigation, walletDetails }) => {
             ]}
             onPress={(e) => {
               copyToClipboard(e);
+              toast({
+                logId: 'WALLET_ADDRESS_COPIED',
+                title: 'Address copied',
+              });
             }}
           >
             <CopyOutlineIcon />

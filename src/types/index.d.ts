@@ -118,3 +118,40 @@ type VaultDepositDetails = {
 };
 
 type ErrorBoundaryErrorScope = 'COMPONENT' | 'ROOT' | 'SCREEN';
+
+type GlobalAlertsPromptCTA = {
+  logId: string;
+  type?: 'PROMPT';
+  title: string;
+  ctaType: 'CONFIRM_REJECT';
+  body?: string;
+  ctas: {
+    confirm: {
+      label: string;
+      action: () => void;
+    };
+    reject: {
+      label: string;
+      action: () => void;
+    };
+  };
+};
+
+type GlobalAlertsAlertCTA = {
+  logId: string;
+  type?: 'ALERT';
+  title: string;
+  body?: string;
+  ctas: {
+    acknowledge: {
+      label: string;
+      action: () => void;
+    };
+  };
+};
+
+type GlobalAlertsToast = {
+  logId: string;
+  type?: 'TOAST';
+  title: string;
+};

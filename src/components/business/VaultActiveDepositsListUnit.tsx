@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Text } from 'react-native-paper';
 
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
@@ -7,6 +7,7 @@ import { WhiteTouchableOpacity } from '../design/WhiteTouchableOpacity';
 import RedCrossIcon from '../../icons/RedCrossIcon';
 import CryptoIcon from '../design/CryptoIcon';
 import { formatDateTimeString } from '../../services/date-time';
+import { GlobalAlertsContext } from '../../contexts/GlobalAlertsContext';
 
 interface VaultActiveDepositsListUnitProps {
   style?: Record<string, unknown>;
@@ -22,8 +23,10 @@ const VaultActiveDepositsListUnitDetails = ({
   hideDetails: () => void;
   depositDetails: VaultDepositDetails;
 }) => {
+  const { prompt } = useContext(GlobalAlertsContext);
+
   return (
-    <View style={styles.vaultActiveDepositsListUnit}>
+    <TouchableOpacity activeOpacity={0.7} style={styles.vaultActiveDepositsListUnit} onPress={hideDetails}>
       <View>
         <View style={styles.upperRow}>
           <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
@@ -81,14 +84,24 @@ const VaultActiveDepositsListUnitDetails = ({
             marginBottom: 10,
           }}
           onPress={() => {
-            return null;
+            prompt({
+              logId: 'CANCEL_VAULT_CONFIRM_REJECT',
+              title: 'Do you want to cancel this deposit ?',
+              ctaType: 'CONFIRM_REJECT',
+              ctas: {
+                confirm: { action: () => {}, label: 'Yes, I agree' },
+                // eslint-disable-next-line quotes
+                reject: { action: () => {}, label: "No, I don't" },
+              },
+              body: 'NOTE : You’ll only get 3% interest on withdrawal',
+            });
           }}
         >
           <RedCrossIcon />
         </WhiteTouchableOpacity>
         <Text style={styles.subtext}>Cancel</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
