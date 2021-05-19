@@ -116,7 +116,7 @@ const extendStylesBySize = (size = '') => {
     case 'large':
       textStyle = {
         fontSize: 18,
-        lineHeight: 18,
+        lineHeight: 20,
       };
       buttonStyle = {
         paddingVertical: 20,
@@ -125,13 +125,13 @@ const extendStylesBySize = (size = '') => {
     case 'small':
       textStyle = {
         fontSize: 12,
-        lineHeight: 12,
+        lineHeight: 14,
       };
       break;
     case 'normal':
       textStyle = {
         fontSize: 14,
-        lineHeight: 14,
+        lineHeight: 16,
       };
       break;
     default:

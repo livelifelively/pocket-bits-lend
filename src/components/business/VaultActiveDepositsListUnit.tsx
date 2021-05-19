@@ -30,7 +30,7 @@ const VaultActiveDepositsListUnitDetails = ({
       <View>
         <View style={styles.upperRow}>
           <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-            <View style={{ marginRight: 15 }}>
+            <View style={{ marginRight: 15, marginLeft: 10 }}>
               <CryptoIcon shortName={depositDetails.coinId} />
             </View>
             <Text>{depositDetails.coinId}</Text>
@@ -61,7 +61,9 @@ const VaultActiveDepositsListUnitDetails = ({
       <View>
         <View style={styles.upperRow}>
           <View>
-            <Text style={styles.upperRowTitle}>{`${depositDetails.interestRate}%`}</Text>
+            <Text style={styles.upperRowTitle}>{`${
+              depositDetails.interestRate ? depositDetails.interestRate : '--'
+            }%`}</Text>
           </View>
           <Text style={[styles.subtext, { textAlign: 'center' }]}>Interest Rate</Text>
         </View>
@@ -125,7 +127,9 @@ const VaultActiveDepositsListUnitBasic = ({
       </View>
       <View>
         <View>
-          <Text style={{ textAlign: 'center' }}>{`${depositDetails.interestRate}%`}</Text>
+          <Text style={{ textAlign: 'center' }}>{`${
+            depositDetails.interestRate ? depositDetails.interestRate : '--'
+          }%`}</Text>
         </View>
         <Text style={[styles.subtext, { textAlign: 'center' }]}>Int Rate</Text>
       </View>
@@ -193,7 +197,7 @@ const styles = StyleSheet.create({
   vaultActiveDepositsListUnit: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
+    paddingHorizontal: 0,
   },
   activeDepositsCount: {
     color: '#FFB850',

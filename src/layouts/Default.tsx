@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, useWindowDimensions } from 'react-native';
 
 interface DefaultLayoutProps {
   style?: Record<string, unknown>;
@@ -12,9 +12,10 @@ export const DefaultLayout: React.FC<DefaultLayoutProps> = ({
   backgroundColor = styles.container.backgroundColor,
   paddingHorizontal = styles.wrapper.paddingHorizontal,
 }) => {
+  const { height } = useWindowDimensions();
   return (
     <ScrollView style={{ ...styles.container, backgroundColor }}>
-      <View style={{ ...styles.wrapper, paddingHorizontal }}>{children}</View>
+      <View style={{ ...styles.wrapper, paddingHorizontal, minHeight: height }}>{children}</View>
     </ScrollView>
   );
 };
@@ -23,6 +24,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f7f7f7',
     flex: 1,
+    position: 'relative',
   },
   wrapper: {
     alignItems: 'center',

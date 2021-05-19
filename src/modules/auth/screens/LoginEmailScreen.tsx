@@ -18,81 +18,91 @@ function LoginEmailScreen({ navigation }: AuthNavProps<'LoginEmail'>) {
 
   return (
     <DefaultLayout backgroundColor="#FCFCFC" paddingHorizontal={45}>
-      <View
-        style={{
-          height: 65,
-          width: '100%',
-          backgroundColor: '#EBEBEB',
-          marginTop: 100,
-          marginBottom: 65,
-          alignItems: 'center',
-          flexDirection: 'column',
-          justifyContent: 'center',
-        }}
-      >
-        <Text style={{ textAlign: 'center', fontSize: 24 }}>logo</Text>
-      </View>
-      <View style={{ marginBottom: 40 }}>
-        <Text style={{ fontSize: 24, fontFamily: 'Poppins-Medium' }}>Sign In</Text>
-      </View>
-      <Formik
-        initialValues={{
-          email: '',
-          password: '',
-          termsAndConditions: false,
-        }}
-        validationSchema={loginSchema}
-        onSubmit={async (values) => {
-          const signedUp: RequestResponse = await signinOTPPost({
-            login: values.email,
-            password: values.password,
-          });
-          if (signedUp.status === 'SUCCESS') {
-            navigation.navigate('LoginEmailVerifyOTP', {
-              email: values.email,
+      <View style={{ width: '100%' }}>
+        <View
+          style={{
+            height: 65,
+            width: '100%',
+            backgroundColor: '#EBEBEB',
+            marginTop: 100,
+            marginBottom: 65,
+            alignItems: 'center',
+            flexDirection: 'column',
+            justifyContent: 'center',
+          }}
+        >
+          <Text style={{ textAlign: 'center', fontSize: 24 }}>logo</Text>
+        </View>
+        <View style={{ marginBottom: 40 }}>
+          <Text style={{ fontSize: 24, fontFamily: 'Poppins-Medium' }}>Sign In</Text>
+        </View>
+        <Formik
+          initialValues={{
+            email: '',
+            password: '',
+            termsAndConditions: false,
+          }}
+          validationSchema={loginSchema}
+          onSubmit={async (values) => {
+            const signedUp: RequestResponse = await signinOTPPost({
+              login: values.email,
               password: values.password,
             });
-          }
+            if (signedUp.status === 'SUCCESS') {
+              navigation.navigate('LoginEmailVerifyOTP', {
+                email: values.email,
+                password: values.password,
+              });
+            }
+          }}
+        >
+          {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+            <View style={{ width: '100%' }}>
+              <AppTextInput
+                autoCorrect={false}
+                style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
+                value={values.email}
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                placeholder="Email"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                error={touched.email ? errors.email : ''}
+              />
+              <AppTextInput
+                autoCorrect={false}
+                style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
+                value={values.password}
+                onChangeText={handleChange('password')}
+                onBlur={handleBlur('password')}
+                placeholder="Password"
+                autoCapitalize="none"
+                secureTextEntry={true}
+                error={touched.password ? errors.password : ''}
+              />
+              <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
+                <AppButton
+                  title="Sign In"
+                  onPress={() => {
+                    handleSubmit();
+                  }}
+                  size="normal"
+                  buttonWrapperStyle={{ width: 150 }}
+                />
+              </View>
+            </View>
+          )}
+        </Formik>
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'absolute',
+          bottom: 30,
         }}
       >
-        {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
-          <View style={{ width: '100%' }}>
-            <AppTextInput
-              autoCorrect={false}
-              style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
-              value={values.email}
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
-              placeholder="Email"
-              keyboardType="email-address"
-              autoCapitalize="none"
-              error={touched.email ? errors.email : ''}
-            />
-            <AppTextInput
-              autoCorrect={false}
-              style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
-              value={values.password}
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
-              placeholder="Password"
-              autoCapitalize="none"
-              secureTextEntry={true}
-              error={touched.password ? errors.password : ''}
-            />
-            <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
-              <AppButton
-                title="Sign In"
-                onPress={() => {
-                  handleSubmit();
-                }}
-                size="normal"
-                buttonWrapperStyle={{ width: 150 }}
-              />
-            </View>
-          </View>
-        )}
-      </Formik>
-      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
         <Text style={{ fontFamily: 'Poppins-Bold' }}>Don’t have an account,</Text>
         <AppButton
           title="Sign Up"

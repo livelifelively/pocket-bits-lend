@@ -91,9 +91,11 @@ export const AuthProvider: React.FC = ({ children }) => {
           Logger.info('AUTH_PROVIDER__SET_PASSCODE--USER_INPUT_RECIEVED', passcode);
           let userObject;
           if (user && user.email && user.token) {
+            // set user passcode, and authorize
             userObject = {
               ...user,
               passcode,
+              userAuthenticated: true,
             };
             setUser(userObject);
             await AsyncStorage.setItem('user', JSON.stringify(userObject));

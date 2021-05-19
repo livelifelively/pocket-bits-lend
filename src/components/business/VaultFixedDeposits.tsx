@@ -216,7 +216,7 @@ export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({ style, o
                     onPress({ all: activeFixedDeposits, active: val });
                   }}
                 >
-                  <Text style={styles.vaultFixedDepositInterestRate}>{val.coinId}</Text>
+                  {/* <Text style={styles.vaultFixedDepositInterestRate}>{val.coinId}</Text> */}
                   <Text style={styles.vaultFixedDepositInterestRate}>{val.interestRatePercent}%</Text>
                   <Text style={[styles.subtext, { textAlign: 'center' }]}>Interest Rate</Text>
                   <YellowView style={styles.vaultFixedDepositDuration}>
