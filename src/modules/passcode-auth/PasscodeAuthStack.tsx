@@ -5,8 +5,6 @@ import { PasscodeAuthParamList } from './PasscodeAuthParamList';
 
 import LoginPasscodeScreen from './screens/LoginPasscodeScreen';
 
-// interface PasscodeAuthStackProps {}
-
 const Stack = createStackNavigator<PasscodeAuthParamList>();
 
 export const PasscodeAuthStack: React.FC = () => {

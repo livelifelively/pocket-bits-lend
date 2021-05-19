@@ -13,6 +13,7 @@ export const AuthContext = React.createContext<{
   softLogout: () => void;
   setPasscode: (passcode: string) => void;
   refreshUserFromAsyncStorage: () => void;
+  userOnboard: () => void;
 }>({
   user: null,
   loginEmailPassword: (user: { email: string; token: string; refreshToken: string }) => {},
@@ -22,6 +23,7 @@ export const AuthContext = React.createContext<{
   softLogout: () => {},
   setPasscode: (passcode: string) => {},
   refreshUserFromAsyncStorage: () => {},
+  userOnboard: () => {},
 });
 
 export const AuthProvider: React.FC = ({ children }) => {
@@ -105,8 +107,17 @@ export const AuthProvider: React.FC = ({ children }) => {
 
           if (userDataStringFromStorage) {
             userDataObjectFromStorage = JSON.parse(userDataStringFromStorage);
-            if (isEqual(userDataObjectFromStorage, user)) setUser(userDataObjectFromStorage);
+            if (!isEqual(userDataObjectFromStorage, user)) {
+              setUser(userDataObjectFromStorage);
+              Logger.debug('AUTH_PROVIDER--USER-OBJECT-REFRESHED', {});
+            }
           }
+        },
+        userOnboard: async () => {
+          const userUpdated = { onboarded: true };
+          setUser(userUpdated);
+          await AsyncStorage.setItem('user', JSON.stringify(userUpdated));
+          Logger.debug('AUTH_PROVIDER__LOGIN_EMAIL', userUpdated);
         },
       }}
     >
