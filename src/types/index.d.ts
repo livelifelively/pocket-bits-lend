@@ -1,4 +1,7 @@
-type User = null | { email: string; token: string; passcode: string; userAuthenticated: boolean };
+type User =
+  | null
+  | { onboarded: boolean }
+  | { email: string; token: string; passcode: string; userAuthenticated: boolean; refreshToken: string };
 
 type RequestResponse = {
   status: 'SUCCESS' | 'FAILED';
