@@ -34,7 +34,7 @@ function LoginEmailScreen({ navigation }: AuthNavProps<'LoginEmail'>) {
           <Text style={{ textAlign: 'center', fontSize: 24 }}>logo</Text>
         </View>
         <View style={{ marginBottom: 40 }}>
-          <Text style={{ fontSize: 24, fontFamily: 'Poppins-Medium' }}>Sign In</Text>
+          <Text style={{ fontSize: 24, fontFamily: 'Poppins-Medium', textAlign: 'center' }}>Sign In</Text>
         </View>
         <Formik
           initialValues={{
