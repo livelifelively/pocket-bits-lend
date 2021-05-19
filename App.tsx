@@ -17,13 +17,11 @@ export default function App() {
   } else {
     return (
       <SafeAreaProvider>
-        {/* <Navigation colorScheme={colorScheme} /> */}
         <PaperProvider theme={Theme}>
           <AuthProvider>
             <Navigation colorScheme={colorScheme} />
           </AuthProvider>
         </PaperProvider>
-        {/* <StatusBar style="dark" /> */}
       </SafeAreaProvider>
     );
   }
