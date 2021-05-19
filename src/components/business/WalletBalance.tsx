@@ -5,6 +5,7 @@ import { Text } from 'react-native-paper';
 import { WhiteView } from '../design/WhiteView';
 import { YellowPlusIcon } from '../../icons';
 import { WhiteTouchableOpacity } from '../design/WhiteTouchableOpacity';
+import TwoColorDoughnutChart from '../design/TwoColorDoughnutChart';
 
 interface WalletBalanceProps {
   style?: Record<string, unknown>;
@@ -15,13 +16,19 @@ interface WalletBalanceProps {
 export const WalletBalance: React.FC<WalletBalanceProps> = ({ style, onPress, walletDetails }) => {
   return (
     <WhiteView style={{ ...styles.walletBalanceWrapper, ...style }}>
-      <View style={styles.walletBalanceGraph}>
-        <Text style={styles.walletBalanceGraphValue}>{walletDetails.holding.total.value}</Text>
-        <Text style={[styles.walletBalanceSubtext, { textAlign: 'center' }]}>Total Balance</Text>
-        <Text
-          style={styles.walletBalanceGraphCurrencyValue}
-        >{`${walletDetails.currency.symbol} ${walletDetails.holding.total.valueInUserCurrency}`}</Text>
-      </View>
+      <TwoColorDoughnutChart
+        size={150}
+        strokeWidth={20}
+        secondPercent={(walletDetails.holding.vault.value / walletDetails.holding.total.value) * 100}
+      >
+        <View>
+          <Text style={styles.walletBalanceGraphValue}>{walletDetails.holding.total.value}</Text>
+          <Text style={[styles.walletBalanceSubtext, { textAlign: 'center' }]}>Total Balance</Text>
+          <Text
+            style={styles.walletBalanceGraphCurrencyValue}
+          >{`${walletDetails.currency.symbol} ${walletDetails.holding.total.valueInUserCurrency}`}</Text>
+        </View>
+      </TwoColorDoughnutChart>
       <View style={styles.walletVaultStatus}>
         <View>
           <Text>
