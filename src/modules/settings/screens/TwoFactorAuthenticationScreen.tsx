@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -11,8 +11,11 @@ import { Title } from 'react-native-paper';
 import { AppTextInput } from '../../../components/design/AppTextInput';
 import { YellowCopyIcon } from '../../../icons';
 import { twoFactorAuthenticationVefificationPost } from '../../../api/auth/requests';
+import { GlobalAlertsContext } from '../../../contexts/GlobalAlertsContext';
 
 const TwoFactorAuthenticationScreen = ({ navigation }: SettingsNavProps<'TwoFactorAuthentication'>) => {
+  const { toast } = useContext(GlobalAlertsContext);
+
   const twoFactorAuthenticationSchema = Yup.object().shape({
     verificationCode: Yup.string()
       .required()
@@ -50,7 +53,15 @@ const TwoFactorAuthenticationScreen = ({ navigation }: SettingsNavProps<'TwoFact
         <View>
           <Text style={{ color: '#625E59', fontSize: 12 }}>3F8QCEXUrRQcjoyp2J8ng71xre3vd33dcer</Text>
         </View>
-        <TouchableOpacity onPress={() => null} style={{ marginRight: 10 }}>
+        <TouchableOpacity
+          onPress={() => {
+            toast({
+              logId: 'TWO_FACTOR_AUTH_ADDRESS',
+              title: 'Copied!',
+            });
+          }}
+          style={{ marginRight: 10 }}
+        >
           <YellowCopyIcon />
         </TouchableOpacity>
       </View>
