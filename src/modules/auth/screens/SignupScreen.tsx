@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Formik } from 'formik';
@@ -14,8 +14,11 @@ import { AppCheckbox } from '../../../components/design/AppCheckbox';
 import { globalStyles } from '../../../theme/globalStyles';
 import { signupPost } from '../../../api/auth/requests';
 import Logger from '../../../services/logger';
+import { GlobalAlertsContext } from '../../../contexts/GlobalAlertsContext';
 
 function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
+  const { alert } = useContext(GlobalAlertsContext);
+
   const signupSchema = Yup.object().shape({
     email: Yup.string().email().required(),
     password: Yup.string().min(8).required(),
@@ -26,6 +29,13 @@ function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
       .required()
       .test('terms-conditions', 'Please accept the terms and conditions', (value) => value === true),
   });
+
+  // alert(logId: 'VALUE_CREATED',
+  // title: 'This is the information that should be displayed here.',
+  // ctas: {
+  //   acknowledge: { action: () => {}, label: 'Okay' },
+  // }
+  // })
 
   return (
     <DefaultLayout backgroundColor="#FCFCFC" paddingHorizontal={45}>
@@ -56,68 +66,84 @@ function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
             }
           } catch (e) {
             // TODO standardise error structure
+            if (e.status === 409) {
+              alert({
+                logId: 'SIGNUP_SCREEN__SUBMIT--FAILED-409',
+                title: 'User exists, please login',
+                ctas: {
+                  acknowledge: {
+                    action: () => {
+                      navigation.navigate('LoginEmail');
+                    },
+                    label: 'Okay',
+                  },
+                },
+              });
+            }
             Logger.error('SIGNUP_SCREEN__SUBMIT--FAILED', e);
           }
         }}
       >
-        {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => (
-          <View style={{ width: '100%' }}>
-            <AppTextInput
-              autoCorrect={false}
-              style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
-              value={values.email}
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
-              placeholder="Email"
-              keyboardType="email-address"
-              autoCapitalize="none"
-              error={touched.email ? errors.email : ''}
-            />
-            <AppTextInput
-              autoCorrect={false}
-              style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
-              value={values.password}
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
-              placeholder="Password"
-              autoCapitalize="none"
-              secureTextEntry={true}
-              error={touched.password ? errors.password : ''}
-            />
-            <AppTextInput
-              autoCorrect={false}
-              style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
-              value={values.confirmPassword}
-              onChangeText={handleChange('confirmPassword')}
-              onBlur={handleBlur('confirmPassword')}
-              placeholder="Confirm Password"
-              autoCapitalize="none"
-              secureTextEntry={true}
-              error={touched.confirmPassword ? errors.confirmPassword : ''}
-            />
-            <View>
-              <AppCheckbox
-                onPress={() => {
-                  setFieldValue('termsAndConditions', !values.termsAndConditions);
-                }}
-                value={values.termsAndConditions}
-              >
-                <Text>I’ve read and I agree to all the terms and conditions.</Text>
-              </AppCheckbox>
-              <Text style={globalStyles.errorText}>{errors.termsAndConditions}</Text>
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-              <AppButton
-                title="Sign Up"
-                onPress={() => {
-                  handleSubmit();
-                }}
-                size="normal"
-                buttonWrapperStyle={{ width: 170 }}
+        {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, errors, touched }) => {
+          return (
+            <View style={{ width: '100%' }}>
+              <AppTextInput
+                autoCorrect={false}
+                style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
+                value={values.email}
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                placeholder="Email"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                error={touched.email ? errors.email : ''}
               />
+              <AppTextInput
+                autoCorrect={false}
+                style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
+                value={values.password}
+                onChangeText={handleChange('password')}
+                onBlur={handleBlur('password')}
+                placeholder="Password"
+                autoCapitalize="none"
+                secureTextEntry={true}
+                error={touched.password ? errors.password : ''}
+              />
+              <AppTextInput
+                autoCorrect={false}
+                style={{ input: styles.textInput, wrapper: styles.textInputWrapper }}
+                value={values.confirmPassword}
+                onChangeText={handleChange('confirmPassword')}
+                onBlur={handleBlur('confirmPassword')}
+                placeholder="Confirm Password"
+                autoCapitalize="none"
+                secureTextEntry={true}
+                error={touched.confirmPassword ? errors.confirmPassword : ''}
+              />
+              <View>
+                <AppCheckbox
+                  onPress={() => {
+                    setFieldValue('termsAndConditions', !values.termsAndConditions);
+                  }}
+                  value={values.termsAndConditions}
+                >
+                  <Text>I’ve read and I agree to all the terms and conditions.</Text>
+                </AppCheckbox>
+                <Text style={globalStyles.errorText}>{errors.termsAndConditions}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                <AppButton
+                  title="Sign Up"
+                  onPress={() => {
+                    handleSubmit();
+                  }}
+                  size="normal"
+                  buttonWrapperStyle={{ width: 170 }}
+                />
+              </View>
             </View>
-          </View>
-        )}
+          );
+        }}
       </Formik>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <Text style={{ fontFamily: 'Poppins-Bold' }}>Have an account, </Text>
