@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Formik } from 'formik';
@@ -10,9 +10,12 @@ import { AppButton } from '../../../components/design/AppButton';
 import { AppTextInput } from '../../../components/design/AppTextInput';
 import { globalStyles } from '../../../theme/globalStyles';
 import { verifyEmailPost } from '../../../api/auth/requests';
+import Logger from '../../../services/logger';
+import { GlobalAlertsContext } from '../../../contexts/GlobalAlertsContext';
 
-const VerifyEmailScreen = ({ navigation }: AuthNavProps<'VerifyEmail'>) => {
-  const email = 'deviced.in@gmail.com';
+const VerifyEmailScreen = ({ navigation, route }: AuthNavProps<'VerifyEmail'>) => {
+  const { alert } = useContext(GlobalAlertsContext);
+  const { email } = route.params;
 
   const emailVerificationSchema = Yup.object().shape({
     otp: Yup.string()
@@ -38,12 +41,27 @@ const VerifyEmailScreen = ({ navigation }: AuthNavProps<'VerifyEmail'>) => {
         }}
         validationSchema={emailVerificationSchema}
         onSubmit={async (values) => {
-          const signedUp: RequestResponse = await verifyEmailPost({
-            otp: values.otp,
-            email: values.email,
-          });
-          if (signedUp.status === 'SUCCESS') {
-            navigation.navigate('SetPasscode');
+          try {
+            const signedUp: RequestResponse = await verifyEmailPost({
+              otp: values.otp,
+              email: values.email,
+            });
+            if (signedUp.status === 'SUCCESS') {
+              alert({
+                logId: 'SIGNUP_SCREEN__SUBMIT--SUCCESS',
+                title: 'Email Verified, please login',
+                ctas: {
+                  acknowledge: {
+                    action: () => {
+                      navigation.navigate('LoginEmail');
+                    },
+                    label: 'Okay',
+                  },
+                },
+              });
+            }
+          } catch (e) {
+            Logger.error('VERIFY_EMAIL_SCREEN__SUBMIT--FAILED', { otp: values.otp, email: values.email });
           }
         }}
       >

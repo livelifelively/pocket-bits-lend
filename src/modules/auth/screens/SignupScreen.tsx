@@ -62,7 +62,7 @@ function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
               referralCode: '',
             });
             if (signedUp.status === 'SUCCESS') {
-              navigation.navigate('VerifyEmail');
+              navigation.navigate('VerifyEmail', { email: values.email });
             }
           } catch (e) {
             // TODO standardise error structure
@@ -80,6 +80,7 @@ function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
                 },
               });
             }
+            console.log(e);
             Logger.error('SIGNUP_SCREEN__SUBMIT--FAILED', e);
           }
         }}

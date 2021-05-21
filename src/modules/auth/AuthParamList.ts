@@ -6,7 +6,9 @@ export type AuthParamList = {
   LoginPasscode: undefined;
   SignUp: undefined;
   SetPasscode: undefined;
-  VerifyEmail: undefined;
+  VerifyEmail: {
+    email: string;
+  };
   HomeGuest: undefined;
   LoginEmailVerifyOTP: {
     email: string;
