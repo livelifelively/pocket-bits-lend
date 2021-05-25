@@ -30,13 +30,6 @@ function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
       .test('terms-conditions', 'Please accept the terms and conditions', (value) => value === true),
   });
 
-  // alert(logId: 'VALUE_CREATED',
-  // title: 'This is the information that should be displayed here.',
-  // ctas: {
-  //   acknowledge: { action: () => {}, label: 'Okay' },
-  // }
-  // })
-
   return (
     <DefaultLayout backgroundColor="#FCFCFC" paddingHorizontal={45}>
       <View style={styles.logo}>
@@ -166,8 +159,8 @@ const styles = StyleSheet.create({
     height: 65,
     width: '100%',
     backgroundColor: '#EBEBEB',
-    marginTop: 100,
-    marginBottom: 65,
+    marginTop: 90,
+    marginBottom: 60,
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'center',

@@ -10,8 +10,9 @@ interface AppCheckboxProps {
 export const AppCheckbox: React.FC<AppCheckboxProps> = ({ children, value, onPress }) => {
   return (
     <View style={styles.appCheckboxWrapper}>
-      <View style={[styles.appCheckbox, { backgroundColor: value ? '#44CBB3' : '#ffffff' }]}>
-        <Checkbox status={value ? 'checked' : 'unchecked'} onPress={onPress} color="#fff" />
+      <View>
+        <View style={[styles.appCheckbox, { borderColor: value ? '#fff' : '#44CBB3' }]}></View>
+        <Checkbox status={value ? 'checked' : 'unchecked'} onPress={onPress} color="#44CBB3" uncheckedColor="#44CBB3" />
       </View>
       <View style={{ width: '85%', marginLeft: 10 }}>{children}</View>
     </View>
@@ -19,10 +20,13 @@ export const AppCheckbox: React.FC<AppCheckboxProps> = ({ children, value, onPre
 };
 const styles = StyleSheet.create({
   appCheckbox: {
-    borderColor: '#44CBB3',
     borderWidth: 1,
-    justifyContent: 'center',
     borderRadius: 5,
+    width: 20,
+    height: 20,
+    position: 'absolute',
+    top: 8,
+    left: 8,
   },
   appCheckboxWrapper: {
     width: '100%',
