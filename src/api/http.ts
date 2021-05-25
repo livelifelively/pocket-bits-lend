@@ -52,15 +52,18 @@ http.interceptors.response.use(
     if (error.response.status === 401) {
       // refresh id_token, else logout.
       try {
-        const refreshTokenData = await refreshTokenPost({
-          refreshToken: userDataObjectFromStorage.refreshToken,
-          token: userDataObjectFromStorage.token,
-        });
+        // if there was a token before, fetch refresh token
+        if (userDataObjectFromStorage.token) {
+          const refreshTokenData = await refreshTokenPost({
+            refreshToken: userDataObjectFromStorage.refreshToken,
+            token: userDataObjectFromStorage.token,
+          });
 
-        if (refreshTokenData.data?.id_token) {
-          await refreshUserToken(userDataObjectFromStorage, refreshTokenData.data);
-        } else {
-          await expireUserToken(userDataObjectFromStorage);
+          if (refreshTokenData.data?.id_token) {
+            await refreshUserToken(userDataObjectFromStorage, refreshTokenData.data);
+          } else {
+            await expireUserToken(userDataObjectFromStorage);
+          }
         }
       } catch (e) {
         await expireUserToken(userDataObjectFromStorage);
