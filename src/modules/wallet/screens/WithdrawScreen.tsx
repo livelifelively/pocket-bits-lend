@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Clipboard } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Formik } from 'formik';
@@ -14,18 +14,11 @@ import CryptoInput from '../../../components/business/CryptoInput';
 
 const WithdrawScreen = ({ navigation, route }: WalletNavProps<'Withdraw'>) => {
   const { walletDetails } = route.params;
-  // const [destinationAddress, setDestinationAddress] = useState(() => '');
-  const destinationAddressRef = useRef('');
 
   const withdrawCryptoSchema = Yup.object().shape({
     destinationAddress: Yup.string().required(),
     withdrawalAmount: Yup.string().required(),
   });
-
-  const fetchCopiedText = async () => {
-    const text = await Clipboard.getString();
-    destinationAddressRef.current.value = 'pasted';
-  };
 
   return (
     <DefaultLayout backgroundColor="#FFFFFF">
@@ -46,7 +39,7 @@ const WithdrawScreen = ({ navigation, route }: WalletNavProps<'Withdraw'>) => {
             navigation.goBack();
           }}
         >
-          {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+          {({ handleChange, handleBlur, handleSubmit, values, errors, touched, setFieldValue }) => (
             <View>
               <View style={[styles.inputAmount]}>
                 <AppTextInput
@@ -59,7 +52,13 @@ const WithdrawScreen = ({ navigation, route }: WalletNavProps<'Withdraw'>) => {
                   error={touched.destinationAddress ? errors.destinationAddress : ''}
                 />
                 <View style={[styles.inputAmountText]}>
-                  <TouchableOpacity onPress={fetchCopiedText}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      Clipboard.getString().then((res) => {
+                        setFieldValue('destinationAddress', res);
+                      });
+                    }}
+                  >
                     <View style={{ marginBottom: 10, marginTop: 10 }}>
                       <PasteIcon />
                     </View>

@@ -10,9 +10,12 @@ import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchable
 
 const DepositScreen = ({ navigation, route }: WalletNavProps<'Deposit'>) => {
   const { walletDetails } = route.params;
+  // #FIXME get from api only
+  const address = walletDetails.address ? walletDetails.address : '3F8QCEXUrRQcjoyp2J8ng71xre3vd33dcer';
 
   const copyToClipboard = () => {
-    Clipboard.setString(walletDetails.address);
+    Clipboard.setString(address);
+    Clipboard.getString().then((res) => console.log(res));
   };
 
   return (
@@ -40,9 +43,9 @@ const DepositScreen = ({ navigation, route }: WalletNavProps<'Deposit'>) => {
         }}
       >
         <View>
-          <Text style={{ color: '#625E59', fontSize: 12 }}>3F8QCEXUrRQcjoyp2J8ng71xre3vd33dcer</Text>
+          <Text style={{ color: '#625E59', fontSize: 12 }}>{address}</Text>
         </View>
-        <TouchableOpacity onPress={copyToClipboard} style={{ marginRight: 10 }}>
+        <TouchableOpacity onPress={copyToClipboard} style={{ marginLeft: 10, width: 30, height: 30 }}>
           <YellowCopyIcon />
         </TouchableOpacity>
       </View>

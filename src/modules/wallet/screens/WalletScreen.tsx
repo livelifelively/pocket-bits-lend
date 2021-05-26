@@ -101,7 +101,7 @@ const WalletScreen = ({ navigation, walletDetails }) => {
               },
             ]}
             onPress={(e) => {
-              copyToClipboard(e);
+              copyToClipboard();
               toast({
                 logId: 'WALLET_ADDRESS_COPIED',
                 title: 'Address copied',
