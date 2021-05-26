@@ -36,7 +36,7 @@ const ChangePasscodeScreen = ({ navigation }: SettingsNavProps<'ProfileSettings'
         validationSchema={passcodeSchema}
         onSubmit={async () => {}}
       >
-        {({ handleChange, handleBlur, handleSubmit, values, errors, touched, setFieldError }) => {
+        {({ handleChange, handleBlur, values, errors, touched, setFieldError }) => {
           switch (passcodeConfirmation) {
             case 'ADD_OLD_PASSCODE':
               return (
