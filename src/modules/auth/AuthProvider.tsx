@@ -14,6 +14,7 @@ export const AuthContext = React.createContext<{
   setPasscode: (passcode: string) => void;
   refreshUserFromAsyncStorage: () => void;
   userOnboard: () => void;
+  confirmPasscode: (passcode: string) => boolean | Promise<boolean>;
 }>({
   user: null,
   loginEmailPassword: (user: { email: string; token: string; refreshToken: string }) => {},
@@ -24,6 +25,9 @@ export const AuthContext = React.createContext<{
   setPasscode: (passcode: string) => {},
   refreshUserFromAsyncStorage: () => {},
   userOnboard: () => {},
+  confirmPasscode: (passcode: string) => {
+    return false;
+  },
 });
 
 export const AuthProvider: React.FC = ({ children }) => {
@@ -99,7 +103,7 @@ export const AuthProvider: React.FC = ({ children }) => {
             };
             setUser(userObject);
             await AsyncStorage.setItem('user', JSON.stringify(userObject));
-            Logger.info('AUTH_PROVIDER__SET_PASSCODE--USER_INPUT_RECIEVED', userObject);
+            Logger.info('AUTH_PROVIDER__SET_PASSCODE--SUCCESS', userObject);
           }
           return;
         },
@@ -120,6 +124,19 @@ export const AuthProvider: React.FC = ({ children }) => {
           setUser(userUpdated);
           await AsyncStorage.setItem('user', JSON.stringify(userUpdated));
           Logger.debug('AUTH_PROVIDER__LOGIN_EMAIL', userUpdated);
+        },
+        confirmPasscode: async (passcode: string) => {
+          const userDataStringFromStorage = await AsyncStorage.getItem('user');
+          let userDataObjectFromStorage;
+
+          if (userDataStringFromStorage) {
+            userDataObjectFromStorage = JSON.parse(userDataStringFromStorage);
+            if (userDataObjectFromStorage.passcode === passcode) {
+              Logger.debug('AUTH_PROVIDER--CONFIRM-PASSCODE', {});
+              return true;
+            }
+          }
+          return false;
         },
       }}
     >
