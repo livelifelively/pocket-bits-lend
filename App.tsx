@@ -6,6 +6,7 @@ import useCachedResources from './src/hooks/useCachedResources';
 import useColorScheme from './src/hooks/useColorScheme';
 import Navigation from './src/navigation';
 import { AuthProvider } from './src/modules/auth/AuthProvider';
+import { APIRequestsProvider } from './src/contexts/APIRequestsContext';
 import Theme from './src/theme';
 
 export default function App() {
@@ -18,9 +19,11 @@ export default function App() {
     return (
       <SafeAreaProvider>
         <PaperProvider theme={Theme}>
-          <AuthProvider>
-            <Navigation colorScheme={colorScheme} />
-          </AuthProvider>
+          <APIRequestsProvider>
+            <AuthProvider>
+              <Navigation colorScheme={colorScheme} />
+            </AuthProvider>
+          </APIRequestsProvider>
         </PaperProvider>
       </SafeAreaProvider>
     );
