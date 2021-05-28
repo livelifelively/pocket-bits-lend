@@ -13,6 +13,7 @@ interface AppButtonProps {
   size?: 'normal' | 'large' | 'small';
   color?: string;
   icon?: React.ReactNode;
+  disabled?: boolean;
 }
 
 export const AppButton: React.FC<AppButtonProps> = ({
@@ -23,11 +24,13 @@ export const AppButton: React.FC<AppButtonProps> = ({
   buttonTextStyle = {},
   size = 'normal',
   color = Theme.colors.primary,
+  disabled = false,
 }) => {
   const { buttonStyle, textStyle } = extendStylesByParams(
     { size, mode, color },
     { ...styles.appButtonContainer, ...buttonWrapperStyle },
-    { ...styles.appButtonText, ...buttonTextStyle }
+    { ...styles.appButtonText, ...buttonTextStyle },
+    disabled
   );
 
   if (mode === 'text') {
@@ -43,6 +46,7 @@ export const AppButton: React.FC<AppButtonProps> = ({
           padding: 0,
         }}
         textStyles={textStyle}
+        disabled={disabled}
       />
     );
   } else if (mode === 'outlined') {
@@ -66,8 +70,13 @@ export const AppButton: React.FC<AppButtonProps> = ({
   }
 };
 
-const extendStylesByParams = ({ mode = '', size = '', color = '' }, baseButtonStyle = {}, baseTextStyle = {}) => {
-  const { buttonModeStyle, textModeStyle } = extendStylesByMode({ mode, color });
+const extendStylesByParams = (
+  { mode = '', size = '', color = '' },
+  baseButtonStyle = {},
+  baseTextStyle = {},
+  disabled = false
+) => {
+  const { buttonModeStyle, textModeStyle } = extendStylesByMode({ mode, color, disabled });
   const { buttonSizeStyle, textSizeStyle } = extendStylesBySize(size);
   return {
     buttonStyle: { ...baseButtonStyle, ...buttonModeStyle, ...buttonSizeStyle },
@@ -75,7 +84,7 @@ const extendStylesByParams = ({ mode = '', size = '', color = '' }, baseButtonSt
   };
 };
 
-const extendStylesByMode = ({ mode = '', color = '' }) => {
+const extendStylesByMode = ({ mode = '', color = '', disabled = false }) => {
   let buttonModeStyle = {};
   let textModeStyle = {};
 
@@ -90,7 +99,7 @@ const extendStylesByMode = ({ mode = '', color = '' }) => {
     case 'text':
       textModeStyle = {
         ...textModeStyle,
-        color: Theme.colors.textButton,
+        color: disabled ? Theme.colors.disabled : Theme.colors.textButton,
         padding: 0,
       };
       buttonModeStyle = {

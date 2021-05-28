@@ -7,6 +7,7 @@ interface TouchOpacityButtonProps {
   textStyles?: Record<string, unknown>;
   wrapperStyles?: Record<string, unknown>;
   title: string;
+  disabled?: boolean;
 }
 
 export const TouchOpacityButton: React.FC<TouchOpacityButtonProps> = ({
@@ -14,12 +15,14 @@ export const TouchOpacityButton: React.FC<TouchOpacityButtonProps> = ({
   onPress,
   wrapperStyles,
   textStyles,
+  disabled = false,
 }) => {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={onPress}
       style={[styles.touchableOpacity, styles.buttonWrapper, wrapperStyles]}
+      disabled={disabled}
     >
       <Text style={[styles.textStyles, textStyles]}>{title}</Text>
     </TouchableOpacity>

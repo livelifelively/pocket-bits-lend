@@ -65,6 +65,7 @@ const Theme = {
     background: '#FFB850',
     text: '#2B2B2B',
     textButton: '#363eff',
+    disabled: 'gray',
   },
   fonts: configureFonts(fontConfig),
 };
