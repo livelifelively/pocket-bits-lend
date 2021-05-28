@@ -158,3 +158,11 @@ type GlobalAlertsToast = {
   type?: 'TOAST';
   title: string;
 };
+
+type AuthState =
+  | 'SOFT_LOGGED_OUT'
+  | 'LOGGED_IN'
+  | 'LOGGED_OUT'
+  | 'ONBOARDED_NEW_USER'
+  | 'LOGGED_IN_WITHOUT_PASSCODE'
+  | 'NEW_USER';

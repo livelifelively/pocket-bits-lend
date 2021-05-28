@@ -27,11 +27,9 @@ function LoginPasscodeScreen({ navigation }: PasscodeAuthNavProps<'LoginPasscode
           passcode: '',
         }}
         validationSchema={passcodeSchema}
-        onSubmit={async (values) => {
-          loginPasscode(values.passcode);
-        }}
+        onSubmit={async (values) => {}}
       >
-        {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+        {({ handleChange, handleBlur, handleSubmit, values, errors, touched, setFieldError }) => (
           <View style={{ width: '100%' }}>
             <Text style={styles.screenTitle}>Enter your Passcode</Text>
             <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
@@ -51,8 +49,13 @@ function LoginPasscodeScreen({ navigation }: PasscodeAuthNavProps<'LoginPasscode
             </View>
             <AppButton
               title="Submit"
-              onPress={() => {
-                handleSubmit();
+              onPress={async () => {
+                try {
+                  await loginPasscode(values.passcode);
+                } catch (e) {
+                  if (e.message === 'LOGIN_PASSCODE_FAILED') setFieldError('passcode', 'Incorrect Passcode');
+                  else setFieldError('passcode', e.message);
+                }
               }}
             />
           </View>
