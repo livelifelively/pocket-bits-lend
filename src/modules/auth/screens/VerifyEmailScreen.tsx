@@ -12,9 +12,11 @@ import { globalStyles } from '../../../theme/globalStyles';
 import { verifyEmailPost } from '../../../api/auth/requests';
 import Logger from '../../../services/logger';
 import { GlobalAlertsContext } from '../../../contexts/GlobalAlertsContext';
+import { APIRequestsContext } from '../../../contexts/APIRequestsContext';
 
 const VerifyEmailScreen = ({ navigation, route }: AuthNavProps<'VerifyEmail'>) => {
   const { alert } = useContext(GlobalAlertsContext);
+  const { apiRequestHandler } = useContext(APIRequestsContext);
   const { email } = route.params;
 
   const emailVerificationSchema = Yup.object().shape({
@@ -42,10 +44,13 @@ const VerifyEmailScreen = ({ navigation, route }: AuthNavProps<'VerifyEmail'>) =
         validationSchema={emailVerificationSchema}
         onSubmit={async (values) => {
           try {
-            const signedUp: RequestResponse = await verifyEmailPost({
-              otp: values.otp,
-              email: values.email,
-            });
+            const signedUp: RequestResponse = await verifyEmailPost(
+              {
+                otp: values.otp,
+                email: values.email,
+              },
+              apiRequestHandler
+            );
             if (signedUp.status === 'SUCCESS') {
               alert({
                 logId: 'SIGNUP_SCREEN__SUBMIT--SUCCESS',

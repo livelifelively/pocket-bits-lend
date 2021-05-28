@@ -15,9 +15,11 @@ import { globalStyles } from '../../../theme/globalStyles';
 import { signupPost } from '../../../api/auth/requests';
 import Logger from '../../../services/logger';
 import { GlobalAlertsContext } from '../../../contexts/GlobalAlertsContext';
+import { APIRequestsContext } from '../../../contexts/APIRequestsContext';
 
 function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
   const { alert } = useContext(GlobalAlertsContext);
+  const { apiRequestHandler } = useContext(APIRequestsContext);
 
   const signupSchema = Yup.object().shape({
     email: Yup.string().email().required(),
@@ -48,12 +50,15 @@ function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
         validationSchema={signupSchema}
         onSubmit={async (values) => {
           try {
-            const signedUp: any = await signupPost({
-              email: values.email,
-              password: values.password,
-              // #TODO
-              referralCode: '',
-            });
+            const signedUp: any = await signupPost(
+              {
+                email: values.email,
+                password: values.password,
+                // #TODO
+                referralCode: '',
+              },
+              apiRequestHandler
+            );
             if (signedUp.status === 'SUCCESS') {
               navigation.navigate('VerifyEmail', { email: values.email });
             }
@@ -139,7 +144,7 @@ function SignupScreen({ navigation }: AuthNavProps<'SignUp'>) {
           );
         }}
       </Formik>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
         <Text style={{ fontFamily: 'Poppins-Bold' }}>Have an account, </Text>
         <AppButton
           title="Sign In"

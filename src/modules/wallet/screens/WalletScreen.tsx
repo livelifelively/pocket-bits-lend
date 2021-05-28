@@ -9,14 +9,16 @@ import { WalletTransactionHistory } from '../../../components/business/WalletTra
 import { CopyOutlineIcon, ReceiveIcon, SendIcon } from '../../../icons';
 import { walletAddressGet } from '../../../api/wallet/requests';
 import { GlobalAlertsContext } from '../../../contexts/GlobalAlertsContext';
+import { APIRequestsContext } from '../../../contexts/APIRequestsContext';
 
 const WalletScreen = ({ navigation, walletDetails }) => {
   const [walletAddress, setWalletAddress] = useState(() => '');
   const { toast } = useContext(GlobalAlertsContext);
+  const { apiRequestHandler } = useContext(APIRequestsContext);
 
   const onloadAPICalls = async (coinId: CoinId) => {
     try {
-      const data = await walletAddressGet({ coinId });
+      const data = await walletAddressGet({ coinId }, apiRequestHandler);
       // setWallets(data);
     } catch (e) {
       // setComponentError({

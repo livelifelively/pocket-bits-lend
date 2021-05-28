@@ -12,9 +12,11 @@ import { AppTextInput } from '../../../components/design/AppTextInput';
 import { YellowCopyIcon } from '../../../icons';
 import { twoFactorAuthenticationVefificationPost } from '../../../api/auth/requests';
 import { GlobalAlertsContext } from '../../../contexts/GlobalAlertsContext';
+import { APIRequestsContext } from '../../../contexts/APIRequestsContext';
 
 const TwoFactorAuthenticationScreen = ({ navigation }: SettingsNavProps<'TwoFactorAuthentication'>) => {
   const { toast } = useContext(GlobalAlertsContext);
+  const { apiRequestHandler } = useContext(APIRequestsContext);
 
   const twoFactorAuthenticationSchema = Yup.object().shape({
     verificationCode: Yup.string()
@@ -22,7 +24,6 @@ const TwoFactorAuthenticationScreen = ({ navigation }: SettingsNavProps<'TwoFact
       .matches(/^[0-9]+$/, 'Must be only digits')
       .min(6, 'Must be exactly 6 digits')
       .max(6, 'Must be exactly 6 digits'),
-    // email: Yup.string().email().required(),
   });
 
   return (
@@ -72,10 +73,13 @@ const TwoFactorAuthenticationScreen = ({ navigation }: SettingsNavProps<'TwoFact
         }}
         validationSchema={twoFactorAuthenticationSchema}
         onSubmit={async (values) => {
-          const signedUp: RequestResponse = await twoFactorAuthenticationVefificationPost({
-            verificationCode: values.verificationCode,
-            email: values.email,
-          });
+          const signedUp: RequestResponse = await twoFactorAuthenticationVefificationPost(
+            {
+              verificationCode: values.verificationCode,
+              email: values.email,
+            },
+            apiRequestHandler
+          );
           if (signedUp.status === 'SUCCESS') {
             // navigation.navigate('SetPasscode')
           }

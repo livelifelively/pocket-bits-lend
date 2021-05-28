@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Formik } from 'formik';
@@ -9,8 +9,11 @@ import { DefaultLayout } from '../../../layouts/Default';
 import { AppButton } from '../../../components/design/AppButton';
 import { AppTextInput } from '../../../components/design/AppTextInput';
 import { signinOTPPost } from '../../../api/auth/requests';
+import { APIRequestsContext } from '../../../contexts/APIRequestsContext';
 
 function LoginEmailScreen({ navigation }: AuthNavProps<'LoginEmail'>) {
+  const { apiRequestHandler } = useContext(APIRequestsContext);
+
   const loginSchema = Yup.object().shape({
     email: Yup.string().email().required(),
     password: Yup.string().min(8).required(),
@@ -44,10 +47,13 @@ function LoginEmailScreen({ navigation }: AuthNavProps<'LoginEmail'>) {
           }}
           validationSchema={loginSchema}
           onSubmit={async (values) => {
-            const signedUp: RequestResponse = await signinOTPPost({
-              login: values.email,
-              password: values.password,
-            });
+            const signedUp: RequestResponse = await signinOTPPost(
+              {
+                login: values.email,
+                password: values.password,
+              },
+              apiRequestHandler
+            );
             if (signedUp.status === 'SUCCESS') {
               navigation.navigate('LoginEmailVerifyOTP', {
                 email: values.email,
