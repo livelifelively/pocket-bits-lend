@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Title, Text } from 'react-native-paper';
 import { walletsAllGet } from '../../api/wallet/requests';
+import { APIRequestsContext } from '../../contexts/APIRequestsContext';
 import useComponentError from '../../hooks/useComponentError';
 
 import CryptoIcon from '../design/CryptoIcon';
@@ -18,10 +19,11 @@ export const Wallets: React.FC<WalletsProps> = ({ style, onPress }) => {
   const [componentError, setComponentError] = useState(() => {
     return { hasError: false, message: '', id: '' };
   });
+  const { apiRequestHandler } = useContext(APIRequestsContext);
 
   const onloadAPICalls = async () => {
     try {
-      const data = await walletsAllGet({});
+      const data = await walletsAllGet({}, apiRequestHandler);
       setWallets(data);
     } catch (e) {
       setComponentError({
