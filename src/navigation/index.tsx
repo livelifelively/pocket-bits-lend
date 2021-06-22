@@ -69,9 +69,9 @@ function ActiveStack({ authState }: { authState: AuthState }) {
       Logger.debug('NAVIGATION__ACTIVE_STACK--APP_STACK', {});
       return <AppStack />;
     case 'ONBOARDED_NEW_USER':
-    case 'LOGGED_OUT':
       Logger.debug('NAVIGATION__ACTIVE_STACK--AUTH_STACK', {});
       return <AuthStack />;
+    case 'LOGGED_OUT':
     case 'NEW_USER':
     default:
       Logger.debug('NAVIGATION__ACTIVE_STACK--ONBOARDING_STACK', {});

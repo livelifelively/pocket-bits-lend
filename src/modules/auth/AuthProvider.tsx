@@ -161,10 +161,12 @@ export const AuthProvider: React.FC = ({ children }) => {
         },
         userOnboard: async () => {
           const userUpdated = { onboarded: true };
+          const userAuthState: AuthState = 'ONBOARDED_NEW_USER';
 
           setUser(userUpdated);
+          setAuthState(userAuthState);
 
-          await AsyncStorage.setItem('authState', 'ONBOARDED_NEW_USER');
+          await AsyncStorage.setItem('authState', userAuthState);
           await AsyncStorage.setItem('user', JSON.stringify(userUpdated));
 
           Logger.debug('AUTH_PROVIDER__USER_ONBOARD--SUCCESS', userUpdated);
