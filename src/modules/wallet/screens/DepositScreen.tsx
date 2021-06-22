@@ -50,9 +50,6 @@ const DepositScreen = ({ navigation, route }: WalletNavProps<'Deposit'>) => {
         </TouchableOpacity>
       </View>
       <WhiteTouchableOpacity
-        onPress={() => {
-          navigation.navigate('Withdraw');
-        }}
         style={{
           flexDirection: 'row',
           alignItems: 'center',
