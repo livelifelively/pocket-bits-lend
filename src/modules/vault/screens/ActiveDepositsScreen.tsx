@@ -1,14 +1,22 @@
-import React from "react";
-import { Text, StyleSheet } from "react-native";
+import React from 'react';
 
-const ActiveDepositsScreen = () => {
-  return <Text style={styles.text}>ActiveDeposits</Text>;
+import { DefaultLayout } from '../../../layouts/Default';
+import { VaultActiveDepositsNavProps } from '../VaultParamList';
+import { VaultActiveDeposits } from '../../../components/business/VaultActiveDeposits';
+import Topbar from '../../../components/design/Topbar';
+
+const ActiveDepositsScreen = ({ navigation }: VaultActiveDepositsNavProps<'ActiveDeposits'>) => {
+  return (
+    <DefaultLayout>
+      <Topbar
+        onBackButtonPress={() => {
+          navigation.goBack();
+        }}
+        title="Active Deposits"
+      />
+      <VaultActiveDeposits showTitle={false} expandableListUnit={true} />
+    </DefaultLayout>
+  );
 };
-
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 30
-  }
-});
 
 export default ActiveDepositsScreen;
