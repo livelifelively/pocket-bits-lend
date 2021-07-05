@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Menu } from 'react-native-paper';
 import { CaretIcon } from '../../icons';
+import { WhiteView } from '../design/WhiteView';
 
 const Dropdown = ({ options, activeOption, onMenuItemSelect, keyVal, titleVal, wrapperStyles = {} }) => {
   const [menuVisibility, setMenuVisibility] = useState(false);
@@ -16,7 +17,7 @@ const Dropdown = ({ options, activeOption, onMenuItemSelect, keyVal, titleVal, w
   };
 
   return (
-    <View style={[styles.dropdownMenuWrapper, wrapperStyles]}>
+    <WhiteView style={{ ...styles.dropdownMenuWrapper, ...wrapperStyles }}>
       <Menu
         visible={menuVisibility}
         onDismiss={closeMenu}
@@ -44,7 +45,7 @@ const Dropdown = ({ options, activeOption, onMenuItemSelect, keyVal, titleVal, w
             );
           })}
       </Menu>
-    </View>
+    </WhiteView>
   );
 };
 
@@ -55,8 +56,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 15,
     width: 100,
-    borderRadius: 2,
+    borderRadius: 10,
     paddingHorizontal: 10,
+    paddingVertical: 0,
   },
   dropdownMenuAnchor: { width: '100%', flexDirection: 'row', justifyContent: 'space-between' },
 });

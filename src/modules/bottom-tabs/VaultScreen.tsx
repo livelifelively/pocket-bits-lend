@@ -9,6 +9,7 @@ import { VaultFixedDeposits } from '../../components/business/VaultFixedDeposits
 import { VaultActiveDeposits } from '../../components/business/VaultActiveDeposits';
 import Topbar from '../../components/design/Topbar';
 import { YellowActiveVaultIcon, YellowHistoryIcon } from '../../icons';
+import { WhiteTouchableOpacity } from '../../components/design/WhiteTouchableOpacity';
 
 const VaultScreen = ({ navigation }: VaultNavProps<'VaultCreationStack'>) => {
   return (
@@ -17,47 +18,41 @@ const VaultScreen = ({ navigation }: VaultNavProps<'VaultCreationStack'>) => {
       <ValueCreated />
       <View style={styles.vaultActions}>
         <View>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={[
-              styles.vaultActionsButtons,
-              {
-                backgroundColor: '#ffffff',
-                height: 53,
-                width: 53,
-                borderRadius: 53,
-                alignItems: 'center',
-                justifyContent: 'center',
-              },
-            ]}
+          <WhiteTouchableOpacity
             onPress={() => {
               navigation.navigate('VaultActiveDepositsStack');
             }}
+            style={{
+              backgroundColor: '#ffffff',
+              height: 53,
+              width: 53,
+              borderRadius: 53,
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: 10,
+            }}
           >
             <YellowActiveVaultIcon />
-          </TouchableOpacity>
+          </WhiteTouchableOpacity>
           <Text style={styles.vaultActionsSubtext}>Active Deposits</Text>
         </View>
         <View>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={[
-              styles.vaultActionsButtons,
-              {
-                backgroundColor: '#ffffff',
-                height: 53,
-                width: 53,
-                borderRadius: 53,
-                alignItems: 'center',
-                justifyContent: 'center',
-              },
-            ]}
+          <WhiteTouchableOpacity
             onPress={() => {
               navigation.navigate('VaultHistoryStack');
             }}
+            style={{
+              backgroundColor: '#ffffff',
+              height: 53,
+              width: 53,
+              borderRadius: 53,
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: 10,
+            }}
           >
             <YellowHistoryIcon />
-          </TouchableOpacity>
+          </WhiteTouchableOpacity>
           <Text style={styles.vaultActionsSubtext}>History</Text>
         </View>
       </View>

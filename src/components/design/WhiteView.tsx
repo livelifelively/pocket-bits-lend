@@ -6,7 +6,7 @@ interface WhiteViewProps {
 }
 
 export const WhiteView: React.FC<WhiteViewProps> = ({ children, style }) => {
-  return <View style={{ ...styles.whiteView, ...style, ...styles.shadow }}>{children}</View>;
+  return <View style={{ ...styles.whiteView, ...styles.shadow, ...style }}>{children}</View>;
 };
 
 function elevationShadowStyle(elevation) {

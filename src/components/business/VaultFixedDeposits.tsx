@@ -219,8 +219,8 @@ export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({ style, o
                   {/* <Text style={styles.vaultFixedDepositInterestRate}>{val.coinId}</Text> */}
                   <Text style={styles.vaultFixedDepositInterestRate}>{val.interestRatePercent}%</Text>
                   <Text style={[styles.subtext, { textAlign: 'center' }]}>Interest Rate</Text>
-                  <YellowView style={styles.vaultFixedDepositDuration}>
-                    <Text style={{ textAlign: 'center' }}>
+                  <YellowView style={[styles.vaultFixedDepositDuration, { paddingVertical: 8, paddingHorizontal: 0 }]}>
+                    <Text style={{ textAlign: 'center', fontWeight: '700', fontSize: 12 }}>
                       {`${val.vaultDuration.value} ${val.vaultDuration.timeUnit}`} vault
                     </Text>
                   </YellowView>
@@ -253,7 +253,9 @@ const styles = StyleSheet.create({
   },
   vaultFixedDeposit: {
     width: '48%',
-    marginBottom: 10,
+    marginBottom: 15,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
   },
   vaultFixedDepositInterestRate: {
     color: '#FFB850',

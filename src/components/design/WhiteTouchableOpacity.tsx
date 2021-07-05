@@ -32,5 +32,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
-  shadow: elevationShadowStyle(5),
+  shadow: elevationShadowStyle(4),
 });
