@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Title } from 'react-native-paper';
 
@@ -6,159 +6,14 @@ import Dropdown from '../design/Dropdown';
 import CryptoIcon from '../design/CryptoIcon';
 import { WhiteView } from '../design/WhiteView';
 import { YellowView } from '../design/YellowView';
-
+import { APIRequestsContext } from '../../contexts/APIRequestsContext';
+import { vaultsInterestRates } from '../../api/vault/requests';
 interface VaultFixedDepositsProps {
   style?: Record<string, unknown>;
   onPress: (data: any) => void;
 }
 
-const vaults = [
-  {
-    id: 1,
-    interestRatePercent: 10,
-    vaultDuration: {
-      value: 1,
-      timeUnit: 'month',
-    },
-    coinId: 'BTC',
-  },
-  {
-    id: 2,
-    interestRatePercent: 13,
-    vaultDuration: {
-      value: 3,
-      timeUnit: 'months',
-    },
-    coinId: 'BTC',
-  },
-  {
-    id: 3,
-    interestRatePercent: 16,
-    vaultDuration: {
-      value: 6,
-      timeUnit: 'months',
-    },
-    coinId: 'BTC',
-  },
-  {
-    id: 4,
-    interestRatePercent: 23,
-    vaultDuration: {
-      value: 1,
-      timeUnit: 'year',
-    },
-    coinId: 'BTC',
-  },
-  {
-    id: 11,
-    interestRatePercent: 10,
-    vaultDuration: {
-      value: 1,
-      timeUnit: 'month',
-    },
-    coinId: 'ETH',
-  },
-  {
-    id: 12,
-    interestRatePercent: 13,
-    vaultDuration: {
-      value: 3,
-      timeUnit: 'months',
-    },
-    coinId: 'ETH',
-  },
-  {
-    id: 13,
-    interestRatePercent: 16,
-    vaultDuration: {
-      value: 6,
-      timeUnit: 'months',
-    },
-    coinId: 'ETH',
-  },
-  {
-    id: 14,
-    interestRatePercent: 23,
-    vaultDuration: {
-      value: 1,
-      timeUnit: 'year',
-    },
-    coinId: 'ETH',
-  },
-  {
-    id: 21,
-    interestRatePercent: 10,
-    vaultDuration: {
-      value: 1,
-      timeUnit: 'month',
-    },
-    coinId: 'USDT',
-  },
-  {
-    id: 22,
-    interestRatePercent: 13,
-    vaultDuration: {
-      value: 3,
-      timeUnit: 'months',
-    },
-    coinId: 'USDT',
-  },
-  {
-    id: 23,
-    interestRatePercent: 16,
-    vaultDuration: {
-      value: 6,
-      timeUnit: 'months',
-    },
-    coinId: 'USDT',
-  },
-  {
-    id: 24,
-    interestRatePercent: 23,
-    vaultDuration: {
-      value: 1,
-      timeUnit: 'year',
-    },
-    coinId: 'USDT',
-  },
-  {
-    id: 31,
-    interestRatePercent: 10,
-    vaultDuration: {
-      value: 1,
-      timeUnit: 'month',
-    },
-    coinId: 'XRP',
-  },
-  {
-    id: 32,
-    interestRatePercent: 13,
-    vaultDuration: {
-      value: 3,
-      timeUnit: 'months',
-    },
-    coinId: 'XRP',
-  },
-  {
-    id: 33,
-    interestRatePercent: 16,
-    vaultDuration: {
-      value: 6,
-      timeUnit: 'months',
-    },
-    coinId: 'XRP',
-  },
-  {
-    id: 34,
-    interestRatePercent: 23,
-    vaultDuration: {
-      value: 1,
-      timeUnit: 'year',
-    },
-    coinId: 'XRP',
-  },
-];
-
+// TODO #FIXME
 const fixedDepositTokens = [
   {
     coinId: 'BTC',
@@ -175,12 +30,18 @@ const fixedDepositTokens = [
 ];
 
 export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({ style, onPress }) => {
-  const [fixedDepositsWallet, setFixedDepositsWallet] = useState(() => fixedDepositTokens[0]);
+  const [fixedDepositsWallet, setFixedDepositsWallet] = useState(() => fixedDepositTokens[3]);
   const [activeFixedDeposits, setActiveFixedDeposits] = useState(() => null);
+  const { apiRequestHandler } = useContext(APIRequestsContext);
+  const [viewAllVaultOptions, setViewAllVaultOptions] = useState(() => false);
+
+  const getInterestRates = async () => {
+    const data = await vaultsInterestRates({ coinId: fixedDepositsWallet.coinId }, apiRequestHandler);
+    setActiveFixedDeposits(data);
+  };
 
   useEffect(() => {
-    const activeVault = vaults.filter((val) => val.coinId === fixedDepositsWallet.coinId);
-    setActiveFixedDeposits(activeVault);
+    getInterestRates();
   }, [fixedDepositsWallet]);
 
   return (
@@ -207,9 +68,12 @@ export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({ style, o
       </View>
       <View style={styles.vaultFixedDepositsList}>
         {activeFixedDeposits ? (
-          activeFixedDeposits.map((val) => {
+          activeFixedDeposits.map((val, index) => {
             return (
-              <WhiteView style={styles.vaultFixedDeposit} key={val.id}>
+              <WhiteView
+                style={{ ...styles.vaultFixedDeposit, ...{ display: index > 3 && !viewAllVaultOptions ? 'none' : '' } }}
+                key={val.id}
+              >
                 <TouchableOpacity
                   activeOpacity={0.7}
                   onPress={() => {
@@ -221,7 +85,7 @@ export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({ style, o
                   <Text style={[styles.subtext, { textAlign: 'center' }]}>Interest Rate</Text>
                   <YellowView style={[styles.vaultFixedDepositDuration, { paddingVertical: 8, paddingHorizontal: 0 }]}>
                     <Text style={{ textAlign: 'center', fontWeight: '700', fontSize: 12 }}>
-                      {`${val.vaultDuration.value} ${val.vaultDuration.timeUnit}`} vault
+                      {`${val.vaultDuration.value} ${val.vaultDuration.timeUnit}`} Vault
                     </Text>
                   </YellowView>
                 </TouchableOpacity>
@@ -233,7 +97,9 @@ export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({ style, o
         )}
       </View>
       <View>
-        <Text style={[styles.subtext, { textAlign: 'right' }]}>+ view more</Text>
+        <TouchableOpacity onPress={() => setViewAllVaultOptions(!viewAllVaultOptions)}>
+          <Text style={[styles.subtext, { textAlign: 'right' }]}>+ view {viewAllVaultOptions ? 'less' : 'more'}</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
