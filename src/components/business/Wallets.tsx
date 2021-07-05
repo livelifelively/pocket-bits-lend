@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Title, Text } from 'react-native-paper';
+
 import { walletsAllGet } from '../../api/wallet/requests';
 import { APIRequestsContext } from '../../contexts/APIRequestsContext';
 import useComponentError from '../../hooks/useComponentError';
+import { WhiteTouchableOpacity } from '../design/WhiteTouchableOpacity';
 
 import CryptoIcon from '../design/CryptoIcon';
-import { WhiteView } from '../design/WhiteView';
 
 interface WalletsProps {
   style?: Record<string, unknown>;
@@ -54,37 +54,35 @@ export const Wallets: React.FC<WalletsProps> = ({ style, onPress }) => {
           const changeDirectionColor = val.crypto.changeInPercent.changeDirection === '+' ? '#44CBB3' : '#EA6D6D';
 
           return (
-            <TouchableOpacity activeOpacity={0.7} onPress={() => onWalletPress(val)} key={val.id}>
-              <WhiteView style={styles.WalletRowWrapper}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
-                    width: 75,
-                  }}
-                >
-                  <View style={{ marginRight: 15 }}>
-                    <CryptoIcon shortName={val.crypto.shortName} />
-                  </View>
-                  <Text style={styles.cryptoName}>{val.crypto.shortName}</Text>
+            <WhiteTouchableOpacity onPress={() => onWalletPress(val)} key={val.id} style={styles.WalletRowWrapper}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'flex-start',
+                  alignItems: 'center',
+                  width: 75,
+                }}
+              >
+                <View style={{ marginRight: 15 }}>
+                  <CryptoIcon shortName={val.crypto.shortName} />
                 </View>
-                <View style={{ flex: 2 }}>
-                  <Text style={styles.cryptoHolding}>{val.holding.total.value}</Text>
-                  <Text
-                    style={styles.cryptoHoldingSubtext}
-                  >{`${val.currency.symbol} ${val.holding.total.valueInUserCurrency}`}</Text>
-                </View>
-                <View style={{ flex: 2 }}>
-                  <Text
-                    style={styles.cryptoHoldingValue}
-                  >{`${val.currency.symbol} ${val.crypto.valueInUserCurrency}`}</Text>
-                  <Text style={{ ...styles.cryptoHoldingValueSubtext, color: changeDirectionColor }}>
-                    {`${val.crypto.changeInPercent.changeDirection}${val.crypto.changeInPercent.changeValue}%`}
-                  </Text>
-                </View>
-              </WhiteView>
-            </TouchableOpacity>
+                <Text style={styles.cryptoName}>{val.crypto.shortName}</Text>
+              </View>
+              <View style={{ flex: 2 }}>
+                <Text style={styles.cryptoHolding}>{val.holding.total.value}</Text>
+                <Text
+                  style={styles.cryptoHoldingSubtext}
+                >{`${val.currency.symbol} ${val.holding.total.valueInUserCurrency}`}</Text>
+              </View>
+              <View style={{ flex: 4 }}>
+                <Text
+                  style={styles.cryptoHoldingValue}
+                >{`${val.currency.symbol} ${val.crypto.valueInUserCurrency}`}</Text>
+                <Text style={{ ...styles.cryptoHoldingValueSubtext, color: changeDirectionColor }}>
+                  {`${val.crypto.changeInPercent.changeDirection}${val.crypto.changeInPercent.changeValue}%`}
+                </Text>
+              </View>
+            </WhiteTouchableOpacity>
           );
         })}
     </View>
@@ -98,8 +96,11 @@ const styles = StyleSheet.create({
   WalletRowWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 10,
-    paddingHorizontal: 30,
+    marginBottom: 15,
+    padding: 15,
+    paddingHorizontal: 20,
+    borderRadius: 15,
+    width: '100%',
   },
   walletCryptoDetails: {},
   cryptoName: {
@@ -123,6 +124,6 @@ const styles = StyleSheet.create({
   },
   cryptoHoldingValueSubtext: {
     fontSize: 10,
-    textAlign: 'center',
+    textAlign: 'right',
   },
 });
