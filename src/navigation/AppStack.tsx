@@ -72,7 +72,7 @@ const AppTabs: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  buttonBackground: { width: 45, height: 45, borderRadius: 45 },
+  buttonBackground: { height: 45, width: 45, borderRadius: 23 },
 });
 
 export const AppStack: React.FC = () => {
