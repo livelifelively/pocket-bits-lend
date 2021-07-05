@@ -31,7 +31,7 @@ const fixedDepositTokens = [
 
 export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({ style, onPress }) => {
   const [fixedDepositsWallet, setFixedDepositsWallet] = useState(() => fixedDepositTokens[3]);
-  const [activeFixedDeposits, setActiveFixedDeposits] = useState(() => null);
+  const [activeFixedDeposits, setActiveFixedDeposits] = useState(() => []);
   const { apiRequestHandler } = useContext(APIRequestsContext);
   const [viewAllVaultOptions, setViewAllVaultOptions] = useState(() => false);
 
@@ -43,6 +43,11 @@ export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({ style, o
   useEffect(() => {
     getInterestRates();
   }, [fixedDepositsWallet]);
+
+  const visibleActiveFixedDeposits =
+    activeFixedDeposits && activeFixedDeposits.length > 4 && !viewAllVaultOptions
+      ? activeFixedDeposits.slice(0, 4)
+      : activeFixedDeposits;
 
   return (
     <View style={{ ...styles.vaultFixedDepositsWrapper, ...style }}>
@@ -67,11 +72,13 @@ export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({ style, o
         />
       </View>
       <View style={styles.vaultFixedDepositsList}>
-        {activeFixedDeposits ? (
-          activeFixedDeposits.map((val, index) => {
+        {visibleActiveFixedDeposits ? (
+          visibleActiveFixedDeposits.map((val, index) => {
             return (
               <WhiteView
-                style={{ ...styles.vaultFixedDeposit, ...{ display: index > 3 && !viewAllVaultOptions ? 'none' : '' } }}
+                style={{
+                  ...styles.vaultFixedDeposit,
+                }}
                 key={val.id}
               >
                 <TouchableOpacity
@@ -80,7 +87,6 @@ export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({ style, o
                     onPress({ all: activeFixedDeposits, active: val });
                   }}
                 >
-                  {/* <Text style={styles.vaultFixedDepositInterestRate}>{val.coinId}</Text> */}
                   <Text style={styles.vaultFixedDepositInterestRate}>{val.interestRatePercent}%</Text>
                   <Text style={[styles.subtext, { textAlign: 'center' }]}>Interest Rate</Text>
                   <YellowView style={[styles.vaultFixedDepositDuration, { paddingVertical: 8, paddingHorizontal: 0 }]}>
@@ -120,7 +126,7 @@ const styles = StyleSheet.create({
   vaultFixedDeposit: {
     width: '48%',
     marginBottom: 15,
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
     paddingVertical: 20,
   },
   vaultFixedDepositInterestRate: {
