@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 10,
+    marginBottom: 15,
     alignItems: 'center',
   },
   vaultHistoryDates: {

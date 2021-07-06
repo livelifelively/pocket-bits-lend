@@ -9,6 +9,7 @@ interface WalletTransactionHistoryProps {
   style?: Record<string, unknown>;
 }
 
+// #TODO #FIXME
 const history = [
   {
     id: 1,
@@ -85,8 +86,7 @@ const styles = StyleSheet.create({
   walletTransactionHistory: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 10,
-    // paddingBottom: 10
+    marginBottom: 15,
   },
   walletTransaction: {
     fontFamily: 'Poppins-Bold',

@@ -7,6 +7,7 @@ import { DefaultLayout } from '../../layouts/Default';
 import { WhiteView } from '../../components/design/WhiteView';
 import { YellowCopyIcon } from '../../icons';
 
+// #TODO #FIXME referrals from API
 const RewardScreen = () => {
   return (
     <DefaultLayout backgroundColor="#ffffff" topBar={{ showBackButton: false, title: 'Reward Screen' }}>
@@ -38,7 +39,7 @@ const RewardScreen = () => {
       </View>
       <View style={{ marginBottom: 25, width: '100%' }}>
         <Title style={{ marginBottom: 10 }}>Your Referrals</Title>
-        <WhiteView style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10, padding: 20 }}>
+        <WhiteView style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 15, padding: 20 }}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
             <View>
               <Text style={{ fontSize: 10 }}>S*************@gmail.com</Text>
@@ -51,7 +52,7 @@ const RewardScreen = () => {
             </View>
           </View>
         </WhiteView>
-        <WhiteView style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10, padding: 20 }}>
+        <WhiteView style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 15, padding: 20 }}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
             <View>
               <Text style={{ fontSize: 10 }}>D*************@gmail.com</Text>
