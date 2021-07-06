@@ -20,4 +20,17 @@ export const VaultAPIConfigurations = {
       },
     },
   },
+  VAULT_RATES: {
+    url: (requestData = {}) => URLPrefixes.AUTH + '/v1' + '/rates?coinId=' + requestData.coinId,
+    apiCallId: 'VAULT_RATES',
+    method: 'GET',
+    errorHandlers: {
+      '409': (response: any) => {
+        console.log('HANDLE 409 ERROR', response);
+      },
+      default: (response: any) => {
+        // console.log('HANDLE GENERIC ERROR', response);
+      },
+    },
+  },
 };

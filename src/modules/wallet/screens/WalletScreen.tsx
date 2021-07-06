@@ -10,6 +10,7 @@ import { CopyOutlineIcon, ReceiveIcon, SendIcon } from '../../../icons';
 import { walletAddressGet } from '../../../api/wallet/requests';
 import { GlobalAlertsContext } from '../../../contexts/GlobalAlertsContext';
 import { APIRequestsContext } from '../../../contexts/APIRequestsContext';
+import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
 
 const WalletScreen = ({ navigation, walletDetails }) => {
   const [walletAddress, setWalletAddress] = useState(() => '');
@@ -47,71 +48,65 @@ const WalletScreen = ({ navigation, walletDetails }) => {
       />
       <WalletBalance style={styles.component} onPress={() => {}} walletDetails={walletDetails} />
       <View style={{ ...styles.walletActions, ...styles.component }}>
-        <View>
-          <TouchableOpacity
-            style={[
-              styles.walletActionsButtons,
-              {
-                backgroundColor: '#ffffff',
-                height: 53,
-                width: 53,
-                borderRadius: 53,
-                alignItems: 'center',
-                justifyContent: 'center',
-              },
-            ]}
+        <View style={{ alignItems: 'center' }}>
+          <WhiteTouchableOpacity
             onPress={() => {
               navigation.navigate('Withdraw', { walletDetails: { ...walletDetails, address: walletAddress } });
             }}
+            style={{
+              backgroundColor: '#ffffff',
+              height: 53,
+              width: 53,
+              borderRadius: 53,
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: 10,
+            }}
           >
             <SendIcon />
-          </TouchableOpacity>
+          </WhiteTouchableOpacity>
           <Text style={styles.walletActionsSubtext}>Send</Text>
         </View>
-        <View>
-          <TouchableOpacity
-            style={[
-              styles.walletActionsButtons,
-              {
-                backgroundColor: '#ffffff',
-                height: 53,
-                width: 53,
-                borderRadius: 53,
-                alignItems: 'center',
-                justifyContent: 'center',
-              },
-            ]}
+        <View style={{ alignItems: 'center' }}>
+          <WhiteTouchableOpacity
             onPress={() => {
               navigation.navigate('Deposit', { walletDetails: { ...walletDetails, address: walletAddress } });
             }}
+            style={{
+              backgroundColor: '#ffffff',
+              height: 53,
+              width: 53,
+              borderRadius: 53,
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: 10,
+            }}
           >
             <ReceiveIcon />
-          </TouchableOpacity>
+          </WhiteTouchableOpacity>
           <Text style={styles.walletActionsSubtext}>Receive</Text>
         </View>
-        <View>
-          <TouchableOpacity
-            style={[
-              styles.walletActionsButtons,
-              {
-                backgroundColor: '#ffffff',
-                height: 53,
-                width: 53,
-                borderRadius: 53,
-                alignItems: 'center',
-                justifyContent: 'center',
-              },
-            ]}
-            onPress={(e) => {
+        <View style={{ alignItems: 'center' }}>
+          <WhiteTouchableOpacity
+            onPress={() => {
               copyToClipboard();
               toast({
                 logId: 'WALLET_ADDRESS_COPIED',
                 title: 'Address copied',
               });
             }}
+            style={{
+              backgroundColor: '#ffffff',
+              height: 53,
+              width: 53,
+              borderRadius: 53,
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: 10,
+            }}
           >
             <CopyOutlineIcon />
-          </TouchableOpacity>
+          </WhiteTouchableOpacity>
           <Text style={styles.walletActionsSubtext}>Copy address</Text>
         </View>
       </View>

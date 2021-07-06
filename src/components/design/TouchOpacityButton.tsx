@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
+import { LinearGradient } from 'expo-linear-gradient';
 
 interface TouchOpacityButtonProps {
   onPress: () => void;
@@ -8,23 +9,37 @@ interface TouchOpacityButtonProps {
   wrapperStyles?: Record<string, unknown>;
   title: string;
   disabled?: boolean;
+  isTransparent?: boolean;
 }
 
 export const TouchOpacityButton: React.FC<TouchOpacityButtonProps> = ({
   title,
   onPress,
   wrapperStyles,
+  isTransparent,
   textStyles,
   disabled = false,
 }) => {
+  const linearGradientColors = [];
+
+  if (!isTransparent) {
+    linearGradientColors.push('rgba(255, 223, 92, 1)');
+    linearGradientColors.push('rgba(255, 184, 80, 0.94)');
+  } else {
+    linearGradientColors.push('transparent');
+    linearGradientColors.push('transparent');
+  }
+
   return (
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={onPress}
-      style={[styles.touchableOpacity, styles.buttonWrapper, wrapperStyles]}
+      style={[styles.touchableOpacity, { backgroundColor: 'transparent' }]}
       disabled={disabled}
     >
-      <Text style={[styles.textStyles, textStyles]}>{title}</Text>
+      <LinearGradient colors={linearGradientColors} style={[styles.buttonWrapper, wrapperStyles]}>
+        <Text style={[styles.textStyles, textStyles]}>{title}</Text>
+      </LinearGradient>
     </TouchableOpacity>
   );
 };
@@ -40,10 +55,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 49,
     paddingVertical: 10,
     borderRadius: 15,
+    padding: 15,
   },
   touchableOpacity: {
-    shadowColor: '#a3a3a3', // IOS
-    shadowOffset: { height: 0, width: 1 }, // IOS
+    shadowColor: 'rgba(215, 215, 215, 0.25)', // IOS
+    shadowOffset: { height: 0, width: 2 }, // IOS
     shadowOpacity: 0.3,
     shadowRadius: 5, //IOS
     // backgroundColor: Theme.colors.primary,
@@ -51,6 +67,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    padding: 15,
+    // borderBottomColor: 'red',
   },
 });

@@ -19,11 +19,11 @@ export default function App() {
     return (
       <SafeAreaProvider>
         <PaperProvider theme={Theme}>
-          <APIRequestsProvider>
-            <AuthProvider>
+          <AuthProvider>
+            <APIRequestsProvider>
               <Navigation colorScheme={colorScheme} />
-            </AuthProvider>
-          </APIRequestsProvider>
+            </APIRequestsProvider>
+          </AuthProvider>
         </PaperProvider>
       </SafeAreaProvider>
     );

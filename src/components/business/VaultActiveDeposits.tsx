@@ -35,7 +35,7 @@ export const VaultActiveDeposits: React.FC<VaultActiveDepositsProps> = ({
         <View style={styles.componentTitle}>
           <Title>
             {'Active Deposits '}
-            <Text style={styles.activeDepositsCount}>(4)</Text>
+            <Text style={styles.activeDepositsCount}>({activeDeposits.length})</Text>
           </Title>
         </View>
       )}

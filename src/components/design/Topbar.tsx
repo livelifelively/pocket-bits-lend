@@ -23,19 +23,13 @@ const Topbar: React.FC<TopBarProps> = ({
     <View style={styles.navBar}>
       <View style={styles.pageTitleAndBack}>
         {showBackButton && (
-          <TouchableOpacity
-            activeOpacity={0.7}
+          <WhiteTouchableOpacity
             onPress={onBackButtonPress}
             style={{
-              shadowColor: '#a3a3a3', // IOS
-              shadowOffset: { height: 0, width: 1 }, // IOS
-              shadowOpacity: 0.3,
-              shadowRadius: 5, //IOS
-              backgroundColor: '#fff',
-              elevation: 2, // Android
-              justifyContent: 'space-between',
+              backgroundColor: '#ffffff',
               alignItems: 'center',
-              flexDirection: 'row',
+              justifyContent: 'center',
+              marginBottom: 10,
               paddingVertical: 15,
               paddingHorizontal: 15,
               borderRadius: 6,
@@ -45,7 +39,7 @@ const Topbar: React.FC<TopBarProps> = ({
             <View style={{ width: 7, height: 10 }}>
               <BackIcon />
             </View>
-          </TouchableOpacity>
+          </WhiteTouchableOpacity>
         )}
         <Title>{title}</Title>
       </View>

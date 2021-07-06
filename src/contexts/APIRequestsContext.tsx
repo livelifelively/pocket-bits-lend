@@ -98,7 +98,7 @@ export const APIRequestsProvider: React.FC = ({ children }) => {
   async function getRequestHandler(requestData: any, requestConfigurations: any) {
     const { apiCallId, url, errorHandlers } = requestConfigurations;
     const requestURL = url(requestData);
-    console.log(requestURL);
+
     try {
       const res = await http.get(requestURL);
       // TODO can pass in adapters as well if needed.

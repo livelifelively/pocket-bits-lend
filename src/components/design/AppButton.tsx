@@ -47,6 +47,7 @@ export const AppButton: React.FC<AppButtonProps> = ({
         }}
         textStyles={textStyle}
         disabled={disabled}
+        isTransparent={true}
       />
     );
   } else if (mode === 'outlined') {
@@ -56,6 +57,7 @@ export const AppButton: React.FC<AppButtonProps> = ({
         onPress={onPress}
         wrapperStyles={{ ...buttonStyle, borderColor: color, backgroundColor: 'transparent' }}
         textStyles={textStyle}
+        isTransparent={true}
       />
     );
   } else if (mode === 'contained') {
@@ -63,8 +65,9 @@ export const AppButton: React.FC<AppButtonProps> = ({
       <TouchOpacityButton
         title={title}
         onPress={onPress}
-        wrapperStyles={{ ...buttonStyle, borderColor: color, backgroundColor: color }}
+        wrapperStyles={{ ...buttonStyle, borderWidth: 0 }}
         textStyles={textStyle}
+        isTransparent={false}
       />
     );
   }

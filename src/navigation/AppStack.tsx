@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import { AppTabsParamList, AppStackParamList } from './AppParamList';
 
@@ -12,7 +13,7 @@ import { VaultActiveDepositsStack, VaultCreationStack, VaultHistoryStack } from 
 import { WalletStack } from '../modules/wallet/WalletStack';
 import { SettingsStack } from '../modules/settings/SettingsStack';
 import { HomeIcon, RewardIcon, VaultIcon } from '../icons';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const Tabs = createBottomTabNavigator<AppTabsParamList>();
 const Stack = createStackNavigator<AppStackParamList>();
@@ -22,29 +23,34 @@ const AppTabs: React.FC = () => {
     <Tabs.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => {
-          let backgroundStyles = {};
+          const linearGradientColors = [];
+
           if (focused) {
-            backgroundStyles = { backgroundColor: '#FFB850' };
+            linearGradientColors.push('rgba(255, 184, 80, 0.94)');
+            linearGradientColors.push('rgba(255, 126, 66, 1)');
+          } else {
+            linearGradientColors.push('transparent');
+            linearGradientColors.push('transparent');
           }
 
           switch (route.name) {
             case 'Home':
               return (
-                <View style={[styles.buttonBackground, backgroundStyles]}>
+                <LinearGradient colors={linearGradientColors} style={[styles.buttonBackground]}>
                   <HomeIcon strokeColor={focused ? '#ffffff' : '#FFBC5A'} />
-                </View>
+                </LinearGradient>
               );
             case 'Rewards':
               return (
-                <View style={[styles.buttonBackground, backgroundStyles]}>
+                <LinearGradient colors={linearGradientColors} style={[styles.buttonBackground]}>
                   <RewardIcon strokeColor={focused ? '#ffffff' : '#FFBC5A'} />
-                </View>
+                </LinearGradient>
               );
             case 'Vault':
               return (
-                <View style={[styles.buttonBackground, backgroundStyles]}>
+                <LinearGradient colors={linearGradientColors} style={[styles.buttonBackground]}>
                   <VaultIcon strokeColor={focused ? '#ffffff' : '#FFBC5A'} />
-                </View>
+                </LinearGradient>
               );
 
             default:
@@ -66,7 +72,7 @@ const AppTabs: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  buttonBackground: { width: 45, height: 45, borderRadius: 45 },
+  buttonBackground: { height: 45, width: 45, borderRadius: 23 },
 });
 
 export const AppStack: React.FC = () => {
