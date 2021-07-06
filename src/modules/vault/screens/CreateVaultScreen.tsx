@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -10,16 +10,31 @@ import { WhiteView } from '../../../components/design/WhiteView';
 import CryptoIcon from '../../../components/design/CryptoIcon';
 import Dropdown from '../../../components/design/Dropdown';
 import CryptoInput from '../../../components/business/CryptoInput';
-
-const availableFundsInCrypto = 1.41;
+import { walletBalanceForCoinGet } from '../../../api/wallet/requests';
+import { APIRequestsContext } from '../../../contexts/APIRequestsContext';
+import Logger from '../../../services/logger';
 
 const CreateVaultScreen = ({ navigation, vaults }) => {
   const [activeVaultOption, setActiveVaultOption] = useState(() => vaults.active);
+  const [cryptoBalance, setCryptoBalance] = useState(() => 0);
+  const { apiRequestHandler } = useContext(APIRequestsContext);
 
-  const twoFactorAuthenticationSchema = Yup.object().shape({
-    verificationCode: Yup.string()
-      .required()
-      .matches(/^[0-9]+$/, 'Must be only digits'),
+  useEffect(() => {
+    const onloadAPICalls = async () => {
+      try {
+        const returnValue = await walletBalanceForCoinGet({ coinId: activeVaultOption.coinId }, apiRequestHandler);
+        setCryptoBalance(parseFloat(returnValue.availableBalance));
+        Logger.debug('API__WALLET_COIN_BALANCE--SUCCESS', {});
+      } catch (e) {
+        Logger.error('API__WALLET_COIN_BALANCE--FAILED', e);
+      }
+    };
+
+    onloadAPICalls();
+  }, []);
+
+  const createVaultSchema = Yup.object().shape({
+    cryptoAmount: Yup.number().max(cryptoBalance).required(),
   });
 
   return (
@@ -51,36 +66,40 @@ const CreateVaultScreen = ({ navigation, vaults }) => {
           initialValues={{
             cryptoAmount: '',
           }}
-          validationSchema={twoFactorAuthenticationSchema}
+          validationSchema={createVaultSchema}
           onSubmit={async () => {
             navigation.navigate('VaultCreated');
           }}
         >
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <View>
-              <CryptoInput
-                textInput={{
-                  value: values.cryptoAmount,
-                  onChangeText: handleChange('cryptoAmount'),
-                  onBlur: handleBlur('cryptoAmount'),
-                  placeholder: `Enter Amount in ${activeVaultOption.coinId}`,
-                  error: touched.cryptoAmount ? errors.cryptoAmount : '',
-                  style: { input: styles.textInput, wrapper: styles.textInputWrapper },
-                }}
-                holding={{
-                  value: availableFundsInCrypto,
-                  coinId: activeVaultOption.coinId,
-                }}
-              />
-              <Dropdown
-                options={vaults.all}
-                activeOption={activeVaultOption}
-                onMenuItemSelect={setActiveVaultOption}
-                keyVal={(val: any) => val.id}
-                titleVal={(val: any) => {
-                  return <Text>{`${val.vaultDuration.value} ${val.vaultDuration.timeUnit}`}</Text>;
-                }}
-              />
+              <View>
+                <CryptoInput
+                  textInput={{
+                    value: values.cryptoAmount,
+                    onChangeText: handleChange('cryptoAmount'),
+                    onBlur: handleBlur('cryptoAmount'),
+                    placeholder: `Enter Amount in ${activeVaultOption.coinId}`,
+                    error: touched.cryptoAmount ? errors.cryptoAmount : '',
+                    style: { input: styles.textInput, wrapper: styles.textInputWrapper },
+                  }}
+                  holding={{
+                    value: cryptoBalance,
+                    coinId: activeVaultOption.coinId,
+                  }}
+                />
+              </View>
+              <View style={{ marginBottom: 15 }}>
+                <Dropdown
+                  options={vaults.all}
+                  activeOption={activeVaultOption}
+                  onMenuItemSelect={setActiveVaultOption}
+                  keyVal={(val: any) => val.id}
+                  titleVal={(val: any) => {
+                    return <Text>{`${val.vaultDuration.value} ${val.vaultDuration.timeUnit}`}</Text>;
+                  }}
+                />
+              </View>
               <Text style={styles.instructions}>
                 Lock {activeVaultOption.coinId} for {activeVaultOption.vaultDuration.value}{' '}
                 {activeVaultOption.vaultDuration.timeUnit} at {activeVaultOption.interestRatePercent}% interest
@@ -102,6 +121,7 @@ const CreateVaultScreen = ({ navigation, vaults }) => {
 const styles = StyleSheet.create({
   createVault: {
     padding: 30,
+    paddingHorizontal: 20,
   },
   createVaultInfo: { flexDirection: 'row', width: '100%', justifyContent: 'space-between', marginBottom: 30 },
 
