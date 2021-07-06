@@ -24,7 +24,14 @@ const Topbar: React.FC<TopBarProps> = ({
   backgroundColor,
 }) => {
   return (
-    <Appbar.Header style={{ backgroundColor, height: 60 }}>
+    <Appbar.Header
+      style={{
+        backgroundColor,
+        height: 80,
+        borderBottomWidth: 0,
+        elevation: 0,
+      }}
+    >
       <View style={[styles.navBar, style]}>
         <View style={styles.pageTitleAndBack}>
           {showBackButton && (
@@ -77,7 +84,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 10,
+    paddingHorizontal: 30,
     paddingTop: 5,
     paddingBottom: 5,
   },
