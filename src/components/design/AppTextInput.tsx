@@ -36,6 +36,7 @@ interface AppTextInputProps {
   secureTextEntry?: boolean;
   onBlur?: (e: any) => void;
   error?: string;
+  autoFocus?: boolean;
 }
 
 export const AppTextInput: React.FC<AppTextInputProps> = ({
@@ -51,6 +52,7 @@ export const AppTextInput: React.FC<AppTextInputProps> = ({
   secureTextEntry = false,
   onBlur,
   error = '',
+  autoFocus = false,
 }) => {
   const errorStyle =
     error.length > 0
@@ -77,6 +79,7 @@ export const AppTextInput: React.FC<AppTextInputProps> = ({
         autoCapitalize={autoCapitalize}
         secureTextEntry={secureTextEntry}
         onBlur={onBlur}
+        autoFocus={autoFocus}
       />
       <InlineErrorText error={error} />
     </View>
