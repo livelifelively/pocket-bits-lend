@@ -3,10 +3,11 @@ import { Text, StyleSheet, View } from 'react-native';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { VaultHistoryNavProps } from '../VaultParamList';
-import Topbar from '../../../components/design/Topbar';
+
 import { WhiteView } from '../../../components/design/WhiteView';
 import CryptoIcon from '../../../components/design/CryptoIcon';
 
+// #TODO #FIXME
 const vaultHistory = [
   {
     id: 1,
@@ -64,13 +65,15 @@ const vaultHistory = [
 
 const VaultHistoryScreen = ({ navigation }: VaultHistoryNavProps<'VaultHistory'>) => {
   return (
-    <DefaultLayout>
-      <Topbar
-        onBackButtonPress={() => {
+    <DefaultLayout
+      topBar={{
+        showBackButton: true,
+        title: 'Vault History',
+        onBackButtonPress: () => {
           navigation.goBack();
-        }}
-        title="Vault History"
-      />
+        },
+      }}
+    >
       {vaultHistory &&
         vaultHistory.map((val) => {
           return (

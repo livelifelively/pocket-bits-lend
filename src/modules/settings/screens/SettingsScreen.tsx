@@ -4,7 +4,7 @@ import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { DefaultLayout } from '../../../layouts/Default';
 import { SettingsNavProps } from '../SettingsParamList';
 import { AuthContext } from '../../auth/AuthProvider';
-import Topbar from '../../../components/design/Topbar';
+
 import { WhiteView } from '../../../components/design/WhiteView';
 import { LockIcon, LogoutIcon, UserIcon } from '../../../icons';
 import { GlobalAlertsContext } from '../../../contexts/GlobalAlertsContext';
@@ -14,13 +14,15 @@ const SettingsScreen = ({ navigation }: SettingsNavProps<'Settings'>) => {
   const { prompt } = useContext(GlobalAlertsContext);
 
   return (
-    <DefaultLayout>
-      <Topbar
-        onBackButtonPress={() => {
+    <DefaultLayout
+      topBar={{
+        showBackButton: true,
+        title: 'Settings',
+        onBackButtonPress: () => {
           navigation.goBack();
-        }}
-        title="Settings"
-      />
+        },
+      }}
+    >
       <TouchableOpacity
         style={styles.settingsAction}
         onPress={() => {

@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { ValueCreated } from '../../components/business/ValueCreated';
-import Topbar from '../../components/design/Topbar';
 import { Title, Text } from 'react-native-paper';
 
 import { DefaultLayout } from '../../layouts/Default';
@@ -10,8 +9,7 @@ import { YellowCopyIcon } from '../../icons';
 
 const RewardScreen = () => {
   return (
-    <DefaultLayout backgroundColor="#ffffff">
-      <Topbar showBackButton={false} title="Reward Screen" />
+    <DefaultLayout backgroundColor="#ffffff" topBar={{ showBackButton: false, title: 'Reward Screen' }}>
       <ValueCreated />
       <View style={{ backgroundColor: '#F3F3F3', height: 140, width: '100%', marginBottom: 20 }}></View>
       <View style={{ marginBottom: 25 }}>

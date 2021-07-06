@@ -4,18 +4,20 @@ import { Text, StyleSheet, View } from 'react-native';
 import { DefaultLayout } from '../../../layouts/Default';
 import { VaultCreationNavProps } from '../VaultParamList';
 import { AppButton } from '../../../components/design/AppButton';
-import Topbar from '../../../components/design/Topbar';
+
 import VaultCreatedImage from '../../../icons/VaultCreatedImage';
 
 const VaultCreatedScreen = ({ navigation }: VaultCreationNavProps<'VaultCreated'>) => {
   return (
-    <DefaultLayout>
-      <Topbar
-        onBackButtonPress={() => {
+    <DefaultLayout
+      topBar={{
+        showBackButton: true,
+        title: 'Vault Created',
+        onBackButtonPress: () => {
           navigation.goBack();
-        }}
-        title="Vault Created"
-      />
+        },
+      }}
+    >
       <View style={styles.successImage}>
         <VaultCreatedImage />
       </View>

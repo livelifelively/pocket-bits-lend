@@ -4,7 +4,7 @@ import { Text, Title } from 'react-native-paper';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { WalletNavProps } from '../WalletParamList';
-import Topbar from '../../../components/design/Topbar';
+
 import { YellowCopyIcon, YellowShareIcon } from '../../../icons';
 import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
 
@@ -19,13 +19,17 @@ const DepositScreen = ({ navigation, route }: WalletNavProps<'Deposit'>) => {
   };
 
   return (
-    <DefaultLayout backgroundColor="#ffffff">
-      <Topbar
-        onBackButtonPress={() => {
+    // #TODO #FIXME add crypto coin id here
+    <DefaultLayout
+      topBar={{
+        showBackButton: true,
+        title: 'Receive BTC',
+        onBackButtonPress: () => {
           navigation.goBack();
-        }}
-        title="Receive BTC"
-      />
+        },
+      }}
+      backgroundColor="#ffffff"
+    >
       <View style={styles.depositQRCode}></View>
       <Title style={styles.component}>Scan the QR Code</Title>
       <Title style={styles.component}>OR</Title>

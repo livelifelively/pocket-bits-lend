@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { DefaultLayout } from '../../../layouts/Default';
 import { SettingsNavProps } from '../SettingsParamList';
 import { AppButton } from '../../../components/design/AppButton';
-import Topbar from '../../../components/design/Topbar';
+
 import { Title } from 'react-native-paper';
 import { AppTextInput } from '../../../components/design/AppTextInput';
 import { YellowCopyIcon } from '../../../icons';
@@ -27,13 +27,16 @@ const TwoFactorAuthenticationScreen = ({ navigation }: SettingsNavProps<'TwoFact
   });
 
   return (
-    <DefaultLayout backgroundColor="#ffffff">
-      <Topbar
-        onBackButtonPress={() => {
+    <DefaultLayout
+      topBar={{
+        showBackButton: true,
+        title: 'TwoFactorAuthentication',
+        onBackButtonPress: () => {
           navigation.goBack();
-        }}
-        title="TwoFactorAuthentication"
-      />
+        },
+      }}
+      backgroundColor="#ffffff"
+    >
       <View style={styles.twoFactorAuthQRCode}></View>
       <Title style={styles.component}>Scan the QR Code</Title>
       <Title style={styles.component}>OR</Title>

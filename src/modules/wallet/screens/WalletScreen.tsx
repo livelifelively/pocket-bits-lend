@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, Clipboard } from 'react-native';
+import { StyleSheet, View, Clipboard } from 'react-native';
 import { Text } from 'react-native-paper';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { WalletBalance } from '../../../components/business/WalletBalance';
-import Topbar from '../../../components/design/Topbar';
+
 import { WalletTransactionHistory } from '../../../components/business/WalletTransactionHistory';
 import { CopyOutlineIcon, ReceiveIcon, SendIcon } from '../../../icons';
 import { walletAddressGet } from '../../../api/wallet/requests';
@@ -39,13 +39,15 @@ const WalletScreen = ({ navigation, walletDetails }) => {
   }, [walletDetails.crypto.shortName]);
 
   return (
-    <DefaultLayout>
-      <Topbar
-        onBackButtonPress={() => {
+    <DefaultLayout
+      topBar={{
+        showBackButton: true,
+        title: 'Wallet',
+        onBackButtonPress: () => {
           navigation.goBack();
-        }}
-        title="Wallet"
-      />
+        },
+      }}
+    >
       <WalletBalance style={styles.component} onPress={() => {}} walletDetails={walletDetails} />
       <View style={{ ...styles.walletActions, ...styles.component }}>
         <View style={{ alignItems: 'center' }}>

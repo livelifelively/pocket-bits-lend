@@ -6,7 +6,6 @@ import { HomeNavProps } from './TabsParamList';
 import { Wallets } from '../../components/business/Wallets';
 import { VaultIntro } from '../../components/business/VaultIntro';
 import { ValueCreated } from '../../components/business/ValueCreated';
-import Topbar from '../../components/design/Topbar';
 import ErrorBoundary from '../../components/design/ErrorBoundary';
 
 const HomeScreen = ({ navigation }: HomeNavProps<'Home'>) => {
@@ -15,13 +14,13 @@ const HomeScreen = ({ navigation }: HomeNavProps<'Home'>) => {
   };
 
   return (
-    <DefaultLayout>
-      <Topbar
-        showBackButton={false}
-        title=""
-        showSettingsButton={true}
-        onSettingsButtonPress={() => navigation.navigate('SettingsStack')}
-      />
+    <DefaultLayout
+      topBar={{
+        showBackButton: false,
+        showSettingsButton: true,
+        onSettingsButtonPress: () => navigation.navigate('SettingsStack'),
+      }}
+    >
       <ValueCreated />
       <VaultIntro style={{ ...styles.components }} />
       <ErrorBoundary errorScope="COMPONENT">

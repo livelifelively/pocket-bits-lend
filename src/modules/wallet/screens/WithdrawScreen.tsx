@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { WalletNavProps } from '../WalletParamList';
-import Topbar from '../../../components/design/Topbar';
+
 import { AppTextInput } from '../../../components/design/AppTextInput';
 import { PasteIcon } from '../../../icons';
 import { AppButton } from '../../../components/design/AppButton';
@@ -21,13 +21,16 @@ const WithdrawScreen = ({ navigation, route }: WalletNavProps<'Withdraw'>) => {
   });
 
   return (
-    <DefaultLayout backgroundColor="#FFFFFF">
-      <Topbar
-        onBackButtonPress={() => {
+    <DefaultLayout
+      topBar={{
+        showBackButton: true,
+        title: 'Send',
+        onBackButtonPress: () => {
           navigation.goBack();
-        }}
-        title={'Send '}
-      />
+        },
+      }}
+      backgroundColor="#ffffff"
+    >
       <View style={{ paddingHorizontal: 15, marginTop: 55 }}>
         <Formik
           initialValues={{

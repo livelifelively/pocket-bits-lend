@@ -4,19 +4,21 @@ import { Text } from 'react-native-paper';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { SettingsNavProps } from '../SettingsParamList';
-import Topbar from '../../../components/design/Topbar';
+
 import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
 import { PencilIcon } from '../../../icons';
 
 const ProfileSettingsScreen = ({ navigation }: SettingsNavProps<'ProfileSettings'>) => {
   return (
-    <DefaultLayout>
-      <Topbar
-        onBackButtonPress={() => {
+    <DefaultLayout
+      topBar={{
+        showBackButton: true,
+        title: 'Profile Settings',
+        onBackButtonPress: () => {
           navigation.goBack();
-        }}
-        title="Profile Settings"
-      />
+        },
+      }}
+    >
       <View
         style={{
           height: 104,

@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { AppButton } from '../../../components/design/AppButton';
-import Topbar from '../../../components/design/Topbar';
+
 import { WhiteView } from '../../../components/design/WhiteView';
 import CryptoIcon from '../../../components/design/CryptoIcon';
 import Dropdown from '../../../components/design/Dropdown';
@@ -23,13 +23,16 @@ const CreateVaultScreen = ({ navigation, vaults }) => {
   });
 
   return (
-    <DefaultLayout style={{ paddingHorizontal: 30 }}>
-      <Topbar
-        onBackButtonPress={() => {
+    <DefaultLayout
+      topBar={{
+        showBackButton: true,
+        title: 'Create Vault',
+        onBackButtonPress: () => {
           navigation.goBack();
-        }}
-        title="Create Vault"
-      />
+        },
+      }}
+      style={{ paddingHorizontal: 30 }}
+    >
       <WhiteView style={styles.createVault}>
         <View style={styles.createVaultInfo}>
           <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: 60 }}>
