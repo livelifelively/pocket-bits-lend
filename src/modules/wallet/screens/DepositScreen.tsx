@@ -39,12 +39,14 @@ const DepositScreen = ({ navigation, route }: WalletNavProps<'Deposit'>) => {
       backgroundColor="#ffffff"
     >
       {address.length > 0 && (
-        <View style={styles.depositQRCode}>
-          <QRCode value={address} size={200} />
-        </View>
+        <>
+          <View style={styles.depositQRCode}>
+            <QRCode value={address} size={200} />
+          </View>
+          <Title style={styles.component}>Scan the QR Code</Title>
+          <Title style={styles.component}>OR</Title>
+        </>
       )}
-      <Title style={styles.component}>Scan the QR Code</Title>
-      <Title style={styles.component}>OR</Title>
       <View
         style={{
           marginBottom: 25,

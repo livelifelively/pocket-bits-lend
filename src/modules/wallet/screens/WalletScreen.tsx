@@ -58,50 +58,54 @@ const WalletScreen = ({ navigation, walletDetails }) => {
           </WhiteTouchableOpacity>
           <Text style={styles.walletActionsSubtext}>Send</Text>
         </View>
-        <View style={{ alignItems: 'center' }}>
-          <WhiteTouchableOpacity
-            onPress={() => {
-              navigation.navigate('Deposit', {
-                walletDetails: { ...walletDetails, address: walletAddress?.depositAddress },
-              });
-            }}
-            style={{
-              backgroundColor: '#ffffff',
-              height: 53,
-              width: 53,
-              borderRadius: 53,
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: 10,
-            }}
-          >
-            <ReceiveIcon />
-          </WhiteTouchableOpacity>
-          <Text style={styles.walletActionsSubtext}>Receive</Text>
-        </View>
-        <View style={{ alignItems: 'center' }}>
-          <WhiteTouchableOpacity
-            onPress={() => {
-              copyToClipboard();
-              toast({
-                logId: 'WALLET_ADDRESS_COPIED',
-                title: 'Address copied',
-              });
-            }}
-            style={{
-              backgroundColor: '#ffffff',
-              height: 53,
-              width: 53,
-              borderRadius: 53,
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: 10,
-            }}
-          >
-            <CopyOutlineIcon />
-          </WhiteTouchableOpacity>
-          <Text style={styles.walletActionsSubtext}>Copy address</Text>
-        </View>
+        {walletAddress && walletAddress.depositAddress && (
+          <>
+            <View style={{ alignItems: 'center' }}>
+              <WhiteTouchableOpacity
+                onPress={() => {
+                  navigation.navigate('Deposit', {
+                    walletDetails: { ...walletDetails, address: walletAddress?.depositAddress },
+                  });
+                }}
+                style={{
+                  backgroundColor: '#ffffff',
+                  height: 53,
+                  width: 53,
+                  borderRadius: 53,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: 10,
+                }}
+              >
+                <ReceiveIcon />
+              </WhiteTouchableOpacity>
+              <Text style={styles.walletActionsSubtext}>Receive</Text>
+            </View>
+            <View style={{ alignItems: 'center' }}>
+              <WhiteTouchableOpacity
+                onPress={() => {
+                  copyToClipboard();
+                  toast({
+                    logId: 'WALLET_ADDRESS_COPIED',
+                    title: 'Address copied',
+                  });
+                }}
+                style={{
+                  backgroundColor: '#ffffff',
+                  height: 53,
+                  width: 53,
+                  borderRadius: 53,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: 10,
+                }}
+              >
+                <CopyOutlineIcon />
+              </WhiteTouchableOpacity>
+              <Text style={styles.walletActionsSubtext}>Copy address</Text>
+            </View>
+          </>
+        )}
       </View>
       <WalletTransactionHistory />
     </DefaultLayout>
