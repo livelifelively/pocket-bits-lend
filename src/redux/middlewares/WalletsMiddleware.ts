@@ -1,9 +1,13 @@
-import { walletsAllGet } from '../../api/wallet/requests';
+import { walletsAllGet, walletAddressGet } from '../../api/wallet/requests';
 import {
   C_GET_ALL_WALLETS,
+  C_GET_WALLET_ADDRESS,
   E_FETCH_WALLETS_SUCCESS,
   E_FETCH_WALLETS_ERROR,
+  E_FETCH_WALLET_ADDRESS_ERROR,
+  E_FETCH_WALLET_ADDRESS_SUCCESS,
   updateWallets,
+  updateWalletAddress,
 } from '../actions/WalletsActions';
 import { apiRequest } from '../actions/APIRequestActions';
 
@@ -17,13 +21,42 @@ export const getAllWalletsFlow = ({ dispatch }: { dispatch: any }) => (next: any
   return next(action);
 };
 
-export const processWalletCollection = ({ dispatch }) => (next) => (action) => {
+export const getWalletAddressFlow = ({ dispatch }: { dispatch: any }) => (next: any) => async (action: ReduxAction) => {
+  if (action.type === C_GET_WALLET_ADDRESS) {
+    dispatch(
+      apiRequest(
+        walletAddressGet,
+        { coinId: action.payload },
+        E_FETCH_WALLET_ADDRESS_SUCCESS,
+        E_FETCH_WALLET_ADDRESS_ERROR
+      )
+    );
+  }
+
+  return next(action);
+};
+
+export const processWalletAddress = ({ dispatch }: { dispatch: any }) => (next: any) => async (action: ReduxAction) => {
+  next(action);
+
+  if (action.type === E_FETCH_WALLET_ADDRESS_SUCCESS) {
+    dispatch(updateWalletAddress(action.payload));
+  }
+};
+
+export const processWalletCollection = ({ dispatch }: { dispatch: any }) => (next: any) => async (
+  action: ReduxAction
+) => {
   next(action);
 
   if (action.type === E_FETCH_WALLETS_SUCCESS) {
-    console.log('E_FETCH_WALLETS_SUCCESS', action.payload);
     dispatch(updateWallets(action.payload));
   }
 };
 
-export const walletMiddlwares = [getAllWalletsFlow, processWalletCollection];
+export const walletMiddlwares = [
+  getAllWalletsFlow,
+  processWalletCollection,
+  getWalletAddressFlow,
+  processWalletAddress,
+];

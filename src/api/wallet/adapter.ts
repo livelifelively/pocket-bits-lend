@@ -52,3 +52,11 @@ export const A_WalletsCoinsValue = (wallets: [WalletBalanceResponse], coins: [Co
 
   return returnValue;
 };
+
+export const A_WalletAddress = (address: any) => {
+  return {
+    coinId: address.coin,
+    depositAddress: address.depositAddress,
+    tagOrMemo: address.tagOrMemo,
+  };
+};

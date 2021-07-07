@@ -1,11 +1,27 @@
-import { R_UPDATE_WALLETS } from '../actions/WalletsActions';
+import { R_UPDATE_WALLETS, R_UPDATE_WALLET_ADDRESS } from '../actions/WalletsActions';
 
-const walletsReducer = (wallets: any[] = [], action: ReduxAction) => {
+const initialState = {
+  balance: [],
+  address: {},
+};
+
+const walletsReducer = (state: any = initialState, action: ReduxAction) => {
   switch (action.type) {
     case R_UPDATE_WALLETS:
-      return action.payload;
+      return {
+        ...state,
+        balance: action.payload,
+      };
+    case R_UPDATE_WALLET_ADDRESS:
+      return {
+        ...state,
+        address: {
+          ...state.address,
+          [action.payload.coinId]: action.payload,
+        },
+      };
     default:
-      return wallets;
+      return state;
   }
 };
 

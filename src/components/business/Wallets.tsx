@@ -15,7 +15,7 @@ interface WalletsProps {
 }
 
 export const Wallets: React.FC<WalletsProps> = ({ style, onPress }) => {
-  const wallets = useSelector((state) => state.wallets);
+  const wallets = useSelector((state) => state?.wallets?.balance);
 
   const [componentError] = useState(() => {
     return { hasError: false, message: '', id: '' };

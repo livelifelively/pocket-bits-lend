@@ -33,9 +33,9 @@ export const WalletAPIConfigurations = {
       },
     },
   },
-  WALLET_COIN: {
+  WALLET_COIN_BALANCE: {
     url: (requestData: WalletsBalanceRequest) => URLPrefixes.AUTH + '/v1' + '/balances/' + requestData.coinId,
-    apiCallId: 'WALLET_COIN',
+    apiCallId: 'WALLET_COIN_BALANCE',
     method: 'GET',
     errorHandlers: {
       '409': (response: any) => {
@@ -46,7 +46,7 @@ export const WalletAPIConfigurations = {
   },
   WALLET_ADDRESS: {
     url: (requestData: WalletsAddressRequest) =>
-      URLPrefixes.AUTH + '/v1' + `/balances/getAddress/${requestData.coinId}`,
+      URLPrefixes.AUTH + '/v1' + `/transfers/getAddress/${requestData.coinId}`,
     apiCallId: 'WALLET_ADDRESS',
     method: 'GET',
     errorHandlers: {

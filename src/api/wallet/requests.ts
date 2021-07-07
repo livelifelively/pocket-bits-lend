@@ -1,9 +1,9 @@
 import { WalletAPIConfigurations } from './configurations';
-import { A_WalletsCoinsValue } from './adapter';
+import { A_WalletsCoinsValue, A_WalletAddress } from './adapter';
 import { apiRequestHandler } from '../../services/http';
 
 export const walletBalanceForCoinGet = async (requestData: WalletBalanceForCoinRequest, apiRequestHandler) => {
-  const returnValue = await apiRequestHandler(requestData, WalletAPIConfigurations['WALLET_COIN']);
+  const returnValue = await apiRequestHandler(requestData, WalletAPIConfigurations['WALLET_COIN_BALANCE']);
   return returnValue.data[0];
 };
 
@@ -20,5 +20,5 @@ export const walletsAllGet = async (requestData: WalletsBalanceRequest) => {
 
 export const walletAddressGet = async (requestData: WalletsAddressRequest) => {
   const walletAddress = await apiRequestHandler(requestData, WalletAPIConfigurations['WALLET_ADDRESS']);
-  return walletAddress?.data;
+  return A_WalletAddress(walletAddress?.data);
 };

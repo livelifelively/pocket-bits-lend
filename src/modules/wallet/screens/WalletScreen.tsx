@@ -1,41 +1,30 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { StyleSheet, View, Clipboard } from 'react-native';
 import { Text } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { getWalletAddress } from '../../../redux/actions/WalletsActions';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { WalletBalance } from '../../../components/business/WalletBalance';
 
 import { WalletTransactionHistory } from '../../../components/business/WalletTransactionHistory';
 import { CopyOutlineIcon, ReceiveIcon, SendIcon } from '../../../icons';
-import { walletAddressGet } from '../../../api/wallet/requests';
 import { GlobalAlertsContext } from '../../../contexts/GlobalAlertsContext';
-import { APIRequestsContext } from '../../../contexts/APIRequestsContext';
 import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
 
 const WalletScreen = ({ navigation, walletDetails }) => {
-  const [walletAddress, setWalletAddress] = useState(() => '');
+  const walletAddress = useSelector((state) => {
+    return state?.wallets?.address[walletDetails.crypto.shortName];
+  });
   const { toast } = useContext(GlobalAlertsContext);
-  const { apiRequestHandler } = useContext(APIRequestsContext);
-
-  const onloadAPICalls = async (coinId: CoinId) => {
-    try {
-      const data = await walletAddressGet({ coinId }, apiRequestHandler);
-      // setWallets(data);
-    } catch (e) {
-      // setComponentError({
-      //   hasError: true,
-      //   message: 'API request failed',
-      //   id: 'COMPONENT__WALLETS--API_REQUEST_FAILED',
-      // });
-    }
-  };
+  const dispatch = useDispatch();
 
   const copyToClipboard = () => {
-    Clipboard.setString(walletAddress);
+    Clipboard.setString(walletAddress.depositAddress);
   };
 
   useEffect(() => {
-    onloadAPICalls(walletDetails.crypto.shortName);
+    dispatch(getWalletAddress(walletDetails.crypto.shortName));
   }, [walletDetails.crypto.shortName]);
 
   return (
@@ -72,7 +61,9 @@ const WalletScreen = ({ navigation, walletDetails }) => {
         <View style={{ alignItems: 'center' }}>
           <WhiteTouchableOpacity
             onPress={() => {
-              navigation.navigate('Deposit', { walletDetails: { ...walletDetails, address: walletAddress } });
+              navigation.navigate('Deposit', {
+                walletDetails: { ...walletDetails, address: walletAddress.depositAddress },
+              });
             }}
             style={{
               backgroundColor: '#ffffff',
