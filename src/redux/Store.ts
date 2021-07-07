@@ -1,7 +1,7 @@
 import { compose, combineReducers, createStore, applyMiddleware } from 'redux';
 
-import wallets from './reducers/Wallets';
-import { walletMiddlwares } from './middlewares/Wallets';
+import wallets from './reducers/WalletsReducer';
+import { walletMiddlwares } from './middlewares/WalletsMiddleware';
 
 const rootReducer = combineReducers({
   wallets,
