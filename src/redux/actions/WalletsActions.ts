@@ -1,9 +1,17 @@
-export const GET_ALL_WALLETS = '[wallets] GET ALL';
-export const FETCH_WALLETS_SUCCESS = '[wallets] Fetch success';
-export const FETCH_WALLETS_ERROR = '[wallets] Fetch Error';
+export const C_GET_ALL_WALLETS = '[wallets] [Command] GET ALL';
+export const E_FETCH_WALLETS_SUCCESS = '[wallets] [Event] Fetch success';
+export const E_FETCH_WALLETS_ERROR = '[wallets] [Event] Fetch Error';
+export const R_UPDATE_WALLETS = '[wallets] [Reducer] Update Wallets';
 
 export const getAllWallets = () => {
   return {
-    type: GET_ALL_WALLETS,
+    type: C_GET_ALL_WALLETS,
+  };
+};
+
+export const updateWallets = (data: any) => {
+  return {
+    type: R_UPDATE_WALLETS,
+    payload: data,
   };
 };
