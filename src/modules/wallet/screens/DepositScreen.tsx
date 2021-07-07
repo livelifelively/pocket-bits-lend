@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View, TouchableOpacity, Clipboard } from 'react-native';
 import { Text, Title } from 'react-native-paper';
+import QRCode from 'react-native-qrcode-svg';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { WalletNavProps } from '../WalletParamList';
 
 import { YellowCopyIcon, YellowShareIcon } from '../../../icons';
 import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
+import { GlobalAlertsContext } from '../../../contexts/GlobalAlertsContext';
 
 const DepositScreen = ({ navigation, route }: WalletNavProps<'Deposit'>) => {
   const { walletDetails } = route.params;
+  const { toast } = useContext(GlobalAlertsContext);
+
   // #FIXME get from api only
-  const address = walletDetails.address ? walletDetails.address : '3F8QCEXUrRQcjoyp2J8ng71xre3vd33dcer';
+  const address = walletDetails && walletDetails.address ? walletDetails.address : '';
 
   const copyToClipboard = () => {
     Clipboard.setString(address);
     Clipboard.getString().then((res) => console.log(res));
+    toast({
+      logId: 'WALLET_ADDRESS_COPIED',
+      title: 'Address copied',
+    });
   };
 
   return (
@@ -30,7 +38,11 @@ const DepositScreen = ({ navigation, route }: WalletNavProps<'Deposit'>) => {
       }}
       backgroundColor="#ffffff"
     >
-      <View style={styles.depositQRCode}></View>
+      {address.length > 0 && (
+        <View style={styles.depositQRCode}>
+          <QRCode value={address} size={200} />
+        </View>
+      )}
       <Title style={styles.component}>Scan the QR Code</Title>
       <Title style={styles.component}>OR</Title>
       <View
@@ -77,10 +89,7 @@ const DepositScreen = ({ navigation, route }: WalletNavProps<'Deposit'>) => {
 
 const styles = StyleSheet.create({
   depositQRCode: {
-    width: 175,
-    height: 175,
-    marginBottom: 50,
-    backgroundColor: '#000',
+    marginBottom: 30,
   },
   component: {
     marginBottom: 30,

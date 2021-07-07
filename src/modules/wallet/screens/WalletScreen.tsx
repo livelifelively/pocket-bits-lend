@@ -62,7 +62,7 @@ const WalletScreen = ({ navigation, walletDetails }) => {
           <WhiteTouchableOpacity
             onPress={() => {
               navigation.navigate('Deposit', {
-                walletDetails: { ...walletDetails, address: walletAddress.depositAddress },
+                walletDetails: { ...walletDetails, address: walletAddress?.depositAddress },
               });
             }}
             style={{

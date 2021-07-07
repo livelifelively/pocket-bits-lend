@@ -31,7 +31,7 @@ const WithdrawScreen = ({ navigation, route }: WalletNavProps<'Withdraw'>) => {
       }}
       backgroundColor="#ffffff"
     >
-      <View style={{ paddingHorizontal: 15, marginTop: 55 }}>
+      <View style={{ marginTop: 55 }}>
         <Formik
           initialValues={{
             destinationAddress: '',
@@ -62,7 +62,7 @@ const WithdrawScreen = ({ navigation, route }: WalletNavProps<'Withdraw'>) => {
                       });
                     }}
                   >
-                    <View style={{ marginBottom: 10, marginTop: 10 }}>
+                    <View style={{ marginBottom: 8, marginTop: 8 }}>
                       <PasteIcon />
                     </View>
                     <View>

@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
     paddingHorizontal: 30,
-    paddingTop: 35,
+    paddingTop: 15,
   },
 });
