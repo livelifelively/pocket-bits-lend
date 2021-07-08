@@ -29,6 +29,7 @@ export const A_VaultOptions = (availableOptions: any, coinId: string) => {
       vaultDuration: {
         value: wordsToNumbers(duration[0].toLowerCase()),
         timeUnit: capitalize(duration[1]),
+        tenure: val.tenure,
       },
     };
   });

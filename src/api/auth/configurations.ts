@@ -76,9 +76,7 @@ export const AuthAPIConfigurations = {
     apiCallId: 'REFRESH_TOKEN',
     method: 'POST',
     errorHandlers: {
-      default: (response: any) => {
-        // console.log('HANDLE GENERIC ERROR', response);
-      },
+      default: (response: any) => {},
     },
   },
 };

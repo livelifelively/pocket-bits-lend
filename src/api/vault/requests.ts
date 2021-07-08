@@ -11,3 +11,8 @@ export const vaultsInterestRates = async (requestData: any) => {
   const vaults = await apiRequestHandler(requestData, VaultAPIConfigurations['VAULT_RATES']);
   return A_VaultOptions(vaults?.data, requestData.coinId);
 };
+
+export const createVault = async (requestData: any) => {
+  const returnVal = await apiRequestHandler(requestData, VaultAPIConfigurations['CREATE_VAULT']);
+  return returnVal;
+};

@@ -15,9 +15,7 @@ export const VaultAPIConfigurations = {
       '409': (response: any) => {
         console.log('HANDLE 409 ERROR', response);
       },
-      default: (response: any) => {
-        // console.log('HANDLE GENERIC ERROR', response);
-      },
+      default: (response: any) => {},
     },
   },
   VAULT_RATES: {
@@ -28,9 +26,15 @@ export const VaultAPIConfigurations = {
       '409': (response: any) => {
         console.log('HANDLE 409 ERROR', response);
       },
-      default: (response: any) => {
-        // console.log('HANDLE GENERIC ERROR', response);
-      },
+      default: (response: any) => {},
+    },
+  },
+  CREATE_VAULT: {
+    url: () => URLPrefixes.AUTH + '/v1' + '/vault',
+    apiCallId: 'CREATE_VAULT',
+    method: 'POST',
+    errorHandlers: {
+      default: (response: any) => {},
     },
   },
 };
