@@ -8,6 +8,7 @@ import {
   updateVaultRates,
   E_CREATE_VAULT_ERROR,
 } from '../actions/VaultActions';
+import { pendingCreateVaultUI } from '../actions/VaultUIActions';
 import { apiRequest } from '../actions/APIRequestActions';
 
 export const getVaultRatesFlow = ({ dispatch }: { dispatch: any }) => (next: any) => async (action: ReduxAction) => {
@@ -48,6 +49,7 @@ export const createVaultFlow = ({ dispatch }: { dispatch: any }) => (next: any) 
         E_CREATE_VAULT_ERROR
       )
     );
+    dispatch(pendingCreateVaultUI());
     // show loading here. wait for success response
   }
 
