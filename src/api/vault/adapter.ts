@@ -1,8 +1,8 @@
 import { capitalize } from 'lodash';
 import wordsToNumbers from '../../services/words-to-numbers';
 
-export const A_VaultActiveDeposits = (activeVaults) => {
-  return activeVaults.map((val) => {
+export const A_VaultActiveDeposits = (activeVaults: any) => {
+  return activeVaults.map((val: any) => {
     return {
       id: val.id,
       principal: val.principal,
@@ -18,8 +18,8 @@ export const A_VaultActiveDeposits = (activeVaults) => {
   });
 };
 
-export const A_VaultOptions = (availableOptions) => {
-  return availableOptions.map((val) => {
+export const A_VaultOptions = (availableOptions: any, coinId: string) => {
+  const restructured = availableOptions.map((val: any) => {
     const duration = val.tenure.split('_');
 
     return {
@@ -32,4 +32,8 @@ export const A_VaultOptions = (availableOptions) => {
       },
     };
   });
+  return {
+    coinId,
+    rates: restructured,
+  };
 };
