@@ -16,7 +16,6 @@ export const getAllWallets = () => {
 };
 
 export const getWalletAddress = (coinId: string) => {
-  console.log(coinId);
   return {
     type: C_GET_WALLET_ADDRESS,
     payload: coinId,
