@@ -58,6 +58,7 @@ export const AppButton: React.FC<AppButtonProps> = ({
         wrapperStyles={{ ...buttonStyle, borderColor: color, backgroundColor: 'transparent' }}
         textStyles={textStyle}
         isTransparent={true}
+        disabled={disabled}
       />
     );
   } else if (mode === 'contained') {
@@ -68,6 +69,7 @@ export const AppButton: React.FC<AppButtonProps> = ({
         wrapperStyles={{ ...buttonStyle, borderWidth: 0 }}
         textStyles={textStyle}
         isTransparent={false}
+        disabled={disabled}
       />
     );
   }

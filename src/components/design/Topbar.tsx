@@ -12,6 +12,7 @@ interface TopBarProps {
   showSettingsButton?: boolean;
   style?: Record<string, unknown>;
   backgroundColor: string;
+  loading?: boolean;
 }
 
 const Topbar: React.FC<TopBarProps> = ({
@@ -22,6 +23,7 @@ const Topbar: React.FC<TopBarProps> = ({
   showSettingsButton = false,
   style = {},
   backgroundColor,
+  loading = false,
 }) => {
   return (
     <Appbar.Header
@@ -38,7 +40,7 @@ const Topbar: React.FC<TopBarProps> = ({
             <WhiteTouchableOpacity
               onPress={onBackButtonPress}
               style={{
-                backgroundColor: '#ffffff',
+                backgroundColor: loading ? '#e5e5e5' : '#ffffff',
                 alignItems: 'center',
                 justifyContent: 'center',
                 marginBottom: 10,
@@ -47,6 +49,7 @@ const Topbar: React.FC<TopBarProps> = ({
                 borderRadius: 6,
                 marginRight: 20,
               }}
+              disabled={loading}
             >
               <View style={{ width: 7, height: 10 }}>
                 <BackIcon />
@@ -65,6 +68,7 @@ const Topbar: React.FC<TopBarProps> = ({
                   height: 48,
                   borderRadius: 48,
                 }}
+                disabled={loading}
               >
                 <View>
                   <Image source={require('../../../assets/images/avatar-male.png')} />
