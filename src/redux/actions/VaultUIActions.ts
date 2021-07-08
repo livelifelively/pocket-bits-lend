@@ -14,3 +14,9 @@ export const pendingCreateVaultUI = () => {
     type: R_CREATE_VAULT_UI_REQUEST_PENDING,
   };
 };
+
+export const failedCreateVaultUI = () => {
+  return {
+    type: R_CREATE_VAULT_UI_REQUEST_FAILED,
+  };
+};

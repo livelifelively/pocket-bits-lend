@@ -8,7 +8,7 @@ import {
   updateVaultRates,
   E_CREATE_VAULT_ERROR,
 } from '../actions/VaultActions';
-import { pendingCreateVaultUI } from '../actions/VaultUIActions';
+import { pendingCreateVaultUI, R_CREATE_VAULT_UI_REQUEST_SUCCESS } from '../actions/VaultUIActions';
 import { apiRequest } from '../actions/APIRequestActions';
 
 export const getVaultRatesFlow = ({ dispatch }: { dispatch: any }) => (next: any) => async (action: ReduxAction) => {
@@ -37,20 +37,8 @@ export const processVaultRates = ({ dispatch }: { dispatch: any }) => (next: any
 
 export const createVaultFlow = ({ dispatch }: { dispatch: any }) => (next: any) => async (action: ReduxAction) => {
   if (action.type === C_CREATE_VAULT) {
-    dispatch(
-      apiRequest(
-        createVault,
-        {
-          coinId: action.payload.coinId,
-          principal: action.payload.principal,
-          tenure: action.payload.tenure,
-        },
-        E_CREATE_VAULT_SUCCESS,
-        E_CREATE_VAULT_ERROR
-      )
-    );
+    // dispatch(apiRequest(createVault, action.payload, E_CREATE_VAULT_SUCCESS, E_CREATE_VAULT_ERROR));
     dispatch(pendingCreateVaultUI());
-    // show loading here. wait for success response
   }
 
   next(action);
@@ -61,8 +49,12 @@ export const processCreateVaultSuccess = ({ dispatch }: { dispatch: any }) => (n
 ) => {
   next(action);
 
+  if (action.type === E_CREATE_VAULT_SUCCESS) {
+    dispatch({ type: R_CREATE_VAULT_UI_REQUEST_SUCCESS });
+  }
+
   // dispatch()
   // stop loading. let the create vault screen navigate to success screen.
 };
 
-export const vaultMiddlwares = [getVaultRatesFlow, processVaultRates];
+export const vaultMiddlwares = [getVaultRatesFlow, processVaultRates, createVaultFlow, processCreateVaultSuccess];

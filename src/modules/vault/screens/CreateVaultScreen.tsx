@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -13,11 +14,14 @@ import CryptoInput from '../../../components/business/CryptoInput';
 import { walletBalanceForCoinGet } from '../../../api/wallet/requests';
 import { APIRequestsContext } from '../../../contexts/APIRequestsContext';
 import Logger from '../../../services/logger';
+import { createVault } from '../../../redux/actions/VaultActions';
 
 const CreateVaultScreen = ({ navigation, vaults }) => {
   const [activeVaultOption, setActiveVaultOption] = useState(() => vaults.active);
   const [cryptoBalance, setCryptoBalance] = useState(() => 0);
   const { apiRequestHandler } = useContext(APIRequestsContext);
+  const dispatch = useDispatch();
+  const uiState = useSelector((state) => state.vaultsUI.createVault);
 
   useEffect(() => {
     const onloadAPICalls = async () => {
@@ -46,6 +50,7 @@ const CreateVaultScreen = ({ navigation, vaults }) => {
           navigation.goBack();
         },
       }}
+      loading={uiState.loading}
       style={{ paddingHorizontal: 30 }}
     >
       <WhiteView style={styles.createVault}>
@@ -67,8 +72,15 @@ const CreateVaultScreen = ({ navigation, vaults }) => {
             cryptoAmount: '',
           }}
           validationSchema={createVaultSchema}
-          onSubmit={async () => {
-            navigation.navigate('VaultCreated');
+          onSubmit={async (values) => {
+            dispatch(
+              createVault({
+                coinId: activeVaultOption.coinId,
+                principal: parseFloat(values.cryptoAmount),
+                tenure: activeVaultOption.vaultDuration.tenure,
+              })
+            );
+            // navigation.navigate('VaultCreated');
           }}
         >
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched, setFieldValue }) => (
@@ -112,6 +124,7 @@ const CreateVaultScreen = ({ navigation, vaults }) => {
                 onPress={() => {
                   handleSubmit();
                 }}
+                disabled={uiState.loading}
               />
             </View>
           )}
