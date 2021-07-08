@@ -4,7 +4,12 @@ import { AppTextInput } from '../design/AppTextInput';
 import { Text } from 'react-native-paper';
 import { WhiteTouchableOpacity } from '../design/WhiteTouchableOpacity';
 
-const CryptoInput = ({ textInput, holding }) => {
+const CryptoInput = ({ textInput, holding, setFieldValue }) => {
+  const setPercentOfHoldingAsInput = (percent: number) => {
+    const toInput = (holding.value * percent) / 100;
+    setFieldValue(toInput);
+  };
+
   return (
     <View>
       <View style={[styles.inputAmount]}>
@@ -27,16 +32,36 @@ const CryptoInput = ({ textInput, holding }) => {
         </View>
       </View>
       <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginBottom: 20, alignItems: 'center' }}>
-        <WhiteTouchableOpacity style={styles.percentButtons}>
+        <WhiteTouchableOpacity
+          style={styles.percentButtons}
+          onPress={() => {
+            setPercentOfHoldingAsInput(25);
+          }}
+        >
           <Text style={styles.percentButtonsText}>25%</Text>
         </WhiteTouchableOpacity>
-        <WhiteTouchableOpacity style={styles.percentButtons}>
+        <WhiteTouchableOpacity
+          style={styles.percentButtons}
+          onPress={() => {
+            setPercentOfHoldingAsInput(50);
+          }}
+        >
           <Text style={styles.percentButtonsText}>50%</Text>
         </WhiteTouchableOpacity>
-        <WhiteTouchableOpacity style={styles.percentButtons}>
+        <WhiteTouchableOpacity
+          style={styles.percentButtons}
+          onPress={() => {
+            setPercentOfHoldingAsInput(75);
+          }}
+        >
           <Text style={styles.percentButtonsText}>75%</Text>
         </WhiteTouchableOpacity>
-        <WhiteTouchableOpacity style={styles.percentButtons}>
+        <WhiteTouchableOpacity
+          style={styles.percentButtons}
+          onPress={() => {
+            setPercentOfHoldingAsInput(100);
+          }}
+        >
           <Text style={styles.percentButtonsText}>100%</Text>
         </WhiteTouchableOpacity>
       </View>

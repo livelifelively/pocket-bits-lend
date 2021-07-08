@@ -84,6 +84,9 @@ const WithdrawScreen = ({ navigation, route }: WalletNavProps<'Withdraw'>) => {
                   value: walletDetails.holding.available.value,
                   coinId: walletDetails.crypto.shortName,
                 }}
+                setFieldValue={(val) => {
+                  setFieldValue('withdrawalAmount', val.toString());
+                }}
               />
               <AppButton title="Send" onPress={() => handleSubmit()} />
             </View>

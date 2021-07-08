@@ -71,7 +71,7 @@ const CreateVaultScreen = ({ navigation, vaults }) => {
             navigation.navigate('VaultCreated');
           }}
         >
-          {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+          {({ handleChange, handleBlur, handleSubmit, values, errors, touched, setFieldValue }) => (
             <View>
               <View>
                 <CryptoInput
@@ -86,6 +86,9 @@ const CreateVaultScreen = ({ navigation, vaults }) => {
                   holding={{
                     value: cryptoBalance,
                     coinId: activeVaultOption.coinId,
+                  }}
+                  setFieldValue={(val: number) => {
+                    setFieldValue('cryptoAmount', val.toString());
                   }}
                 />
               </View>
