@@ -34,6 +34,7 @@ const VaultUIReducer = (state: any = initialState, action: ReduxAction) => {
         createVault: {
           loading: false,
           status: 'SUCCESS',
+          navigateToSuccess: true,
         },
       };
     case R_CREATE_VAULT_UI_RESET:
