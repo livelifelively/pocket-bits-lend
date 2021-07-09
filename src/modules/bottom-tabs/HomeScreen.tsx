@@ -7,6 +7,7 @@ import { Wallets } from '../../components/business/Wallets';
 import { VaultIntro } from '../../components/business/VaultIntro';
 import { ValueCreated } from '../../components/business/ValueCreated';
 import ErrorBoundary from '../../components/design/ErrorBoundary';
+import HorizontalScrollWhiteView from '../../components/design/HorizontalScrollWhiteView';
 
 const HomeScreen = ({ navigation }: HomeNavProps<'Home'>) => {
   const onWalletPress = (walletDetails: Record<string, unknown>) => {
@@ -21,6 +22,7 @@ const HomeScreen = ({ navigation }: HomeNavProps<'Home'>) => {
         onSettingsButtonPress: () => navigation.navigate('SettingsStack'),
       }}
     >
+      <HorizontalScrollWhiteView />
       <ValueCreated />
       <VaultIntro style={{ ...styles.components }} />
       <ErrorBoundary errorScope="COMPONENT">
