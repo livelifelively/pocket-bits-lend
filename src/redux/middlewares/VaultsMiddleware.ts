@@ -1,17 +1,21 @@
-import { vaultsInterestRates, createVault, vaultsAllGet } from '../../api/vault/requests';
+import { vaultsInterestRates, createVault, vaultsAllGet, deleteVault } from '../../api/vault/requests';
 
 import {
   C_GET_VAULTS_RATES,
   C_GET_ACTIVE_VAULTS,
   C_CREATE_VAULT,
+  C_DELETE_VAULT,
   E_FETCH_VAULTS_RATES_ERROR,
   E_FETCH_VAULTS_RATES_SUCCESS,
   E_CREATE_VAULT_SUCCESS,
   E_FETCH_ACTIVE_VAULTS_SUCCESS,
   E_FETCH_ACTIVE_VAULTS_ERROR,
   E_CREATE_VAULT_ERROR,
+  E_DELETE_VAULT_ERROR,
+  E_DELETE_VAULT_SUCCESS,
   updateVaultRates,
   updateActiveVaults,
+  getAllActiveVaults,
 } from '../actions/VaultActions';
 
 import {
@@ -90,6 +94,26 @@ export const processAllActiveVaultsGetResponse = ({ dispatch }: { dispatch: any 
   }
 };
 
+export const deleteVaultFlow = ({ dispatch }: { dispatch: any }) => (next: any) => async (action: ReduxAction) => {
+  if (action.type === C_DELETE_VAULT) {
+    dispatch(apiRequest(deleteVault, { id: action.payload }, E_DELETE_VAULT_SUCCESS, E_DELETE_VAULT_ERROR));
+  }
+
+  return next(action);
+};
+
+export const processDeleteVaultFlow = ({ dispatch }: { dispatch: any }) => (next: any) => async (
+  action: ReduxAction
+) => {
+  next(action);
+  if (action.type === E_DELETE_VAULT_SUCCESS) {
+    // get active vaults again
+    dispatch(getAllActiveVaults());
+    // get all wallets again, since wallet balance changed
+    dispatch(getAllWallets());
+  }
+};
+
 export const vaultMiddlwares = [
   getVaultRatesFlow,
   processVaultRates,
@@ -97,4 +121,6 @@ export const vaultMiddlwares = [
   processCreateVaultSuccessOrError,
   getAllActiveVaultsFlow,
   processAllActiveVaultsGetResponse,
+  deleteVaultFlow,
+  processDeleteVaultFlow,
 ];

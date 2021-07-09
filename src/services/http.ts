@@ -167,10 +167,26 @@ async function getRequestHandler(requestData: any, requestConfigurations: any) {
   }
 }
 
+async function deleteRequestHandler(requestData: any, requestConfigurations: any) {
+  const { apiCallId, url, errorHandlers } = requestConfigurations;
+  const requestURL = url(requestData);
+
+  try {
+    const res = await http.delete(requestURL);
+    return structureAPIResponse(res, apiCallId);
+  } catch (err) {
+    errorResponseAsPerStatusCode(err, errorHandlers);
+    const structuredError = structureAPIError({ err, requestData, requestConfigurations });
+    throw structuredError;
+  }
+}
+
 export const apiRequestHandler = async (requestData: any, requestConfig: any) => {
   if (requestConfig.method === 'GET') {
     return getRequestHandler(requestData, requestConfig);
   } else if (requestConfig.method === 'POST') {
     return postRequestHandler(requestData, requestConfig);
+  } else if (requestConfig.method === 'DEL') {
+    return deleteRequestHandler(requestData, requestConfig);
   }
 };

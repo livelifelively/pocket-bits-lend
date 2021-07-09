@@ -63,3 +63,10 @@ export const updateActiveVaults = (data: any) => {
     payload: data,
   };
 };
+
+export const deleteVault = (data: any) => {
+  return {
+    type: C_DELETE_VAULT,
+    payload: data,
+  };
+};

@@ -37,4 +37,12 @@ export const VaultAPIConfigurations = {
       default: (response: any) => {},
     },
   },
+  DELETE_VAULT: {
+    url: (requestData: any) => URLPrefixes.AUTH + '/v1' + '/vault/' + requestData.id,
+    apiCallId: 'DELETE_VAULT',
+    method: 'DEL',
+    errorHandlers: {
+      default: (response: any) => {},
+    },
+  },
 };

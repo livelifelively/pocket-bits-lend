@@ -16,3 +16,8 @@ export const createVault = async (requestData: any) => {
   const returnVal = await apiRequestHandler(requestData, VaultAPIConfigurations['CREATE_VAULT']);
   return returnVal;
 };
+
+export const deleteVault = async (requestData: any) => {
+  const returnVal = await apiRequestHandler(requestData, VaultAPIConfigurations['DELETE_VAULT']);
+  return returnVal;
+};
