@@ -1,4 +1,4 @@
-import { R_UPDATE_VAULTS_RATES, R_UPDATE_VAULT_WALLETS } from '../actions/VaultActions';
+import { R_UPDATE_VAULTS_RATES, R_UPDATE_VAULT_WALLETS, R_UPDATE_ACTIVE_VAULTS } from '../actions/VaultActions';
 
 const initialState = {
   rates: {},
@@ -21,6 +21,12 @@ const vaultsReducer = (state: any = initialState, action: ReduxAction) => {
       return {
         ...state,
         wallets: action.payload,
+      };
+
+    case R_UPDATE_ACTIVE_VAULTS:
+      return {
+        ...state,
+        active: action.payload,
       };
     default:
       return state;

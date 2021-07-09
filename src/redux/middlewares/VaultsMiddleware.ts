@@ -1,18 +1,25 @@
-import { vaultsInterestRates, createVault } from '../../api/vault/requests';
+import { vaultsInterestRates, createVault, vaultsAllGet } from '../../api/vault/requests';
+
 import {
   C_GET_VAULTS_RATES,
+  C_GET_ACTIVE_VAULTS,
+  C_CREATE_VAULT,
   E_FETCH_VAULTS_RATES_ERROR,
   E_FETCH_VAULTS_RATES_SUCCESS,
-  C_CREATE_VAULT,
   E_CREATE_VAULT_SUCCESS,
-  updateVaultRates,
+  E_FETCH_ACTIVE_VAULTS_SUCCESS,
+  E_FETCH_ACTIVE_VAULTS_ERROR,
   E_CREATE_VAULT_ERROR,
+  updateVaultRates,
+  updateActiveVaults,
 } from '../actions/VaultActions';
+
 import {
   pendingCreateVaultUI,
   R_CREATE_VAULT_UI_REQUEST_SUCCESS,
   R_CREATE_VAULT_UI_REQUEST_FAILED,
 } from '../actions/VaultUIActions';
+
 import { getAllWallets } from '../actions/WalletsActions';
 import { apiRequest } from '../actions/APIRequestActions';
 
@@ -46,7 +53,7 @@ export const createVaultFlow = ({ dispatch }: { dispatch: any }) => (next: any) 
     dispatch(pendingCreateVaultUI());
   }
 
-  next(action);
+  return next(action);
 };
 
 export const processCreateVaultSuccessOrError = ({ dispatch }: { dispatch: any }) => (next: any) => async (
@@ -61,9 +68,26 @@ export const processCreateVaultSuccessOrError = ({ dispatch }: { dispatch: any }
   } else if (action.type === E_CREATE_VAULT_ERROR) {
     dispatch({ type: R_CREATE_VAULT_UI_REQUEST_FAILED });
   }
+};
 
-  // dispatch()
-  // stop loading. let the create vault screen navigate to success screen.
+export const getAllActiveVaultsFlow = ({ dispatch }: { dispatch: any }) => (next: any) => async (
+  action: ReduxAction
+) => {
+  if (action.type === C_GET_ACTIVE_VAULTS) {
+    dispatch(apiRequest(vaultsAllGet, {}, E_FETCH_ACTIVE_VAULTS_SUCCESS, E_FETCH_ACTIVE_VAULTS_ERROR));
+  }
+
+  return next(action);
+};
+
+export const processAllActiveVaultsGetResponse = ({ dispatch }: { dispatch: any }) => (next: any) => async (
+  action: ReduxAction
+) => {
+  next(action);
+
+  if (action.type === E_FETCH_ACTIVE_VAULTS_SUCCESS) {
+    dispatch(updateActiveVaults(action.payload));
+  }
 };
 
 export const vaultMiddlwares = [
@@ -71,4 +95,6 @@ export const vaultMiddlwares = [
   processVaultRates,
   createVaultFlow,
   processCreateVaultSuccessOrError,
+  getAllActiveVaultsFlow,
+  processAllActiveVaultsGetResponse,
 ];

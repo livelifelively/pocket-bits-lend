@@ -57,23 +57,9 @@ export const updateActiveWallets = (data: any) => {
   };
 };
 
-// export const getWalletAddress = (coinId: string) => {
-//   return {
-//     type: C_GET_WALLET_ADDRESS,
-//     payload: coinId,
-//   };
-// };
-
-// export const updateWallets = (data: any) => {
-//   return {
-//     type: R_UPDATE_WALLETS,
-//     payload: data,
-//   };
-// };
-
-// export const updateWalletAddress = (data: any) => {
-//   return {
-//     type: R_UPDATE_WALLET_ADDRESS,
-//     payload: data,
-//   };
-// };
+export const updateActiveVaults = (data: any) => {
+  return {
+    type: R_UPDATE_ACTIVE_VAULTS,
+    payload: data,
+  };
+};

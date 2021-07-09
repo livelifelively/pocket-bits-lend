@@ -24,18 +24,19 @@ const CreateVaultScreen = ({ navigation, vaults }) => {
   const walletsBalance = useSelector((state) => state?.wallets?.balance);
   const { toast } = useContext(GlobalAlertsContext);
 
+  // reset create vault ui state in redux
   const resetUI = () => {
     dispatch(resetCreateVaultUI());
   };
 
+  // handle ui state changes.
   useEffect(() => {
-    if (uiState.navigateToSuccess) {
+    if (uiState.status === 'SUCCESS' && uiState.navigateToSuccess) {
       navigation.navigate('VaultCreated');
       resetUI();
       formik.resetForm();
     }
     if (uiState.status === 'FAILED') {
-      // show toast message
       toast({
         title: 'Create Vault Request Failed.',
         logId: 'CREATE_VAULT__API_REQUEST--FAILED',
@@ -45,6 +46,7 @@ const CreateVaultScreen = ({ navigation, vaults }) => {
     }
   }, [uiState]);
 
+  // get updated balance on wallet balance changes.
   useEffect(() => {
     const coinWallet = walletsBalance.filter((val) => val.id === activeVaultOption.coinId);
     const walletCryptoBalance = coinWallet[0].holding?.available?.value ? coinWallet[0].holding?.available?.value : 0;
