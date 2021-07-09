@@ -11,8 +11,6 @@ import { WhiteView } from '../../../components/design/WhiteView';
 import CryptoIcon from '../../../components/design/CryptoIcon';
 import Dropdown from '../../../components/design/Dropdown';
 import CryptoInput from '../../../components/business/CryptoInput';
-import { walletBalanceForCoinGet } from '../../../api/wallet/requests';
-import { APIRequestsContext } from '../../../contexts/APIRequestsContext';
 import Logger from '../../../services/logger';
 import { createVault } from '../../../redux/actions/VaultActions';
 import { resetCreateVaultUI } from '../../../redux/actions/VaultUIActions';
@@ -20,9 +18,9 @@ import { resetCreateVaultUI } from '../../../redux/actions/VaultUIActions';
 const CreateVaultScreen = ({ navigation, vaults }) => {
   const [activeVaultOption, setActiveVaultOption] = useState(() => vaults.active);
   const [cryptoBalance, setCryptoBalance] = useState(() => 0);
-  const { apiRequestHandler } = useContext(APIRequestsContext);
   const dispatch = useDispatch();
   const uiState = useSelector((state) => state.vaultsUI.createVault);
+  const walletsBalance = useSelector((state) => state.wallets?.balance);
 
   const resetUI = () => {
     dispatch(resetCreateVaultUI());
@@ -37,18 +35,11 @@ const CreateVaultScreen = ({ navigation, vaults }) => {
   }, [uiState]);
 
   useEffect(() => {
-    const onloadAPICalls = async () => {
-      try {
-        const returnValue = await walletBalanceForCoinGet({ coinId: activeVaultOption.coinId }, apiRequestHandler);
-        setCryptoBalance(parseFloat(returnValue.availableBalance));
-        Logger.debug('API__WALLET_COIN_BALANCE--SUCCESS', {});
-      } catch (e) {
-        Logger.error('API__WALLET_COIN_BALANCE--FAILED', e);
-      }
-    };
-
-    onloadAPICalls();
-  }, []);
+    const coinWallet = walletsBalance.filter((val) => val.id === activeVaultOption.coinId);
+    const walletCryptoBalance = coinWallet[0].holding?.available?.value ? coinWallet[0].holding?.available?.value : 0;
+    setCryptoBalance(walletCryptoBalance);
+    Logger.debug('CREATE_VAULT__WALLET_BALANCE--UPDATED', activeVaultOption);
+  }, [walletsBalance]);
 
   const createVaultSchema = Yup.object().shape({
     cryptoAmount: Yup.number().max(cryptoBalance).required(),
