@@ -12,28 +12,15 @@ import { YellowView } from '../design/YellowView';
 interface VaultFixedDepositsProps {
   style?: Record<string, unknown>;
   onPress: (data: any) => void;
+  activeWalletTokens: any;
 }
 
-// TODO #FIXME get it from wallets
-const fixedDepositTokens = [
-  {
-    coinId: 'BTC',
-  },
-  {
-    coinId: 'ETH',
-  },
-  {
-    coinId: 'USDT',
-  },
-  {
-    coinId: 'XRP',
-  },
-];
-
-export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({ style, onPress }) => {
-  const [fixedDepositsWallet, setFixedDepositsWallet] = useState(() => fixedDepositTokens[3]);
+export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({ style, onPress, activeWalletTokens }) => {
+  const [fixedDepositsWallet, setFixedDepositsWallet] = useState(() => activeWalletTokens[0]);
   const [viewAllVaultOptions, setViewAllVaultOptions] = useState(() => false);
+
   const dispatch = useDispatch();
+
   const activeFixedDeposits = useSelector((state) => {
     const rates = state.vaults.rates && state.vaults.rates[fixedDepositsWallet.coinId];
     return rates;
@@ -53,7 +40,7 @@ export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({ style, o
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
         <Title style={styles.title}>Fixed Deposits</Title>
         <Dropdown
-          options={fixedDepositTokens}
+          options={activeWalletTokens}
           activeOption={fixedDepositsWallet}
           onMenuItemSelect={(val) => setFixedDepositsWallet(val)}
           keyVal={(val: any) => val.coinId}

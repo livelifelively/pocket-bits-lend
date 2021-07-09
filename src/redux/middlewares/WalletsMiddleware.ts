@@ -10,6 +10,7 @@ import {
   updateWalletAddress,
 } from '../actions/WalletsActions';
 import { apiRequest } from '../actions/APIRequestActions';
+import { updateActiveWallets } from '../actions/VaultActions';
 
 export const getAllWalletsFlow = ({ dispatch }: { dispatch: any }) => (next: any) => async (action: ReduxAction) => {
   if (action.type === C_GET_ALL_WALLETS) {
@@ -51,6 +52,12 @@ export const processWalletCollection = ({ dispatch }: { dispatch: any }) => (nex
 
   if (action.type === E_FETCH_WALLETS_SUCCESS) {
     dispatch(updateWallets(action.payload));
+    const activeWallets = action.payload.map((val) => {
+      return {
+        coinId: val.id,
+      };
+    });
+    dispatch(updateActiveWallets(activeWallets));
   }
 };
 

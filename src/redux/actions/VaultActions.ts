@@ -19,6 +19,7 @@ export const E_DELETE_VAULT_ERROR = '[vaults] [Event] Delete vault error';
 export const R_UPDATE_VAULTS_RATES = '[vaults] [Reducer] Update vaults rates';
 export const R_UPDATE_ACTIVE_VAULTS = '[vaults] [Reducer] Update active vaults';
 export const R_UPDATE_VAULTS_HISTORY = '[vaults] [Reducer] Update vaults history';
+export const R_UPDATE_VAULT_WALLETS = '[vaults] [Event] Update vaults wallets';
 
 export const getAllActiveVaults = () => {
   return {
@@ -45,6 +46,13 @@ export const updateVaultRates = (data: any) => {
 export const createVault = (data: any) => {
   return {
     type: C_CREATE_VAULT,
+    payload: data,
+  };
+};
+
+export const updateActiveWallets = (data: any) => {
+  return {
+    type: R_UPDATE_VAULT_WALLETS,
     payload: data,
   };
 };

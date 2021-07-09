@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
+import { useSelector } from 'react-redux';
 
 import { DefaultLayout } from '../../layouts/Default';
 import { VaultNavProps } from './TabsParamList';
@@ -11,6 +12,10 @@ import { YellowActiveVaultIcon, YellowHistoryIcon } from '../../icons';
 import { WhiteTouchableOpacity } from '../../components/design/WhiteTouchableOpacity';
 
 const VaultScreen = ({ navigation }: VaultNavProps<'VaultCreationStack'>) => {
+  const activeWalletTokens = useSelector((state) => {
+    return state.vaults.wallets;
+  });
+
   return (
     <DefaultLayout topBar={{ showBackButton: false, title: 'Vault' }}>
       <ValueCreated />
@@ -59,6 +64,7 @@ const VaultScreen = ({ navigation }: VaultNavProps<'VaultCreationStack'>) => {
         onPress={(data = {}) => {
           navigation.navigate('VaultCreationStack', data);
         }}
+        activeWalletTokens={activeWalletTokens}
       />
       <VaultActiveDeposits />
     </DefaultLayout>
