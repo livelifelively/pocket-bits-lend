@@ -68,7 +68,7 @@ export const processCreateVaultSuccessOrError = ({ dispatch }: { dispatch: any }
   if (action.type === E_CREATE_VAULT_SUCCESS) {
     dispatch({ type: R_CREATE_VAULT_UI_REQUEST_SUCCESS });
     dispatch(getAllWallets());
-    // #TODO update active wallets
+    dispatch(getAllActiveVaults());
   } else if (action.type === E_CREATE_VAULT_ERROR) {
     dispatch({ type: R_CREATE_VAULT_UI_REQUEST_FAILED });
   }

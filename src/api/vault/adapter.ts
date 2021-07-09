@@ -3,15 +3,18 @@ import wordsToNumbers from '../../services/words-to-numbers';
 
 export const A_VaultActiveDeposits = (activeVaults: any) => {
   return activeVaults.map((val: any) => {
+    const duration = val.tenure.split('_');
+
     return {
       id: val.id,
       principal: val.principal,
       coinId: val.coinId,
       tenure: {
         id: val.tenure,
-        label: capitalize(val.tenure.split('_').join(' ')),
+        label: `${wordsToNumbers(duration[0].toLowerCase())} ${capitalize(duration[1])}`,
       },
       interestEarned: val.interestEarned,
+      interestRate: val.rate,
       createdAt: val.createdAt,
       maturityDate: val.maturityDate,
     };
