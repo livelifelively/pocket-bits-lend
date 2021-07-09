@@ -8,7 +8,11 @@ import {
   updateVaultRates,
   E_CREATE_VAULT_ERROR,
 } from '../actions/VaultActions';
-import { pendingCreateVaultUI, R_CREATE_VAULT_UI_REQUEST_SUCCESS } from '../actions/VaultUIActions';
+import {
+  pendingCreateVaultUI,
+  R_CREATE_VAULT_UI_REQUEST_SUCCESS,
+  R_CREATE_VAULT_UI_REQUEST_FAILED,
+} from '../actions/VaultUIActions';
 import { getAllWallets } from '../actions/WalletsActions';
 import { apiRequest } from '../actions/APIRequestActions';
 
@@ -45,19 +49,26 @@ export const createVaultFlow = ({ dispatch }: { dispatch: any }) => (next: any) 
   next(action);
 };
 
-export const processCreateVaultSuccess = ({ dispatch }: { dispatch: any }) => (next: any) => async (
+export const processCreateVaultSuccessOrError = ({ dispatch }: { dispatch: any }) => (next: any) => async (
   action: ReduxAction
 ) => {
   next(action);
 
   if (action.type === E_CREATE_VAULT_SUCCESS) {
     dispatch({ type: R_CREATE_VAULT_UI_REQUEST_SUCCESS });
-    // update wallets local state
     dispatch(getAllWallets());
+    // #TODO update active wallets
+  } else if (action.type === E_CREATE_VAULT_ERROR) {
+    dispatch({ type: R_CREATE_VAULT_UI_REQUEST_FAILED });
   }
 
   // dispatch()
   // stop loading. let the create vault screen navigate to success screen.
 };
 
-export const vaultMiddlwares = [getVaultRatesFlow, processVaultRates, createVaultFlow, processCreateVaultSuccess];
+export const vaultMiddlwares = [
+  getVaultRatesFlow,
+  processVaultRates,
+  createVaultFlow,
+  processCreateVaultSuccessOrError,
+];

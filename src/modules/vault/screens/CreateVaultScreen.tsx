@@ -14,13 +14,15 @@ import CryptoInput from '../../../components/business/CryptoInput';
 import Logger from '../../../services/logger';
 import { createVault } from '../../../redux/actions/VaultActions';
 import { resetCreateVaultUI } from '../../../redux/actions/VaultUIActions';
+import { GlobalAlertsContext } from '../../../contexts/GlobalAlertsContext';
 
 const CreateVaultScreen = ({ navigation, vaults }) => {
   const [activeVaultOption, setActiveVaultOption] = useState(() => vaults.active);
   const [cryptoBalance, setCryptoBalance] = useState(() => 0);
   const dispatch = useDispatch();
-  const uiState = useSelector((state) => state.vaultsUI.createVault);
-  const walletsBalance = useSelector((state) => state.wallets?.balance);
+  const uiState = useSelector((state) => state?.vaultsUI?.createVault);
+  const walletsBalance = useSelector((state) => state?.wallets?.balance);
+  const { toast } = useContext(GlobalAlertsContext);
 
   const resetUI = () => {
     dispatch(resetCreateVaultUI());
@@ -32,12 +34,23 @@ const CreateVaultScreen = ({ navigation, vaults }) => {
       resetUI();
       formik.resetForm();
     }
+    if (uiState.status === 'FAILED') {
+      // show toast message
+      toast({
+        title: 'Create Vault Request Failed.',
+        logId: 'CREATE_VAULT__API_REQUEST--FAILED',
+        messageType: 'ERROR',
+      });
+      resetUI();
+    }
   }, [uiState]);
 
   useEffect(() => {
     const coinWallet = walletsBalance.filter((val) => val.id === activeVaultOption.coinId);
     const walletCryptoBalance = coinWallet[0].holding?.available?.value ? coinWallet[0].holding?.available?.value : 0;
+
     setCryptoBalance(walletCryptoBalance);
+
     Logger.debug('CREATE_VAULT__WALLET_BALANCE--UPDATED', activeVaultOption);
   }, [walletsBalance]);
 

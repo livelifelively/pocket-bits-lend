@@ -19,7 +19,7 @@ const Toast = ({ alertState }) => {
         <Text
           style={{
             textAlign: 'center',
-            color: '#50CFB8',
+            color: alertState.messageType === 'ERROR' ? '#EA6D6D' : '#50CFB8',
           }}
         >
           {alertState.title}

@@ -157,6 +157,7 @@ type GlobalAlertsToast = {
   logId: string;
   type?: 'TOAST';
   title: string;
+  messageType?: 'ERROR' | 'INFO';
 };
 
 type AuthState =
