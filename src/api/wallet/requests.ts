@@ -15,7 +15,8 @@ export const coinTickerGet = async (requestData: any, apiRequestHandler) => {
 export const walletsAllGet = async (requestData: WalletsBalanceRequest) => {
   const wallets = await apiRequestHandler(requestData, WalletAPIConfigurations['WALLET_ALL']);
   const coins = await coinTickerGet({}, apiRequestHandler);
-  return A_WalletsCoinsValue(wallets?.data, coins.data);
+
+  return A_WalletsCoinsValue(wallets?.data, coins);
 };
 
 export const walletAddressGet = async (requestData: WalletsAddressRequest) => {
