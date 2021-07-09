@@ -27,7 +27,7 @@ const ChangePasscodeScreen = ({ navigation }: SettingsNavProps<'ProfileSettings'
   const { setPasscode, confirmPasscode } = useContext(AuthContext);
 
   return (
-    <DefaultLayout>
+    <DefaultLayout topBar={{ title: '', showBackButton: false, type: 'MINIMAL' }}>
       <Formik
         initialValues={{
           passcode: '',

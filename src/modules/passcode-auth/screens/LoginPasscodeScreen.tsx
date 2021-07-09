@@ -21,7 +21,7 @@ function LoginPasscodeScreen({ navigation }: PasscodeAuthNavProps<'LoginPasscode
   });
 
   return (
-    <DefaultLayout>
+    <DefaultLayout topBar={{ title: '', showBackButton: false, type: 'MINIMAL' }}>
       <Formik
         initialValues={{
           passcode: '',

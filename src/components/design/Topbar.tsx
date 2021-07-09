@@ -13,6 +13,7 @@ interface TopBarProps {
   style?: Record<string, unknown>;
   backgroundColor: string;
   loading?: boolean;
+  type?: string;
 }
 
 const Topbar: React.FC<TopBarProps> = ({
@@ -24,12 +25,13 @@ const Topbar: React.FC<TopBarProps> = ({
   style = {},
   backgroundColor,
   loading = false,
+  type = 'STANDARD',
 }) => {
   return (
     <Appbar.Header
       style={{
         backgroundColor,
-        height: 80,
+        height: type === 'MINIMAL' ? 0 : 80,
         borderBottomWidth: 0,
         elevation: 0,
       }}

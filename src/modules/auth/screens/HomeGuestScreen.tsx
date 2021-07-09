@@ -7,10 +7,12 @@ import { AppButton } from '../../../components/design/AppButton';
 import { VaultIntro } from '../../../components/business/VaultIntro';
 import { Wallets } from '../../../components/business/Wallets';
 import ErrorBoundary from '../../../components/design/ErrorBoundary';
+import HorizontalScrollWhiteView from '../../../components/design/HorizontalScrollWhiteView';
 
 function HomeGuestScreen({ navigation }: AuthNavProps<'HomeGuest'>) {
   return (
-    <DefaultLayout>
+    <DefaultLayout topBar={{ title: '', showBackButton: false, type: 'MINIMAL' }}>
+      <HorizontalScrollWhiteView />
       <View style={{ ...styles.authButtonsWrapper, ...styles.components }}>
         <AppButton
           title="Sign In"

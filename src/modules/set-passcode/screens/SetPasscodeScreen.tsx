@@ -24,7 +24,7 @@ const SetPasscodeScreen = () => {
   const { setPasscode } = useContext(AuthContext);
 
   return (
-    <DefaultLayout>
+    <DefaultLayout topBar={{ title: '', showBackButton: false, type: 'MINIMAL' }}>
       <Formik
         initialValues={{
           passcode: '',
