@@ -1,13 +1,16 @@
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider as ReduxProvider } from 'react-redux';
 
 import useCachedResources from './src/hooks/useCachedResources';
 import useColorScheme from './src/hooks/useColorScheme';
 import Navigation from './src/navigation';
 import { AuthProvider } from './src/modules/auth/AuthProvider';
 import { APIRequestsProvider } from './src/contexts/APIRequestsContext';
+import { LoadingProvider } from './src/contexts/LoadingContext';
 import Theme from './src/theme';
+import store from './src/redux/Store';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -18,13 +21,17 @@ export default function App() {
   } else {
     return (
       <SafeAreaProvider>
-        <PaperProvider theme={Theme}>
-          <AuthProvider>
-            <APIRequestsProvider>
-              <Navigation colorScheme={colorScheme} />
-            </APIRequestsProvider>
-          </AuthProvider>
-        </PaperProvider>
+        <ReduxProvider store={store}>
+          <PaperProvider theme={Theme}>
+            <AuthProvider>
+              <APIRequestsProvider>
+                <LoadingProvider>
+                  <Navigation colorScheme={colorScheme} />
+                </LoadingProvider>
+              </APIRequestsProvider>
+            </AuthProvider>
+          </PaperProvider>
+        </ReduxProvider>
       </SafeAreaProvider>
     );
   }

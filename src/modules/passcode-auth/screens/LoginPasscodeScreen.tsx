@@ -21,7 +21,7 @@ function LoginPasscodeScreen({ navigation }: PasscodeAuthNavProps<'LoginPasscode
   });
 
   return (
-    <DefaultLayout>
+    <DefaultLayout topBar={{ title: '', showBackButton: false, type: 'MINIMAL' }}>
       <Formik
         initialValues={{
           passcode: '',
@@ -41,10 +41,11 @@ function LoginPasscodeScreen({ navigation }: PasscodeAuthNavProps<'LoginPasscode
                 onBlur={handleBlur('passcode')}
                 keyboardType="numeric"
                 autoCapitalize="none"
-                placeholder="****"
+                // placeholder="****"
                 maxLength={4}
                 secureTextEntry={true}
                 error={touched.passcode ? errors.passcode : ''}
+                autoFocus={true}
               />
             </View>
             <AppButton

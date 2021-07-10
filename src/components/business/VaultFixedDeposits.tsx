@@ -1,47 +1,33 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Title } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { getAllVaultsRates } from '../../redux/actions/VaultActions';
 import Dropdown from '../design/Dropdown';
 import CryptoIcon from '../design/CryptoIcon';
 import { WhiteView } from '../design/WhiteView';
 import { YellowView } from '../design/YellowView';
-import { APIRequestsContext } from '../../contexts/APIRequestsContext';
-import { vaultsInterestRates } from '../../api/vault/requests';
+
 interface VaultFixedDepositsProps {
   style?: Record<string, unknown>;
   onPress: (data: any) => void;
+  activeWalletTokens: any;
 }
 
-// TODO #FIXME
-const fixedDepositTokens = [
-  {
-    coinId: 'BTC',
-  },
-  {
-    coinId: 'ETH',
-  },
-  {
-    coinId: 'USDT',
-  },
-  {
-    coinId: 'XRP',
-  },
-];
-
-export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({ style, onPress }) => {
-  const [fixedDepositsWallet, setFixedDepositsWallet] = useState(() => fixedDepositTokens[3]);
-  const [activeFixedDeposits, setActiveFixedDeposits] = useState(() => []);
-  const { apiRequestHandler } = useContext(APIRequestsContext);
+export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({ style, onPress, activeWalletTokens }) => {
+  const [fixedDepositsWallet, setFixedDepositsWallet] = useState(() => activeWalletTokens[0]);
   const [viewAllVaultOptions, setViewAllVaultOptions] = useState(() => false);
 
-  const getInterestRates = async () => {
-    const data = await vaultsInterestRates({ coinId: fixedDepositsWallet.coinId }, apiRequestHandler);
-    setActiveFixedDeposits(data);
-  };
+  const dispatch = useDispatch();
+
+  const activeFixedDeposits = useSelector((state) => {
+    const rates = state.vaults.rates && state.vaults.rates[fixedDepositsWallet.coinId];
+    return rates;
+  });
 
   useEffect(() => {
-    getInterestRates();
+    dispatch(getAllVaultsRates(fixedDepositsWallet.coinId));
   }, [fixedDepositsWallet]);
 
   const visibleActiveFixedDeposits =
@@ -54,7 +40,7 @@ export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({ style, o
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
         <Title style={styles.title}>Fixed Deposits</Title>
         <Dropdown
-          options={fixedDepositTokens}
+          options={activeWalletTokens}
           activeOption={fixedDepositsWallet}
           onMenuItemSelect={(val) => setFixedDepositsWallet(val)}
           keyVal={(val: any) => val.coinId}
@@ -102,11 +88,13 @@ export const VaultFixedDeposits: React.FC<VaultFixedDepositsProps> = ({ style, o
           <></>
         )}
       </View>
-      <View>
-        <TouchableOpacity onPress={() => setViewAllVaultOptions(!viewAllVaultOptions)}>
-          <Text style={[styles.subtext, { textAlign: 'right' }]}>+ view {viewAllVaultOptions ? 'less' : 'more'}</Text>
-        </TouchableOpacity>
-      </View>
+      {activeFixedDeposits && activeFixedDeposits.length > 4 && (
+        <View>
+          <TouchableOpacity onPress={() => setViewAllVaultOptions(!viewAllVaultOptions)}>
+            <Text style={[styles.subtext, { textAlign: 'right' }]}>+ view {viewAllVaultOptions ? 'less' : 'more'}</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 };

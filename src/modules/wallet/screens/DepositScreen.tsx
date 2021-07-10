@@ -1,34 +1,52 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View, TouchableOpacity, Clipboard } from 'react-native';
 import { Text, Title } from 'react-native-paper';
+import QRCode from 'react-native-qrcode-svg';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { WalletNavProps } from '../WalletParamList';
-import Topbar from '../../../components/design/Topbar';
+
 import { YellowCopyIcon, YellowShareIcon } from '../../../icons';
 import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
+import { GlobalAlertsContext } from '../../../contexts/GlobalAlertsContext';
 
 const DepositScreen = ({ navigation, route }: WalletNavProps<'Deposit'>) => {
   const { walletDetails } = route.params;
+  const { toast } = useContext(GlobalAlertsContext);
+
   // #FIXME get from api only
-  const address = walletDetails.address ? walletDetails.address : '3F8QCEXUrRQcjoyp2J8ng71xre3vd33dcer';
+  const address = walletDetails && walletDetails.address ? walletDetails.address : '';
 
   const copyToClipboard = () => {
     Clipboard.setString(address);
     Clipboard.getString().then((res) => console.log(res));
+    toast({
+      logId: 'WALLET_ADDRESS_COPIED',
+      title: 'Address copied',
+    });
   };
 
   return (
-    <DefaultLayout backgroundColor="#ffffff">
-      <Topbar
-        onBackButtonPress={() => {
+    // #TODO #FIXME add crypto coin id here
+    <DefaultLayout
+      topBar={{
+        showBackButton: true,
+        title: 'Receive BTC',
+        onBackButtonPress: () => {
           navigation.goBack();
-        }}
-        title="Receive BTC"
-      />
-      <View style={styles.depositQRCode}></View>
-      <Title style={styles.component}>Scan the QR Code</Title>
-      <Title style={styles.component}>OR</Title>
+        },
+      }}
+      backgroundColor="#ffffff"
+    >
+      {address.length > 0 && (
+        <>
+          <View style={styles.depositQRCode}>
+            <QRCode value={address} size={200} />
+          </View>
+          <Title style={styles.component}>Scan the QR Code</Title>
+          <Title style={styles.component}>OR</Title>
+        </>
+      )}
       <View
         style={{
           marginBottom: 25,
@@ -73,10 +91,7 @@ const DepositScreen = ({ navigation, route }: WalletNavProps<'Deposit'>) => {
 
 const styles = StyleSheet.create({
   depositQRCode: {
-    width: 175,
-    height: 175,
-    marginBottom: 50,
-    backgroundColor: '#000',
+    marginBottom: 30,
   },
   component: {
     marginBottom: 30,

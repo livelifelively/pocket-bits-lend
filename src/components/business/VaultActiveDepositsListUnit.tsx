@@ -1,13 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { Text } from 'react-native-paper';
-
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
+
 import { WhiteView } from '../design/WhiteView';
 import { WhiteTouchableOpacity } from '../design/WhiteTouchableOpacity';
 import RedCrossIcon from '../../icons/RedCrossIcon';
 import CryptoIcon from '../design/CryptoIcon';
 import { formatDateTimeString } from '../../services/date-time';
 import { GlobalAlertsContext } from '../../contexts/GlobalAlertsContext';
+import { deleteVault } from '../../redux/actions/VaultActions';
 
 interface VaultActiveDepositsListUnitProps {
   style?: Record<string, unknown>;
@@ -24,6 +26,7 @@ const VaultActiveDepositsListUnitDetails = ({
   depositDetails: VaultDepositDetails;
 }) => {
   const { prompt } = useContext(GlobalAlertsContext);
+  const dispatch = useDispatch();
 
   return (
     <TouchableOpacity activeOpacity={0.7} style={styles.vaultActiveDepositsListUnit} onPress={hideDetails}>
@@ -91,7 +94,13 @@ const VaultActiveDepositsListUnitDetails = ({
               title: 'Do you want to cancel this deposit ?',
               ctaType: 'CONFIRM_REJECT',
               ctas: {
-                confirm: { action: () => {}, label: 'Yes, I agree' },
+                confirm: {
+                  action: () => {
+                    // dispatch delete actions here
+                    dispatch(deleteVault(depositDetails.id));
+                  },
+                  label: 'Yes, I agree',
+                },
                 // eslint-disable-next-line quotes
                 reject: { action: () => {}, label: "No, I don't" },
               },

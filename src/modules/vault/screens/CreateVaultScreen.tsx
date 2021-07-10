@@ -1,35 +1,91 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
-import { Formik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { AppButton } from '../../../components/design/AppButton';
-import Topbar from '../../../components/design/Topbar';
+
 import { WhiteView } from '../../../components/design/WhiteView';
 import CryptoIcon from '../../../components/design/CryptoIcon';
 import Dropdown from '../../../components/design/Dropdown';
 import CryptoInput from '../../../components/business/CryptoInput';
-
-const availableFundsInCrypto = 1.41;
+import Logger from '../../../services/logger';
+import { createVault } from '../../../redux/actions/VaultActions';
+import { resetCreateVaultUI } from '../../../redux/actions/VaultUIActions';
+import { GlobalAlertsContext } from '../../../contexts/GlobalAlertsContext';
 
 const CreateVaultScreen = ({ navigation, vaults }) => {
   const [activeVaultOption, setActiveVaultOption] = useState(() => vaults.active);
+  const [cryptoBalance, setCryptoBalance] = useState(() => 0);
+  const dispatch = useDispatch();
+  const uiState = useSelector((state) => state?.vaultsUI?.createVault);
+  const walletsBalance = useSelector((state) => state?.wallets?.balance);
+  const { toast } = useContext(GlobalAlertsContext);
 
-  const twoFactorAuthenticationSchema = Yup.object().shape({
-    verificationCode: Yup.string()
-      .required()
-      .matches(/^[0-9]+$/, 'Must be only digits'),
+  // reset create vault ui state in redux
+  const resetUI = () => {
+    dispatch(resetCreateVaultUI());
+  };
+
+  // handle ui state changes.
+  useEffect(() => {
+    if (uiState.status === 'SUCCESS' && uiState.navigateToSuccess) {
+      navigation.navigate('VaultCreated');
+      resetUI();
+      formik.resetForm();
+    }
+    if (uiState.status === 'FAILED') {
+      toast({
+        title: 'Create Vault Request Failed.',
+        logId: 'CREATE_VAULT__API_REQUEST--FAILED',
+        messageType: 'ERROR',
+      });
+      resetUI();
+    }
+  }, [uiState]);
+
+  // get updated balance on wallet balance changes.
+  useEffect(() => {
+    const coinWallet = walletsBalance.filter((val) => val.id === activeVaultOption.coinId);
+    const walletCryptoBalance = coinWallet[0].holding?.available?.value ? coinWallet[0].holding?.available?.value : 0;
+
+    setCryptoBalance(walletCryptoBalance);
+
+    Logger.debug('CREATE_VAULT__WALLET_BALANCE--UPDATED', activeVaultOption);
+  }, [walletsBalance]);
+
+  const createVaultSchema = Yup.object().shape({
+    cryptoAmount: Yup.number().max(cryptoBalance).required(),
+  });
+
+  const formik = useFormik({
+    initialValues: { cryptoAmount: '' },
+    onSubmit: async (values) => {
+      dispatch(
+        createVault({
+          coinId: activeVaultOption.coinId,
+          principal: parseFloat(values.cryptoAmount),
+          tenure: activeVaultOption.vaultDuration.tenure,
+        })
+      );
+    },
+    validationSchema: createVaultSchema,
   });
 
   return (
-    <DefaultLayout style={{ paddingHorizontal: 30 }}>
-      <Topbar
-        onBackButtonPress={() => {
+    <DefaultLayout
+      topBar={{
+        showBackButton: true,
+        title: 'Create Vault',
+        onBackButtonPress: () => {
           navigation.goBack();
-        }}
-        title="Create Vault"
-      />
+        },
+      }}
+      loading={uiState.loading}
+      style={{ paddingHorizontal: 30 }}
+    >
       <WhiteView style={styles.createVault}>
         <View style={styles.createVaultInfo}>
           <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: 60 }}>
@@ -44,53 +100,49 @@ const CreateVaultScreen = ({ navigation, vaults }) => {
           </View>
         </View>
 
-        <Formik
-          initialValues={{
-            cryptoAmount: '',
-          }}
-          validationSchema={twoFactorAuthenticationSchema}
-          onSubmit={async () => {
-            navigation.navigate('VaultCreated');
-          }}
-        >
-          {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
-            <View>
-              <CryptoInput
-                textInput={{
-                  value: values.cryptoAmount,
-                  onChangeText: handleChange('cryptoAmount'),
-                  onBlur: handleBlur('cryptoAmount'),
-                  placeholder: `Enter Amount in ${activeVaultOption.coinId}`,
-                  error: touched.cryptoAmount ? errors.cryptoAmount : '',
-                  style: { input: styles.textInput, wrapper: styles.textInputWrapper },
-                }}
-                holding={{
-                  value: availableFundsInCrypto,
-                  coinId: activeVaultOption.coinId,
-                }}
-              />
-              <Dropdown
-                options={vaults.all}
-                activeOption={activeVaultOption}
-                onMenuItemSelect={setActiveVaultOption}
-                keyVal={(val: any) => val.id}
-                titleVal={(val: any) => {
-                  return <Text>{`${val.vaultDuration.value} ${val.vaultDuration.timeUnit}`}</Text>;
-                }}
-              />
-              <Text style={styles.instructions}>
-                Lock {activeVaultOption.coinId} for {activeVaultOption.vaultDuration.value}{' '}
-                {activeVaultOption.vaultDuration.timeUnit} at {activeVaultOption.interestRatePercent}% interest
-              </Text>
-              <AppButton
-                title="Lock in Vault"
-                onPress={() => {
-                  handleSubmit();
-                }}
-              />
-            </View>
-          )}
-        </Formik>
+        <View>
+          <View>
+            <CryptoInput
+              textInput={{
+                value: formik.values.cryptoAmount,
+                onChangeText: formik.handleChange('cryptoAmount'),
+                onBlur: formik.handleBlur('cryptoAmount'),
+                placeholder: `Enter Amount in ${activeVaultOption.coinId}`,
+                error: formik.touched.cryptoAmount ? formik.errors.cryptoAmount : '',
+                style: { input: styles.textInput, wrapper: styles.textInputWrapper },
+              }}
+              holding={{
+                value: cryptoBalance,
+                coinId: activeVaultOption.coinId,
+              }}
+              setFieldValue={(val: number) => {
+                formik.setFieldValue('cryptoAmount', val.toString());
+              }}
+            />
+          </View>
+          <View style={{ marginBottom: 15 }}>
+            <Dropdown
+              options={vaults.all}
+              activeOption={activeVaultOption}
+              onMenuItemSelect={setActiveVaultOption}
+              keyVal={(val: any) => val.id}
+              titleVal={(val: any) => {
+                return <Text>{`${val.vaultDuration.value} ${val.vaultDuration.timeUnit}`}</Text>;
+              }}
+            />
+          </View>
+          <Text style={styles.instructions}>
+            Lock {activeVaultOption.coinId} for {activeVaultOption.vaultDuration.value}{' '}
+            {activeVaultOption.vaultDuration.timeUnit} at {activeVaultOption.interestRatePercent}% interest
+          </Text>
+          <AppButton
+            title="Lock in Vault"
+            onPress={() => {
+              formik.handleSubmit();
+            }}
+            disabled={uiState.loading}
+          />
+        </View>
       </WhiteView>
     </DefaultLayout>
   );
@@ -99,6 +151,7 @@ const CreateVaultScreen = ({ navigation, vaults }) => {
 const styles = StyleSheet.create({
   createVault: {
     padding: 30,
+    paddingHorizontal: 20,
   },
   createVaultInfo: { flexDirection: 'row', width: '100%', justifyContent: 'space-between', marginBottom: 30 },
 

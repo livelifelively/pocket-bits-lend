@@ -8,7 +8,7 @@ import Logger from '../services/logger';
 export const GlobalAlertsContext = React.createContext<{
   alert: ({ title, body, ctas }: GlobalAlertsAlertCTA) => void;
   prompt: ({ title, ctaType, ctas }: GlobalAlertsPromptCTA) => void;
-  toast: ({ title, logId }: GlobalAlertsToast) => void;
+  toast: ({ title, messageType, logId }: GlobalAlertsToast) => void;
 }>({
   alert: () => {},
   prompt: () => {},
@@ -58,16 +58,17 @@ export const GlobalAlertsProvider: React.FC = ({ children }) => {
             logId,
           });
         },
-        toast: ({ title, logId }) => {
+        toast: ({ title, messageType, logId }) => {
           setType('TOAST');
           setVisibility(true);
           setAlertState({
             title,
             logId,
+            messageType,
           });
           setTimeout(() => {
             setVisibility(false);
-          }, 1000);
+          }, 2000);
         },
       }}
     >

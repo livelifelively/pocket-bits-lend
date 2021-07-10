@@ -27,7 +27,7 @@ const ChangePasscodeScreen = ({ navigation }: SettingsNavProps<'ProfileSettings'
   const { setPasscode, confirmPasscode } = useContext(AuthContext);
 
   return (
-    <DefaultLayout>
+    <DefaultLayout topBar={{ title: '', showBackButton: false, type: 'MINIMAL' }}>
       <Formik
         initialValues={{
           passcode: '',
@@ -81,12 +81,13 @@ function NewPasscode({ values, handleBlur, handleChange, touched, errors, setPas
           value={values.newPasscode}
           onChangeText={handleChange('newPasscode')}
           onBlur={handleBlur('newPasscode')}
-          placeholder="****"
+          // placeholder="****"
           keyboardType="numeric"
           autoCapitalize="none"
           secureTextEntry={true}
           maxLength={4}
           error={touched.newPasscode ? errors.newPasscode : ''}
+          autoFocus={true}
         />
       </View>
       <AppButton
@@ -126,10 +127,11 @@ function OldPasscode({
           onBlur={handleBlur('passcode')}
           keyboardType="numeric"
           autoCapitalize="none"
-          placeholder="****"
+          // placeholder="****"
           maxLength={4}
           secureTextEntry={true}
           error={touched.passcode ? errors.passcode : ''}
+          autoFocus={true}
         />
       </View>
       <AppButton

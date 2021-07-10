@@ -1,17 +1,16 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { ValueCreated } from '../../components/business/ValueCreated';
-import Topbar from '../../components/design/Topbar';
 import { Title, Text } from 'react-native-paper';
 
 import { DefaultLayout } from '../../layouts/Default';
 import { WhiteView } from '../../components/design/WhiteView';
 import { YellowCopyIcon } from '../../icons';
 
+// #TODO #FIXME referrals from API
 const RewardScreen = () => {
   return (
-    <DefaultLayout backgroundColor="#ffffff">
-      <Topbar showBackButton={false} title="Reward Screen" />
+    <DefaultLayout backgroundColor="#ffffff" topBar={{ showBackButton: false, title: 'Reward Screen' }}>
       <ValueCreated />
       <View style={{ backgroundColor: '#F3F3F3', height: 140, width: '100%', marginBottom: 20 }}></View>
       <View style={{ marginBottom: 25 }}>
@@ -40,7 +39,7 @@ const RewardScreen = () => {
       </View>
       <View style={{ marginBottom: 25, width: '100%' }}>
         <Title style={{ marginBottom: 10 }}>Your Referrals</Title>
-        <WhiteView style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10, padding: 20 }}>
+        <WhiteView style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 15, padding: 20 }}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
             <View>
               <Text style={{ fontSize: 10 }}>S*************@gmail.com</Text>
@@ -53,7 +52,7 @@ const RewardScreen = () => {
             </View>
           </View>
         </WhiteView>
-        <WhiteView style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10, padding: 20 }}>
+        <WhiteView style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 15, padding: 20 }}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
             <View>
               <Text style={{ fontSize: 10 }}>D*************@gmail.com</Text>

@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { Text, Title } from 'react-native-paper';
-import { vaultsAllGet } from '../../api/vault/requests';
-import { APIRequestsContext } from '../../contexts/APIRequestsContext';
+
+import { getAllActiveVaults } from '../../redux/actions/VaultActions';
 
 import { VaultActiveDepositsListUnit } from './VaultActiveDepositsListUnit';
 
@@ -17,16 +18,13 @@ export const VaultActiveDeposits: React.FC<VaultActiveDepositsProps> = ({
   showTitle = true,
   expandableListUnit = false,
 }) => {
-  const { apiRequestHandler } = useContext(APIRequestsContext);
-  const [activeDeposits, setActiveDeposits] = useState(() => []);
+  const dispatch = useDispatch();
+  const activeDeposits = useSelector((state) => {
+    return state.vaults.active;
+  });
 
   useEffect(() => {
-    const onloadAPICalls = async () => {
-      const data = await vaultsAllGet({}, apiRequestHandler);
-      setActiveDeposits(data);
-    };
-
-    onloadAPICalls();
+    dispatch(getAllActiveVaults());
   }, []);
 
   return (

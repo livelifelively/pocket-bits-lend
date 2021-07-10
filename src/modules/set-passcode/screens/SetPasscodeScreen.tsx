@@ -24,7 +24,7 @@ const SetPasscodeScreen = () => {
   const { setPasscode } = useContext(AuthContext);
 
   return (
-    <DefaultLayout>
+    <DefaultLayout topBar={{ title: '', showBackButton: false, type: 'MINIMAL' }}>
       <Formik
         initialValues={{
           passcode: '',
@@ -87,6 +87,7 @@ function ConfirmPasscode({ values, handleBlur, handleChange, touched, handleSubm
           secureTextEntry={true}
           maxLength={4}
           error={touched.confirmPasscode ? errors.confirmPasscode : ''}
+          autoFocus={true}
         />
       </View>
       <AppButton
@@ -116,6 +117,7 @@ function AddPasscode({ values, handleBlur, handleChange, touched, errors, setPas
           maxLength={4}
           secureTextEntry={true}
           error={touched.passcode ? errors.passcode : ''}
+          autoFocus={true}
         />
       </View>
       <AppButton

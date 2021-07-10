@@ -1,51 +1,42 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, Clipboard } from 'react-native';
+import React, { useContext, useEffect } from 'react';
+import { StyleSheet, View, Clipboard } from 'react-native';
 import { Text } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { getWalletAddress } from '../../../redux/actions/WalletsActions';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { WalletBalance } from '../../../components/business/WalletBalance';
-import Topbar from '../../../components/design/Topbar';
+
 import { WalletTransactionHistory } from '../../../components/business/WalletTransactionHistory';
 import { CopyOutlineIcon, ReceiveIcon, SendIcon } from '../../../icons';
-import { walletAddressGet } from '../../../api/wallet/requests';
 import { GlobalAlertsContext } from '../../../contexts/GlobalAlertsContext';
-import { APIRequestsContext } from '../../../contexts/APIRequestsContext';
 import { WhiteTouchableOpacity } from '../../../components/design/WhiteTouchableOpacity';
 
 const WalletScreen = ({ navigation, walletDetails }) => {
-  const [walletAddress, setWalletAddress] = useState(() => '');
+  const walletAddress = useSelector((state) => {
+    return state?.wallets?.address[walletDetails.crypto.shortName];
+  });
   const { toast } = useContext(GlobalAlertsContext);
-  const { apiRequestHandler } = useContext(APIRequestsContext);
-
-  const onloadAPICalls = async (coinId: CoinId) => {
-    try {
-      const data = await walletAddressGet({ coinId }, apiRequestHandler);
-      // setWallets(data);
-    } catch (e) {
-      // setComponentError({
-      //   hasError: true,
-      //   message: 'API request failed',
-      //   id: 'COMPONENT__WALLETS--API_REQUEST_FAILED',
-      // });
-    }
-  };
+  const dispatch = useDispatch();
 
   const copyToClipboard = () => {
-    Clipboard.setString(walletAddress);
+    Clipboard.setString(walletAddress.depositAddress);
   };
 
   useEffect(() => {
-    onloadAPICalls(walletDetails.crypto.shortName);
+    dispatch(getWalletAddress(walletDetails.crypto.shortName));
   }, [walletDetails.crypto.shortName]);
 
   return (
-    <DefaultLayout>
-      <Topbar
-        onBackButtonPress={() => {
+    <DefaultLayout
+      topBar={{
+        showBackButton: true,
+        title: 'Wallet',
+        onBackButtonPress: () => {
           navigation.goBack();
-        }}
-        title="Wallet"
-      />
+        },
+      }}
+    >
       <WalletBalance style={styles.component} onPress={() => {}} walletDetails={walletDetails} />
       <View style={{ ...styles.walletActions, ...styles.component }}>
         <View style={{ alignItems: 'center' }}>
@@ -67,48 +58,54 @@ const WalletScreen = ({ navigation, walletDetails }) => {
           </WhiteTouchableOpacity>
           <Text style={styles.walletActionsSubtext}>Send</Text>
         </View>
-        <View style={{ alignItems: 'center' }}>
-          <WhiteTouchableOpacity
-            onPress={() => {
-              navigation.navigate('Deposit', { walletDetails: { ...walletDetails, address: walletAddress } });
-            }}
-            style={{
-              backgroundColor: '#ffffff',
-              height: 53,
-              width: 53,
-              borderRadius: 53,
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: 10,
-            }}
-          >
-            <ReceiveIcon />
-          </WhiteTouchableOpacity>
-          <Text style={styles.walletActionsSubtext}>Receive</Text>
-        </View>
-        <View style={{ alignItems: 'center' }}>
-          <WhiteTouchableOpacity
-            onPress={() => {
-              copyToClipboard();
-              toast({
-                logId: 'WALLET_ADDRESS_COPIED',
-                title: 'Address copied',
-              });
-            }}
-            style={{
-              backgroundColor: '#ffffff',
-              height: 53,
-              width: 53,
-              borderRadius: 53,
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: 10,
-            }}
-          >
-            <CopyOutlineIcon />
-          </WhiteTouchableOpacity>
-          <Text style={styles.walletActionsSubtext}>Copy address</Text>
-        </View>
+        {walletAddress && walletAddress.depositAddress && (
+          <>
+            <View style={{ alignItems: 'center' }}>
+              <WhiteTouchableOpacity
+                onPress={() => {
+                  navigation.navigate('Deposit', {
+                    walletDetails: { ...walletDetails, address: walletAddress?.depositAddress },
+                  });
+                }}
+                style={{
+                  backgroundColor: '#ffffff',
+                  height: 53,
+                  width: 53,
+                  borderRadius: 53,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: 10,
+                }}
+              >
+                <ReceiveIcon />
+              </WhiteTouchableOpacity>
+              <Text style={styles.walletActionsSubtext}>Receive</Text>
+            </View>
+            <View style={{ alignItems: 'center' }}>
+              <WhiteTouchableOpacity
+                onPress={() => {
+                  copyToClipboard();
+                  toast({
+                    logId: 'WALLET_ADDRESS_COPIED',
+                    title: 'Address copied',
+                  });
+                }}
+                style={{
+                  backgroundColor: '#ffffff',
+                  height: 53,
+                  width: 53,
+                  borderRadius: 53,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: 10,
+                }}
+              >
+                <CopyOutlineIcon />
+              </WhiteTouchableOpacity>
+              <Text style={styles.walletActionsSubtext}>Copy address</Text>
+            </View>
+          </>
+        )}
       </View>
       <WalletTransactionHistory />
     </DefaultLayout>

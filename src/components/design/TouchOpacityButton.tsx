@@ -22,9 +22,12 @@ export const TouchOpacityButton: React.FC<TouchOpacityButtonProps> = ({
 }) => {
   const linearGradientColors = [];
 
-  if (!isTransparent) {
+  if (!isTransparent && !disabled) {
     linearGradientColors.push('rgba(255, 223, 92, 1)');
     linearGradientColors.push('rgba(255, 184, 80, 0.94)');
+  } else if (disabled && !isTransparent) {
+    linearGradientColors.push('#d5d5d5');
+    linearGradientColors.push('#a3a3a3');
   } else {
     linearGradientColors.push('transparent');
     linearGradientColors.push('transparent');

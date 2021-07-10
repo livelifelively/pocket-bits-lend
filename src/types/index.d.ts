@@ -157,6 +157,7 @@ type GlobalAlertsToast = {
   logId: string;
   type?: 'TOAST';
   title: string;
+  messageType?: 'ERROR' | 'INFO';
 };
 
 type AuthState =
@@ -166,3 +167,9 @@ type AuthState =
   | 'ONBOARDED_NEW_USER'
   | 'LOGGED_IN_WITHOUT_PASSCODE'
   | 'NEW_USER';
+
+type ReduxAction = {
+  type: string;
+  payload?: any;
+  meta?: any;
+};

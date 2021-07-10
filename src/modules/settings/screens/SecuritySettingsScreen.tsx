@@ -3,19 +3,21 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { DefaultLayout } from '../../../layouts/Default';
 import { SettingsNavProps } from '../SettingsParamList';
-import Topbar from '../../../components/design/Topbar';
+
 import { WhiteView } from '../../../components/design/WhiteView';
 import { LockIcon, MobilePasscodeIcon } from '../../../icons';
 
 const SecuritySettingsScreen = ({ navigation }: SettingsNavProps<'SecuritySettings'>) => {
   return (
-    <DefaultLayout>
-      <Topbar
-        onBackButtonPress={() => {
+    <DefaultLayout
+      topBar={{
+        showBackButton: true,
+        title: 'Security Settings',
+        onBackButtonPress: () => {
           navigation.goBack();
-        }}
-        title="Security Settings"
-      />
+        },
+      }}
+    >
       <TouchableOpacity
         style={styles.settingsAction}
         onPress={() => {

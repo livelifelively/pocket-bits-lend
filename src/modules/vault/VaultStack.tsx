@@ -15,10 +15,6 @@ import CreateVaultScreen from './screens/CreateVaultScreen';
 import VaultCreatedScreen from './screens/VaultCreatedScreen';
 import VaultHistoryScreen from './screens/VaultHistoryScreen';
 
-// interface VaultHistoryStackProps {}
-// interface VaultCreationStackProps {}
-// interface VaultActiveDepositsStackProps {}
-
 const VaultHistory = createStackNavigator<VaultHistoryParamList>();
 const VaultActiveDeposits = createStackNavigator<VaultActiveDepositsParamList>();
 const VaultCreation = createStackNavigator<VaultCreationParamList>();

@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Title, Text } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { walletsAllGet } from '../../api/wallet/requests';
-import { APIRequestsContext } from '../../contexts/APIRequestsContext';
 import useComponentError from '../../hooks/useComponentError';
 import { WhiteTouchableOpacity } from '../design/WhiteTouchableOpacity';
+import { getAllWallets } from '../../redux/actions/WalletsActions';
 
 import CryptoIcon from '../design/CryptoIcon';
 
@@ -15,27 +15,16 @@ interface WalletsProps {
 }
 
 export const Wallets: React.FC<WalletsProps> = ({ style, onPress }) => {
-  const [wallets, setWallets] = useState<[] | [WalletDetails]>(() => []);
-  const [componentError, setComponentError] = useState(() => {
+  const wallets = useSelector((state) => state?.wallets?.balance);
+
+  const [componentError] = useState(() => {
     return { hasError: false, message: '', id: '' };
   });
-  const { apiRequestHandler } = useContext(APIRequestsContext);
 
-  const onloadAPICalls = async () => {
-    try {
-      const data = await walletsAllGet({}, apiRequestHandler);
-      setWallets(data);
-    } catch (e) {
-      setComponentError({
-        hasError: true,
-        message: 'API request failed',
-        id: 'COMPONENT__WALLETS--API_REQUEST_FAILED',
-      });
-    }
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    onloadAPICalls();
+    dispatch(getAllWallets());
   }, []);
 
   useComponentError(componentError);
